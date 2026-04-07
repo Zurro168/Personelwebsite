@@ -102,7 +102,14 @@ export default function MiningReport() {
                 responsive: true,
                 maintainAspectRatio: false,
                 plugins: { legend: { display: false } },
-                scales: { r: { angleLines: { color: 'rgba(214, 211, 209, 0.5)' }, ticks: { display: false, min: 0, max: 100 } } }
+                scales: { 
+                    r: { 
+                        angleLines: { color: 'rgba(214, 211, 209, 0.5)' }, 
+                        min: 0, 
+                        max: 100, 
+                        ticks: { display: false } 
+                    } 
+                }
             }
         });
     }
