@@ -22,18 +22,48 @@ const commodityData: any = {
     chartLabels: ['Jan', 'Feb', 'Mar', 'Apr'],
     chartValues: [8800, 9100, 8950, 9240]
   },
+  'zirconium': {
+    name: '锆 (Zirconium)',
+    price: '15,800',
+    change: '+0.5%',
+    unit: 'USD/MT',
+    stats: {
+      supply: '受限 (矿端开采权收紧)',
+      demand: '稳健 (核电/高端陶瓷)',
+      inventory: '中等偏低',
+      outlook: '中性偏多'
+    },
+    context: '锆英砂供应受制于核心产区开采效率，核电工业的结构性需求提供了底部支撑。',
+    chartLabels: ['Jan', 'Feb', 'Mar', 'Apr'],
+    chartValues: [15200, 15400, 15600, 15800]
+  },
+  'titanium': {
+    name: '钛 (Titanium)',
+    price: '28,500',
+    change: '+2.1%',
+    unit: 'USD/MT',
+    stats: {
+      supply: '结构性错配 (航级短缺)',
+      demand: '爆发 (民航/海工)',
+      inventory: '极低',
+      outlook: '强力看涨'
+    },
+    context: '随着全球民航大飞机的交付提速，航空级钛材面临长期产能瓶颈。',
+    chartLabels: ['Jan', 'Feb', 'Mar', 'Apr'],
+    chartValues: [26000, 27200, 27800, 28500]
+  },
   'lithium': {
     name: '碳酸锂 (Lithium)',
     price: '98,000',
     change: '-0.8%',
     unit: 'CNY/MT',
     stats: {
-      supply: '过剩',
-      demand: '放缓',
-      inventory: '高位',
-      outlook: '震荡筑底'
+      supply: '过剩 (多项目达产)',
+      demand: '增速回归常态',
+      inventory: '高位运行',
+      outlook: '筑底期'
     },
-    context: '产能出清周期尚未结束，市场仍在消化过往三年的超量建设。',
+    context: '行业正在经历残酷的成本出清周期，市场仍在寻找新的定价锚点。',
     chartLabels: ['Jan', 'Feb', 'Mar', 'Apr'],
     chartValues: [110000, 105000, 100000, 98000]
   }
