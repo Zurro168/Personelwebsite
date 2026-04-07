@@ -128,7 +128,7 @@ export default function MiningReport() {
       <header className="bg-white shadow-sm sticky top-0 z-50">
         <div className="max-w-6xl mx-auto px-4 py-4 flex flex-col md:flex-row justify-between items-center">
           <div className="flex items-center gap-6">
-            <div className="hidden md:block">
+            <div className="flex flex-col gap-1">
                <Breadcrumbs items={breadcrumbs} />
             </div>
             <div>
