@@ -1,8 +1,21 @@
 'use client';
 
 import React, { useEffect, useRef, useState } from 'react';
+import Link from 'next/link';
+import { 
+  BarChart3, 
+  Globe2, 
+  Zap, 
+  MapPin, 
+  TrendingUp, 
+  ChevronRight, 
+  ChevronLeft,
+  ArrowRight,
+  ShieldCheck,
+  AlertTriangle,
+  History
+} from 'lucide-react';
 import Chart from 'chart.js/auto';
-import Breadcrumbs from '@/components/layout/Breadcrumbs';
 
 // --- Types ---
 interface Faction {
@@ -137,14 +150,14 @@ export default function MiningReport() {
       {/* Header & Navigation */}
       <header className="bg-white shadow-sm sticky top-0 z-50">
         <div className="max-w-6xl mx-auto px-4 py-4 flex flex-col md:flex-row justify-between items-center">
-          <div className="flex items-center gap-6">
-            <div className="flex flex-col gap-1">
-               <Breadcrumbs items={breadcrumbs} />
-            </div>
-            <div>
-              <h1 className="text-2xl font-black text-stone-800">硅基洞察 <span className="text-amber-700">.</span></h1>
-              <p className="text-xs text-stone-500 uppercase tracking-widest">2026 全球矿业战略大博弈</p>
-            </div>
+          <div className="flex items-center gap-4">
+            <Link href="/portfolio" className="group flex flex-col items-start transition-opacity hover:opacity-80">
+              <div className="flex items-center gap-2">
+                <ChevronLeft className="w-5 h-5 text-amber-700 group-hover:-translate-x-1 transition-transform" />
+                <h1 className="text-2xl font-black text-stone-800">硅基洞察 <span className="text-amber-700">.</span></h1>
+              </div>
+              <p className="text-[10px] text-stone-500 uppercase tracking-widest ml-7">Silicon Insight / 2026 矿业大博弈</p>
+            </Link>
           </div>
           <nav className="flex space-x-6 mt-4 md:mt-0">
             {['macro', 'factions', 'action'].map((v, i) => (
