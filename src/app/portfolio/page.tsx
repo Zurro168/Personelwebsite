@@ -31,7 +31,7 @@ export default function Portfolio() {
   return (
     <div className="min-h-screen bg-background">
       {/* Page Header */}
-      <section className="px-8 py-20 bg-slate-900/40 border-b border-industrial-border relative overflow-hidden">
+      <section className="px-8 py-10 bg-slate-900/40 border-b border-industrial-border relative overflow-hidden">
         <div className="absolute top-0 right-0 w-1/2 h-full bg-brand-blue/5 blur-[100px] pointer-events-none"></div>
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-end gap-10">
           <div className="space-y-4">
@@ -51,10 +51,9 @@ export default function Portfolio() {
         </div>
       </section>
 
-      {/* Filter Bar */}
       <section className="sticky top-[86px] z-40 bg-background/80 backdrop-blur-xl border-b border-white/5 px-8">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
-          <div className="flex gap-8 overflow-x-auto no-scrollbar py-6">
+          <div className="flex gap-8 overflow-x-auto no-scrollbar py-3">
             {TAGS.map(tag => (
               <button 
                 key={tag}
@@ -72,12 +71,12 @@ export default function Portfolio() {
       </section>
 
       {/* Breadcrumbs Section */}
-      <div className="max-w-7xl mx-auto px-8 pt-8">
+      <div className="max-w-7xl mx-auto px-8 pt-4">
         <Breadcrumbs items={[{ name: '深度研报', href: '/portfolio' }]} />
       </div>
 
       {/* Reports Grid */}
-      <main className="max-w-7xl mx-auto px-8 py-16">
+      <main className="max-w-7xl mx-auto px-8 py-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
           {currentReports.map((report) => (
             <article 

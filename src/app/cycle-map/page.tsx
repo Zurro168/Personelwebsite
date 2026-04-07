@@ -50,9 +50,9 @@ const COMMODITIES = [
 
 export default function CycleMapPortal() {
   return (
-    <div className="min-h-screen bg-background p-8 md:p-12">
+    <div className="min-h-screen bg-background p-6 md:p-8">
       {/* Header */}
-      <section className="mb-20 max-w-7xl mx-auto space-y-6">
+      <section className="mb-8 max-w-7xl mx-auto space-y-3">
         <div className="flex items-center gap-4 text-brand-blue">
           <Layers size={24} />
           <span className="text-[12px] font-black uppercase tracking-[0.4em] font-mono">Real-time Intelligence</span>
