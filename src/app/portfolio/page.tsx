@@ -2,8 +2,9 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { Search, Filter, ChevronLeft, ChevronRight, Clock, Box } from 'lucide-react';
-import { ALL_REPORTS, Report } from '@/data/reports';
+import { Search, Filter, ChevronLeft, ChevronRight, Clock } from 'lucide-react';
+import { ALL_REPORTS } from '@/data/reports';
+import Breadcrumbs from '@/components/layout/Breadcrumbs';
 
 const TAGS = ['全部', '宏观研究', '有色金属', '能源化工', '电池金属', '黑色金属', '跨界实验'];
 
@@ -70,6 +71,11 @@ export default function Portfolio() {
         </div>
       </section>
 
+      {/* Breadcrumbs Section */}
+      <div className="max-w-7xl mx-auto px-8 pt-8">
+        <Breadcrumbs items={[{ name: '深度研报', href: '/portfolio' }]} />
+      </div>
+
       {/* Reports Grid */}
       <main className="max-w-7xl mx-auto px-8 py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
@@ -79,11 +85,21 @@ export default function Portfolio() {
               className={`group flex flex-col transition-opacity ${report.hasContent ? 'opacity-100' : 'opacity-60'}`}
             >
               <div className="relative aspect-[16/10] overflow-hidden rounded mb-6 border border-white/5 bg-slate-900">
-                <img 
-                  src={report.image} 
-                  alt={report.title} 
-                  className="w-full h-full object-cover opacity-60 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700 font-mono text-[8px] flex items-center justify-center italic text-white/10" 
-                />
+                {report.hasContent ? (
+                  <Link href={`/portfolio/${report.slug}`} className="block w-full h-full">
+                    <img 
+                      src={report.image} 
+                      alt={report.title} 
+                      className="w-full h-full object-cover opacity-60 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700" 
+                    />
+                  </Link>
+                ) : (
+                  <img 
+                    src={report.image} 
+                    alt={report.title} 
+                    className="w-full h-full object-cover opacity-30 grayscale group-hover:grayscale-0 transition-all duration-700" 
+                  />
+                )}
                 <div className="absolute top-4 left-4 flex gap-2">
                   <span className="px-3 py-1 bg-brand-blue text-slate-900 text-[10px] font-black uppercase tracking-widest">{report.tag}</span>
                   {!report.hasContent && (

@@ -2,6 +2,7 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import Chart from 'chart.js/auto';
+import Breadcrumbs from '@/components/layout/Breadcrumbs';
 
 // --- Data Constants ---
 const factionData: any = {
@@ -35,6 +36,10 @@ const factionData: any = {
 };
 
 export default function MiningReport() {
+  const breadcrumbs = [
+      { name: '深度研报', href: '/portfolio' },
+      { name: '2026 矿业大博弈', href: '/portfolio/mining-2026' }
+  ];
   const [activeView, setActiveView] = useState('macro');
   const [activeFaction, setActiveFaction] = useState('A');
   const macroChartRef = useRef<HTMLCanvasElement>(null);
@@ -122,9 +127,14 @@ export default function MiningReport() {
       {/* Header & Navigation */}
       <header className="bg-white shadow-sm sticky top-0 z-50">
         <div className="max-w-6xl mx-auto px-4 py-4 flex flex-col md:flex-row justify-between items-center">
-          <div>
-            <h1 className="text-2xl font-black text-stone-800">硅基洞察 <span className="text-amber-700">.</span></h1>
-            <p className="text-xs text-stone-500 uppercase tracking-widest">2026 全球矿业战略大博弈</p>
+          <div className="flex items-center gap-6">
+            <div className="hidden md:block">
+               <Breadcrumbs items={breadcrumbs} />
+            </div>
+            <div>
+              <h1 className="text-2xl font-black text-stone-800">硅基洞察 <span className="text-amber-700">.</span></h1>
+              <p className="text-xs text-stone-500 uppercase tracking-widest">2026 全球矿业战略大博弈</p>
+            </div>
           </div>
           <nav className="flex space-x-6 mt-4 md:mt-0">
             {['macro', 'factions', 'action'].map((v, i) => (
