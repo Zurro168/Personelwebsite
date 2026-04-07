@@ -17,34 +17,34 @@ const COMMODITIES = [
     labels: ['库存紧缺', '能源转型', '算力溢价']
   },
   {
-    name: '原油 (Crude Oil)',
-    symbol: 'CL=F',
-    score: 54,
-    status: '供需弱平衡 / 地缘溢价',
-    slug: 'crude-oil',
+    name: '锆 (Zirconium)',
+    symbol: 'ZR',
+    score: 64,
+    status: '供应受限 / 需求平稳',
+    slug: 'zirconium',
     trend: 'neutral',
-    description: '核心观察点：OPEC+ 减产协议的执行力与非 OPEC 产油国增产的博弈。',
-    labels: ['地缘政治', '宏观溢价', '炼厂检修']
+    description: '核心观察点：澳洲精矿供应动态与全球陶瓷、核电涂层的订单反馈。',
+    labels: ['精矿供应', '核电材料', '陶瓷基建']
   },
   {
-    name: '黄金 (Gold)',
-    symbol: 'GC=F',
-    score: 78,
-    status: '避险情绪 / 降息预期',
-    slug: 'gold',
+    name: '钛 (Titanium)',
+    symbol: 'TI',
+    score: 71,
+    status: '航空级需求强劲',
+    slug: 'titanium',
     trend: 'up',
-    description: '核心观察点：全球央行增持趋势与美元信用体系的长期去全球化风险。',
-    labels: ['避险资产', '货币替代', '宏观对冲']
+    description: '核心观察点：民航大飞机复苏对高端钛合金零件的长期拉动效应。',
+    labels: ['航空工业', '海工装备', '结构强韧']
   },
   {
-    name: '铝 (Aluminum)',
-    symbol: 'ALI=F',
-    score: 42,
-    status: '供给过剩 / 需求持平',
-    slug: 'aluminum',
+    name: '锂 (Lithium)',
+    symbol: 'LI',
+    score: 45,
+    status: '库存出清 / 成本支撑',
+    slug: 'lithium',
     trend: 'down',
-    description: '核心观察点：电解铝产能红线与能源成本下降带来的成本端下移压力。',
-    labels: ['电力成本', '减产预期', '轻量化']
+    description: '核心观察点：锂矿提锂成本线与下游电池厂商补库周期的拟合度。',
+    labels: ['电池金属', '库存周期', '减产预期']
   }
 ];
 
@@ -111,7 +111,7 @@ export default function CycleMapPortal() {
         <div className="bg-slate-900/10 border border-dashed border-white/10 rounded-3xl p-10 flex flex-center flex-col justify-center items-center gap-4 text-center group">
            <Zap size={32} className="text-white/10 group-hover:text-brand-gold transition-colors" />
            <div className="space-y-1">
-              <div className="text-white/30 font-black text-lg tracking-widest uppercase italic">Zirconium / Titanium / Lithium</div>
+              <div className="text-white/30 font-black text-lg tracking-widest uppercase italic">Cobalt / Nickel / Rare Earth</div>
               <p className="text-white/10 text-[10px] uppercase tracking-[0.3em]">Initial Intelligence under processing</p>
            </div>
         </div>
