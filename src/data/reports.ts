@@ -101,10 +101,10 @@ export const ALL_REPORTS: Report[] = [
   },
   // --- 自动补齐其余 90 篇 ---
   ...Array.from({ length: 90 }).map((_, i) => ({
-    id: `SCC-2026-${String(011 + i).padStart(3, '0')}`,
-    title: `深度专题 ${011 + i}：大宗商品供应链风险校准`,
+    id: `SCC-2026-${String(11 + i).padStart(3, '0')}`,
+    title: `深度专题 ${11 + i}：大宗商品供应链风险校准`,
     description: '本系列专题旨在通过对全球核心资源节点的实时监测，提供具有实战价值的供应链风险预警逻辑。',
-    tag: (['宏观研究', '有色金属', '能源化工', '电池金属', '黑色金属', '跨界实验'][i % 6]) as any,
+    tag: (['宏观研究', '有色金属', '能源化工', '电池金属', '黑色金属', '跨界实验'][i % 6]) as Report['tag'],
     date: '2026-03-20',
     readTime: '10 min',
     image: `https://images.unsplash.com/photo-${1500000000000 + i}?q=80&w=800&auto=format&fit=crop`,

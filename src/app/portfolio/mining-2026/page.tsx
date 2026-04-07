@@ -4,8 +4,18 @@ import React, { useEffect, useRef, useState } from 'react';
 import Chart from 'chart.js/auto';
 import Breadcrumbs from '@/components/layout/Breadcrumbs';
 
-// --- Data Constants ---
-const factionData: any = {
+// --- Types ---
+interface Faction {
+  title: string;
+  companies: string;
+  description: string;
+  logic: string;
+  chartData: number[];
+  color: string;
+  borderColor: string;
+}
+
+const factionData: Record<string, Faction> = {
   'A': {
     title: "A. 守成与兼并派",
     companies: "BHP (必和必拓), Anglo American (英美资源)",
@@ -44,8 +54,8 @@ export default function MiningReport() {
   const [activeFaction, setActiveFaction] = useState('A');
   const macroChartRef = useRef<HTMLCanvasElement>(null);
   const radarChartRef = useRef<HTMLCanvasElement>(null);
-  const macroInstance = useRef<any>(null);
-  const radarInstance = useRef<any>(null);
+  const macroInstance = useRef<Chart | null>(null);
+  const radarInstance = useRef<Chart | null>(null);
 
   useEffect(() => {
     // Initialize Macro Chart
