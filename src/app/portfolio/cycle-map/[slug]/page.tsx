@@ -17,7 +17,7 @@ import {
   Filler
 } from 'chart.js';
 import { Bar, Line, Doughnut } from 'react-chartjs-2';
-import { ChevronLeft, Database, TrendingUp, Cpu, Activity, Zap } from 'lucide-react';
+import { ChevronLeft, TrendingUp, Cpu } from 'lucide-react';
 import { cycleMaps } from '@/data/cycle-maps';
 
 // Register Chart.js components
@@ -39,15 +39,15 @@ export default function GenericCycleMap() {
   const slug = typeof params?.slug === 'string' ? params.slug : 'copper';
   const data = cycleMaps[slug];
 
-  if (!data) {
-    return notFound();
-  }
-
   // Chart.js defaults set once
   useEffect(() => {
     ChartJS.defaults.color = '#94a3b8';
     ChartJS.defaults.font.family = "'Inter', 'PingFang SC', sans-serif";
   }, []);
+
+  if (!data) {
+    return notFound();
+  }
 
   // Prep Data
   const scoreData = {
@@ -120,24 +120,19 @@ export default function GenericCycleMap() {
   ];
 
   return (
-    <div className="min-h-screen bg-background text-foreground font-sans pb-12 antialiased relative">
-      {/* HUD Header */}
-      <header className="sticky top-0 z-50 bg-background/60 backdrop-blur-xl border-b border-industrial-border px-8 py-6 flex justify-between items-center shadow-lg">
+    <div className="relative overflow-x-hidden">
+      {/* Sub-Header for Navigation Back */}
+      <div className="bg-slate-900/40 backdrop-blur-md border-b border-white/5 px-8 py-4 flex justify-between items-center sticky top-[80px] z-40">
         <div className="flex items-center gap-4">
           <Link href="/portfolio" className="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center hover:bg-brand-blue hover:text-slate-900 transition-all">
             <ChevronLeft size={16} />
           </Link>
-          <span className="font-black text-xl tracking-tighter uppercase font-mono">
-            Cycle <span className="text-brand-blue">Map</span> <span className="text-white/20 mx-2">//</span> <span className="text-white">{data.name.split(' ')[0]}</span>
+          <span className="font-bold text-sm tracking-tight text-white/40 uppercase font-mono">
+            Terminal <span className="mx-1">/</span> <span className="text-white">{data.name.split(' ')[0]}</span>
           </span>
         </div>
-        <div className="hidden lg:flex items-center gap-6">
-           <div className="flex items-center gap-2 px-3 py-1 bg-white/5 border border-white/10 rounded font-mono text-[10px] tracking-widest text-slate-400">
-              <Zap size={10} className="text-brand-gold" /> TERMINAL STATUS: LIVE_FEED
-           </div>
-           <div className="text-[10px] font-bold text-white/30 uppercase tracking-[0.2em] font-mono">Synced: APR 07 2026</div>
-        </div>
-      </header>
+        <div className="text-[10px] font-bold text-white/20 uppercase tracking-widest font-mono">ID: {slug.toUpperCase()}-TERMINAL-SYNC</div>
+      </div>
 
       <main className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-12 py-16">
         <div className="mb-20 space-y-4">
@@ -160,7 +155,7 @@ export default function GenericCycleMap() {
             </div>
             <div className="text-[10px] text-white/20 font-mono tracking-widest italic flex items-center gap-2">
               <TrendingUp size={12} className={data.score > data.lastScore ? 'text-emerald-500' : 'text-rose-500'} /> 
-              Prev: {data.lastScore} // Trend: {data.score > data.lastScore ? 'UPWARD' : 'NEUTRAL_SHIFT'}
+              Prev: {data.lastScore} {'//'} Trend: {data.score > data.lastScore ? 'UPWARD' : 'NEUTRAL_SHIFT'}
             </div>
           </div>
 
@@ -169,7 +164,6 @@ export default function GenericCycleMap() {
               <h2 className="text-2xl font-black text-white flex items-center gap-3 font-mono italic uppercase tracking-tight">
                  <span className="w-1.5 h-6 bg-brand-blue"></span> Core Pillar Analysis
               </h2>
-              <Link href="/portfolio" className="text-[10px] font-bold text-brand-blue underline underline-offset-4 tracking-[0.2em] font-mono">BACK_TO_LIST</Link>
             </div>
             <div className="flex-grow min-h-[300px]">
               <Bar 
@@ -207,8 +201,8 @@ export default function GenericCycleMap() {
                 interaction: { mode: 'index', intersect: false },
                 plugins: { legend: { position: 'top', labels: { usePointStyle: true, font: { weight: 'bold' } } } },
                 scales: {
-                  y: { type: 'linear', position: 'left', title: { display: true, text: 'Stock (kT)', color: '#f43f5e', font: { weight: 'black' } } },
-                  y1: { type: 'linear', position: 'right', grid: { display: false }, title: { display: true, text: 'Price (USD)', color: '#38bdf8', font: { weight: 'black' } } }
+                  y: { type: 'linear', position: 'left', title: { display: true, text: 'Stock (kT)', color: '#f43f5e', font: { weight: 'bold' } } },
+                  y1: { type: 'linear', position: 'right', grid: { display: false }, title: { display: true, text: 'Price (USD)', color: '#38bdf8', font: { weight: 'bold' } } }
                 }
               }}
             />
@@ -272,27 +266,7 @@ export default function GenericCycleMap() {
                 ))}
             </div>
         </div>
-
-        {/* Global Compliance & Meta */}
-        <div className="bg-slate-950/60 p-8 rounded-3xl text-[9px] text-slate-500 font-mono tracking-[0.2em] border border-white/5 uppercase">
-            <div className="flex flex-col md:flex-row justify-between gap-8">
-               <div className="flex-1 space-y-4">
-                  <h3 className="font-black text-white/30 mb-2">Analysis System Meta</h3>
-                  <p>Vibrant Tech UI v5.0 // Optimized for commodity price visualization with high-contrast data layers.</p>
-                  <p>Strategic Narrative: Score ➔ Analytics ➔ Action Protocols ➔ Roadmap.</p>
-               </div>
-               <div className="flex-1 space-y-4">
-                  <h3 className="font-black text-white/30 mb-2">Legal Disclaimer</h3>
-                  <p>Non-Financial Advice (NFA). Analytical findings based on historical data & multi-agent modeling.</p>
-                  <p>Source Data: LME / COMEX / SHFE / Proprietary Intelligence.</p>
-               </div>
-            </div>
-        </div>
       </main>
-
-      <footer className="px-8 py-12 text-center text-white/5 text-[8px] tracking-[1em] font-mono uppercase">
-        © 2026 Silicon Commodity | Analytical Terminal v4.8.2
-      </footer>
     </div>
   );
 }

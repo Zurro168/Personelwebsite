@@ -1,40 +1,11 @@
 import React from 'react';
-import Link from 'next/link';
 import { Database, TrendingUp, Cpu, Activity } from 'lucide-react';
 
 export default function AboutPage() {
   return (
-    <div className="min-h-screen bg-background text-foreground font-sans relative overflow-x-hidden">
+    <div className="relative overflow-x-hidden">
       {/* Decorative Background Grid */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]"></div>
-
-      {/* Header */}
-      <header className="border-b border-industrial-border px-8 py-6 flex justify-between items-center sticky top-0 bg-background/60 backdrop-blur-xl z-50">
-        <div className="flex items-center gap-3 group">
-          <Link href="/" className="w-9 h-9 bg-brand-blue rounded shadow-[0_0_15px_rgba(56,189,248,0.3)] flex items-center justify-center text-slate-900 font-black cursor-pointer transition-transform group-hover:scale-105">Si</Link>
-          <span className="text-xl font-black tracking-tighter">
-            <Link href="/" className="flex items-center gap-1 group-hover:opacity-80 transition-opacity">
-              <span className="text-white">硅基大宗</span>
-              <span className="text-brand-blue/40 font-light">|</span>
-              <span className="text-brand-blue text-sm uppercase tracking-widest font-mono">Terminal</span>
-            </Link>
-          </span>
-        </div>
-        <nav className="flex gap-10 text-[11px] font-bold tracking-[0.25em] text-white/50">
-          <Link href="/portfolio" className="hover:text-brand-blue transition-all relative group">
-            PORTFOLIO
-            <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-brand-blue transition-all group-hover:w-full"></span>
-          </Link>
-          <Link href="/intersection" className="hover:text-brand-blue transition-all relative group">
-            INTERSECTION
-            <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-brand-blue transition-all group-hover:w-full"></span>
-          </Link>
-          <Link href="/about" className="text-brand-blue relative">
-            ABOUT
-            <span className="absolute -bottom-1 left-0 w-full h-[1px] bg-brand-blue"></span>
-          </Link>
-        </nav>
-      </header>
 
       <main className="max-w-6xl mx-auto px-8 lg:px-20 py-24 relative">
         <div className="space-y-32">
@@ -178,21 +149,6 @@ export default function AboutPage() {
           </section>
         </div>
       </main>
-
-      {/* Industrial Footer */}
-      <footer className="border-t border-industrial-border px-8 py-20 text-center text-white/10 text-[10px] tracking-[0.6em] font-mono uppercase bg-slate-900/40 backdrop-blur-xl">
-        <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-10">
-          <div className="flex items-center gap-4">
-             <span className="w-2 h-2 bg-brand-blue rounded-full animate-pulse"></span>
-             <span>© 2026 Silicon Commodity | Analytical Terminal v4.0.0</span>
-          </div>
-          <div className="flex gap-12 text-[9px] font-bold">
-            <span className="text-brand-blue/40 border-b border-brand-blue/10 pb-1">LATENCY: 8.4ms</span>
-            <span className="text-brand-blue/40 border-b border-brand-blue/10 pb-1">UPLINK: ACTIVE</span>
-            <span className="text-brand-blue/40 border-b border-brand-blue/10 pb-1">SECURITY: ENCRYPTED</span>
-          </div>
-        </div>
-      </footer>
     </div>
   );
 }

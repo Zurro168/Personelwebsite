@@ -55,24 +55,9 @@ const reports = [
 
 export default function PortfolioPage() {
   return (
-    <div className="min-h-screen bg-background text-foreground font-sans relative overflow-x-hidden">
+    <div className="relative overflow-x-hidden">
       {/* Background Decor */}
       <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-brand-blue/5 blur-[120px] rounded-full pointer-events-none -mr-40 -mt-20"></div>
-
-      {/* Header */}
-      <header className="border-b border-industrial-border px-8 py-6 flex justify-between items-center sticky top-0 bg-background/60 backdrop-blur-xl z-50 shadow-sm">
-        <div className="flex items-center gap-3">
-          <Link href="/" className="w-9 h-9 bg-brand-blue rounded shadow-[0_0_15px_rgba(56,189,248,0.3)] flex items-center justify-center text-slate-900 font-black">Si</Link>
-          <span className="text-xl font-black tracking-tighter uppercase font-mono">
-            Collective <span className="text-brand-blue">Intelligence</span>
-          </span>
-        </div>
-        <nav className="flex gap-10 text-[11px] font-bold tracking-[0.25em] text-white/50">
-          <Link href="/portfolio" className="text-brand-blue relative">PORTFOLIO <span className="absolute -bottom-1 left-0 w-full h-[1px] bg-brand-blue"></span></Link>
-          <Link href="/intersection" className="hover:text-brand-blue transition-all">INTERSECTION</Link>
-          <Link href="/about" className="hover:text-brand-blue transition-all">ABOUT</Link>
-        </nav>
-      </header>
 
       <main className="max-w-7xl mx-auto px-8 lg:px-12 py-24 relative space-y-32">
         
@@ -173,10 +158,6 @@ export default function PortfolioPage() {
         </section>
 
       </main>
-
-      <footer className="border-t border-industrial-border px-8 py-20 text-center text-white/5 text-[9px] tracking-[0.8em] font-mono uppercase bg-slate-950/40">
-        © 2026 SILICON COMMODITY | ANALYTICAL TERMINAL V5.2.0 | ENCRYPTED LINK
-      </footer>
     </div>
   );
 }
