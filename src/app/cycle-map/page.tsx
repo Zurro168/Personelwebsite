@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { Activity, Zap, TrendingUp, TrendingDown, Layers } from 'lucide-react';
+import { Activity, Zap, TrendingUp, TrendingDown } from 'lucide-react';
 
 // --- Commodity Overview Data (Sync with your data/cycle-maps.ts) ---
 const COMMODITIES = [
@@ -52,10 +52,6 @@ export default function CycleMapPortal() {
   return (
     <div className="min-h-screen bg-background p-6 md:p-8">
       <section className="max-w-7xl mx-auto py-10 space-y-4">
-        <div className="flex items-center gap-4 text-brand-blue">
-          <Layers size={21} />
-          <span className="text-[10px] font-black uppercase tracking-[0.4em] font-mono opacity-60">Real-time Intelligence</span>
-        </div>
         <h1 className="text-5xl font-black text-white italic uppercase tracking-tighter">
           金属周期地图 <span className="text-brand-blue">/</span> Circle Map
         </h1>
