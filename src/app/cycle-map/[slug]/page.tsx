@@ -1,7 +1,7 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
-import { ChevronRight, ArrowLeft, TrendingUp, TrendingDown, Info, ShieldAlert, BarChart3, Activity } from 'lucide-react';
+import React, { use } from 'react';
+import { ChevronRight, ShieldAlert, BarChart3, Activity } from 'lucide-react';
 import Link from 'next/link';
 import Breadcrumbs from '@/components/layout/Breadcrumbs';
 
@@ -69,8 +69,8 @@ const commodityData: any = {
   }
 };
 
-export default function CycleMapDetail({ params }: { params: { slug: string } }) {
-  const { slug } = params;
+export default function CycleMapDetail({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = use(params);
   const data = commodityData[slug];
 
   const breadcrumbs = [
@@ -80,11 +80,11 @@ export default function CycleMapDetail({ params }: { params: { slug: string } })
 
   if (!data) {
     return (
-      <div className="min-h-screen bg-[#050507] text-white flex flex-col items-center justify-center p-8">
+      <div className="min-h-screen bg-[#050507] text-white flex flex-col items-center justify-center p-8 text-center">
         <div className="text-brand-blue font-mono mb-4">ERROR_CODE: 404</div>
-        <h1 className="text-2xl font-black mb-8">数据中心未查询到该品种</h1>
-        <Link href="/cycle-map" className="px-6 py-3 bg-white/5 border border-white/10 hover:bg-brand-blue hover:text-slate-900 transition-all font-bold">
-          返回控制中心
+        <h1 className="text-2xl font-black mb-8 italic uppercase tracking-tighter">智库数据中心未检索到该品种 // NO_ENTRY</h1>
+        <Link href="/cycle-map" className="px-8 py-3 bg-white/5 border border-white/10 hover:bg-brand-blue hover:text-slate-900 transition-all font-bold tracking-widest uppercase text-xs italic">
+          返回控制中心 / Back to Terminal
         </Link>
       </div>
     );
@@ -94,26 +94,26 @@ export default function CycleMapDetail({ params }: { params: { slug: string } })
     <div className="min-h-screen bg-[#050507] text-white font-sans selection:bg-brand-blue/30">
       {/* Top Nav */}
       <div className="max-w-7xl mx-auto px-6 py-8">
-        <div className="mb-10 opacity-60 hover:opacity-100 transition-opacity">
+        <div className="mb-10 opacity-30 hover:opacity-100 transition-opacity">
            <Breadcrumbs items={breadcrumbs} />
         </div>
 
-        <div className="bg-white/5 border border-white/10 p-8 md:p-12 backdrop-blur-xl">
+        <div className="bg-white/5 border border-white/5 p-8 md:p-12 backdrop-blur-xl rounded-sm">
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-12 gap-6">
             <div>
               <div className="flex items-center gap-3 mb-2">
                 <div className="w-2 h-2 rounded-full bg-brand-blue animate-pulse"></div>
-                <span className="text-brand-blue font-mono text-xs tracking-widest">LIVE TERMINAL // {slug.toUpperCase()}</span>
+                <span className="text-brand-blue font-mono text-[10px] tracking-widest">LIVE DATA TERMINAL // {slug.toUpperCase()}</span>
               </div>
-              <h1 className="text-5xl font-black tracking-tighter">{data.name}</h1>
+              <h1 className="text-5xl font-black tracking-tighter italic uppercase">{data.name}</h1>
             </div>
             
             <div className="flex items-center gap-8">
               <div className="text-right">
-                <div className="text-white/40 text-[10px] uppercase font-black mb-1">Current Price</div>
-                <div className="text-4xl font-black tracking-tighter">{data.price} <span className="text-sm font-normal text-white/40 ml-1">{data.unit}</span></div>
+                <div className="text-white/20 text-[10px] uppercase font-black mb-1 tracking-widest">Pricing Index</div>
+                <div className="text-4xl font-black tracking-tighter">{data.price} <span className="text-sm font-normal text-white/20 ml-1">{data.unit}</span></div>
               </div>
-              <div className={`px-4 py-2 text-sm font-black ${data.change.startsWith('+') ? 'bg-emerald-500/10 text-emerald-400' : 'bg-red-500/10 text-red-400'}`}>
+              <div className={`px-4 py-2 text-sm font-black italic ${data.change.startsWith('+') ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20' : 'bg-red-500/10 text-red-400 border border-red-500/20'}`}>
                 {data.change}
               </div>
             </div>
@@ -121,53 +121,69 @@ export default function CycleMapDetail({ params }: { params: { slug: string } })
 
           <div className="grid md:grid-cols-4 gap-4 mb-12">
             {Object.entries(data.stats).map(([k, v]) => (
-              <div key={k} className="p-6 bg-white/5 border border-white/5 hover:border-white/20 transition-colors">
-                <div className="text-[10px] text-white/30 uppercase font-black mb-2">{k}</div>
-                <div className="text-lg font-bold">{v as string}</div>
+              <div key={k} className="p-6 bg-white/[0.02] border border-white/5 hover:border-white/20 transition-all group">
+                <div className="text-[10px] text-white/20 uppercase font-black mb-2 tracking-[0.2em] group-hover:text-brand-blue transition-colors">{k}</div>
+                <div className="text-lg font-bold tracking-tight">{v as string}</div>
               </div>
             ))}
           </div>
 
           <div className="grid lg:grid-cols-3 gap-12">
             <div className="lg:col-span-2">
-              <div className="h-64 relative border border-white/5 bg-white/[0.02] flex items-center justify-center">
-                 <div className="absolute inset-0 opacity-10 pointer-events-none">
-                    <div className="w-full h-full" style={{ backgroundImage: 'radial-gradient(circle, #3b82f6 1px, transparent 1px)', backgroundSize: '24px 24px' }}></div>
+              <div className="h-72 relative border border-white/5 bg-white/[0.01] flex items-center justify-center rounded-sm group overflow-hidden">
+                 <div className="absolute inset-0 opacity-5 group-hover:opacity-10 transition-opacity">
+                    <div className="w-full h-full" style={{ backgroundImage: 'radial-gradient(circle, #3b82f6 0.5px, transparent 0.5px)', backgroundSize: '16px 16px' }}></div>
                  </div>
-                 <BarChart3 className="w-12 h-12 text-brand-blue opacity-20" />
-                 <span className="font-mono text-[10px] text-white/20 uppercase tracking-[0.2em]">Data Visualization Pipeline Online</span>
+                 <div className="flex flex-col items-center gap-4 relative z-10">
+                    <BarChart3 className="w-10 h-10 text-brand-blue opacity-20 group-hover:opacity-50 transition-all duration-700" />
+                    <span className="font-mono text-[10px] text-white/20 uppercase tracking-[0.3em] italic">Real-time Visualization Pipeline Syncing...</span>
+                 </div>
               </div>
-              <div className="mt-8">
-                <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
+              <div className="mt-10">
+                <h3 className="text-xl font-black mb-6 flex items-center gap-3 italic uppercase tracking-tight">
                   <Activity className="w-5 h-5 text-brand-blue" />
-                  基本面深度解析
+                  周期逻辑深度解析 <span className="text-brand-blue">/</span> Analysis
                 </h3>
-                <p className="text-lg text-white/60 leading-relaxed font-light italic">
-                  “{data.context}”
-                </p>
+                <div className="p-8 border-l border-brand-blue/30 bg-white/[0.02] relative">
+                    <p className="text-lg text-white/80 leading-relaxed font-light italic">
+                      “{data.context}”
+                    </p>
+                </div>
               </div>
             </div>
 
             <div className="space-y-6">
-                <div className="p-8 bg-brand-blue text-slate-900">
-                    <h4 className="font-black uppercase tracking-tight mb-4">AI 风险评级：中性偏多</h4>
-                    <p className="text-sm font-medium leading-normal">
-                        基于 LME 与 SHFE 联动数据的多维度交叉验证，该品种当前处于复苏周期的早期阶段。建议关注关键成本支撑位的防御性逻辑。
+                <div className="p-8 bg-brand-blue text-slate-900 rounded-sm relative overflow-hidden">
+                    <div className="absolute top-0 right-0 p-4 opacity-10">
+                        <ShieldAlert size={48} />
+                    </div>
+                    <h4 className="font-black uppercase tracking-widest text-xs mb-4">AI 周期预判 // PREDICTION</h4>
+                    <p className="text-sm font-medium leading-relaxed">
+                        基于跨市场基本面数据的多维度交叉验证。该品种当前核心矛盾集中在供应端的非线性反馈。
                     </p>
+                    <div className="mt-6 pt-6 border-t border-slate-900/10">
+                        <div className="text-[10px] font-black uppercase mb-1">Current Rating</div>
+                        <div className="text-xl font-black italic uppercase">中性偏多 / NEUTRAL+</div>
+                    </div>
                 </div>
-                <div className="p-8 border border-white/10 bg-white/5">
-                    <div className="flex items-center gap-2 mb-4 text-white/40">
+                
+                <div className="p-8 border border-white/10 bg-white/[0.02] rounded-sm">
+                    <div className="flex items-center gap-2 mb-6 text-white/20">
                         <ShieldAlert className="w-4 h-4" />
-                        <span className="text-[10px] font-black uppercase">Alpha Strategy</span>
+                        <span className="text-[10px] font-black uppercase tracking-widest">Alpha Signals</span>
                     </div>
                     <ul className="space-y-4 text-sm font-bold">
-                        <li className="flex items-center gap-3">
+                        <li className="flex items-center gap-3 group cursor-pointer hover:text-brand-blue transition-colors">
                             <ChevronRight className="w-4 h-4 text-brand-blue" />
-                            库存下降斜率检测
+                            库存斜率变动预警
                         </li>
-                        <li className="flex items-center gap-3">
+                        <li className="flex items-center gap-3 group cursor-pointer hover:text-brand-blue transition-colors">
                             <ChevronRight className="w-4 h-4 text-brand-blue" />
-                            冶炼利润盈亏线追踪
+                            产业利润周期追踪
+                        </li>
+                        <li className="flex items-center gap-3 group cursor-pointer hover:text-brand-blue transition-colors">
+                            <ChevronRight className="w-4 h-4 text-brand-blue" />
+                            宏观流动性溢价测算
                         </li>
                     </ul>
                 </div>
@@ -175,6 +191,12 @@ export default function CycleMapDetail({ params }: { params: { slug: string } })
           </div>
         </div>
       </div>
+
+      <footer className="max-w-7xl mx-auto mt-20 py-12 border-t border-white/5 text-center">
+         <Link href="/cycle-map" className="text-white/20 hover:text-brand-blue text-[10px] font-mono tracking-widest uppercase transition-colors">
+            RETURN TO COMMAND CENTER
+         </Link>
+      </footer>
     </div>
   );
 }

@@ -1,6 +1,7 @@
+import Link from 'next/link';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
-import { Calendar, Tag, ChevronLeft } from 'lucide-react';
+import { Calendar, ChevronLeft } from 'lucide-react';
 
 // Mock function for fetching report by slug
 async function getReport(slug: string) {
@@ -36,29 +37,32 @@ async function getReport(slug: string) {
   };
 }
 
-export default async function ReportPage({ params }: { params: { slug: string } }) {
-  const report = await getReport(params.slug);
+export default async function ReportPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const report = await getReport(slug);
 
   return (
     <div className="min-h-screen bg-background text-foreground font-sans">
       {/* Header */}
       <header className="border-b border-white/10 px-8 py-4 flex justify-between items-center sticky top-0 bg-background/80 backdrop-blur-md z-50">
         <div className="flex items-center gap-2">
-          <a href="/" className="w-8 h-8 bg-brand-blue rounded-sm flex items-center justify-center text-white font-bold cursor-pointer">Si</a>
-          <span className="text-lg font-bold tracking-tighter cursor-pointer"><a href="/">硅基大宗 <span className="text-brand-blue">|</span> Digital Commodities</a></span>
+          <Link href="/" className="w-8 h-8 bg-brand-blue rounded-sm flex items-center justify-center text-white font-bold cursor-pointer">Si</Link>
+          <span className="text-lg font-bold tracking-tighter cursor-pointer">
+            <Link href="/">硅基大宗 <span className="text-brand-blue">|</span> Digital Commodities</Link>
+          </span>
         </div>
         <nav className="flex gap-8 text-sm font-medium opacity-70">
-          <a href="/portfolio" className="text-brand-blue font-bold">PORTFOLIO</a>
-          <a href="/intersection" className="hover:text-brand-blue transition-colors">INTERSECTION</a>
-          <a href="/about" className="hover:text-brand-blue transition-colors">ABOUT</a>
+          <Link href="/portfolio" className="text-brand-blue font-bold">PORTFOLIO</Link>
+          <Link href="/intersection" className="hover:text-brand-blue transition-colors">INTERSECTION</Link>
+          <Link href="/about" className="hover:text-brand-blue transition-colors">ABOUT</Link>
         </nav>
       </header>
 
       <main className="max-w-4xl mx-auto px-8 py-20">
         <div className="space-y-8">
-          <a href="/portfolio" className="flex items-center gap-2 text-white/40 hover:text-brand-blue transition-colors text-xs font-mono group">
+          <Link href="/portfolio" className="flex items-center gap-2 text-white/40 hover:text-brand-blue transition-colors text-xs font-mono group">
             <ChevronLeft size={16} className="group-hover:-translate-x-1 transition-transform" /> BACK TO ARCHIVE
-          </a>
+          </Link>
           
           <div className="space-y-4">
              <div className="inline-block px-3 py-1 bg-brand-gold/10 border border-brand-gold/20 text-brand-gold text-[10px] font-bold tracking-[0.2em] rounded uppercase">
