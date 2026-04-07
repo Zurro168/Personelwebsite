@@ -1,162 +1,161 @@
-import React from 'react';
+'use client';
+
+import React, { useState } from 'react';
 import Link from 'next/link';
-import { Search, Calendar, ChevronRight, Activity, Zap, TrendingUp } from 'lucide-react';
+import { Search, Filter, ChevronLeft, ChevronRight, Clock, Box } from 'lucide-react';
+import { ALL_REPORTS, Report } from '@/data/reports';
 
-const cycleMaps = [
-  {
-    id: 'copper',
-    name: '铜 (Copper)',
-    status: '⚠️ 修正期',
-    score: 58,
-    lastUpdate: '2026-04-07',
-    description: '核心观察：库存饱和 vs AI/能源长期刚性。市场正处于估值回归与结构性牛市的博弈中。',
-    color: 'border-amber-500'
-  },
-  {
-    id: 'aluminum',
-    name: '铝 (Aluminum)',
-    status: '🚀 扩张期',
-    score: 82,
-    lastUpdate: '2026-03-24',
-    description: '核心观察：供给红线与光伏/轻量化需求。氧化铝瓶颈持续抬升成本中枢。',
-    color: 'border-emerald-500'
-  },
-  {
-    id: 'zircon',
-    name: '锆钛 (Zircon & Ti)',
-    status: '💎 积累期',
-    score: 65,
-    lastUpdate: '2026-04-07',
-    description: '核心观察：航空航天刚需与供给寡头化。关注高品质矿源的战略溢价。',
-    color: 'border-indigo-500'
-  }
-];
+const TAGS = ['全部', '宏观研究', '有色金属', '能源化工', '电池金属', '黑色金属', '跨界实验'];
 
-const reports = [
-  {
-    id: 1,
-    title: '去全球化叙事下的铅锌矿供应链重构与地缘政治溢价',
-    excerpt: '分析铅锌精矿在全球矿权集中度提升背景下的价格底线，以及区域冲突如何改变传统海运物流链条的风险权重...',
-    date: '2026-03-15',
-    category: '宏观觉悟',
-    tags: ['#供应链', '#地缘政治', '#铅锌矿'],
-    slug: 'lead-zinc-supply-chain'
-  },
-  {
-    id: 2,
-    title: '硅基采购范式：如何利用 AI 模型优化锰矿长协定价策略',
-    excerpt: '从传统的人工经验决策转向基于概率图模型与多智能体博弈的采购策略，详述在锰系合金波动周期中的套期保值应用案例...',
-    date: '2026-03-28',
-    category: '硅基采购',
-    tags: ['#AI实践', '#锰矿', '#采购管理'],
-    slug: 'ai-procurement-strategy-manganese'
-  }
-];
+export default function Portfolio() {
+  const [activeTag, setActiveTag] = useState('全部');
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 6; // Increased density
 
-export default function PortfolioPage() {
+  // Smart Sorting: hasContent (boolean) first, then date (string)
+  const sortedReports = [...ALL_REPORTS].sort((a, b) => {
+    if (a.hasContent !== b.hasContent) {
+      return a.hasContent ? -1 : 1;
+    }
+    return new Date(b.date).getTime() - new Date(a.date).getTime();
+  });
+
+  const filteredReports = sortedReports.filter(r => 
+    activeTag === '全部' || r.tag === activeTag
+  );
+
+  const totalPages = Math.ceil(filteredReports.length / itemsPerPage);
+  const currentReports = filteredReports.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
+
   return (
-    <div className="relative overflow-x-hidden">
-      {/* Background Decor */}
-      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-brand-blue/5 blur-[120px] rounded-full pointer-events-none -mr-40 -mt-20"></div>
-
-      <main className="max-w-7xl mx-auto px-8 lg:px-12 py-24 relative space-y-32">
-        
-        {/* Dynamic Column Section */}
-        <section className="space-y-12">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-10 pb-12 border-b border-white/5">
-            <div className="space-y-6">
-               <div className="inline-flex items-center gap-2 px-3 py-1 bg-brand-gold/10 border border-brand-gold/20 text-brand-gold text-[10px] font-black tracking-[0.3em] rounded uppercase font-mono">
-                  <Activity size={14} className="animate-pulse" /> Column: Cycle Maps
-               </div>
-               <h1 className="text-5xl md:text-7xl font-black tracking-tighter text-white">金属研判周期地图</h1>
-               <p className="text-slate-400 text-xl font-light leading-relaxed max-w-2xl italic">交互式透视：将宏观叙事量化为周期坐标，捕捉每一次结构性拐点。</p>
-            </div>
-            <div className="hidden lg:flex items-center gap-2 text-white/10 font-mono text-[9px] tracking-widest uppercase pb-2">
-                 Updated: APR 07 2026 // Real-time Feed Active
-            </div>
+    <div className="min-h-screen bg-background">
+      {/* Page Header */}
+      <section className="px-8 py-20 bg-slate-900/40 border-b border-industrial-border relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-1/2 h-full bg-brand-blue/5 blur-[100px] pointer-events-none"></div>
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-end gap-10">
+          <div className="space-y-4">
+            <h1 className="text-5xl font-black text-white italic uppercase tracking-tighter">深度研报 <span className="text-brand-blue">/</span> Deep Insights</h1>
+            <p className="text-slate-400 max-w-xl font-light">
+              致力于用第一性原理拆解大宗商品背后的物理与资本逻辑。所有研报均基于硅基大宗专有模型与长期产业深度访谈。
+            </p>
           </div>
+          <div className="flex bg-slate-800/50 p-1.5 rounded-lg border border-white/5 backdrop-blur-md">
+            <input 
+              type="text" 
+              placeholder="搜索视角..." 
+              className="bg-transparent px-4 py-2 outline-none text-xs text-white placeholder:text-white/20 w-48"
+            />
+            <button className="p-2 bg-brand-blue text-slate-900 rounded"><Search size={16} /></button>
+          </div>
+        </div>
+      </section>
 
-          <div className="grid md:grid-cols-2 gap-10">
-            {cycleMaps.map((map) => (
-              <Link key={map.id} href={`/portfolio/cycle-map/${map.id}`} className="group relative">
-                <div className={`absolute -inset-0.5 bg-gradient-to-r from-brand-blue/20 to-brand-gold/20 rounded-3xl blur opacity-0 group-hover:opacity-100 transition duration-500`}></div>
-                <div className={`relative bg-slate-900/60 border-l-4 ${map.color} border-t border-r border-b border-white/5 rounded-3xl p-10 backdrop-blur-3xl shadow-xl hover:translate-y-[-4px] transition-all duration-500`}>
-                  <div className="flex justify-between items-start mb-8">
-                     <div className="space-y-2">
-                        <h2 className="text-3xl font-black text-white group-hover:text-brand-blue transition-colors uppercase italic">{map.name}</h2>
-                        <div className="text-[10px] font-mono tracking-widest text-white/30 italic">LATEST_SYNC: {map.lastUpdate}</div>
-                     </div>
-                     <div className="text-4xl font-black text-brand-gold font-mono">{map.score}<span className="text-[10px] text-white/20 italic">/100</span></div>
-                  </div>
-                  <p className="text-slate-400 text-lg leading-relaxed font-light mb-8 italic">&ldquo;{map.description}&rdquo;</p>
-                  <div className="flex items-center justify-between border-t border-white/5 pt-8">
-                     <div className="flex items-center gap-4 text-xs font-black text-brand-blue tracking-widest uppercase group-hover:gap-6 transition-all">
-                       Open Terminal <ChevronRight size={16} />
-                     </div>
-                     <div className={`px-4 py-1.5 rounded-full border border-white/10 text-[9px] font-black uppercase tracking-widest ${map.color.replace('border-', 'text-')} group-hover:bg-white/5 transition-colors`}>
-                        {map.status}
-                     </div>
-                  </div>
-                </div>
-              </Link>
+      {/* Filter Bar */}
+      <section className="sticky top-[86px] z-40 bg-background/80 backdrop-blur-xl border-b border-white/5 px-8">
+        <div className="max-w-7xl mx-auto flex items-center justify-between">
+          <div className="flex gap-8 overflow-x-auto no-scrollbar py-6">
+            {TAGS.map(tag => (
+              <button 
+                key={tag}
+                onClick={() => { setActiveTag(tag); setCurrentPage(1); }}
+                className={`text-[10px] font-bold tracking-[0.2em] uppercase transition-all whitespace-nowrap ${activeTag === tag ? 'text-brand-blue' : 'text-white/30 hover:text-white'}`}
+              >
+                {tag}
+              </button>
             ))}
-            <div className="relative bg-slate-900/20 border border-dashed border-white/10 rounded-3xl p-12 flex flex-col justify-center items-center text-center opacity-50 group hover:opacity-100 transition-opacity">
-               <TrendingUp size={48} className="text-white/20 mb-6 group-hover:rotate-12 transition-transform" />
-               <h3 className="text-xl font-black text-white/40 mb-2 uppercase italic tracking-widest">More Metals Coming</h3>
-               <p className="text-xs text-white/20 font-mono tracking-widest">LITHIUM / NICKEL / IRON_ORE</p>
-            </div>
           </div>
-        </section>
+          <div className="hidden md:flex items-center gap-2 text-white/20">
+            <Filter size={14} /> <span className="text-[10px] font-mono tracking-widest italic">Sorted by Recency</span>
+          </div>
+        </div>
+      </section>
 
-        {/* Hardcore Reports Section */}
-        <section className="space-y-12">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-10 pb-12 border-b border-white/5">
-            <div className="space-y-6">
-               <div className="inline-flex items-center gap-2 px-3 py-1 bg-brand-blue/10 border border-brand-blue/20 text-brand-blue text-[10px] font-black tracking-[0.3em] rounded uppercase font-mono">
-                  <Zap size={14} className="text-brand-gold" /> Column: Deep Insights
-               </div>
-               <h2 className="text-5xl md:text-6xl font-black tracking-tighter text-white uppercase italic">深度研报归档</h2>
-            </div>
-            <div className="relative group w-full md:w-[350px]">
-               <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-white/20 group-focus-within:text-brand-blue transition-all" size={18} />
-               <input 
-                 type="text" 
-                 placeholder="Search reports..."
-                 className="w-full bg-white/[0.02] border border-white/10 rounded-xl py-3 px-12 text-[11px] focus:outline-none focus:border-brand-blue transition-all placeholder:text-white/10"
+      {/* Reports Grid */}
+      <main className="max-w-7xl mx-auto px-8 py-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
+          {currentReports.map((report) => (
+            <article 
+              key={report.id} 
+              className={`group flex flex-col transition-opacity ${report.hasContent ? 'opacity-100' : 'opacity-60'}`}
+            >
+              <div className="relative aspect-[16/10] overflow-hidden rounded mb-6 border border-white/5 bg-slate-900">
+                <img 
+                  src={report.image} 
+                  alt={report.title} 
+                  className="w-full h-full object-cover opacity-60 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700 font-mono text-[8px] flex items-center justify-center italic text-white/10" 
                 />
-            </div>
-          </div>
-
-          <div className="grid gap-12">
-            {reports.map((report) => (
-              <Link key={report.id} href={`/portfolio/${report.slug}`} className="group relative block animate-in fade-in slide-up duration-500">
-                <div className="relative bg-slate-900/40 border border-white/5 rounded-3xl p-10 hover:border-brand-blue/30 transition-all shadow-xl group-hover:translate-x-1 duration-500">
-                  <div className="grid lg:grid-cols-[1fr_auto] gap-10">
-                    <div className="space-y-6">
-                      <div className="flex items-center gap-6 text-[10px] font-black tracking-widest text-white/30 font-mono">
-                        <span className="flex items-center gap-2 uppercase tracking-[0.2em]"><Calendar size={14} className="text-brand-blue"/> {report.date}</span>
-                        <span className="text-brand-gold bg-brand-gold/5 px-3 py-1 rounded border border-brand-gold/10 tracking-[0.2em] uppercase">{report.category}</span>
-                      </div>
-                      <h2 className="text-3xl font-black text-white group-hover:text-brand-blue transition-colors tracking-tight italic uppercase">{report.title}</h2>
-                      <p className="text-slate-400 text-lg leading-relaxed line-clamp-2 font-light italic">&ldquo;{report.excerpt}&rdquo;</p>
-                      <div className="flex items-center gap-4 pt-4">
-                         {report.tags.map((t, idx) => (
-                           <span key={idx} className="text-[9px] font-black text-white/20 uppercase tracking-[0.2em]">{t}</span>
-                         ))}
-                      </div>
-                    </div>
-                    <div className="flex items-center justify-center">
-                      <div className="w-14 h-14 rounded-2xl border border-white/10 flex items-center justify-center group-hover:bg-brand-blue group-hover:border-brand-blue transition-all duration-500">
-                        <ChevronRight className="text-white group-hover:text-slate-900" size={24} />
-                      </div>
-                    </div>
-                  </div>
+                <div className="absolute top-4 left-4 flex gap-2">
+                  <span className="px-3 py-1 bg-brand-blue text-slate-900 text-[10px] font-black uppercase tracking-widest">{report.tag}</span>
+                  {!report.hasContent && (
+                    <span className="px-3 py-1 bg-white/10 text-white/40 text-[10px] font-black uppercase tracking-widest backdrop-blur-sm">校准中 / Drafting</span>
+                  )}
                 </div>
-              </Link>
-            ))}
-          </div>
-        </section>
+              </div>
+              
+              <div className="space-y-4 flex-grow">
+                <div className="flex justify-between items-center text-[10px] text-white/20 font-mono">
+                  <span className="flex items-center gap-2"><Clock size={12} /> {report.readTime}</span>
+                  <span className="flex items-center gap-2">
+                    {report.hasContent && <span className="w-1.5 h-1.5 bg-brand-blue rounded-full animate-pulse"></span>}
+                    {report.date}
+                  </span>
+                </div>
+                <h2 className="text-xl font-bold text-white transition-colors group-hover:text-brand-blue leading-tight tracking-tight">
+                  {report.hasContent ? (
+                    <Link href={`/portfolio/${report.slug}`}>{report.title}</Link>
+                  ) : (
+                    <span className="cursor-help">{report.title}</span>
+                  )}
+                </h2>
+                <p className="text-sm text-slate-500 line-clamp-2 font-light leading-relaxed">
+                  {report.description}
+                </p>
+                <div className="pt-4 flex items-center justify-between">
+                  <span className="text-[10px] font-mono text-white/10 italic">#{report.id}</span>
+                  {report.hasContent ? (
+                    <Link href={`/portfolio/${report.slug}`} className="text-brand-blue text-xs font-black hover:underline transition-all flex items-center gap-2 underline-offset-4 decoration-2">
+                      READ INSIGHT <span className="text-lg">→</span>
+                    </Link>
+                  ) : (
+                    <span className="text-white/10 text-[10px] font-mono uppercase tracking-[0.2em] italic">Intelligence Pending...</span>
+                  )}
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
 
+        {/* Pagination */}
+        {totalPages > 1 && (
+          <div className="mt-24 pt-12 border-t border-white/5 flex items-center justify-center gap-10">
+            <button 
+              disabled={currentPage === 1}
+              onClick={() => setCurrentPage(prev => prev - 1)}
+              className="p-4 border border-white/5 rounded-full text-white/30 hover:text-brand-blue hover:border-brand-blue/30 disabled:opacity-0 transition-all"
+            >
+              <ChevronLeft size={24} />
+            </button>
+            <div className="flex items-center gap-4 text-xs font-mono tracking-widest">
+              <span className="text-brand-blue font-black">{currentPage}</span>
+              <span className="text-white/10">/</span>
+              <span className="text-white/40">{totalPages}</span>
+            </div>
+            <button 
+              disabled={currentPage === totalPages}
+              onClick={() => setCurrentPage(prev => prev + 1)}
+              className="p-4 border border-white/5 rounded-full text-white/30 hover:text-brand-blue hover:border-brand-blue/30 disabled:opacity-0 transition-all"
+            >
+              <ChevronRight size={24} />
+            </button>
+          </div>
+        )}
+
+        {currentReports.length === 0 && (
+          <div className="py-20 text-center space-y-4">
+             <div className="text-brand-blue/20 text-6xl">∅</div>
+             <p className="text-white/30 text-xs font-mono tracking-widest uppercase italic">No analysis found for this selection.</p>
+          </div>
+        )}
       </main>
     </div>
   );

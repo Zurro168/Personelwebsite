@@ -8,9 +8,11 @@ export default function Navbar() {
   const pathname = usePathname();
 
   const navLinks = [
-    { name: 'PORTFOLIO', path: '/portfolio' },
-    { name: 'INTERSECTION', path: '/intersection' },
-    { name: 'ABOUT', path: '/about' },
+    { name: '首页', path: '/' },
+    { name: '金属周期地图', path: '/cycle-map' },
+    { name: '深度研报', path: '/portfolio' },
+    { name: '跨界实验', path: '/intersection' },
+    { name: '关于', path: '/about' },
   ];
 
   return (

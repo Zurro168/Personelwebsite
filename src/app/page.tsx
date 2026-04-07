@@ -49,7 +49,7 @@ export default function Home() {
                  深度探讨了在全球算力架构升级背景下，高导电率精炼铜的需求爆发如何与传统矿业产量的结构性瓶颈产生共振，并推演了未来的价格策略过程...
                </p>
                <div className="pt-6 border-t border-white/5 flex items-center justify-between">
-                  <Link href="/portfolio/cycle-map/copper" className="flex items-center text-brand-blue text-sm font-black gap-3 hover:gap-5 transition-all group-hover:text-cyan-300">
+                  <Link href="/cycle-map/copper" className="flex items-center text-brand-blue text-sm font-black gap-3 hover:gap-5 transition-all group-hover:text-cyan-300">
                     查看完整周期地图 <span className="text-xl">→</span>
                   </Link>
                   <div className="flex -space-x-2">
