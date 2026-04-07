@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { Activity, ShieldCheck, Share2, Zap } from 'lucide-react';
+import PriceTicker from '@/components/layout/PriceTicker';
 
 export default function Home() {
   return (
@@ -60,29 +61,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Dynamic Data Bar */}
-      <section className="border-y border-industrial-border bg-slate-900/40 py-6 backdrop-blur-md">
-        <div className="flex overflow-hidden gap-20 whitespace-nowrap px-8">
-          <div className="flex animate-scroll gap-20">
-            {[
-              { name: "LME COPPER", price: "12,150.00", delta: "+2.4%" },
-              { name: "WTI CRUDE", price: "92.45", delta: "-0.8%" },
-              { name: "GOLD (SPOT)", price: "2,465.20", delta: "+0.5%" },
-              { name: "SILVER (SPOT)", price: "34.12", delta: "+1.2%" },
-              { name: "ALUMINUM", price: "2,640.50", delta: "+0.3%" },
-              { name: "NICKEL", price: "18,450", delta: "-2.1%" }
-            ].map((item, i) => (
-              <div key={i} className="flex gap-6 items-center group">
-                <span className="text-white/30 font-mono text-[10px] tracking-widest">{item.name}</span>
-                <span className="font-black text-white text-sm tracking-tight">{item.price}</span>
-                <span className={`text-[10px] font-bold px-2 py-0.5 rounded ${item.delta.startsWith('+') ? "bg-emerald-500/10 text-emerald-400" : "bg-rose-500/10 text-rose-400"}`}>
-                  {item.delta}
-                </span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* Dynamic Data Bar (LIVE) */}
+      <PriceTicker />
 
       {/* Feature Grid */}
       <section className="px-8 py-32 max-w-7xl mx-auto grid md:grid-cols-3 gap-10">
