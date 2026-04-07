@@ -31,12 +31,12 @@ export default function Portfolio() {
   return (
     <div className="min-h-screen bg-background">
       {/* Page Header */}
-      <section className="px-8 py-10 bg-slate-900/40 border-b border-industrial-border relative overflow-hidden">
+      <section className="px-8 py-6 bg-slate-900/40 border-b border-industrial-border relative overflow-hidden">
         <div className="absolute top-0 right-0 w-1/2 h-full bg-brand-blue/5 blur-[100px] pointer-events-none"></div>
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-end gap-10">
-          <div className="space-y-4">
+          <div className="space-y-2">
             <h1 className="text-5xl font-black text-white italic uppercase tracking-tighter">深度研报 <span className="text-brand-blue">/</span> Deep Insights</h1>
-            <p className="text-slate-400 max-w-xl font-light">
+            <p className="text-slate-500 max-w-xl font-light text-xs leading-relaxed">
               致力于用第一性原理拆解大宗商品背后的物理与资本逻辑。所有研报均基于硅基大宗专有模型与长期产业深度访谈。
             </p>
           </div>

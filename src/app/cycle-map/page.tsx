@@ -51,11 +51,11 @@ const COMMODITIES = [
 export default function CycleMapPortal() {
   return (
     <div className="min-h-screen bg-background p-6 md:p-8">
-      <section className="max-w-7xl mx-auto py-10 space-y-4">
+      <section className="max-w-7xl mx-auto py-6 space-y-2">
         <h1 className="text-5xl font-black text-white italic uppercase tracking-tighter">
           金属周期地图 <span className="text-brand-blue">/</span> Circle Map
         </h1>
-        <p className="max-w-2xl text-slate-500 font-light text-lg leading-relaxed pt-4">
+        <p className="max-w-2xl text-slate-500 font-light text-xs leading-relaxed">
           基于独有的“硅基定价模型”，通过高频数据拟合大宗商品的基本面状态、宏观溢价与情绪指数，实时监测各品类的周期拐点。
         </p>
       </section>
