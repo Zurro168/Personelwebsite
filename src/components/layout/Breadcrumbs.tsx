@@ -15,10 +15,10 @@ interface BreadcrumbsProps {
 
 export default function Breadcrumbs({ items }: BreadcrumbsProps) {
   return (
-    <nav className="flex items-center space-x-2 text-[10px] font-mono tracking-widest uppercase text-white/30 py-4 mb-8 border-b border-white/5">
+    <nav className="flex items-center space-x-2 text-[10px] font-mono tracking-widest uppercase text-white/30 py-2 border-b border-white/5">
       <Link href="/" className="hover:text-brand-blue transition-colors flex items-center gap-1.5 grayscale hover:grayscale-0">
-        <Home size={12} />
-        <span>TERMINAL</span>
+        <Home size={10} />
+        <span>硅基洞察 / SILICON INSIGHT</span>
       </Link>
       
       {items.map((item, index) => (
