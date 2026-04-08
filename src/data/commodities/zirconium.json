@@ -1,29 +1,36 @@
 {
   "slug": "zirconium",
-  "last_updated": "2026-04-08T10:18:00Z",
+  "last_updated": "2026-04-08T15:00:00Z",
   "metadata": {
-    "name": "锆 (Zirconium)",
-    "unit": "USD/MT",
-    "fred_code": "STRATEGIC_MINERAL_PROXY"
+    "name": "海绵锆 (Zirconium)",
+    "unit": "CNY/KG",
+    "fred_code": null
   },
   "score_engine": {
-    "total_score": 65,
-    "dimensions": [50, 65, 40, 75],
-    "cycle_position": 0,
-    "outlook": "up"
+    "total_score": 72,
+    "dimensions": [65, 80, 50, 85],
+    "cycle_position": 1,
+    "outlook": "bullish",
+    "cycle_steps": [
+      { "emoji": "🌪️", "label": "宏观环境", "sub": "能源主权与军工溢价" },
+      { "emoji": "⚡", "label": "需求动能", "sub": "核电重启与航空复苏" },
+      { "emoji": "📦", "label": "库存水平", "sub": "渠道库存中性偏低" },
+      { "emoji": "💲", "label": "价格反应", "sub": "底部抬升，开始溢价" },
+      { "emoji": "⛏️", "label": "供应周期", "sub": "战略矿产管控：紧缺" }
+    ]
   },
   "narrative_layer": [
     {
-      "title": "供应霸权：矿端高度集中",
-      "content": "全球锆矿供应高度依赖少数几个关键矿区。受地缘政治及开采权收紧影响，上游议价权正在增强。"
+      "title": "核级锆：新一代能源的‘紧缩骨架’",
+      "content": "随着全球核电站建设进入复苏长周期，核级海绵锆的需求呈现出‘脉冲式增长’。不同于基础金属，海绵锆的供应壁垒极高，且高度依赖地缘政治稳定性。当前的宏观叙事正转向‘能源主权’，锆作为核燃料包壳的核心材料，其战略溢价正在被重新发现。"
     },
     {
-      "title": "核电及新能源陶瓷需求",
-      "content": "作为典型的能源转型资产，锆在核电级海绵锆和固态电池电解质中的应用前景正被重新评估。"
+      "title": "高端陶瓷与航空的分野",
+      "content": "虽然传统陶瓷色釉料领域的锆石需求在下滑，但航空级海绵锆的订单却处于爆单状态。这种‘结构性紧缺’正在支撑锆价在周期底部率先走出一道漂亮的斜线。"
     }
   ],
   "manual_override": {
-    "price": 15800,
-    "context": "受全球能源转型带动的核电基建潮影响，锆英砂的长协定价权正在向卖方倾斜。"
+    "price": "235.00",
+    "context": "“正处于【需求加速爆发期】。核电订单的刚性正在对冲下行宏观压力。”"
   }
 }

@@ -1,7 +1,7 @@
 'use client';
 
 import React, { use, useEffect, useState } from 'react';
-import { ChevronRight, ShieldAlert, Activity, Loader2, Info } from 'lucide-react';
+import { ChevronRight, ShieldAlert, Activity, Loader2, Info, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 import Breadcrumbs from '@/components/layout/Breadcrumbs';
 import { resolveCommodity, UnifiedCommodityData } from '@/lib/price-adapter';
@@ -33,7 +33,7 @@ ChartJS.register(
 
 export default function CycleMapDetail({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = use(params);
-  const [data, setData] = useState<UnifiedCommodityData | null>(null);
+  const [data, setData] = useState<any>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -48,9 +48,9 @@ export default function CycleMapDetail({ params }: { params: Promise<{ slug: str
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-[#050507] text-white flex flex-col items-center justify-center">
-        <Loader2 className="w-8 h-8 text-brand-blue animate-spin mb-4" />
-        <div className="text-[10px] uppercase font-bold tracking-widest text-brand-blue italic animate-pulse">Syncing Cycle Data...</div>
+      <div className="min-h-screen bg-[#0c0c0e] text-white flex flex-col items-center justify-center">
+        <Loader2 className="w-10 h-10 text-brand-blue animate-spin mb-6" />
+        <div className="text-xs uppercase font-black tracking-[0.3em] text-brand-blue italic animate-pulse">Establishing Secure Neural Link...</div>
       </div>
     );
   }
@@ -63,61 +63,89 @@ export default function CycleMapDetail({ params }: { params: Promise<{ slug: str
   ];
 
   return (
-    <div className="min-h-screen bg-[#050507] text-white font-sans selection:bg-brand-blue/30 pb-20">
-      <div className="max-w-7xl mx-auto px-6 py-8">
-        <div className="mb-8 opacity-30 hover:opacity-100 transition-opacity">
+    <div className="min-h-screen bg-[#0c0c0e] text-white font-sans selection:bg-brand-blue/30 pb-32">
+      {/* 注入全局动态关键帧 */}
+      <style jsx global>{`
+        @keyframes liquidFlow {
+          0% { stroke-dashoffset: 20; opacity: 0.1; }
+          50% { opacity: 0.5; }
+          100% { stroke-dashoffset: 0; opacity: 0.1; }
+        }
+        @keyframes pulseGlow {
+          0%, 100% { box-shadow: 0 0 10px rgba(59, 130, 246, 0.1); }
+          50% { box-shadow: 0 0 25px rgba(59, 130, 246, 0.4); }
+        }
+        @keyframes radarExpand {
+          0% { transform: scale(0.9); opacity: 0.2; }
+          100% { transform: scale(1.5); opacity: 0; }
+        }
+      `}</style>
+
+      <div className="max-w-7xl mx-auto px-6 py-12">
+        <div className="mb-12 opacity-60 hover:opacity-100 transition-opacity duration-500">
            <Breadcrumbs items={breadcrumbs} />
         </div>
 
-        {/* --- 终端头部 (Terminal Header) --- */}
-        <div className="bg-white/5 border border-white/5 p-8 rounded-sm mb-6">
-          <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 gap-8">
-            <div>
-              <div className="flex items-center gap-3 mb-2">
-                <span className="w-2 h-2 rounded-full bg-brand-blue animate-pulse"></span>
-                <span className="text-[10px] font-bold text-brand-blue uppercase tracking-widest italic">Live Statistics</span>
+        {/* --- 工业头部 (Premium Header) --- */}
+        <div className="bg-[#141417] border border-white/10 p-12 rounded-sm mb-10 shadow-2xl relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-[600px] h-full bg-gradient-to-l from-brand-blue/[0.03] to-transparent pointer-events-none"></div>
+          
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-20 gap-12 relative z-10">
+            <div className="flex-1">
+              <div className="flex items-center gap-4 mb-6">
+                <div className="relative">
+                   <div className="w-3 h-3 rounded-full bg-brand-blue animate-pulse"></div>
+                   <div className="absolute inset-0 rounded-full bg-brand-blue animate-ping opacity-20"></div>
+                </div>
+                <span className="text-xs font-black text-brand-blue uppercase tracking-[0.2em] italic">Industrial Data Node 0x7A // SILICON INSIGHT</span>
               </div>
-              <h1 className="text-6xl font-black tracking-tighter italic uppercase">{data.name}</h1>
-              <p className="mt-4 text-white/40 max-w-2xl text-sm leading-relaxed italic">{data.context}</p>
+              <h1 className="text-8xl font-black tracking-tighter italic uppercase text-white mb-8 leading-none drop-shadow-2xl">{data.name}</h1>
+              <p className="max-w-2xl text-lg leading-relaxed text-white/70 italic font-medium border-l-2 border-brand-blue/30 pl-8">{data.context}</p>
             </div>
             
-            <div className="flex items-end gap-10">
+            <div className="flex items-end gap-16">
               <div className="text-right">
-                <div className="text-[10px] uppercase font-black text-white/20 mb-2 tracking-widest">Market Value</div>
-                <div className="text-5xl font-black tracking-tighter tracking-tight">
-                  {data.price} <span className="text-sm font-normal text-white/20 ml-1">{data.unit}</span>
+                <div className="text-xs uppercase font-black text-white/40 mb-4 tracking-widest">Market Quotation Index</div>
+                <div className="text-7xl font-black tracking-tighter text-white">
+                  {data.price} <span className="text-xl font-normal text-white/20 ml-3 italic">USD</span>
                 </div>
               </div>
-              <div className={`px-4 py-2 text-sm font-black italic rounded-sm ${data.change.startsWith('+') ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20' : 'bg-rose-500/10 text-rose-400 border border-rose-500/20'}`}>
+              <div className={`px-6 py-4 text-2xl font-black italic rounded-sm shadow-[0_0_30px_rgba(0,0,0,0.5)] transform hover:scale-105 transition-transform ${data.change.startsWith('+') ? 'bg-emerald-500 text-slate-900 border-b-4 border-emerald-700' : 'bg-rose-500 text-white border-b-4 border-rose-700'}`}>
                 {data.change}
               </div>
             </div>
           </div>
 
-          <div className="grid lg:grid-cols-4 gap-6">
-            {/* 周期评分卡片 (Score Card ported from HTML) */}
-            <div className="p-8 bg-white/[0.02] border border-white/5 flex flex-col items-center justify-center text-center relative overflow-hidden group">
-               <div className="absolute top-0 left-0 w-full h-1 bg-amber-500 shadow-[0_0_10px_rgba(245,158,11,0.5)]"></div>
-               <div className="text-[10px] font-black text-white/20 uppercase tracking-widest mb-4 italic">Cycle Score</div>
-               <div className="text-7xl font-black text-amber-500 italic drop-shadow-xl mb-1">{data.score}<span className="text-xl text-white/10 italic">/100</span></div>
-               <div className="px-3 py-1 bg-amber-500/20 text-amber-500 text-[10px] font-black rounded-sm border border-amber-500/20 uppercase italic">警告: 周期修正</div>
+          <div className="grid lg:grid-cols-4 gap-10">
+            {/* 核心评分卡片 (Radar Animated Score) */}
+            <div className="p-12 bg-white/[0.04] border border-white/10 flex flex-col items-center justify-center text-center relative overflow-hidden group shadow-2xl transition-all hover:bg-white/[0.06]">
+               <div className="absolute top-0 left-0 w-full h-2 bg-amber-500 shadow-[0_0_20px_#f59e0b]"></div>
+               {/* 动态雷达波扩散 */}
+               <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                  <div className="w-32 h-32 rounded-full border border-amber-500/20" style={{ animation: 'radarExpand 3s infinite linear' }}></div>
+                  <div className="w-32 h-32 rounded-full border border-amber-500/10 delay-1000" style={{ animation: 'radarExpand 3s infinite linear 1.5s' }}></div>
+               </div>
+               <div className="text-xs font-black text-white/50 uppercase tracking-widest mb-8 italic z-10 transition-colors group-hover:text-amber-500">Global Score Matrix</div>
+               <div className="text-9xl font-black text-amber-500 italic drop-shadow-[0_0_30px_rgba(245,158,11,0.5)] mb-3 tracking-tighter z-10">{data.score}<span className="text-2xl text-white/10 italic ml-1">/pts</span></div>
+               <div className="px-6 py-2 bg-amber-500/20 text-amber-500 text-xs font-black rounded-sm border border-amber-500/40 uppercase italic tracking-[0.2em] z-10">Rating: High Risk Correction</div>
             </div>
 
-            {/* 维度逻辑拆解 (Dimension Analysis ported from HTML) */}
-            <div className="md:col-span-3 p-8 bg-white/[0.02] border border-white/5">
-                <h2 className="text-[10px] font-black text-brand-blue uppercase tracking-widest mb-6 italic flex items-center gap-2">
-                    <Info size={12} /> Dimension Logic Breakdown
+            {/* 逻辑分解条形图 (High-Contrast Bar) */}
+            <div className="md:col-span-3 p-12 bg-white/[0.04] border border-white/10 shadow-2xl relative group">
+                <div className="absolute top-0 left-0 w-1 h-full bg-brand-blue group-hover:w-2 transition-all duration-500 opacity-30"></div>
+                <h2 className="text-xs font-black text-brand-blue uppercase tracking-widest mb-10 italic flex items-center gap-4">
+                    <Activity size={18} className="text-brand-blue" /> Fundamental Dimension Breakdown
                 </h2>
-                <div className="h-32">
+                <div className="h-44">
                     <Bar 
                         data={{
                             labels: ['宏观环境', '需求动能', '库存水位', '供应潜力'],
                             datasets: [{
                                 data: data.dimensionScores,
-                                backgroundColor: ['rgba(244,63,94,0.6)', 'rgba(52,211,153,0.6)', 'rgba(244,63,94,0.6)', 'rgba(245,158,11,0.6)'],
-                                borderColor: ['#f43f5e', '#34d399', '#f43f5e', '#f59e0b'],
-                                borderWidth: 1,
-                                borderRadius: 2
+                                backgroundColor: ['rgba(244,63,94,0.9)', 'rgba(52,211,153,0.9)', 'rgba(244,63,94,0.9)', 'rgba(245,158,11,0.9)'],
+                                borderColor: '#fff',
+                                borderWidth: 0,
+                                borderRadius: 0
                             }]
                         }}
                         options={{
@@ -126,8 +154,8 @@ export default function CycleMapDetail({ params }: { params: Promise<{ slug: str
                             maintainAspectRatio: false,
                             plugins: { legend: { display: false } },
                             scales: {
-                                x: { grid: { display: false }, ticks: { color: 'rgba(255,255,255,0.2)', font: { size: 9, family: 'monospace' } } },
-                                y: { grid: { display: false }, ticks: { color: 'rgba(255,255,255,0.6)', font: { size: 10 } } }
+                                x: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: 'rgba(255,255,255,0.4)', font: { size: 10, family: 'monospace', weight: 'bold' } } },
+                                y: { grid: { display: false }, ticks: { color: '#fff', font: { size: 14, weight: 'bold' } } }
                             }
                         }}
                     />
@@ -136,98 +164,141 @@ export default function CycleMapDetail({ params }: { params: Promise<{ slug: str
           </div>
         </div>
 
-        {/* --- 深度叙事层 (Narrative Layer) --- */}
-        <div className="grid lg:grid-cols-3 gap-12 mb-12">
+        {/* --- 宏观周期流程 (Liquid Interaction Flow) --- */}
+        <div className="bg-[#141417] border border-white/10 p-16 rounded-sm mb-10 shadow-2xl relative group">
+            <div className="absolute -left-2 top-1/2 -translate-y-1/2 w-4 h-32 bg-brand-blue/20 blur-2xl opacity-10 group-hover:opacity-100 transition-opacity"></div>
+            <h2 className="text-xs font-black text-brand-blue uppercase tracking-[0.5em] mb-16 italic text-center drop-shadow-sm">End-to-End Market Cycle Logic Linkage</h2>
+            <div className="flex flex-col lg:flex-row items-stretch justify-between gap-6 lg:gap-4 lg:px-10">
+                {data.cycleSteps?.map((pos: any, idx: number) => (
+                    <React.Fragment key={idx}>
+                        <div className={`flex-1 p-8 border rounded-sm text-center transition-all duration-700 relative flex flex-col justify-center items-center group/card cursor-pointer hover:bg-white/[0.05] ${idx === data.cyclePosition ? 'border-amber-500 bg-amber-500/10 shadow-[0_0_60px_rgba(245,158,11,0.2)] scale-110 z-20 border-2' : 'border-white/5 bg-white/[0.01] opacity-40 hover:opacity-100 grayscale hover:grayscale-0'}`}>
+                            {idx === data.cyclePosition && (
+                                <div className="absolute -top-5 left-1/2 -translate-x-1/2 bg-amber-500 text-slate-900 text-[10px] font-black px-4 py-1.5 whitespace-nowrap italic shadow-[0_0_20px_#f59e0b] animate-bounce">ACTUAL LOGIC POSITION</div>
+                            )}
+                            <div className={`text-6xl mb-6 transition-transform duration-500 group-hover/card:scale-125 drop-shadow-[0_4px_10px_rgba(0,0,0,0.5)]`}>{pos.emoji}</div>
+                            <div className={`text-base font-black uppercase mb-3 tracking-widest transition-colors ${idx === data.cyclePosition ? 'text-amber-500' : 'text-white/90 group-hover/card:text-brand-blue'}`}>{pos.label}</div>
+                            <div className={`text-[12px] font-bold italic leading-snug px-2 transition-opacity ${idx === data.cyclePosition ? 'text-amber-500 opacity-100' : 'text-white/30 group-hover/card:text-white/60'}`}>{pos.sub}</div>
+                        </div>
+                        {idx < 4 && (
+                            <div className="hidden lg:flex items-center justify-center text-white/5 opacity-40 hover:opacity-100">
+                                <ArrowRight size={24} className="animate-pulse" />
+                            </div>
+                        )}
+                    </React.Fragment>
+                ))}
+            </div>
+        </div>
+
+        <div className="grid lg:grid-cols-3 gap-10">
             <div className="lg:col-span-2 space-y-12">
-                <div className="p-8 border border-white/5 bg-white/[0.012] rounded-sm">
-                   <h2 className="text-[10px] font-black text-brand-blue uppercase tracking-widest mb-8 italic">Market Trend Analysis</h2>
-                   <div className="h-80 w-full mb-10">
+                <div className="p-12 border border-white/10 bg-[#141417] rounded-sm shadow-2xl relative section-reveal">
+                   <h2 className="text-xs font-black text-brand-blue uppercase tracking-widest mb-16 italic flex items-center gap-4">
+                      <Activity className="w-6 h-6 text-brand-blue" />
+                      Multidimensional Market Intelligence Narrative
+                   </h2>
+                   <div className="h-[500px] w-full mb-16 border-b border-white/10 pb-12">
                       <Line 
                         data={{
                            labels: data.chartLabels,
                            datasets: [{
-                              label: 'SPOT PRICE INDEX',
+                              label: 'REAL-TIME OBSERVATION',
                               data: data.chartValues,
                               borderColor: '#3b82f6',
-                              borderWidth: 2,
-                              pointRadius: 4,
+                              borderWidth: 4,
+                              pointRadius: 6,
+                              pointBackgroundColor: '#3b82f6',
+                              pointBorderColor: '#fff',
+                              pointBorderWidth: 3,
+                              pointHoverRadius: 10,
                               fill: true,
                               tension: 0.4,
-                              backgroundColor: 'rgba(59, 130, 246, 0.05)'
+                              backgroundColor: (context) => {
+                                const ctx = context.chart.ctx;
+                                const gradient = ctx.createLinearGradient(0, 0, 0, 500);
+                                gradient.addColorStop(0, 'rgba(59, 130, 246, 0.25)');
+                                gradient.addColorStop(1, 'rgba(59, 130, 246, 0)');
+                                return gradient;
+                              },
                            }]
                         }}
-                        options={{ responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }}
+                        options={{ 
+                            responsive: true, 
+                            maintainAspectRatio: false, 
+                            plugins: { 
+                                legend: { display: false },
+                                tooltip: {
+                                    backgroundColor: 'rgba(20, 20, 23, 0.95)',
+                                    titleFont: { size: 16, weight: 'bold' },
+                                    bodyFont: { size: 14, family: 'monospace' },
+                                    borderColor: '#3b82f6',
+                                    borderWidth: 1,
+                                    padding: 16,
+                                    displayColors: false
+                                }
+                            },
+                            scales: {
+                                y: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: 'rgba(255,255,255,0.4)', font: { size: 12, family: 'monospace', weight: 'bold' } } },
+                                x: { grid: { display: false }, ticks: { color: 'rgba(255,255,255,0.4)', font: { size: 12, family: 'monospace', weight: 'bold' } } }
+                            }
+                        }}
                       />
                    </div>
                    
-                   <div className="space-y-10 border-t border-white/5 pt-10">
-                      {data.narrative.map((item, idx) => (
-                        <div key={idx}>
-                           <h3 className="text-xl font-black mb-4 italic uppercase flex items-center gap-3">
-                              <div className="w-1 h-4 bg-brand-blue"></div> {item.title}
+                   <div className="space-y-16">
+                      {data.narrative?.map((item: any, idx: number) => (
+                        <div key={idx} className="group cursor-default relative pl-12">
+                           <div className="absolute left-0 top-0 w-1 h-full bg-white/5 group-hover:bg-brand-blue transition-all duration-700"></div>
+                           <h3 className="text-3xl font-black mb-8 italic uppercase text-white group-hover:tracking-wider transition-all duration-500">
+                              {item.title}
                            </h3>
-                           <p className="text-white/60 leading-relaxed text-sm font-light italic">{item.content}</p>
+                           <p className="text-white/80 leading-relaxed text-xl font-medium italic mb-2">{item.content}</p>
+                           <div className="h-0.5 w-12 bg-brand-blue/40 mt-8 group-hover:w-full transition-all duration-1000"></div>
                         </div>
                       ))}
                    </div>
                 </div>
-
-                {/* --- 宏观周期定位 (Cycle Flow ported from HTML) --- */}
-                <div className="p-10 bg-white/[0.012] border border-white/5 rounded-sm">
-                    <h2 className="text-[10px] font-black text-brand-blue uppercase tracking-widest mb-10 italic text-center">Global Macro Cycle Positioning</h2>
-                    <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-                        {[
-                            { emoji: '🌪️', label: '宏观环境', sub: '滞胀隐忧' },
-                            { emoji: '⚡', label: '需求动能', sub: '核心刚性' },
-                            { emoji: '📦', label: '库存水平', sub: '严重饱和' },
-                            { emoji: '💲', label: '价格反应', sub: '横盘整理' },
-                            { emoji: '⛏️', label: '供应周期', sub: '紧平衡' }
-                        ].map((pos, idx) => (
-                            <React.Fragment key={idx}>
-                                <div className={`flex-1 p-4 border rounded-sm text-center transition-all relative ${idx === data.cyclePosition ? 'border-amber-500 bg-amber-500/10 shadow-[0_0_20px_rgba(245,158,11,0.2)] scale-110 z-10' : 'border-white/5 bg-white/[0.02] opacity-40'}`}>
-                                    {idx === data.cyclePosition && (
-                                        <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-amber-500 text-slate-900 text-[8px] font-black px-2 py-0.5 whitespace-nowrap italic animate-pulse">LATEST POSITION</div>
-                                    )}
-                                    <div className="text-2xl mb-2">{pos.emoji}</div>
-                                    <div className={`text-[10px] font-black uppercase mb-1 ${idx === data.cyclePosition ? 'text-amber-500' : 'text-white/60'}`}>{pos.label}</div>
-                                    <div className="text-[8px] opacity-40 italic">{pos.sub}</div>
-                                </div>
-                                {idx < 4 && (
-                                    <div className="hidden md:block text-white/5 text-xl font-light">→</div>
-                                )}
-                            </React.Fragment>
-                        ))}
-                    </div>
-                </div>
             </div>
 
-            <div className="space-y-6">
-                <div className="p-8 bg-brand-blue text-slate-900 relative overflow-hidden">
-                    <div className="absolute top-0 right-0 p-4 opacity-10"><ShieldAlert size={40} /></div>
-                    <div className="text-[10px] font-black uppercase tracking-widest italic mb-6">AI Strategy Prediction</div>
-                    <p className="text-sm font-bold leading-relaxed mb-8">利用多维度非对称数据计算得出的周期结论。目前建议维持“结构性防御”姿态。</p>
-                    <div className="pt-6 border-t border-slate-900/10">
-                        <div className="text-[10px] font-black uppercase mb-1 opacity-40 tracking-widest">Rating</div>
-                        <div className="text-2xl font-black italic">修正期 / CORRECTION</div>
+            <div className="space-y-10">
+                <div className="p-12 bg-brand-blue text-slate-900 border-l-[12px] border-slate-900/10 shadow-[0_20px_50px_rgba(59,130,246,0.3)] relative overflow-hidden group/strat">
+                    <div className="absolute top-0 right-0 p-8 opacity-20 transform group-hover/strat:scale-110 transition-transform duration-700"><ShieldAlert size={80} /></div>
+                    <div className="text-xs font-black uppercase tracking-[0.3em] italic mb-10 border-b border-slate-900/10 pb-4 inline-block">AI Strategy Masterplan</div>
+                    <p className="text-2xl font-black leading-tight mb-12 italic border-l-4 border-slate-900/10 pl-6">“库存拐点尚未确立，流动性溢价面临二次修正。当前核心逻辑：防守至上，静待极值爆发。”</p>
+                    <div className="pt-10 border-t border-slate-900/20">
+                        <div className="text-[12px] font-black uppercase mb-2 opacity-60 tracking-widest">Global Risk Rating</div>
+                        <div className="text-4xl font-black italic uppercase tracking-tighter shadow-sm">中性偏空 / BEARISH-HEDGE</div>
                     </div>
                 </div>
 
-                <div className="p-8 border border-white/5 bg-white/[0.02]">
-                    <h3 className="text-[10px] font-black text-brand-blue uppercase tracking-widest mb-6 italic">Strategic Operations</h3>
-                    <div className="space-y-4">
-                        <div className="p-4 bg-white/[0.02] border border-white/5 rounded-sm">
-                            <div className="text-rose-400 text-[10px] font-black uppercase mb-1 italic">Short-term</div>
-                            <div className="text-[11px] font-bold text-white/60">LME铜价在 12,000 - 12,300 美元区间震荡。</div>
+                <div className="p-12 border border-white/10 bg-[#141417] shadow-2xl relative overflow-hidden">
+                    <div className="absolute -right-10 -bottom-10 w-40 h-40 bg-brand-blue/5 rounded-full blur-3xl opacity-50"></div>
+                    <h3 className="text-xs font-black text-brand-blue uppercase tracking-widest mb-10 italic flex items-center gap-4">
+                        <Activity size={18} /> High-Fidelity Alpha Signals
+                    </h3>
+                    <div className="space-y-8">
+                        <div className="p-8 bg-white/[0.04] border border-white/10 rounded-sm hover:border-brand-blue/60 hover:bg-white/[0.06] transition-all cursor-cell group">
+                            <div className="text-rose-400 text-xs font-black uppercase mb-4 italic flex items-center gap-3">
+                                <div className="w-2 h-2 rounded-full bg-rose-500 shadow-[0_0_8px_#f43f5e] animate-pulse"></div> 战术性空头敞口预警
+                            </div>
+                            <div className="text-[15px] font-bold text-white/80 leading-relaxed italic">LME 现货大幅深贴水（Contango），暗示实物囤积成本高昂。</div>
                         </div>
-                        <div className="p-4 bg-white/[0.02] border border-white/5 rounded-sm">
-                            <div className="text-emerald-400 text-[10px] font-black uppercase mb-1 italic">Critical Support</div>
-                            <div className="text-[11px] font-bold text-white/60">密切关注 11,500 美元一线切入点。</div>
+                        <div className="p-8 bg-white/[0.04] border border-white/10 rounded-sm hover:border-brand-blue/60 hover:bg-white/[0.06] transition-all cursor-cell group">
+                            <div className="text-emerald-400 text-xs font-black uppercase mb-4 italic flex items-center gap-3">
+                                <div className="w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_8px_#10b981] animate-pulse"></div> 供给侧结构性异动
+                            </div>
+                            <div className="text-[15px] font-bold text-white/80 leading-relaxed italic">刚果（金）出口物流受阻，关注 11,200 美金底线支撑力度。</div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
       </div>
+
+      <footer className="max-w-7xl mx-auto mt-32 py-16 border-t border-white/5 text-center">
+         <Link href="/cycle-map" className="text-white/20 hover:text-brand-blue text-xs font-black tracking-[0.5em] uppercase transition-all duration-500 hover:tracking-[0.8em] italic">
+            BACK TO CENTRAL INTELLIGENCE COMMAND
+         </Link>
+      </footer>
     </div>
   );
 }

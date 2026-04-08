@@ -1,0 +1,36 @@
+{
+  "slug": "titanium",
+  "last_updated": "2026-04-08T15:00:00Z",
+  "metadata": {
+    "name": "海绵钛 (Titanium)",
+    "unit": "USD/KG",
+    "fred_code": null
+  },
+  "score_engine": {
+    "total_score": 88,
+    "dimensions": [75, 95, 40, 90],
+    "cycle_position": 1,
+    "outlook": "strongly-bullish",
+    "cycle_steps": [
+      { "emoji": "🌪️", "label": "宏观环境", "sub": "防务支出增长与防空竞赛" },
+      { "emoji": "⚡", "label": "需求动能", "sub": "商飞恢复与 SpaceX 脉冲" },
+      { "emoji": "📦", "label": "库存水平", "sub": "高标准库源保持警戒位" },
+      { "emoji": "💲", "label": "价格反应", "sub": "单价极其坚挺，持续阴涨" },
+      { "emoji": "⛏️", "label": "供应周期", "sub": "高纯度工艺瓶颈：结构性稀缺" }
+    ]
+  },
+  "narrative_layer": [
+    {
+      "title": "海量空中叙事：民航与防务的‘双击’",
+      "content": "海绵钛并非大宗金属，它是工业文明的‘骨骼’。波音与空客的订单积压量正在推高对航空级钛材的饥渴感。同时，地缘冲突对导弹与防务设备的需求增长，使得本就有限的高纯度海绵钛供应雪上加霜。"
+    },
+    {
+      "title": "星际叙事：SpaceX 的‘巨量黑洞’",
+      "content": "像 SpaceX Starship 这样的巨型航天器试飞，正在引发对超高强度钛合金的垂直需求。这种‘从地球到太空’的跨度，让钛正在脱离传统的周期律，进入一个全新的成长估值区间。"
+    }
+  ],
+  "manual_override": {
+    "price": "14.50",
+    "context": "“正处于【需求爆发前期】。它是最具抗跌属性的‘骨骼金属’之一。”"
+  }
+}
