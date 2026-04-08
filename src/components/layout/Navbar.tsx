@@ -27,7 +27,7 @@ export default function Navbar() {
           </Link>
         </span>
       </div>
-      <nav className="flex gap-10 text-[11px] font-bold tracking-[0.25em] text-white/50">
+      <nav className="flex gap-10 text-[15px] font-bold tracking-[0.2em] text-white/50">
         {navLinks.map((link) => {
           const isActive = pathname === link.path;
           return (
