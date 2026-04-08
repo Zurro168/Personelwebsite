@@ -3,6 +3,7 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { Calendar, ChevronLeft } from 'lucide-react';
 import ReportRenderer from '@/components/ReportRenderer';
+import TableOfContents from '@/components/TableOfContents';
 
 import fs from 'fs';
 import path from 'path';
@@ -62,6 +63,9 @@ export default async function ReportPage({ params }: { params: Promise<{ slug: s
         <div id="reading-progress" className="h-full bg-brand-blue w-full scale-x-0" />
       </div>
 
+      {/* Node-based Progress Tracker (Side Menu) */}
+      <TableOfContents content={report.content} />
+
       {/* Header */}
       <header className="border-b border-white/10 px-8 py-4 flex justify-between items-center sticky top-0 bg-background/80 backdrop-blur-md z-50">
         <div className="flex items-center gap-2">
@@ -111,13 +115,14 @@ export default async function ReportPage({ params }: { params: Promise<{ slug: s
         </div>
       </main>
 
-      {/* Client-side script for progress bar */}
+      {/* Client-side script for top progress bar */}
       <script dangerouslySetInnerHTML={{ __html: `
         window.addEventListener('scroll', () => {
           const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
           const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
           const scrolled = (winScroll / height);
-          document.getElementById('reading-progress').style.transform = 'scaleX(' + scrolled + ')';
+          const bar = document.getElementById('reading-progress');
+          if (bar) bar.style.transform = 'scaleX(' + scrolled + ')';
         });
       `}} />
 
