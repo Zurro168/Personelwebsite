@@ -2,6 +2,7 @@ import Link from 'next/link';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { Calendar, ChevronLeft } from 'lucide-react';
+import ReportRenderer from '@/components/ReportRenderer';
 
 import fs from 'fs';
 import path from 'path';
@@ -55,7 +56,12 @@ export default async function ReportPage({ params }: { params: Promise<{ slug: s
                  report.content.includes('<script');
 
   return (
-    <div className="min-h-screen bg-background text-foreground font-sans">
+    <div className="min-h-screen bg-background text-foreground font-sans selection:bg-brand-blue/30">
+      {/* Scroll Progress Bar */}
+      <div className="fixed top-0 left-0 w-full h-[2px] z-[60] bg-white/5">
+        <div id="reading-progress" className="h-full bg-brand-blue w-full scale-x-0" />
+      </div>
+
       {/* Header */}
       <header className="border-b border-white/10 px-8 py-4 flex justify-between items-center sticky top-0 bg-background/80 backdrop-blur-md z-50">
         <div className="flex items-center gap-2">
@@ -71,7 +77,7 @@ export default async function ReportPage({ params }: { params: Promise<{ slug: s
         </nav>
       </header>
 
-      <main className="max-w-4xl mx-auto px-8 py-20">
+      <main className={`${isHtml ? 'max-w-7xl' : 'max-w-4xl'} mx-auto px-8 py-20`}>
         <div className="space-y-8">
           <Link href="/portfolio" className="flex items-center gap-2 text-white/40 hover:text-brand-blue transition-colors text-xs font-mono group">
             <ChevronLeft size={16} className="group-hover:-translate-x-1 transition-transform" /> BACK TO ARCHIVE
@@ -81,33 +87,46 @@ export default async function ReportPage({ params }: { params: Promise<{ slug: s
              <div className="inline-block px-3 py-1 bg-brand-blue/10 border border-brand-blue/20 text-brand-blue text-[10px] font-bold tracking-[0.2em] rounded uppercase">
                {report.tag}
              </div>
-             <h1 className="text-4xl md:text-5xl font-bold tracking-tighter leading-tight text-white">
+             <h1 className="text-4xl md:text-6xl font-black tracking-tighter leading-[1.1] text-white">
                {report.title}
              </h1>
-             <div className="flex flex-wrap gap-4 text-xs font-mono text-white/30 pt-4">
-                <span className="flex items-center gap-1"><Calendar size={14} /> {report.date}</span>
+             <div className="flex flex-wrap gap-4 text-xs font-mono text-white/30 pt-4 items-center">
+                <span className="flex items-center gap-1 bg-white/5 px-2 py-1 rounded"><Calendar size={14} /> {report.date}</span>
                 <span className="text-white/10 italic">#{report.id}</span>
+                <span className="ml-auto text-[10px] uppercase tracking-widest bg-brand-blue/20 text-brand-blue px-2 py-0.5 rounded border border-brand-blue/20">Certified Intelligence</span>
              </div>
           </div>
 
-          <div className="pt-12 border-t border-white/5 prose prose-invert max-w-none prose-headings:tracking-tighter prose-a:text-brand-blue">
+          <div className="pt-16 border-t border-white/5">
             {isHtml ? (
-              <div 
-                dangerouslySetInnerHTML={{ __html: report.content }} 
-                className="report-html-content"
-              />
+              <ReportRenderer html={report.content} />
             ) : (
-              <ReactMarkdown remarkPlugins={[remarkGfm]}>
-                {report.content}
-              </ReactMarkdown>
+              <div className="prose prose-invert prose-cyber max-w-none">
+                <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                  {report.content}
+                </ReactMarkdown>
+              </div>
             )}
           </div>
         </div>
       </main>
 
+      {/* Client-side script for progress bar */}
+      <script dangerouslySetInnerHTML={{ __html: `
+        window.addEventListener('scroll', () => {
+          const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+          const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+          const scrolled = (winScroll / height);
+          document.getElementById('reading-progress').style.transform = 'scaleX(' + scrolled + ')';
+        });
+      `}} />
+
       {/* Footer */}
-      <footer className="border-t border-white/5 px-8 py-12 text-center text-white/20 text-[10px] tracking-widest font-mono">
-        © 2026 SILICON COMMODITY | RESEARCH ARCHIVE
+      <footer className="border-t border-white/5 px-8 py-20 text-center flex flex-col items-center gap-4">
+        <div className="w-10 h-[1px] bg-white/20" />
+        <div className="text-white/20 text-[10px] tracking-[0.4em] font-mono uppercase">
+          © 2026 SILICON COMMODITY | RESEARCH ARCHIVE
+        </div>
       </footer>
     </div>
   );

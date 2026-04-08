@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@source "../../public/content/reports/**/*.html";
 
 :root {
   --background: #0b1120;
@@ -66,4 +67,67 @@ body {
 
 .animate-scroll:hover {
   animation-play-state: paused;
+}
+
+/* --- Silicon Typography Engine (v1.0) --- */
+.prose-cyber {
+  --tw-prose-headings: var(--foreground);
+  --tw-prose-body: rgba(248, 250, 252, 0.7);
+  --tw-prose-links: var(--brand-blue);
+  --tw-prose-bold: var(--foreground);
+  --tw-prose-quotes: var(--brand-blue);
+}
+
+.prose-cyber h2 {
+  position: relative;
+  font-weight: 800 !important;
+  letter-spacing: -0.05em;
+  padding-left: 1rem;
+  border-left: 4px solid var(--brand-blue);
+  margin-top: 3rem !important;
+  margin-bottom: 1.5rem !important;
+  color: var(--foreground) !important;
+}
+
+.prose-cyber blockquote {
+  background: rgba(56, 189, 248, 0.05);
+  border: 1px solid rgba(56, 189, 248, 0.2);
+  border-left: 4px solid var(--brand-blue) !important;
+  padding: 1.5rem 2rem !important;
+  border-radius: 0.5rem;
+  font-style: normal !important;
+  font-weight: 500;
+  color: var(--brand-blue) !important;
+}
+
+.prose-cyber ul {
+  list-style: none !important;
+  padding-left: 0 !important;
+}
+
+.prose-cyber ul li {
+  position: relative;
+  padding-left: 1.5rem !important;
+  margin-bottom: 0.75rem !important;
+}
+
+.prose-cyber ul li::before {
+  content: "→";
+  position: absolute;
+  left: 0;
+  color: var(--brand-blue);
+  font-family: var(--font-mono);
+  font-weight: bold;
+}
+
+.report-html-content img {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.75rem;
+  margin: 2rem 0;
+  box-shadow: 0 0 40px rgba(56, 189, 248, 0.1);
+}
+
+#reading-progress {
+  transform-origin: left;
+  transition: transform 0.1s ease;
 }
