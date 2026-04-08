@@ -1,0 +1,29 @@
+{
+  "slug": "copper",
+  "last_updated": "2026-04-08T10:18:00Z",
+  "metadata": {
+    "name": "精炼铜 (Copper)",
+    "unit": "USD/MT",
+    "fred_code": "WPU10220101"
+  },
+  "score_engine": {
+    "total_score": 58,
+    "dimensions": [45, 70, 25, 60],
+    "cycle_position": 2,
+    "outlook": "neutral"
+  },
+  "narrative_layer": [
+    {
+      "title": "库存瓶颈：消失的紧缺感",
+      "content": "全球显性库存突破 100 万吨大关坐标。巨量库存形成坚实天花板，压制铜价短期难以突破阻力位。"
+    },
+    {
+      "title": "AI 与硅基需求锚点",
+      "content": "算力中心的电网升级提供了极强的底部韧性，但这属于长周期逻辑，短期难以对冲宏观衰退压力。"
+    }
+  ],
+  "manual_override": {
+    "price": null,
+    "context": "正从过热期向结构性修正期过渡。全球高库存及宏观经济压力暂时抵消了 AI 和能源转型的长期需求。"
+  }
+}

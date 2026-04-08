@@ -1,0 +1,29 @@
+{
+  "slug": "zirconium",
+  "last_updated": "2026-04-08T10:18:00Z",
+  "metadata": {
+    "name": "锆 (Zirconium)",
+    "unit": "USD/MT",
+    "fred_code": "STRATEGIC_MINERAL_PROXY"
+  },
+  "score_engine": {
+    "total_score": 65,
+    "dimensions": [50, 65, 40, 75],
+    "cycle_position": 0,
+    "outlook": "up"
+  },
+  "narrative_layer": [
+    {
+      "title": "供应霸权：矿端高度集中",
+      "content": "全球锆矿供应高度依赖少数几个关键矿区。受地缘政治及开采权收紧影响，上游议价权正在增强。"
+    },
+    {
+      "title": "核电及新能源陶瓷需求",
+      "content": "作为典型的能源转型资产，锆在核电级海绵锆和固态电池电解质中的应用前景正被重新评估。"
+    }
+  ],
+  "manual_override": {
+    "price": 15800,
+    "context": "受全球能源转型带动的核电基建潮影响，锆英砂的长协定价权正在向卖方倾斜。"
+  }
+}

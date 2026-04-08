@@ -1,7 +1,7 @@
 'use client';
 
 import React, { use, useEffect, useState } from 'react';
-import { ChevronRight, ShieldAlert, Activity, Loader2 } from 'lucide-react';
+import { ChevronRight, ShieldAlert, Activity, Loader2, Info } from 'lucide-react';
 import Link from 'next/link';
 import Breadcrumbs from '@/components/layout/Breadcrumbs';
 import { resolveCommodity, UnifiedCommodityData } from '@/lib/price-adapter';
@@ -11,18 +11,20 @@ import {
   LinearScale,
   PointElement,
   LineElement,
+  BarElement,
   Title,
   Tooltip,
   Filler,
   Legend,
 } from 'chart.js';
-import { Line } from 'react-chartjs-2';
+import { Line, Bar } from 'react-chartjs-2';
 
 ChartJS.register(
   CategoryScale,
   LinearScale,
   PointElement,
   LineElement,
+  BarElement,
   Title,
   Tooltip,
   Filler,
@@ -44,183 +46,188 @@ export default function CycleMapDetail({ params }: { params: Promise<{ slug: str
     fetchData();
   }, [slug]);
 
-  const breadcrumbs = [
-    { name: '金属周期地图', href: '/cycle-map' },
-    { name: data ? data.name : slug.toUpperCase(), href: `/cycle-map/${slug}` }
-  ];
-
   if (loading) {
     return (
-      <div className="min-h-screen bg-[#050507] text-white flex flex-col items-center justify-center p-8">
+      <div className="min-h-screen bg-[#050507] text-white flex flex-col items-center justify-center">
         <Loader2 className="w-8 h-8 text-brand-blue animate-spin mb-4" />
-        <div className="text-brand-blue font-mono text-[10px] tracking-widest uppercase italic">Establishing Secure FRED Link...</div>
+        <div className="text-[10px] uppercase font-bold tracking-widest text-brand-blue italic animate-pulse">Syncing Cycle Data...</div>
       </div>
     );
   }
 
-  if (!data) {
-    return (
-      <div className="min-h-screen bg-[#050507] text-white flex flex-col items-center justify-center p-8 text-center">
-        <div className="text-brand-blue font-mono mb-4">ERROR_CODE: 404</div>
-        <h1 className="text-2xl font-black mb-8 italic uppercase tracking-tighter">智库数据中心未检索到该品种 // NO_ENTRY</h1>
-        <Link href="/cycle-map" className="px-8 py-3 bg-white/5 border border-white/10 hover:bg-brand-blue hover:text-slate-900 transition-all font-bold tracking-widest uppercase text-xs italic">
-          返回控制中心 / Back to Terminal
-        </Link>
-      </div>
-    );
-  }
+  if (!data) return null;
+
+  const breadcrumbs = [
+    { name: '金属周期地图', href: '/cycle-map' },
+    { name: data.name, href: `/cycle-map/${slug}` }
+  ];
 
   return (
-    <div className="min-h-screen bg-[#050507] text-white font-sans selection:bg-brand-blue/30">
-      {/* Top Nav */}
+    <div className="min-h-screen bg-[#050507] text-white font-sans selection:bg-brand-blue/30 pb-20">
       <div className="max-w-7xl mx-auto px-6 py-8">
-        <div className="mb-10 opacity-30 hover:opacity-100 transition-opacity">
+        <div className="mb-8 opacity-30 hover:opacity-100 transition-opacity">
            <Breadcrumbs items={breadcrumbs} />
         </div>
 
-        <div className="bg-white/5 border border-white/5 p-8 md:p-12 backdrop-blur-xl rounded-sm">
-          <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-12 gap-6">
+        {/* --- 终端头部 (Terminal Header) --- */}
+        <div className="bg-white/5 border border-white/5 p-8 rounded-sm mb-6">
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 gap-8">
             <div>
               <div className="flex items-center gap-3 mb-2">
-                <div className="w-2 h-2 rounded-full bg-brand-blue animate-pulse"></div>
-                <span className="text-brand-blue font-mono text-[10px] tracking-widest">LIVE DATA TERMINAL // {slug.toUpperCase()}</span>
+                <span className="w-2 h-2 rounded-full bg-brand-blue animate-pulse"></span>
+                <span className="text-[10px] font-bold text-brand-blue uppercase tracking-widest italic">Live Statistics</span>
               </div>
-              <h1 className="text-5xl font-black tracking-tighter italic uppercase">{data.name}</h1>
+              <h1 className="text-6xl font-black tracking-tighter italic uppercase">{data.name}</h1>
+              <p className="mt-4 text-white/40 max-w-2xl text-sm leading-relaxed italic">{data.context}</p>
             </div>
             
-            <div className="flex items-center gap-8">
+            <div className="flex items-end gap-10">
               <div className="text-right">
-                <div className="text-white/20 text-[10px] uppercase font-black mb-1 tracking-widest">Pricing Index</div>
-                <div className="text-4xl font-black tracking-tighter">{data.price} <span className="text-sm font-normal text-white/20 ml-1">{data.unit}</span></div>
+                <div className="text-[10px] uppercase font-black text-white/20 mb-2 tracking-widest">Market Value</div>
+                <div className="text-5xl font-black tracking-tighter tracking-tight">
+                  {data.price} <span className="text-sm font-normal text-white/20 ml-1">{data.unit}</span>
+                </div>
               </div>
-              <div className={`px-4 py-2 text-sm font-black italic ${data.change.startsWith('+') ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20' : 'bg-red-500/10 text-red-400 border border-red-500/20'}`}>
+              <div className={`px-4 py-2 text-sm font-black italic rounded-sm ${data.change.startsWith('+') ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20' : 'bg-rose-500/10 text-rose-400 border border-rose-500/20'}`}>
                 {data.change}
               </div>
             </div>
           </div>
 
-          <div className="grid md:grid-cols-4 gap-4 mb-12">
-            {Object.entries(data.stats).map(([k, v]) => (
-              <div key={k} className="p-6 bg-white/[0.02] border border-white/5 hover:border-white/20 transition-all group">
-                <div className="text-[10px] text-white/20 uppercase font-black mb-2 tracking-[0.2em] group-hover:text-brand-blue transition-colors text-xs italic">{k}</div>
-                <div className="text-lg font-bold tracking-tight">{v as string}</div>
-              </div>
-            ))}
-          </div>
-
-          <div className="grid lg:grid-cols-3 gap-12">
-            <div className="lg:col-span-2">
-              <div className="h-72 relative border border-white/5 bg-white/[0.012] p-6 rounded-sm group overflow-hidden">
-                <Line 
-                  data={{
-                    labels: data.chartLabels,
-                    datasets: [{
-                      label: 'SPOT PRICE INDEX',
-                      data: data.chartValues,
-                      borderColor: '#3b82f6',
-                      borderWidth: 2,
-                      pointBackgroundColor: '#3b82f6',
-                      pointBorderColor: '#050507',
-                      pointBorderWidth: 2,
-                      pointRadius: 4,
-                      pointHoverRadius: 6,
-                      fill: true,
-                      tension: 0.4,
-                      backgroundColor: (context) => {
-                        const ctx = context.chart.ctx;
-                        const gradient = ctx.createLinearGradient(0, 0, 0, 300);
-                        gradient.addColorStop(0, 'rgba(59, 130, 246, 0.15)');
-                        gradient.addColorStop(1, 'rgba(59, 130, 246, 0)');
-                        return gradient;
-                      },
-                    }]
-                  }}
-                  options={{
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                      legend: { display: false },
-                      tooltip: {
-                        backgroundColor: 'rgba(5, 5, 7, 0.95)',
-                        titleFont: { family: 'inherit', weight: 'bold' },
-                        bodyFont: { family: 'monospace' },
-                        padding: 12,
-                        borderColor: 'rgba(255, 255, 255, 0.1)',
-                        borderWidth: 1,
-                        displayColors: false,
-                      }
-                    },
-                    scales: {
-                      y: {
-                        grid: { color: 'rgba(255, 255, 255, 0.05)' },
-                        ticks: { color: 'rgba(255, 255, 255, 0.2)', font: { size: 10, family: 'monospace' } }
-                      },
-                      x: {
-                        grid: { display: false },
-                        ticks: { color: 'rgba(255, 255, 255, 0.2)', font: { size: 10, family: 'monospace' } }
-                      }
-                    }
-                  }}
-                />
-              </div>
-              <div className="mt-10">
-                <h3 className="text-xl font-black mb-6 flex items-center gap-3 italic uppercase tracking-tight">
-                  <Activity className="w-5 h-5 text-brand-blue" />
-                  周期逻辑深度解析 <span className="text-brand-blue">/</span> Analysis
-                </h3>
-                <div className="p-8 border-l border-brand-blue/30 bg-white/[0.02] relative">
-                    <p className="text-lg text-white/80 leading-relaxed font-light italic">
-                      “{data.context}”
-                    </p>
-                </div>
-              </div>
+          <div className="grid lg:grid-cols-4 gap-6">
+            {/* 周期评分卡片 (Score Card ported from HTML) */}
+            <div className="p-8 bg-white/[0.02] border border-white/5 flex flex-col items-center justify-center text-center relative overflow-hidden group">
+               <div className="absolute top-0 left-0 w-full h-1 bg-amber-500 shadow-[0_0_10px_rgba(245,158,11,0.5)]"></div>
+               <div className="text-[10px] font-black text-white/20 uppercase tracking-widest mb-4 italic">Cycle Score</div>
+               <div className="text-7xl font-black text-amber-500 italic drop-shadow-xl mb-1">{data.score}<span className="text-xl text-white/10 italic">/100</span></div>
+               <div className="px-3 py-1 bg-amber-500/20 text-amber-500 text-[10px] font-black rounded-sm border border-amber-500/20 uppercase italic">警告: 周期修正</div>
             </div>
 
-            <div className="space-y-6">
-                <div className="p-8 bg-brand-blue text-slate-900 rounded-sm relative overflow-hidden">
-                    <div className="absolute top-0 right-0 p-4 opacity-10">
-                        <ShieldAlert size={48} />
-                    </div>
-                    <h4 className="font-black uppercase tracking-widest text-xs mb-4 text-xs italic">AI 周期预判 // PREDICTION</h4>
-                    <p className="text-sm font-medium leading-relaxed">
-                        基于跨市场基本面数据的多维度交叉验证。该品种当前核心矛盾集中在供应端的非线性反馈。
-                    </p>
-                    <div className="mt-6 pt-6 border-t border-slate-900/10">
-                        <div className="text-[10px] font-black uppercase mb-1 tracking-widest">Current Rating</div>
-                        <div className="text-xl font-black italic uppercase">中性偏多 / NEUTRAL+</div>
-                    </div>
-                </div>
-                
-                <div className="p-8 border border-white/10 bg-white/[0.02] rounded-sm">
-                    <div className="flex items-center gap-2 mb-6 text-white/20">
-                        <ShieldAlert className="w-4 h-4" />
-                        <span className="text-[10px] font-black uppercase tracking-widest">Alpha Signals</span>
-                    </div>
-                    <ul className="space-y-4 text-sm font-bold">
-                        <li className="flex items-center gap-3 group cursor-pointer hover:text-brand-blue transition-colors text-xs italic">
-                            <ChevronRight className="w-4 h-4 text-brand-blue" />
-                            库存斜率变动预警
-                        </li>
-                        <li className="flex items-center gap-3 group cursor-pointer hover:text-brand-blue transition-colors text-xs italic">
-                            <ChevronRight className="w-4 h-4 text-brand-blue" />
-                            产业利润周期追踪
-                        </li>
-                        <li className="flex items-center gap-3 group cursor-pointer hover:text-brand-blue transition-colors text-xs italic">
-                            <ChevronRight className="w-4 h-4 text-brand-blue" />
-                            宏观流动性溢价测算
-                        </li>
-                    </ul>
+            {/* 维度逻辑拆解 (Dimension Analysis ported from HTML) */}
+            <div className="md:col-span-3 p-8 bg-white/[0.02] border border-white/5">
+                <h2 className="text-[10px] font-black text-brand-blue uppercase tracking-widest mb-6 italic flex items-center gap-2">
+                    <Info size={12} /> Dimension Logic Breakdown
+                </h2>
+                <div className="h-32">
+                    <Bar 
+                        data={{
+                            labels: ['宏观环境', '需求动能', '库存水位', '供应潜力'],
+                            datasets: [{
+                                data: data.dimensionScores,
+                                backgroundColor: ['rgba(244,63,94,0.6)', 'rgba(52,211,153,0.6)', 'rgba(244,63,94,0.6)', 'rgba(245,158,11,0.6)'],
+                                borderColor: ['#f43f5e', '#34d399', '#f43f5e', '#f59e0b'],
+                                borderWidth: 1,
+                                borderRadius: 2
+                            }]
+                        }}
+                        options={{
+                            indexAxis: 'y',
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            plugins: { legend: { display: false } },
+                            scales: {
+                                x: { grid: { display: false }, ticks: { color: 'rgba(255,255,255,0.2)', font: { size: 9, family: 'monospace' } } },
+                                y: { grid: { display: false }, ticks: { color: 'rgba(255,255,255,0.6)', font: { size: 10 } } }
+                            }
+                        }}
+                    />
                 </div>
             </div>
           </div>
         </div>
-      </div>
 
-      <footer className="max-w-7xl mx-auto mt-20 py-12 border-t border-white/5 text-center">
-         <Link href="/cycle-map" className="text-white/20 hover:text-brand-blue text-[10px] font-mono tracking-widest uppercase transition-colors">
-            RETURN TO COMMAND CENTER
-         </Link>
-      </footer>
+        {/* --- 深度叙事层 (Narrative Layer) --- */}
+        <div className="grid lg:grid-cols-3 gap-12 mb-12">
+            <div className="lg:col-span-2 space-y-12">
+                <div className="p-8 border border-white/5 bg-white/[0.012] rounded-sm">
+                   <h2 className="text-[10px] font-black text-brand-blue uppercase tracking-widest mb-8 italic">Market Trend Analysis</h2>
+                   <div className="h-80 w-full mb-10">
+                      <Line 
+                        data={{
+                           labels: data.chartLabels,
+                           datasets: [{
+                              label: 'SPOT PRICE INDEX',
+                              data: data.chartValues,
+                              borderColor: '#3b82f6',
+                              borderWidth: 2,
+                              pointRadius: 4,
+                              fill: true,
+                              tension: 0.4,
+                              backgroundColor: 'rgba(59, 130, 246, 0.05)'
+                           }]
+                        }}
+                        options={{ responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }}
+                      />
+                   </div>
+                   
+                   <div className="space-y-10 border-t border-white/5 pt-10">
+                      {data.narrative.map((item, idx) => (
+                        <div key={idx}>
+                           <h3 className="text-xl font-black mb-4 italic uppercase flex items-center gap-3">
+                              <div className="w-1 h-4 bg-brand-blue"></div> {item.title}
+                           </h3>
+                           <p className="text-white/60 leading-relaxed text-sm font-light italic">{item.content}</p>
+                        </div>
+                      ))}
+                   </div>
+                </div>
+
+                {/* --- 宏观周期定位 (Cycle Flow ported from HTML) --- */}
+                <div className="p-10 bg-white/[0.012] border border-white/5 rounded-sm">
+                    <h2 className="text-[10px] font-black text-brand-blue uppercase tracking-widest mb-10 italic text-center">Global Macro Cycle Positioning</h2>
+                    <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+                        {[
+                            { emoji: '🌪️', label: '宏观环境', sub: '滞胀隐忧' },
+                            { emoji: '⚡', label: '需求动能', sub: '核心刚性' },
+                            { emoji: '📦', label: '库存水平', sub: '严重饱和' },
+                            { emoji: '💲', label: '价格反应', sub: '横盘整理' },
+                            { emoji: '⛏️', label: '供应周期', sub: '紧平衡' }
+                        ].map((pos, idx) => (
+                            <React.Fragment key={idx}>
+                                <div className={`flex-1 p-4 border rounded-sm text-center transition-all relative ${idx === data.cyclePosition ? 'border-amber-500 bg-amber-500/10 shadow-[0_0_20px_rgba(245,158,11,0.2)] scale-110 z-10' : 'border-white/5 bg-white/[0.02] opacity-40'}`}>
+                                    {idx === data.cyclePosition && (
+                                        <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-amber-500 text-slate-900 text-[8px] font-black px-2 py-0.5 whitespace-nowrap italic animate-pulse">LATEST POSITION</div>
+                                    )}
+                                    <div className="text-2xl mb-2">{pos.emoji}</div>
+                                    <div className={`text-[10px] font-black uppercase mb-1 ${idx === data.cyclePosition ? 'text-amber-500' : 'text-white/60'}`}>{pos.label}</div>
+                                    <div className="text-[8px] opacity-40 italic">{pos.sub}</div>
+                                </div>
+                                {idx < 4 && (
+                                    <div className="hidden md:block text-white/5 text-xl font-light">→</div>
+                                )}
+                            </React.Fragment>
+                        ))}
+                    </div>
+                </div>
+            </div>
+
+            <div className="space-y-6">
+                <div className="p-8 bg-brand-blue text-slate-900 relative overflow-hidden">
+                    <div className="absolute top-0 right-0 p-4 opacity-10"><ShieldAlert size={40} /></div>
+                    <div className="text-[10px] font-black uppercase tracking-widest italic mb-6">AI Strategy Prediction</div>
+                    <p className="text-sm font-bold leading-relaxed mb-8">利用多维度非对称数据计算得出的周期结论。目前建议维持“结构性防御”姿态。</p>
+                    <div className="pt-6 border-t border-slate-900/10">
+                        <div className="text-[10px] font-black uppercase mb-1 opacity-40 tracking-widest">Rating</div>
+                        <div className="text-2xl font-black italic">修正期 / CORRECTION</div>
+                    </div>
+                </div>
+
+                <div className="p-8 border border-white/5 bg-white/[0.02]">
+                    <h3 className="text-[10px] font-black text-brand-blue uppercase tracking-widest mb-6 italic">Strategic Operations</h3>
+                    <div className="space-y-4">
+                        <div className="p-4 bg-white/[0.02] border border-white/5 rounded-sm">
+                            <div className="text-rose-400 text-[10px] font-black uppercase mb-1 italic">Short-term</div>
+                            <div className="text-[11px] font-bold text-white/60">LME铜价在 12,000 - 12,300 美元区间震荡。</div>
+                        </div>
+                        <div className="p-4 bg-white/[0.02] border border-white/5 rounded-sm">
+                            <div className="text-emerald-400 text-[10px] font-black uppercase mb-1 italic">Critical Support</div>
+                            <div className="text-[11px] font-bold text-white/60">密切关注 11,500 美元一线切入点。</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
     </div>
   );
 }
