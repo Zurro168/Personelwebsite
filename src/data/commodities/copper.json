@@ -34,7 +34,16 @@
     }
   ],
   "manual_override": {
-    "price": null,
+    "price": "12240.50",
+    "change": "-1.24%",
     "context": "“正从过热期向结构性修正期过渡。全球显性库存的‘虚假繁荣’正在经历回归现实的压力。”"
-  }
+  },
+  "history": [
+    { "date": "2025-11", "price": 10200, "inventory": 420 },
+    { "date": "2025-12", "price": 11500, "inventory": 510 },
+    { "date": "2026-01", "price": 12900, "inventory": 680 },
+    { "date": "2026-02", "price": 12900, "inventory": 850 },
+    { "date": "2026-03", "price": 12500, "inventory": 960 },
+    { "date": "2026-04", "price": 12240, "inventory": 1050 }
+  ]
 }

@@ -196,49 +196,92 @@ export default function CycleMapDetail({ params }: { params: Promise<{ slug: str
                       <Activity className="w-6 h-6 text-brand-blue" />
                       Multidimensional Market Intelligence Narrative
                    </h2>
-                   <div className="h-[500px] w-full mb-16 border-b border-white/10 pb-12">
+                   <div className="h-[500px] w-full mb-16 border-b border-white/10 pb-12 relative">
                       <Line 
                         data={{
-                           labels: data.chartLabels,
-                           datasets: [{
-                              label: 'REAL-TIME OBSERVATION',
-                              data: data.chartValues,
-                              borderColor: '#3b82f6',
-                              borderWidth: 4,
-                              pointRadius: 6,
-                              pointBackgroundColor: '#3b82f6',
-                              pointBorderColor: '#fff',
-                              pointBorderWidth: 3,
-                              pointHoverRadius: 10,
-                              fill: true,
-                              tension: 0.4,
-                              backgroundColor: (context) => {
-                                const ctx = context.chart.ctx;
-                                const gradient = ctx.createLinearGradient(0, 0, 0, 500);
-                                gradient.addColorStop(0, 'rgba(59, 130, 246, 0.25)');
-                                gradient.addColorStop(1, 'rgba(59, 130, 246, 0)');
-                                return gradient;
-                              },
-                           }]
+                            labels: data.chartLabels,
+                            datasets: [
+                                {
+                                    label: '全球库存 (千吨)',
+                                    data: data.inventoryValues,
+                                    borderColor: '#f43f5e',
+                                    backgroundColor: (context) => {
+                                        const ctx = context.chart.ctx;
+                                        const gradient = ctx.createLinearGradient(0, 0, 0, 400);
+                                        gradient.addColorStop(0, 'rgba(244, 63, 94, 0.4)');
+                                        gradient.addColorStop(1, 'rgba(244, 63, 94, 0)');
+                                        return gradient;
+                                    },
+                                    fill: true,
+                                    yAxisID: 'y1',
+                                    tension: 0.4,
+                                    pointRadius: 6,
+                                    pointBackgroundColor: '#f43f5e',
+                                    pointBorderColor: '#fff',
+                                    pointBorderWidth: 2,
+                                },
+                                {
+                                    label: '市场均价 (USD)',
+                                    data: data.chartValues,
+                                    borderColor: '#3b82f6',
+                                    borderDash: [5, 5],
+                                    pointRadius: 6,
+                                    pointBackgroundColor: '#fff',
+                                    pointBorderColor: '#3b82f6',
+                                    pointBorderWidth: 3,
+                                    yAxisID: 'y',
+                                    tension: 0.4,
+                                }
+                            ]
                         }}
-                        options={{ 
-                            responsive: true, 
-                            maintainAspectRatio: false, 
-                            plugins: { 
-                                legend: { display: false },
+                        options={{
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            plugins: {
+                                legend: {
+                                    display: true,
+                                    position: 'top',
+                                    align: 'center',
+                                    labels: {
+                                        color: 'rgba(255,255,255,0.6)',
+                                        font: { size: 12, weight: 'bold', family: 'monospace' },
+                                        usePointStyle: true,
+                                        padding: 20
+                                    }
+                                },
                                 tooltip: {
                                     backgroundColor: 'rgba(20, 20, 23, 0.95)',
                                     titleFont: { size: 16, weight: 'bold' },
                                     bodyFont: { size: 14, family: 'monospace' },
-                                    borderColor: '#3b82f6',
+                                    borderColor: 'rgba(255,255,255,0.1)',
                                     borderWidth: 1,
                                     padding: 16,
-                                    displayColors: false
+                                    callbacks: {
+                                        label: (context) => `${context.dataset.label}: ${context.raw}`
+                                    }
                                 }
                             },
                             scales: {
-                                y: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: 'rgba(255,255,255,0.4)', font: { size: 12, family: 'monospace', weight: 'bold' } } },
-                                x: { grid: { display: false }, ticks: { color: 'rgba(255,255,255,0.4)', font: { size: 12, family: 'monospace', weight: 'bold' } } }
+                                y: {
+                                    type: 'linear',
+                                    display: true,
+                                    position: 'right',
+                                    title: { display: true, text: '价格 (USD)', color: '#3b82f6', font: { weight: 'bold' } },
+                                    grid: { color: 'rgba(255,255,255,0.05)' },
+                                    ticks: { color: '#3b82f6', font: { family: 'monospace' } }
+                                },
+                                y1: {
+                                    type: 'linear',
+                                    display: true,
+                                    position: 'left',
+                                    title: { display: true, text: '库存 (kT)', color: '#f43f5e', font: { weight: 'bold' } },
+                                    grid: { drawOnChartArea: false },
+                                    ticks: { color: '#f43f5e', font: { family: 'monospace' } }
+                                },
+                                x: {
+                                    grid: { display: false },
+                                    ticks: { color: 'rgba(255,255,255,0.5)', font: { family: 'monospace' } }
+                                }
                             }
                         }}
                       />
