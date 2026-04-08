@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<style>
+.chart-container {
+    position: relative;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    height: 350px;
+}
+@media (min-width: 768px) {
+    .chart-container {
+        height: 400px;
+    }
+}
+.glass-card {
+    background: rgba(30, 41, 59, 0.7);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(51, 65, 85, 0.5);
+    border-radius: 1rem;
+    padding: 2rem;
+    margin-bottom: 2rem;
+}
+.stat-value {
+    background: linear-gradient(to right, #22d3ee, #818cf8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.flow-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: #64748b;
+}
+</style>
+</head>
+<body>
+
+<div class="max-w-7xl mx-auto py-8">
+    
+    <header class="mb-12 text-center">
+        <h1 class="text-4xl md:text-6xl font-extrabold mb-4 tracking-tight text-white">
+            铜 <span class="stat-value">周期地图</span>
+        </h1>
+        <p class="text-xl text-slate-400 max-w-3xl mx-auto">
+            正从过热期向结构性修正期过渡。全球高库存及宏观经济压力暂时抵消了人工智能（AI）和能源转型的长期需求。
+        </p>
+    </header>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
+        <div class="lg:col-span-1 glass-card flex flex-col justify-center items-center text-center shadow-xl border-t-4 border-t-amber-500">
+            <h2 class="text-slate-300 text-lg font-semibold uppercase tracking-wider mb-2">当前周期评分</h2>
+            <div class="text-7xl font-black text-amber-500 mb-4 drop-shadow-lg">58<span class="text-3xl text-slate-500">/100</span></div>
+            <div class="inline-flex items-center justify-center px-4 py-2 rounded-full bg-amber-500/20 text-amber-300 font-bold text-sm mb-4">
+                ⚠️ 修正期
+            </div>
+            <p class="text-slate-400 text-sm">
+                评分较上月（72分）显著回落。市场在结构性牛市中进入技术性调整。
+            </p>
+        </div>
+
+        <div class="lg:col-span-2 glass-card shadow-xl">
+            <h2 class="text-2xl font-bold mb-2 text-white flex items-center gap-2">
+                <span>🧭</span> 维度逻辑拆解
+            </h2>
+            <p class="text-slate-400 mb-6 text-sm">
+                定量分析支撑当前铜价的四大核心支柱。
+            </p>
+            <div class="chart-container">
+                <canvas id="scoreChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <div class="mb-12 glass-card shadow-xl border-l-4 border-l-rose-500">
+        <h2 class="text-3xl font-bold mb-4 text-white">库存瓶颈：消失的紧缺感</h2>
+        <p class="text-slate-300 mb-6 text-lg">
+            市场紧迫感已大幅缓解。全球显性库存（LME + SHFE + COMEX）突破 100 万吨大关，触及 6 年高点。巨量库存形成坚实的天花板，即使长期基本面强劲，短期内也压制铜价难以突破 13,000 美元/吨阻力位。
+        </p>
+        <div class="chart-container md:h-[450px]">
+            <canvas id="inventoryChart"></canvas>
+        </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+        <div class="glass-card shadow-xl">
+            <h2 class="text-2xl font-bold mb-4 text-white">K型需求复苏</h2>
+            <p class="text-slate-300 mb-6">
+                需求并未消失，而是出现了分化。我们见证了“硅基骨架”（AI数据中心与电网升级）需求的爆发，而传统制造业和建筑业则在高能源成本和利率压力下表现乏力。
+            </p>
+            <div class="chart-container">
+                <canvas id="demandChart"></canvas>
+            </div>
+        </div>
+
+        <div class="glass-card shadow-xl border-t-4 border-t-cyan-500 flex flex-col">
+            <h2 class="text-2xl font-bold mb-4 text-white">战略展望与行动建议</h2>
+            <p class="text-slate-300 mb-6">
+                在市场消化过剩库存期间，短期建议保持谨慎。然而，由于矿业资本支出受限和科技需求扩张，长期牛市逻辑依然成立。
+            </p>
+            <div class="space-y-4 flex-grow">
+                <div class="bg-slate-800 rounded-lg p-4 border border-slate-700">
+                    <div class="text-rose-400 font-bold mb-1 flex items-center gap-2"><span>📉</span> 短期策略</div>
+                    <div class="text-sm text-slate-300">LME铜价在 12,000 - 12,300 美元区间震荡。在库存开始回落前，下行压力将持续存在。</div>
+                </div>
+                <div class="bg-slate-800 rounded-lg p-4 border border-slate-700">
+                    <div class="text-emerald-400 font-bold mb-1 flex items-center gap-2"><span>🎯</span> 关键支撑位</div>
+                    <div class="text-sm text-slate-300">密切关注 11,500 美元一线。若价格触及此处且库存同步回落，将是下一轮繁荣周期的绝佳入场点。</div>
+                </div>
+                <div class="bg-slate-800 rounded-lg p-4 border border-slate-700">
+                    <div class="text-cyan-400 font-bold mb-1 flex items-center gap-2"><span>💼</span> 企业策略</div>
+                    <div class="text-sm text-slate-300">维持“随用随买”策略。在地缘局势及关税（Section 232）风险尘埃落定前，避免大规模战略囤货。</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 周期地图移动至最底部 -->
+    <div class="glass-card shadow-xl mb-12">
+        <h2 class="text-2xl font-bold mb-6 text-white text-center">当前宏观周期定位</h2>
+        <div class="flex flex-col md:flex-row items-stretch justify-between gap-2 md:gap-4">
+            <div class="flex-1 bg-slate-800 border border-slate-600 rounded-xl p-4 text-center">
+                <div class="text-2xl mb-2">🌪️</div>
+                <div class="font-bold text-rose-400 mb-1">宏观环境</div>
+                <div class="text-xs text-slate-400">滞胀隐忧</div>
+            </div>
+            <div class="flow-arrow hidden md:flex">➔</div>
+            <div class="flex-1 bg-slate-800 border border-slate-600 rounded-xl p-4 text-center">
+                <div class="text-2xl mb-2">⚡</div>
+                <div class="font-bold text-emerald-400 mb-1">需求动能</div>
+                <div class="text-xs text-slate-400">AI与电网刚性</div>
+            </div>
+            <div class="flow-arrow hidden md:flex">➔</div>
+            <div class="flex-1 bg-amber-900/50 border-2 border-amber-500 rounded-xl p-4 text-center relative shadow-[0_0_15px_rgba(245,158,11,0.3)]">
+                <div class="absolute -top-3 -right-3 bg-amber-500 text-slate-900 text-xs font-bold px-2 py-1 rounded-full animate-pulse">当前位置</div>
+                <div class="text-2xl mb-2">📦</div>
+                <div class="font-bold text-amber-500 mb-1">库存水平</div>
+                <div class="text-xs text-slate-300">严重饱和 (100万+ 吨)</div>
+            </div>
+            <div class="flow-arrow hidden md:flex">➔</div>
+            <div class="flex-1 bg-slate-800 border border-slate-600 rounded-xl p-4 text-center opacity-70">
+                <div class="text-2xl mb-2">💲</div>
+                <div class="font-bold text-slate-300 mb-1">价格反应</div>
+                <div class="text-xs text-slate-400">横盘整理</div>
+            </div>
+            <div class="flow-arrow hidden md:flex">➔</div>
+            <div class="flex-1 bg-slate-800 border border-slate-600 rounded-xl p-4 text-center opacity-70">
+                <div class="text-2xl mb-2">⛏️</div>
+                <div class="font-bold text-slate-300 mb-1">供应周期</div>
+                <div class="text-xs text-slate-400">紧平衡态势</div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+(function() {
+    Chart.defaults.color = '#94a3b8';
+    Chart.defaults.font.family = "'PingFang SC', 'Microsoft YaHei', sans-serif";
+
+    // 1. Scoring Chart
+    const ctxScore = document.getElementById('scoreChart').getContext('2d');
+    new Chart(ctxScore, {
+        type: 'bar',
+        data: {
+            labels: ['宏观环境', '需求动能', '库存水位', '供应潜力'],
+            datasets: [{
+                label: '评分 (100分制)',
+                data: [45, 70, 25, 60],
+                backgroundColor: [
+                    'rgba(244, 63, 94, 0.8)', 
+                    'rgba(52, 211, 153, 0.8)', 
+                    'rgba(244, 63, 94, 0.8)', 
+                    'rgba(245, 158, 11, 0.8)'  
+                ],
+                borderWidth: 1,
+                borderRadius: 6
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            indexAxis: 'y',
+            plugins: { legend: { display: false } },
+            scales: {
+                x: { beginAtZero: true, max: 100, grid: { color: 'rgba(51, 65, 85, 0.5)' } },
+                y: { grid: { display: false } }
+            }
+        }
+    });
+
+    // 2. Inventory Chart
+    const ctxInv = document.getElementById('inventoryChart').getContext('2d');
+    new Chart(ctxInv, {
+        type: 'line',
+        data: {
+            labels: ['25Q4', '26Q1', '26Q2预期'],
+            labels: ['2025年11月', '2025年12月', '2026年1月', '2026年2月', '2026年3月', '2026年4月'],
+            datasets: [
+                {
+                    label: '全球库存 (千吨)',
+                    data: [420, 510, 680, 850, 960, 1050],
+                    borderColor: '#f43f5e',
+                    backgroundColor: 'rgba(244, 63, 94, 0.2)',
+                    fill: true,
+                    yAxisID: 'y',
+                    tension: 0.4
+                },
+                {
+                    label: 'LME铜价 (USD)',
+                    data: [10200, 11500, 13400, 12900, 12500, 12150],
+                    borderColor: '#22d3ee',
+                    yAxisID: 'y1',
+                    tension: 0.4,
+                    borderDash: [5, 5]
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: { position: 'left', title: { display: true, text: '库存 (kT)' } },
+                y1: { position: 'right', grid: { display: false }, title: { display: true, text: '价格 (USD)' } }
+            }
+        }
+    });
+
+    // 3. Demand Chart
+    const ctxDemand = document.getElementById('demandChart').getContext('2d');
+    new Chart(ctxDemand, {
+        type: 'doughnut',
+        data: {
+            labels: ['AI/服务器', 'EV/电网', '传统建筑', '制造业'],
+            datasets: [{
+                data: [35, 45, 12, 8],
+                backgroundColor: ['#22d3ee', '#34d399', '#64748b', '#475569'],
+                borderWidth: 0
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { position: 'bottom' } }
+        }
+    });
+})();
+</script>
+</body>
+</html>

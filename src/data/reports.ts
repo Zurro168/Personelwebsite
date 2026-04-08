@@ -12,6 +12,28 @@ export interface Report {
 
 export const ALL_REPORTS: Report[] = [
   {
+    id: 'SCC-2026-210',
+    title: '硅基大宗周期地图：铜 (Copper)',
+    description: '正从过热期向结构性修正期过渡。全球高库存及宏观经济压力暂时抵消了人工智能（AI）和能源转型的长期需求。',
+    tag: '有色金属',
+    date: '2026-04-08',
+    readTime: '15 min',
+    image: '/images/reports/mining-strategy.png',
+    slug: 'copper-cycle-map',
+    hasContent: true
+  },
+  {
+    id: 'SCC-2026-920',
+    title: '2026 全球矿业巨头大博弈',
+    description: '从算法到原子的跨代竞争：解析必和必拓、紫金矿业等巨头在全球资源民族主义背景下的地缘抉择。',
+    tag: '宏观研究',
+    date: '2026-04-08',
+    readTime: '15 min',
+    image: '/images/reports/mining-strategy.png',
+    slug: 'mining-battle-2026',
+    hasContent: true
+  },
+  {
     id: 'SCC-2026-003',
     title: '重塑版图：全球矿业巨头的 2026 战略大博弈',
     description: '本文深入解析必和必拓、紫金矿业等巨头在全球资源民族主义抬头背景下的地缘政治抉择与协同逻辑。',

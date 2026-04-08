@@ -3,43 +3,56 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { Calendar, ChevronLeft } from 'lucide-react';
 
-// Mock function for fetching report by slug
+import fs from 'fs';
+import path from 'path';
+import { ALL_REPORTS } from '@/data/reports';
+
+// Real function for fetching report by slug from the local filesystem
 async function getReport(slug: string) {
-  // In a real scenario, fetch from Notion/Sanity here
+  const reportMeta = ALL_REPORTS.find(r => r.slug === slug);
+  
+  if (!reportMeta) {
+    return null;
+  }
+
+  // Path to the synchronized content
+  const contentPath = path.join(process.cwd(), 'public/content/reports', `${slug}.html`);
+  let content = '';
+  
+  try {
+    if (fs.existsSync(contentPath)) {
+      content = fs.readFileSync(contentPath, 'utf8');
+    } else {
+      content = '⚠️ 报告内容正在同步中，请稍后再试...';
+    }
+  } catch (err) {
+    console.error(`Failed to read report content for ${slug}:`, err);
+    content = '❌ 内容读取失败。';
+  }
+
   return {
-    title: '2026 铜供给缺口：从智利矿区到高性能算力心脏的传导逻辑',
-    date: '2026-04-07',
-    category: '硬核商品',
-    tags: ['#宏观觉悟', '#精炼铜', '#算力基础设施'],
-    content: `
-# 2026 铜供给缺口：深度透视
-
-大宗商品市场的周期波动，本质上是实物资产对全球流动性溢价的定价校准。在本轮周期中，铜（Copper）正成为 **“数字化能源转换”** 的核心锚点。
-
-## 1. 智利矿区的生产瓶颈
-
-尽管铜矿资源总量丰富，但 **“高品位矿石”** 的枯竭正使得生产边际成本不断攀升。智利某些大型矿山的开采深度已经超过 1,000 米...
-
-## 2. 算力心脏的传导逻辑
-
-高性能算力（HPC）集群、数据中心以及 AI 芯片的算力密度激增，对电力系统的稳定性提出了前所未有的要求。**精炼铜** 在变级器、散热系统及高频导电网络中的应用几乎不可替代。
-
-- **需求倍增**: 预计到 2026 年，算力相关的铜需求将占比提升至 12%。
-- **弹性缺失**: 矿业生产周期的滞后性决定了短期内无法弥补供给缺口。
-
-## 3. 定价权转换
-
-我们观察到，定价权正从传统的现货贸易流转，向 **“硅基算力中心”** 的供应链锁定合同转移...
-
----
-> “贸易的终局，算法的起点。”
-    `
+    ...reportMeta,
+    content
   };
 }
 
 export default async function ReportPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const report = await getReport(slug);
+
+  if (!report) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center text-white font-mono uppercase tracking-widest">
+        404 | Research Not Found
+      </div>
+    );
+  }
+
+  // Detect if the content is likely HTML (starts with <!DOCTYPE or contains tags)
+  const isHtml = report.content.trim().startsWith('<!DOCTYPE') || 
+                 report.content.includes('<html') || 
+                 report.content.includes('<div') ||
+                 report.content.includes('<script');
 
   return (
     <div className="min-h-screen bg-background text-foreground font-sans">
@@ -65,26 +78,29 @@ export default async function ReportPage({ params }: { params: Promise<{ slug: s
           </Link>
           
           <div className="space-y-4">
-             <div className="inline-block px-3 py-1 bg-brand-gold/10 border border-brand-gold/20 text-brand-gold text-[10px] font-bold tracking-[0.2em] rounded uppercase">
-               {report.category}
+             <div className="inline-block px-3 py-1 bg-brand-blue/10 border border-brand-blue/20 text-brand-blue text-[10px] font-bold tracking-[0.2em] rounded uppercase">
+               {report.tag}
              </div>
              <h1 className="text-4xl md:text-5xl font-bold tracking-tighter leading-tight text-white">
                {report.title}
              </h1>
              <div className="flex flex-wrap gap-4 text-xs font-mono text-white/30 pt-4">
                 <span className="flex items-center gap-1"><Calendar size={14} /> {report.date}</span>
-                <div className="flex gap-2">
-                  {report.tags.map((t, i) => (
-                    <span key={i} className="text-brand-blue/60">{t}</span>
-                  ))}
-                </div>
+                <span className="text-white/10 italic">#{report.id}</span>
              </div>
           </div>
 
           <div className="pt-12 border-t border-white/5 prose prose-invert max-w-none prose-headings:tracking-tighter prose-a:text-brand-blue">
-            <ReactMarkdown remarkPlugins={[remarkGfm]}>
-              {report.content}
-            </ReactMarkdown>
+            {isHtml ? (
+              <div 
+                dangerouslySetInnerHTML={{ __html: report.content }} 
+                className="report-html-content"
+              />
+            ) : (
+              <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                {report.content}
+              </ReactMarkdown>
+            )}
           </div>
         </div>
       </main>
