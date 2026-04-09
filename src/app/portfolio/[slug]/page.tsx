@@ -102,15 +102,15 @@ export default async function ReportPage({ params }: { params: Promise<{ slug: s
           </div>
 
           <div className="pt-16 border-t border-white/5">
-            {isHtml ? (
-              <ReportRenderer html={report.content} />
-            ) : (
-              <div className="prose prose-invert prose-cyber max-w-none">
+            <div className="prose prose-invert prose-cyber max-w-none">
+              {isHtml ? (
+                <ReportRenderer html={report.content} />
+              ) : (
                 <ReactMarkdown remarkPlugins={[remarkGfm]}>
                   {report.content}
                 </ReactMarkdown>
-              </div>
-            )}
+              )}
+            </div>
           </div>
         </div>
       </main>
