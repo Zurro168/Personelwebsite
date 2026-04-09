@@ -15,6 +15,7 @@ import {
   Activity,
   Layers,
   Cpu,
+  History,
   LayoutList
 } from 'lucide-react';
 import Chart from 'chart.js/auto';
