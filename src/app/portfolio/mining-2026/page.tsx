@@ -236,7 +236,7 @@ export default function MiningReport() {
         </nav>
       </header>
 
-      <main className="max-w-6xl mx-auto px-8 py-20 relative z-10">
+      <main className="max-w-5xl mx-auto px-8 py-20 relative z-10">
         {activeView === 'macro' && (
           <div className="animate-in fade-in slide-in-from-bottom-4 duration-700">
             <div className="grid lg:grid-cols-2 gap-20 items-center mb-20">
