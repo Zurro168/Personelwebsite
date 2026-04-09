@@ -63,7 +63,8 @@ async function sync() {
         const relativeDir = rawRelativeDir.split(path.sep).join('/');
         
         // 自动计算分类：优先使用 Frontmatter tag，其次使用文件夹名，最后默认分类
-        const folderCategory = relativeDir !== '.' ? relativeDir : '未分类';
+        const categoryParts = relativeDir.split('/').filter(p => !['.', '..', '02_Queue', '03_Archives'].includes(p));
+        const folderCategory = categoryParts.length > 0 ? categoryParts[categoryParts.length - 1] : '未分类';
 
         const fileContent = fs.readFileSync(filePath, 'utf8');
         const { data, content } = matter(fileContent);

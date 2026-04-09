@@ -81,7 +81,8 @@ export default async function ReportPage({ params }: { params: Promise<{ slug: s
         </nav>
       </header>
 
-      <main className={`${isHtml ? 'max-w-[90rem]' : 'max-w-5xl'} mx-auto px-6 lg:pl-16 lg:pr-[26rem] py-20`}>
+      {/* Horizontal Stretch: Content now fills the space up to the Guidance Bar */}
+      <main className={`${isHtml ? 'max-w-[100rem]' : 'max-w-7xl'} mx-auto px-6 lg:pl-16 lg:pr-[20rem] py-20`}>
         <div className="space-y-8">
           <Link href="/portfolio" className="flex items-center gap-2 text-white/40 hover:text-brand-blue transition-colors text-xs font-mono group">
             <ChevronLeft size={16} className="group-hover:-translate-x-1 transition-transform" /> BACK TO ARCHIVE

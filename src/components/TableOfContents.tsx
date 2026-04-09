@@ -135,16 +135,17 @@ export default function TableOfContents({ content }: { content: string }) {
           return (
             <div key={`${item.id}-${idx}`} className="relative flex items-center justify-end group/item">
               {/* Optional Label - Always visible but dimmed if not active */}
+              {/* Fixed Width Label Container with Word-Wrap Support */}
               <div className={`
-                absolute right-10 flex flex-col items-end transition-all duration-500
+                absolute right-10 w-64 flex flex-col items-end transition-all duration-500 text-right
                 ${isActive ? 'opacity-100 translate-x-0' : 'opacity-10 group-hover/item:opacity-50 translate-x-2'}
               `}>
-                <div className="flex items-center gap-2 mb-1">
+                <div className="flex items-center gap-2 mb-1 justify-end">
                   <span className="text-[8px] font-black text-brand-blue/40 font-mono tracking-tighter">NODE 0{idx + 1}</span>
                   {isActive && <span className="text-[8px] font-black text-brand-blue animate-pulse font-mono">LIVE</span>}
                 </div>
                 <span className={`
-                  whitespace-nowrap text-[11px] font-bold tracking-[0.1em] uppercase transition-colors
+                  whitespace-normal text-[11px] font-bold tracking-[0.1em] uppercase transition-colors leading-tight
                   ${isActive ? 'text-white' : 'text-white/60'}
                 `}>
                   {item.text}
