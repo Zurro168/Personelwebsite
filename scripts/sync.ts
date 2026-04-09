@@ -59,7 +59,8 @@ async function sync() {
     for (const filePath of files) {
         const fileName = path.basename(filePath);
         const sourceRoot = filePath.includes(ARCHIVE_DIR) ? ARCHIVE_DIR : OBSIDIAN_PUBLISH_DIR;
-        const relativeDir = path.dirname(path.relative(sourceRoot, filePath));
+        const rawRelativeDir = path.dirname(path.relative(sourceRoot, filePath));
+        const relativeDir = rawRelativeDir.split(path.sep).join('/');
         
         // 自动计算分类：优先使用 Frontmatter tag，其次使用文件夹名，最后默认分类
         const folderCategory = relativeDir !== '.' ? relativeDir : '未分类';
