@@ -12,8 +12,9 @@ export default function Home() {
       {/* Hero Section */}
       <section className="px-8 py-24 md:py-40 grid lg:grid-cols-2 gap-20 items-center max-w-7xl mx-auto relative content-center min-h-[70vh]">
         <div className="space-y-12 animate-in fade-in slide-in-from-left-8 duration-1000">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-brand-blue/10 border border-brand-blue/20 text-brand-blue text-[11px] font-bold tracking-[0.3em] rounded uppercase font-mono">
-            <Zap size={14} className="text-brand-gold animate-pulse" /> Intelligence Hub Active
+          <div className="flex items-center gap-3">
+            <div className="w-1.5 h-1.5 bg-brand-blue rounded-full animate-pulse shadow-[0_0_8px_#38bdf8]"></div>
+            <span className="text-brand-blue/60 text-[10px] font-black tracking-[0.4em] uppercase font-mono">Terminal Active</span>
           </div>
           <h1 className="text-6xl md:text-8xl font-black leading-[0.9] tracking-tighter text-white">
             贸易的终局 <br />

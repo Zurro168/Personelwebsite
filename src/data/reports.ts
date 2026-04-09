@@ -2,7 +2,7 @@ export interface Report {
   id: string;
   title: string;
   description: string;
-  tag: '宏观研究' | '有色金属' | '能源化工' | '电池金属' | '跨界实验' | '黑色金属';
+  tag: string; // 使用字符串，确保分类可以随着文件夹动态增加
   date: string;
   readTime: string;
   image: string;
@@ -12,10 +12,32 @@ export interface Report {
 
 export const ALL_REPORTS: Report[] = [
   {
+    id: 'SCC-2026-446',
+    title: '深度解析‘看对行情却赚不到钱’的盈亏悖论与破局之道 网页代码',
+    description: '自动同步的深度研究报告',
+    tag: '交易员笔记',
+    date: '2026-04-09',
+    readTime: '5 min',
+    image: '/images/reports/mining-strategy.png',
+    slug: 'profit-loss-paradox',
+    hasContent: true
+  },
+  {
+    id: 'SCC-2026-359',
+    title: '跨越鸿沟：为什么你赢了判断，却输了账户？',
+    description: '自动同步的深度研究报告',
+    tag: '交易员笔记',
+    date: '2026-04-09',
+    readTime: '5 min',
+    image: '/images/reports/mining-strategy.png',
+    slug: 'Crossing-the-Cognitive-Gap',
+    hasContent: true
+  },
+  {
     id: 'SCC-2026-210',
     title: '硅基大宗周期地图：铜 (Copper)',
     description: '正从过热期向结构性修正期过渡。全球高库存及宏观经济压力暂时抵消了人工智能（AI）和能源转型的长期需求。',
-    tag: '有色金属',
+    tag: '商品深度研究',
     date: '2026-04-08',
     readTime: '15 min',
     image: '/images/reports/mining-strategy.png',
@@ -26,7 +48,7 @@ export const ALL_REPORTS: Report[] = [
     id: 'SCC-2026-920',
     title: '2026 全球矿业巨头大博弈',
     description: '从算法到原子的跨代竞争：解析必和必拓、紫金矿业等巨头在全球资源民族主义背景下的地缘抉择。',
-    tag: '宏观研究',
+    tag: '宏观周期',
     date: '2026-04-08',
     readTime: '15 min',
     image: '/images/reports/mining-strategy.png',
@@ -37,7 +59,7 @@ export const ALL_REPORTS: Report[] = [
     id: 'SCC-2026-003',
     title: '重塑版图：全球矿业巨头的 2026 战略大博弈',
     description: '本文深入解析必和必拓、紫金矿业等巨头在全球资源民族主义抬头背景下的地缘政治抉择与协同逻辑。',
-    tag: '宏观研究',
+    tag: '宏观周期',
     date: '2026-03-28',
     readTime: '25 min',
     image: '/images/reports/mining-strategy.png',
@@ -48,7 +70,7 @@ export const ALL_REPORTS: Report[] = [
     id: 'SCC-2026-005',
     title: '硅基时代的能源锚点：核聚变商用化的路径演进',
     description: '解析超导材料需求与清洁能源最终方案，探讨 ITER 之后的可持续能源路径。',
-    tag: '跨界实验',
+    tag: 'AI × 供应链',
     date: '2026-04-05',
     readTime: '15 min',
     image: '/images/reports/fusion-energy.png',

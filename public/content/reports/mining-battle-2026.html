@@ -1,0 +1,994 @@
+<style>
+
+        .chart-container {
+
+            position: relative;
+
+            width: 100%;
+
+            max-width: 1200px;
+
+            margin-left: auto;
+
+            margin-right: auto;
+
+            height: 50vh;
+
+            max-height: 450px;
+
+        }
+
+        @media (max-width: 768px) {
+
+            .chart-container {
+
+                height: 40vh;
+
+                max-height: 350px;
+
+            }
+
+        }
+
+        .tab-active {
+
+            border-bottom: 2px solid #b45309;
+
+            color: #b45309;
+
+            font-weight: bold;
+
+        }
+
+        .hide-scroll::-webkit-scrollbar {
+
+            display: none;
+
+        }
+
+        .hide-scroll {
+
+            -ms-overflow-style: none;
+
+            scrollbar-width: none;
+
+        }
+
+    </style>
+
+
+  
+
+    
+
+  
+
+    
+
+  
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-24">
+
+  
+
+        <section id="context" class="scroll-mt-24">
+
+            <div class="max-w-3xl mb-8">
+
+                <h2 class="text-3xl font-bold text-stone-100 mb-4 flex items-center">
+
+                    <span class="text-amber-600 mr-2">&#9632;</span> 01 物理货币时代降临
+
+                </h2>
+
+                <p class="text-lg text-stone-400 leading-relaxed">
+
+                    本部分揭示了当前宏观经济环境的核心矛盾。通过对比 AI 算力的瞬时爆发与物理矿产开发的漫长周期，您将了解为何传统“低买高卖”的贸易模式走向终局，而对底层矿产资源（铜、锂、镍）的掌控力，成为了算法时代生存的唯一前提。
+
+                </p>
+
+            </div>
+
+            <div class="bg-white rounded-2xl shadow-sm border border-stone-200 p-8 md:p-12">
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+
+                    <div>
+
+                        <h3 class="text-2xl font-semibold mb-4">当算法撞上原子天花板</h3>
+
+                        <p class="text-stone-400 mb-4">传统靠标准化商品流通、价格博弈的模式已被压缩至极限。未来的竞争核心转向效率与算力。但 AI 算力需要海量电力，电力背后是关键矿石。</p>
+
+                        <p class="text-stone-400">这种不可逾越的物理稀缺性，让矿产从普通商品升级为具备地缘政治属性的<span class="font-bold text-brand-blue bg-brand-blue/10 px-1">物理货币</span>。</p>
+
+                    </div>
+
+                    <div class="flex flex-col space-y-6">
+
+                        <div class="bg-stone-50 p-6 rounded-xl border border-stone-100 flex items-center justify-between">
+
+                            <span class="text-stone-500 font-medium">新铜矿平均开发周期</span>
+
+                            <span class="text-4xl font-bold text-stone-300">17 <span class="text-lg font-normal text-stone-500">年</span></span>
+
+                        </div>
+
+                        <div class="bg-stone-50 p-6 rounded-xl border border-stone-100 flex items-center justify-between">
+
+                            <span class="text-stone-500 font-medium">AI 算力与电力需求增长</span>
+
+                            <span class="text-4xl font-bold text-amber-600">指数级 <span class="text-lg font-normal text-amber-600/70">&#8593;</span></span>
+
+                        </div>
+
+                        <p class="text-sm text-stone-400 italic text-right">巨大的物理鸿沟由此产生：今天的需求，撞上的是十几年前的产能。</p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+  
+
+        <section id="players" class="scroll-mt-24">
+
+            <div class="max-w-3xl mb-8">
+
+                <h2 class="text-3xl font-bold text-stone-100 mb-4 flex items-center">
+
+                    <span class="text-amber-600 mr-2">&#9632;</span> 02 全球十强：掌控底牌的玩家
+
+                </h2>
+
+                <p class="text-lg text-stone-400 leading-relaxed">
+
+                    探索截至 2026 年初主导全球矿业的十大巨头。此图表展示了各公司的预估市值。<strong>请点击图表中的柱状条</strong>，即可在下方查看该公司的核心战略重点与地缘分布特征，了解他们如何向“能源金属”转型以获取估值溢价。
+
+                </p>
+
+            </div>
+
+  
+
+            <div class="bg-white rounded-2xl shadow-sm border border-stone-200 p-6">
+
+                <div class="chart-container mb-8">
+
+                    <canvas id="marketCapChart"></canvas>
+
+                </div>
+
+                <div id="companyDetailBox" class="bg-stone-50 rounded-xl p-6 border border-brand-blue/20 hidden">
+
+                    <div class="flex items-center justify-between mb-4 border-b border-stone-200 pb-4">
+
+                        <h4 id="detailName" class="text-2xl font-bold text-stone-100"></h4>
+
+                        <span id="detailValue" class="text-lg font-mono font-semibold text-brand-blue bg-brand-blue/10 px-3 py-1 rounded"></span>
+
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+                        <div>
+
+                            <span class="block text-sm text-stone-500 uppercase tracking-wider mb-1">核心战略重点</span>
+
+                            <p id="detailStrategy" class="text-stone-300 font-medium"></p>
+
+                        </div>
+
+                        <div>
+
+                            <span class="block text-sm text-stone-500 uppercase tracking-wider mb-1">地缘分布特征</span>
+
+                            <p id="detailGeo" class="text-stone-300 font-medium"></p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <p id="detailPrompt" class="text-center text-stone-400 text-sm italic mt-4">&#9650; 点击上方图表数据条以查看详情</p>
+
+            </div>
+
+        </section>
+
+  
+
+        <section id="factions" class="scroll-mt-24">
+
+            <div class="max-w-3xl mb-8">
+
+                <h2 class="text-3xl font-bold text-stone-100 mb-4 flex items-center">
+
+                    <span class="text-amber-600 mr-2">&#9632;</span> 03 三大阵营：矿业版《三国演义》
+
+                </h2>
+
+                <p class="text-lg text-stone-400 leading-relaxed">
+
+                    在 2026 年，巨头们的比拼不再是挖掘机的数量，而是“含铜量”与战略深度。本节将市场玩家分为三大阵营。<strong>点击下方不同的标签页</strong>，了解各自代表企业应对漫长开发周期与碳中和要求的不同战术动作与底层逻辑。
+
+                </p>
+
+            </div>
+
+  
+
+            <div class="bg-white rounded-2xl shadow-sm border border-stone-200 overflow-hidden">
+
+                <div class="flex border-b border-stone-200 bg-stone-50 overflow-x-auto hide-scroll">
+
+                    <button onclick="switchTab('factionA')" id="btn-factionA" class="tab-btn tab-active flex-1 py-4 px-6 text-center font-medium text-stone-400 hover:text-stone-100 whitespace-nowrap">守成与兼并派</button>
+
+                    <button onclick="switchTab('factionB')" id="btn-factionB" class="tab-btn flex-1 py-4 px-6 text-center font-medium text-stone-400 hover:text-stone-100 whitespace-nowrap">供应链垂直整合派</button>
+
+                    <button onclick="switchTab('factionC')" id="btn-factionC" class="tab-btn flex-1 py-4 px-6 text-center font-medium text-stone-400 hover:text-stone-100 whitespace-nowrap">电池金属激进派</button>
+
+                </div>
+
+                <div class="p-8">
+
+                    <div id="content-factionA" class="tab-content block animate-[fadeIn_0.3s_ease-in-out]">
+
+                        <div class="mb-6 flex flex-wrap gap-2">
+
+                            <span class="bg-stone-200 text-stone-300 text-sm px-3 py-1 rounded-full font-bold">必和必拓 (BHP)</span>
+
+                            <span class="bg-stone-200 text-stone-300 text-sm px-3 py-1 rounded-full font-bold">力拓 (Rio Tinto)</span>
+
+                        </div>
+
+                        <h3 class="text-2xl font-bold mb-4 text-stone-100">老牌霸主的“铜权力”保卫战</h3>
+
+                        <div class="space-y-4 text-stone-400">
+
+                            <p><strong class="text-stone-300">深度逻辑：</strong> 2026年2月，必和必拓财报投下重磅炸弹：其铜业务利润占比达到 <span class="text-amber-600 font-bold">51%</span>，历史上首次超越铁矿石。这标志着矿业“铁器时代”的谢幕。</p>
+
+                            <p><strong class="text-stone-300">战术动作：</strong> 面对 17 年的漫长开发期，他们信奉“拿来主义”。必和必拓通过对英美资源的资产剥离式并购，意在掠夺拉美核心铜资产；力拓则通过蒙古奥尤陶勒盖项目的全面达产，试图重塑全球铜定价权。</p>
+
+                        </div>
+
+                    </div>
+
+  
+
+                    <div id="content-factionB" class="tab-content hidden animate-[fadeIn_0.3s_ease-in-out]">
+
+                        <div class="mb-6 flex flex-wrap gap-2">
+
+                            <span class="bg-white/5 text-white/70 text-sm px-3 py-1 rounded-full font-bold">紫金矿业</span>
+
+                            <span class="bg-white/5 text-white/70 text-sm px-3 py-1 rounded-full font-bold">洛阳钼业</span>
+
+                        </div>
+
+                        <h3 class="text-2xl font-bold mb-4 text-stone-100">中资巨头的“全能竞技场”</h3>
+
+                        <div class="space-y-4 text-stone-400">
+
+                            <p><strong class="text-stone-300">深度逻辑：</strong> 中资巨头不再是单一采矿商，而是<span class="text-amber-600 font-bold">“全产业链运营商”</span>。</p>
+
+                            <p><strong class="text-stone-300">战术动作：</strong> 洛阳钼业稳居全球钴老大，并深度绑定下游电池巨头。他们通过参与 TAZARA 铁路现代化升级，掌控了从非洲内陆矿山到出海口的物流命脉，在西方巨头退缩的“边缘地带”构筑起物理层面的“供应长城”。</p>
+
+                        </div>
+
+                    </div>
+
+  
+
+                    <div id="content-factionC" class="tab-content hidden animate-[fadeIn_0.3s_ease-in-out]">
+
+                        <div class="mb-6 flex flex-wrap gap-2">
+
+                            <span class="bg-green-100 text-green-800 text-sm px-3 py-1 rounded-full font-bold">嘉能可 (Glencore)</span>
+
+                            <span class="bg-green-100 text-green-800 text-sm px-3 py-1 rounded-full font-bold">淡水河谷 (Vale)</span>
+
+                        </div>
+
+                        <h3 class="text-2xl font-bold mb-4 text-stone-100">资本市场的“身段大师”</h3>
+
+                        <div class="space-y-4 text-stone-400">
+
+                            <p><strong class="text-stone-300">深度逻辑：</strong> 他们深谙资本市场对“净零排放”的溢价渴求。</p>
+
+                            <p><strong class="text-stone-300">战术动作：</strong> 嘉能可强行拆分煤炭业务，试图通过“去黑增绿”重塑估值。淡水河谷则引入沙特 Manara Minerals 等主权基金，利用中东资本打造脱离传统矿权束缚的全球能源金属贸易平台。</p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+  
+
+        <section id="geopolitics" class="scroll-mt-24">
+
+            <div class="max-w-3xl mb-8">
+
+                <h2 class="text-3xl font-bold text-stone-100 mb-4 flex items-center">
+
+                    <span class="text-amber-600 mr-2">&#9632;</span> 04 资源民族主义 2.0
+
+                </h2>
+
+                <p class="text-lg text-stone-400 leading-relaxed">
+
+                    如果说 1.0 时代是简单的“坐地起价”，那么 2026 年则是“入股分红与本土增值”。资源国正利用政策杠杆强行重塑产业链。<strong>将鼠标悬停（或在手机上点击）下方国家卡片</strong>，查看各方势力的核心政策与防御反击战术。
+
+                </p>
+
+            </div>
+
+  
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+                <!-- Card 1 -->
+
+                <div class="group relative bg-white border border-stone-200 rounded-2xl p-6 hover:shadow-lg transition-all duration-300 cursor-default">
+
+                    <div class="absolute top-0 left-0 w-full h-1 bg-brand-blue/100 rounded-t-2xl"></div>
+
+                    <div class="flex justify-between items-start mb-4">
+
+                        <h3 class="text-xl font-bold text-stone-100">智利</h3>
+
+                        <span class="text-2xl">&#127464;&#127473;</span>
+
+                    </div>
+
+                    <h4 class="text-sm font-semibold text-stone-500 mb-4 uppercase">从采矿者到基建商</h4>
+
+                    <div class="text-stone-400 group-hover:text-stone-300 transition-colors">
+
+                        <p class="mb-2">智利新政要求巨头转型为工业园区建设者。</p>
+
+                        <ul class="list-none space-y-2 text-sm border-t border-stone-100 pt-4 mt-4">
+
+                            <li class="flex items-start"><span class="text-amber-500 mr-2">&#9656;</span> 矿权授予与本土冶炼设施、海水淡化厂及绿电矩阵投入硬挂钩。</li>
+
+                            <li class="flex items-start"><span class="text-amber-500 mr-2">&#9656;</span> 边际成本大幅抬升，必须帮当地修好基础建设链。</li>
+
+                        </ul>
+
+                    </div>
+
+                </div>
+
+  
+
+                <!-- Card 2 -->
+
+                <div class="group relative bg-white border border-stone-200 rounded-2xl p-6 hover:shadow-lg transition-all duration-300 cursor-default">
+
+                    <div class="absolute top-0 left-0 w-full h-1 bg-emerald-600 rounded-t-2xl"></div>
+
+                    <div class="flex justify-between items-start mb-4">
+
+                        <h3 class="text-xl font-bold text-stone-100">印尼 & 刚果(金)</h3>
+
+                        <span class="text-2xl">&#127470;&#127465; &#127464;&#127465;</span>
+
+                    </div>
+
+                    <h4 class="text-sm font-semibold text-stone-500 mb-4 uppercase">配额制的组合拳</h4>
+
+                    <div class="text-stone-400 group-hover:text-stone-300 transition-colors">
+
+                        <ul class="list-none space-y-3 text-sm pt-2">
+
+                            <li class="pb-3 border-b border-stone-100">
+
+                                <strong class="block text-stone-100 mb-1">印尼控盘：</strong>
+
+                                将镍矿配额从 3.79 亿湿吨压减至约 2.5 亿吨。人为制造稀缺，强制电池前驱体本土生产。
+
+                            </li>
+
+                            <li>
+
+                                <strong class="block text-stone-100 mb-1">刚果(金)紧缩：</strong>
+
+                                执行严格钴出口配额制。2026 年配额仅为往年 40%-50%，驱动全球钴价中枢飙升。
+
+                            </li>
+
+                        </ul>
+
+                    </div>
+
+                </div>
+
+  
+
+                <!-- Card 3 -->
+
+                <div class="group relative bg-white border border-stone-200 rounded-2xl p-6 hover:shadow-lg transition-all duration-300 cursor-default">
+
+                    <div class="absolute top-0 left-0 w-full h-1 bg-slate-800 rounded-t-2xl"></div>
+
+                    <div class="flex justify-between items-start mb-4">
+
+                        <h3 class="text-xl font-bold text-stone-100">美国与盟友</h3>
+
+                        <span class="text-2xl">&#127482;&#127480;</span>
+
+                    </div>
+
+                    <h4 class="text-sm font-semibold text-stone-500 mb-4 uppercase">防守反击策略</h4>
+
+                    <div class="text-stone-400 group-hover:text-stone-300 transition-colors">
+
+                        <p class="mb-2">消费国应对断供威胁的战略储备行动。</p>
+
+                        <ul class="list-none space-y-2 text-sm border-t border-stone-100 pt-4 mt-4">
+
+                            <li class="flex items-start"><span class="text-slate-500 mr-2">&#9656;</span> <strong class="mr-1">保险箱计划 (Project Vault):</strong> 拨款 10 亿美元建立战略储备，物理囤货。</li>
+
+                            <li class="flex items-start"><span class="text-slate-500 mr-2">&#9656;</span> 与 11 国签署关键矿产 MOU，试图建立排他性“供应链朋友圈”。</li>
+
+                        </ul>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+  
+
+        <section id="future" class="scroll-mt-24 mb-24">
+
+            <div class="max-w-3xl mb-8">
+
+                <h2 class="text-3xl font-bold text-stone-100 mb-4 flex items-center">
+
+                    <span class="text-amber-600 mr-2">&#9632;</span> 05 原子瓶颈与 AI 救赎
+
+                </h2>
+
+                <p class="text-lg text-stone-400 leading-relaxed">
+
+                    大自然设立了物理铁律：矿石品位连年衰减导致能耗飙升。本部分的交互图表展示了这种自然衰减趋势带来的能耗悖论。<strong>请点击“启动 AI 干预”按钮</strong>，观察数字孪生与智能勘探技术如何扭转这一绝境，在贫瘠矿石中榨取价值。
+
+                </p>
+
+            </div>
+
+  
+
+            <div class="bg-white rounded-2xl shadow-sm border border-stone-200 p-6 md:p-10">
+
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
+
+                    <div>
+
+                        <h3 class="text-xl font-bold text-stone-100">核心矿山品位衰减 vs 提取能耗模拟 (2020-2030)</h3>
+
+                        <p class="text-sm text-stone-500 mt-1">矿石品位自然衰减 1%-3%/年 造成的能耗飙升危机</p>
+
+                    </div>
+
+                    <button id="aiToggleButton" class="bg-stone-900 hover:bg-amber-600 text-white px-6 py-3 rounded-lg font-bold transition-colors shadow-md flex items-center">
+
+                        <span class="mr-2 text-xl">&#9881;</span> 启动 AI 干预模拟
+
+                    </button>
+
+                </div>
+
+                <div class="chart-container">
+
+                    <canvas id="aiSimulationChart"></canvas>
+
+                </div>
+
+  
+
+                <div id="aiExplanation" class="mt-8 bg-stone-50 border-l-4 border-amber-500 p-6 rounded-r-xl hidden">
+
+                    <h4 class="text-lg font-bold text-stone-100 mb-2">AI 救赎已启动：</h4>
+
+                    <ul class="list-disc list-inside text-stone-400 space-y-1">
+
+                        <li><strong>AI 智能勘探：</strong> 依托机器学习分析海量地质数据，将勘探成功率大幅提升 15%。</li>
+
+                        <li><strong>全流程管控：</strong> 数字化孪生技术让管理层实时操控深达数千米的地下作业（如块体崩落法），压榨每一克原子的价值，显著平抑了因品位下降带来的能耗暴涨。</li>
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+        </section>
+
+  
+
+        
+
+  
+
+    </main>
+
+  
+
+    <script>
+
+        // --- Data Storage ---
+
+        // 1. Top 10 Giants Data
+
+        const top10Data = [
+
+            { name: '必和必拓 (BHP)', value: 213.6, strategy: '铜、镍、钾肥业务，铜利润首超铁矿石达 51%。', geo: '澳大利亚、智利、北美' },
+
+            { name: '力拓 (Rio Tinto)', value: 190.8, strategy: '铁矿石、铜 (奥尤陶勒盖全面达产)、铝、锂。', geo: '澳大利亚、蒙古、西非' },
+
+            { name: '淡水河谷 (Vale)', value: 185.2, strategy: '高品位铁矿、基础金属 (VBM) 剥离独立。', geo: '巴西、加拿大、印尼' },
+
+            { name: '中国神华', value: 148.1, strategy: '煤电一体化、向能源金属稳步转型。', geo: '中国核心，区域化扩张' },
+
+            { name: '南方铜业', value: 145.9, strategy: '纯铜产能的规模化极限扩张。', geo: '墨西哥、秘鲁' },
+
+            { name: '紫金矿业', value: 125.2, strategy: '铜、金、锂逆周期并购，全产业链运营。', geo: '全球布局 (18国30余基地)' },
+
+            { name: '纽蒙特 (Newmont)', value: 122.7, strategy: '利用黄金避险，以铜驱动长期增长。', geo: '全球领先金矿企业分布' },
+
+            { name: '嘉能可 (Glencore)', value: 118.9, strategy: '贸易+采矿双轮，拆分煤炭业务去黑增绿。', geo: '刚果(金)、澳大利亚、拉美' },
+
+            { name: '英美资源', value: 96.3, strategy: '优质铜、铂族金属、铁矿石防守策略。', geo: '拉美、南非' },
+
+            { name: '自由港 (Freeport)', value: 87.7, strategy: '保持纯铜业务敞口，挖掘老矿剩余价值。', geo: '印尼、北美' }
+
+        ];
+
+  
+
+        // 2. Simulation Data (Ore Grade vs Energy)
+
+        const years = [2020, 2021, 2022, 2023, 2024, 2025, 2026, 2027, 2028, 2029, 2030];
+
+        const oreGradeBase = [1.0, 0.98, 0.96, 0.93, 0.91, 0.88, 0.85, 0.82, 0.79, 0.76, 0.73]; // % grade dropping
+
+        const energyBase = [100, 105, 112, 122, 135, 152, 175, 205, 245, 295, 360]; // Exponential rise due to poor grade
+
+        const energyAI = [100, 105, 112, 122, 135, 152, 160, 165, 168, 170, 172]; // AI optimization bends the curve
+
+  
+
+        // --- State Management ---
+
+        let marketCapChartInstance = null;
+
+        let aiChartInstance = null;
+
+        let aiActivated = false;
+
+  
+
+        // --- Logic & Initialization ---
+
+  
+
+        document.addEventListener('DOMContentLoaded', () => {
+
+            initMarketCapChart();
+
+            initAISimulationChart();
+
+        });
+
+  
+
+        // Tab Switching Logic
+
+        function switchTab(tabId) {
+
+            // Hide all contents
+
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+
+            // Remove active state from all buttons
+
+            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('tab-active'));
+
+            // Show selected content
+
+            document.getElementById(`content-${tabId}`).classList.remove('hidden');
+
+            // Add active state to clicked button
+
+            document.getElementById(`btn-${tabId}`).classList.add('tab-active');
+
+        }
+
+  
+
+        // Initialize Top 10 Chart
+
+        function initMarketCapChart() {
+
+            const ctx = document.getElementById('marketCapChart').getContext('2d');
+
+            // Extract data arrays
+
+            const labels = top10Data.map(d => {
+
+                // Formatting label to wrap if too long (though these are short enough, good practice)
+
+                let name = d.name;
+
+                return name.length > 16 ? name.substring(0, 16) + '...' : name;
+
+            });
+
+            const values = top10Data.map(d => d.value);
+
+  
+
+            marketCapChartInstance = new Chart(ctx, {
+
+                type: 'bar',
+
+                data: {
+
+                    labels: labels,
+
+                    datasets: [{
+
+                        label: '预估市值 (十亿美元)',
+
+                        data: values,
+
+                        backgroundColor: '#d6d3d1', // stone-300
+
+                        hoverBackgroundColor: '#d97706', // amber-600
+
+                        borderRadius: 4,
+
+                        barThickness: 'flex',
+
+                        maxBarThickness: 40
+
+                    }]
+
+                },
+
+                options: {
+
+                    responsive: true,
+
+                    maintainAspectRatio: false, // CRITICAL FOR CONTAINER STYLING
+
+                    indexAxis: 'y', // Horizontal bar chart
+
+                    plugins: {
+
+                        legend: { display: false },
+
+                        tooltip: {
+
+                            backgroundColor: '#1c1917',
+
+                            padding: 12,
+
+                            titleFont: { size: 14 },
+
+                            bodyFont: { size: 14 },
+
+                            displayColors: false,
+
+                            callbacks: {
+
+                                label: function(context) {
+
+                                    return context.raw + ' 十亿美元 (点击查看详情)';
+
+                                }
+
+                            }
+
+                        }
+
+                    },
+
+                    scales: {
+
+                        x: {
+
+                            grid: { color: '#f5f5f4' },
+
+                            title: { display: true, text: '十亿美元', color: '#78716c' }
+
+                        },
+
+                        y: {
+
+                            grid: { display: false },
+
+                            ticks: { color: '#44403c', font: { weight: 'bold' } }
+
+                        }
+
+                    },
+
+                    onClick: (event, elements) => {
+
+                        if (elements.length > 0) {
+
+                            const index = elements[0].index;
+
+                            showCompanyDetails(index);
+
+                        }
+
+                    }
+
+                }
+
+            });
+
+        }
+
+  
+
+        function showCompanyDetails(index) {
+
+            const data = top10Data[index];
+
+            document.getElementById('detailName').textContent = data.name;
+
+            document.getElementById('detailValue').textContent = data.value + ' B USD';
+
+            document.getElementById('detailStrategy').textContent = data.strategy;
+
+            document.getElementById('detailGeo').textContent = data.geo;
+
+            const detailBox = document.getElementById('companyDetailBox');
+
+            detailBox.classList.remove('hidden');
+
+            detailBox.classList.add('animate-[fadeIn_0.3s_ease-in-out]');
+
+            document.getElementById('detailPrompt').style.display = 'none';
+
+        }
+
+  
+
+        // Initialize AI Simulation Chart
+
+        function initAISimulationChart() {
+
+            const ctx = document.getElementById('aiSimulationChart').getContext('2d');
+
+            aiChartInstance = new Chart(ctx, {
+
+                type: 'line',
+
+                data: {
+
+                    labels: years,
+
+                    datasets: [
+
+                        {
+
+                            label: '矿石平均品位 (%)',
+
+                            data: oreGradeBase,
+
+                            borderColor: '#a8a29e', // stone-400
+
+                            backgroundColor: 'rgba(168, 162, 158, 0.1)',
+
+                            yAxisID: 'y1',
+
+                            tension: 0.4,
+
+                            fill: true,
+
+                            pointRadius: 3
+
+                        },
+
+                        {
+
+                            label: '传统提取能耗指数',
+
+                            data: energyBase,
+
+                            borderColor: '#ef4444', // red-500
+
+                            borderWidth: 3,
+
+                            borderDash: [5, 5],
+
+                            yAxisID: 'y2',
+
+                            tension: 0.4,
+
+                            pointRadius: 0
+
+                        }
+
+                    ]
+
+                },
+
+                options: {
+
+                    responsive: true,
+
+                    maintainAspectRatio: false, // CRITICAL FOR CONTAINER STYLING
+
+                    interaction: {
+
+                        mode: 'index',
+
+                        intersect: false,
+
+                    },
+
+                    plugins: {
+
+                        legend: { position: 'top', labels: { color: '#44403c' } },
+
+                        tooltip: { backgroundColor: '#1c1917', padding: 12 }
+
+                    },
+
+                    scales: {
+
+                        x: { grid: { display: false } },
+
+                        y1: {
+
+                            type: 'linear',
+
+                            display: true,
+
+                            position: 'left',
+
+                            title: { display: true, text: '品位 (%)', color: '#78716c' },
+
+                            grid: { color: '#f5f5f4' }
+
+                        },
+
+                        y2: {
+
+                            type: 'linear',
+
+                            display: true,
+
+                            position: 'right',
+
+                            title: { display: true, text: '能耗指数', color: '#78716c' },
+
+                            grid: { display: false }
+
+                        }
+
+                    }
+
+                }
+
+            });
+
+  
+
+            // Toggle Button Logic
+
+            document.getElementById('aiToggleButton').addEventListener('click', function() {
+
+                aiActivated = !aiActivated;
+
+                const btn = this;
+
+                const explainBox = document.getElementById('aiExplanation');
+
+                if (aiActivated) {
+
+                    // Turn on AI
+
+                    btn.classList.remove('bg-stone-900', 'text-white');
+
+                    btn.classList.add('bg-brand-blue/100', 'text-stone-100', 'shadow-amber-500/50');
+
+                    btn.innerHTML = '<span class="mr-2 text-xl">&#10003;</span> AI 干预运行中';
+
+                    // Add AI line, mute base line
+
+                    aiChartInstance.data.datasets[1].borderColor = '#fca5a5'; // dim red
+
+                    if (aiChartInstance.data.datasets.length === 2) {
+
+                        aiChartInstance.data.datasets.push({
+
+                            label: 'AI 优化后能耗指数',
+
+                            data: energyAI,
+
+                            borderColor: '#059669', // emerald-600
+
+                            borderWidth: 4,
+
+                            backgroundColor: 'rgba(5, 150, 105, 0.1)',
+
+                            yAxisID: 'y2',
+
+                            tension: 0.4,
+
+                            fill: true,
+
+                            pointBackgroundColor: '#059669'
+
+                        });
+
+                    }
+
+                    explainBox.classList.remove('hidden');
+
+                } else {
+
+                    // Turn off AI
+
+                    btn.classList.add('bg-stone-900', 'text-white');
+
+                    btn.classList.remove('bg-brand-blue/100', 'text-stone-100', 'shadow-amber-500/50');
+
+                    btn.innerHTML = '<span class="mr-2 text-xl">&#9881;</span> 启动 AI 干预模拟';
+
+                    aiChartInstance.data.datasets[1].borderColor = '#ef4444'; // bright red
+
+                    if (aiChartInstance.data.datasets.length > 2) {
+
+                        aiChartInstance.data.datasets.pop(); // Remove AI dataset
+
+                    }
+
+                    explainBox.classList.add('hidden');
+
+                }
+
+                aiChartInstance.update();
+
+            });
+
+        }
+
+        // CSS Animation for Tab Content and Details
+
+        const styleSheet = document.createElement("style");
+
+        styleSheet.innerText = `
+
+            @keyframes fadeIn {
+
+                from { opacity: 0; transform: translateY(5px); }
+
+                to { opacity: 1; transform: translateY(0); }
+
+            }
+
+        `;
+
+        document.head.appendChild(styleSheet);
+
+    </script>

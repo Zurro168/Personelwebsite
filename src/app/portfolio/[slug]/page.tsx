@@ -97,7 +97,6 @@ export default async function ReportPage({ params }: { params: Promise<{ slug: s
              <div className="flex flex-wrap gap-4 text-xs font-mono text-white/30 pt-4 items-center">
                 <span className="flex items-center gap-1 bg-white/5 px-2 py-1 rounded"><Calendar size={14} /> {report.date}</span>
                 <span className="text-white/10 italic">#{report.id}</span>
-                <span className="ml-auto text-[10px] uppercase tracking-widest bg-brand-blue/20 text-brand-blue px-2 py-0.5 rounded border border-brand-blue/20">Certified Intelligence</span>
              </div>
           </div>
 

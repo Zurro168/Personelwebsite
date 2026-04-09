@@ -6,7 +6,8 @@ import { Search, Filter, ChevronLeft, ChevronRight, Clock } from 'lucide-react';
 import { ALL_REPORTS } from '@/data/reports';
 import Breadcrumbs from '@/components/layout/Breadcrumbs';
 
-const TAGS = ['全部', '宏观研究', '有色金属', '能源化工', '电池金属', '黑色金属', '跨界实验'];
+// 动态获取所有分类，确保与 reports.ts 同步
+const TAGS = ['全部', ...Array.from(new Set(ALL_REPORTS.map(r => r.tag)))];
 
 export default function Portfolio() {
   const [activeTag, setActiveTag] = useState('全部');
@@ -99,11 +100,8 @@ export default function Portfolio() {
                     className="w-full h-full object-cover opacity-30 grayscale group-hover:grayscale-0 transition-all duration-700" 
                   />
                 )}
-                <div className="absolute top-4 left-4 flex gap-2">
-                  <span className="px-3 py-1 bg-brand-blue text-slate-900 text-[10px] font-black uppercase tracking-widest">{report.tag}</span>
-                  {!report.hasContent && (
-                    <span className="px-3 py-1 bg-white/10 text-white/40 text-[10px] font-black uppercase tracking-widest backdrop-blur-sm">校准中 / Drafting</span>
-                  )}
+                <div className="absolute top-4 left-4">
+                  <span className="text-brand-blue text-[9px] font-black uppercase tracking-[0.3em] font-mono">{report.tag}</span>
                 </div>
               </div>
               

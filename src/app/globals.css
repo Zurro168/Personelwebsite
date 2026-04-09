@@ -154,14 +154,41 @@ body {
   opacity: 0.6;
 }
 
-.report-html-content img {
+.report-html-content-wrapper img, .prose-cyber img {
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 0.75rem;
-  margin: 2rem 0;
-  box-shadow: 0 0 40px rgba(56, 189, 248, 0.1);
+  margin: 3rem auto;
+  display: block;
+  box-shadow: 0 0 60px rgba(56, 189, 248, 0.05);
+  max-width: 100%;
+  height: auto;
 }
 
+/* --- Navigation & Interactive --- */
 #reading-progress {
   transform-origin: left;
   transition: transform 0.1s ease;
+}
+
+/* Ensure the portal navbar doesn't overlap content too much */
+header + main {
+  padding-top: 5rem;
+}
+
+/* Custom Scrollbar for a sleek industrial look */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(56, 189, 248, 0.2);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--brand-blue);
 }

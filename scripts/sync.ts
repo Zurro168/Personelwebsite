@@ -3,10 +3,13 @@ import path from 'path';
 import matter from 'gray-matter';
 
 /**
- * ⚡ Silicon Commodity: Obsidian Sync Engine v2.5 (Intelligent Classifier)
+ * ⚡ Silicon Commodity: Obsidian Sync Engine v3.0 (Folder-Based Intelligence)
  * ---------------------------------------------------------------------
- * 作用：一键同步 Obsidian 内容到 Web 终端。支持「大宗评分卡」与「内容研报」双轨制。
- * 核心升级：支持依据 Frontmatter [tag] 自动在网页端分类挂载。
+ * 作用：一键同步 Obsidian 内容到 Web 终端。
+ * 核心升级：
+ * 1. 递归扫描：支持 sub-folders，方便分类管理。
+ * 2. 文件夹驱动分类：如果没有在 Frontmatter 指定 tag，则自动使用文件夹名称作为分类。
+ * 3. 极简运维：通过文件夹移动即可改变网页展示逻辑。
  */
 
 const OBSIDIAN_PUBLISH_DIR = 'D:/iCloudDrive/iCloud~md~obsidian/Obsidian Vault/SiliconCommand/02_Queue';
@@ -20,50 +23,117 @@ if (!fs.existsSync(PUBLIC_REPORTS_DIR)) {
     fs.mkdirSync(PUBLIC_REPORTS_DIR, { recursive: true });
 }
 
+/**
+ * 递归获取所有 markdown 文件
+ */
+function getAllFiles(dir: string, allFiles: string[] = []) {
+    const files = fs.readdirSync(dir);
+    files.forEach(file => {
+        const filePath = path.join(dir, file);
+        if (fs.statSync(filePath).isDirectory()) {
+            getAllFiles(filePath, allFiles);
+        } else if (file.endsWith('.md')) {
+            allFiles.push(filePath);
+        }
+    });
+    return allFiles;
+}
+
 async function sync() {
-    console.log('🚀 Checking for new intelligence in Obsidian Queue...');
+    console.log('🚀 Checking for new intelligence in Obsidian Queue (Recursive)...');
     
     if (!fs.existsSync(OBSIDIAN_PUBLISH_DIR)) {
         console.error('❌ Obsidian directory not found.');
         return;
     }
 
-    const files = fs.readdirSync(OBSIDIAN_PUBLISH_DIR).filter(f => f.endsWith('.md'));
+    const files = getAllFiles(OBSIDIAN_PUBLISH_DIR);
 
     if (files.length === 0) {
         console.log('✨ No files to sync. Staying dormant.');
         return;
     }
 
-    for (const file of files) {
-        const filePath = path.join(OBSIDIAN_PUBLISH_DIR, file);
+    for (const filePath of files) {
+        const fileName = path.basename(filePath);
+        const relativeDir = path.dirname(path.relative(OBSIDIAN_PUBLISH_DIR, filePath));
+        
+        // 自动计算分类：优先使用 Frontmatter tag，其次使用文件夹名，最后默认分类
+        const folderCategory = relativeDir !== '.' ? relativeDir : '未分类';
+
         const fileContent = fs.readFileSync(filePath, 'utf8');
         const { data, content } = matter(fileContent);
 
         if (!data.slug) {
-            console.warn(`⚠️ Skipping ${file}: Missing 'slug' in Frontmatter.`);
+            console.warn(`⚠️ Skipping ${fileName}: Missing 'slug' in Frontmatter.`);
             continue;
         }
 
-        // --- 逻辑分流 A: 处理「内容研报」 (依据是否存在 tag 判定) ---
-        if (data.tag) {
-            console.log(`📑 Processing Report: ${data.title || data.slug} [Category: ${data.tag}]`);
+        const reportTag = data.tag || folderCategory;
+
+        // --- 逻辑分流 A: 处理「内容研报」 (依据是否存在 slug + content 判定) ---
+        // 只要有 slug 我们就认为是研报，除非明确是评分卡格式
+        if (data.tag || relativeDir !== '.') {
+            console.log(`📑 Processing Report: ${data.title || data.slug} [Category: ${reportTag}]`);
             
-            // 1. 保存文章实体文件到 public
+            let finalContent = content.trim();
+
+            // 如果内容看起来是完整的 HTML 页面，尝试提取 Body 部分并清理
+            if (finalContent.includes('<body') || finalContent.includes('<html')) {
+                console.log(`   - Full HTML detected, sanitizing for portal integration...`);
+                
+                const bodyMatch = finalContent.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
+                if (bodyMatch) {
+                    finalContent = bodyMatch[1];
+                }
+
+                const styleMatches = content.match(/<style[^>]*>([\s\S]*?)<\/style>/gi);
+                if (styleMatches) {
+                    const styles = styleMatches.join('\n');
+                    finalContent = styles + '\n' + finalContent;
+                }
+
+                // 移除冗余的导航、页眉、页脚
+                finalContent = finalContent.replace(/<nav[^>]*>[\s\S]*?<\/nav>/gi, '');
+                finalContent = finalContent.replace(/<header[^>]*>[\s\S]*?<\/header>/gi, '');
+                finalContent = finalContent.replace(/<footer[^>]*>[\s\S]*?<\/footer>/gi, '');
+                finalContent = finalContent.replace(/<script[^>]*src="[^"]*tailwindcss\.com[^"]*"[^>]*><\/script>/gi, '');
+                
+                // 适配暗色模式与清理红框
+                finalContent = finalContent.replace(/bg-stone-100/gi, '');
+                finalContent = finalContent.replace(/text-stone-800/gi, 'text-stone-300');
+                finalContent = finalContent.replace(/text-stone-900/gi, 'text-stone-100');
+                finalContent = finalContent.replace(/text-stone-600/gi, 'text-stone-400');
+                
+                // 彻底移除红框标识 (Red Box removal)
+                finalContent = finalContent.replace(/bg-red-600/gi, 'bg-brand-blue/20');
+                finalContent = finalContent.replace(/bg-red-500/gi, 'bg-brand-blue/20');
+                finalContent = finalContent.replace(/bg-red-100/gi, 'bg-white/5');
+                finalContent = finalContent.replace(/text-red-600/gi, 'text-brand-blue');
+                finalContent = finalContent.replace(/text-red-500/gi, 'text-brand-blue');
+                finalContent = finalContent.replace(/text-red-800/gi, 'text-white/70');
+                finalContent = finalContent.replace(/border-red-600/gi, 'border-brand-blue/30');
+                finalContent = finalContent.replace(/border-red-200/gi, 'border-white/10');
+                
+                // 适配工业风颜色
+                finalContent = finalContent.replace(/text-amber-700/gi, 'text-brand-blue');
+                finalContent = finalContent.replace(/bg-amber-50/gi, 'bg-brand-blue/10');
+                finalContent = finalContent.replace(/border-amber-100/gi, 'border-brand-blue/20');
+            }
+
+            // 1. 保存文章实体文件
             const reportContentPath = path.join(PUBLIC_REPORTS_DIR, `${data.slug}.html`);
-            // 为了保持 HTML 原样, 我们直接使用 content 部分
-            fs.writeFileSync(reportContentPath, content.trim());
+            fs.writeFileSync(reportContentPath, finalContent.trim());
             console.log(`   - Content saved to public assets.`);
 
             // 2. 更新 reports.ts 注册表
             let registryContent = fs.readFileSync(REPORTS_REGISTRY_FILE, 'utf8');
             
-            // 构造新条目对象
             const newEntry = {
                 id: `SCC-${new Date().getFullYear()}-${Math.floor(Math.random() * 900) + 100}`,
-                title: data.title || '未命名报告',
-                description: data.description || '暂无描述',
-                tag: data.tag,
+                title: data.title || fileName.replace('.md', ''),
+                description: data.description || '自动同步的深度研究报告',
+                tag: reportTag,
                 date: new Date().toISOString().split('T')[0],
                 readTime: data.readTime || '15 min',
                 image: data.image || '/images/reports/mining-strategy.png',
@@ -83,13 +153,10 @@ async function sync() {
     hasContent: true
   },`;
 
-            // 检查是否已存在该 slug 的条目
             const slugRegex = new RegExp(`slug:\\s*'${data.slug}'`, 'g');
             if (slugRegex.test(registryContent)) {
-                console.log(`   - Entry already exists, updating properties...`);
-                // 这里简单处理：如果已存在，则通过覆盖文件更新内容，但 registry 中我们暂时不复杂替换（可后续优化）
+                console.log(`   - Entry already exists, content updated.`);
             } else {
-                // 插入到 ALL_REPORTS 数组的开头
                 registryContent = registryContent.replace(
                     /export const ALL_REPORTS: Report\[\] = \[/,
                     `export const ALL_REPORTS: Report[] = [\n${entryString}`
@@ -135,9 +202,12 @@ async function sync() {
         }
 
         // --- 公共动作: 归档 ---
-        const archivePath = path.join(ARCHIVE_DIR, file);
+        const archiveDest = path.join(ARCHIVE_DIR, relativeDir);
+        if (!fs.existsSync(archiveDest)) fs.mkdirSync(archiveDest, { recursive: true });
+        
+        const archivePath = path.join(archiveDest, fileName);
         fs.renameSync(filePath, archivePath);
-        console.log(`📦 Archived: ${file} moved to 03_Archives.\n`);
+        console.log(`📦 Archived: ${fileName} moved to 03_Archives/${relativeDir}.\n`);
     }
 
     console.log('🏆 All-Pass Sync Complete. Industrial Intelligence Terminal updated.');

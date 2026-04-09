@@ -119,15 +119,14 @@ export default function CycleMapDetail({ params }: { params: Promise<{ slug: str
           <div className="grid lg:grid-cols-4 gap-10">
             {/* 核心评分卡片 (Radar Animated Score) */}
             <div className="p-12 bg-white/[0.04] border border-white/10 flex flex-col items-center justify-center text-center relative overflow-hidden group shadow-2xl transition-all hover:bg-white/[0.06]">
-               <div className="absolute top-0 left-0 w-full h-2 bg-amber-500 shadow-[0_0_20px_#f59e0b]"></div>
                {/* 动态雷达波扩散 */}
                <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                  <div className="w-32 h-32 rounded-full border border-amber-500/20" style={{ animation: 'radarExpand 3s infinite linear' }}></div>
-                  <div className="w-32 h-32 rounded-full border border-amber-500/10 delay-1000" style={{ animation: 'radarExpand 3s infinite linear 1.5s' }}></div>
+                  <div className="w-32 h-32 rounded-full border border-white/10" style={{ animation: 'radarExpand 3s infinite linear' }}></div>
+                  <div className="w-32 h-32 rounded-full border border-white/5 delay-1000" style={{ animation: 'radarExpand 3s infinite linear 1.5s' }}></div>
                </div>
-               <div className="text-xs font-black text-white/50 uppercase tracking-widest mb-8 italic z-10 transition-colors group-hover:text-amber-500">Global Score Matrix</div>
-               <div className="text-9xl font-black text-amber-500 italic drop-shadow-[0_0_30px_rgba(245,158,11,0.5)] mb-3 tracking-tighter z-10">{data.score}<span className="text-2xl text-white/10 italic ml-1">/pts</span></div>
-               <div className="px-6 py-2 bg-amber-500/20 text-amber-500 text-xs font-black rounded-sm border border-amber-500/40 uppercase italic tracking-[0.2em] z-10">Rating: High Risk Correction</div>
+               <div className="text-xs font-black text-white/50 uppercase tracking-widest mb-8 italic z-10 transition-colors group-hover:text-brand-blue">Global Score Matrix</div>
+               <div className="text-9xl font-black text-white italic drop-shadow-[0_0_30px_rgba(255,255,255,0.1)] mb-3 tracking-tighter z-10">{data.score}<span className="text-2xl text-white/10 italic ml-1">/pts</span></div>
+               <div className="px-6 py-2 bg-white/5 text-white/60 text-[10px] font-black rounded-sm border border-white/10 uppercase italic tracking-[0.2em] z-10">Rating: Current Cycle Phase</div>
             </div>
 
             {/* 逻辑分解条形图 (High-Contrast Bar) */}
@@ -142,7 +141,7 @@ export default function CycleMapDetail({ params }: { params: Promise<{ slug: str
                             labels: ['宏观环境', '需求动能', '库存水位', '供应潜力'],
                             datasets: [{
                                 data: data.dimensionScores,
-                                backgroundColor: ['rgba(244,63,94,0.9)', 'rgba(52,211,153,0.9)', 'rgba(244,63,94,0.9)', 'rgba(245,158,11,0.9)'],
+                                backgroundColor: ['rgba(56,189,248,0.7)', 'rgba(56,189,248,0.5)', 'rgba(56,189,248,0.3)', 'rgba(56,189,248,0.6)'],
                                 borderColor: '#fff',
                                 borderWidth: 0,
                                 borderRadius: 0
@@ -171,13 +170,13 @@ export default function CycleMapDetail({ params }: { params: Promise<{ slug: str
             <div className="flex flex-col lg:flex-row items-stretch justify-between gap-6 lg:gap-4 lg:px-10">
                 {data.cycleSteps?.map((pos: any, idx: number) => (
                     <React.Fragment key={idx}>
-                        <div className={`flex-1 p-8 border rounded-sm text-center transition-all duration-700 relative flex flex-col justify-center items-center group/card cursor-pointer hover:bg-white/[0.05] ${idx === data.cyclePosition ? 'border-amber-500 bg-amber-500/10 shadow-[0_0_60px_rgba(245,158,11,0.2)] scale-110 z-20 border-2' : 'border-white/5 bg-white/[0.01] opacity-40 hover:opacity-100 grayscale hover:grayscale-0'}`}>
+                        <div className={`flex-1 p-8 border rounded-sm text-center transition-all duration-700 relative flex flex-col justify-center items-center group/card cursor-pointer hover:bg-white/[0.05] ${idx === data.cyclePosition ? 'border-brand-blue/50 bg-brand-blue/5 shadow-[0_0_60px_rgba(56,189,248,0.1)] scale-110 z-20 border-2' : 'border-white/5 bg-white/[0.01] opacity-40 hover:opacity-100 grayscale hover:grayscale-0'}`}>
                             {idx === data.cyclePosition && (
-                                <div className="absolute -top-5 left-1/2 -translate-x-1/2 bg-amber-500 text-slate-900 text-[10px] font-black px-4 py-1.5 whitespace-nowrap italic shadow-[0_0_20px_#f59e0b] animate-bounce">ACTUAL LOGIC POSITION</div>
+                                <div className="absolute -top-5 left-1/2 -translate-x-1/2 bg-brand-blue text-slate-900 text-[9px] font-black px-4 py-1.5 whitespace-nowrap italic shadow-[0_0_20px_rgba(56,189,248,0.4)]">ACTIVE POSITION</div>
                             )}
                             <div className={`text-6xl mb-6 transition-transform duration-500 group-hover/card:scale-125 drop-shadow-[0_4px_10px_rgba(0,0,0,0.5)]`}>{pos.emoji}</div>
-                            <div className={`text-base font-black uppercase mb-3 tracking-widest transition-colors ${idx === data.cyclePosition ? 'text-amber-500' : 'text-white/90 group-hover/card:text-brand-blue'}`}>{pos.label}</div>
-                            <div className={`text-[12px] font-bold italic leading-snug px-2 transition-opacity ${idx === data.cyclePosition ? 'text-amber-500 opacity-100' : 'text-white/30 group-hover/card:text-white/60'}`}>{pos.sub}</div>
+                            <div className={`text-base font-black uppercase mb-3 tracking-widest transition-colors ${idx === data.cyclePosition ? 'text-brand-blue' : 'text-white/90 group-hover/card:text-brand-blue'}`}>{pos.label}</div>
+                            <div className={`text-[12px] font-bold italic leading-snug px-2 transition-opacity ${idx === data.cyclePosition ? 'text-brand-blue/60 opacity-100' : 'text-white/30 group-hover/card:text-white/60'}`}>{pos.sub}</div>
                         </div>
                         {idx < 4 && (
                             <div className="hidden lg:flex items-center justify-center text-white/5 opacity-40 hover:opacity-100">
