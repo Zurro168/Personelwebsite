@@ -13,7 +13,7 @@ export interface Report {
 export const ALL_REPORTS: Report[] = [
   {
     id: 'SCC-2026-446',
-    title: '深度解析‘看对行情却赚不到钱’的盈亏悖论与破局之道 网页代码',
+    title: '深度解析‘看对行情却赚不到钱’的盈亏悖论与破局之道',
     description: '自动同步的深度研究报告',
     tag: '交易员笔记',
     date: '2026-04-09',
