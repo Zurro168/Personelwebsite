@@ -12,7 +12,40 @@ export interface Report {
 
 export const ALL_REPORTS: Report[] = [
   {
-    id: 'SCC-2026-709',
+    id: 'SCC-2026-487',
+    title: '第一线认知：中游加工企业的成本管控与管理哲学思考',
+    description: '自动同步的深度研究报告',
+    tag: '跨界实验',
+    date: '2026-04-09',
+    readTime: '10 min',
+    image: '/images/reports/mining-strategy.png',
+    slug: 'first-line-management-philosophy',
+    hasContent: true
+  },
+  {
+    id: 'SCC-2026-762',
+    title: '中医系统论：从脏腑平衡到大宗商品供给侧博弈的隐喻',
+    description: '自动同步的深度研究报告',
+    tag: '跨界实验',
+    date: '2026-04-09',
+    readTime: '10 min',
+    image: '/images/reports/mining-strategy.png',
+    slug: 'tcm-commodity-metaphor',
+    hasContent: true
+  },
+  {
+    id: 'SCC-2026-749',
+    title: 'AI 时代的信息生产：从碎片化搜索转向结构化知识合成',
+    description: '自动同步的深度研究报告',
+    tag: '跨界实验',
+    date: '2026-04-09',
+    readTime: '8min',
+    image: '/images/reports/mining-strategy.png',
+    slug: 'ai-information-production',
+    hasContent: true
+  },
+  {
+    id: 'SCC-2026-693',
     title: '硅基大宗：给所有人的商品周期地图——看懂世界的赚钱逻辑',
     description: '自动同步的深度研究报告',
     tag: '商品研报',
@@ -23,7 +56,7 @@ export const ALL_REPORTS: Report[] = [
     hasContent: true
   },
   {
-    id: 'SCC-2026-680',
+    id: 'SCC-2026-880',
     title: '硅基大宗：AI Agent 抢了全球供应链的“中枢神经”',
     description: '自动同步的深度研究报告',
     tag: '商品研报',
@@ -34,7 +67,7 @@ export const ALL_REPORTS: Report[] = [
     hasContent: true
   },
   {
-    id: 'SCC-2026-608',
+    id: 'SCC-2026-549',
     title: '重塑版图：全球十大矿业巨头 2026 战略大博弈',
     description: '自动同步的深度研究报告',
     tag: '商品研报',
@@ -45,7 +78,7 @@ export const ALL_REPORTS: Report[] = [
     hasContent: true
   },
   {
-    id: 'SCC-2026-968',
+    id: 'SCC-2026-817',
     title: '深度解析‘看对行情却赚不到钱’的盈亏悖论与破局之道 网页代码',
     description: '自动同步的深度研究报告',
     tag: '交易员笔记',
@@ -56,7 +89,7 @@ export const ALL_REPORTS: Report[] = [
     hasContent: true
   },
   {
-    id: 'SCC-2026-693',
+    id: 'SCC-2026-270',
     title: '跨越鸿沟：为什么你赢了判断，却输了账户？',
     description: '自动同步的深度研究报告',
     tag: '交易员笔记',
@@ -67,7 +100,7 @@ export const ALL_REPORTS: Report[] = [
     hasContent: true
   },
   {
-    id: 'SCC-2026-124',
+    id: 'SCC-2026-394',
     title: '硅基大宗周期地图：铜 (Copper)',
     description: '正从过热期向结构性修正期过渡。全球高库存及宏观经济压力暂时抵消了人工智能（AI）和能源转型的长期需求。',
     tag: '商品研报',
@@ -78,7 +111,7 @@ export const ALL_REPORTS: Report[] = [
     hasContent: true
   },
   {
-    id: 'SCC-2026-611',
+    id: 'SCC-2026-464',
     title: '2026 全球矿业巨头大博弈',
     description: '从算法到原子的跨代竞争：解析必和必拓、紫金矿业等巨头在全球资源民族主义背景下的地缘抉择。',
     tag: '商品研报',
