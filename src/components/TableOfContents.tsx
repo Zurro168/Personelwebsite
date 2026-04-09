@@ -12,18 +12,30 @@ export default function TableOfContents({ content }: { content: string }) {
   const [activeId, setActiveId] = useState<string>('');
 
   useEffect(() => {
-    // Parse the content for h2 titles (either markdown ## or html <h2>)
-    const h2Regex = /#{2}\s+(.*)/g;
+    // Dual-mode parsing: works for raw Markdown (##) or Syneced HTML (<h2>)
     const foundItems: TOCItem[] = [];
-    let match;
     
-    // We add an ID to the h2 elements in the DOM later, 
-    // but here we just need to know how many nodes to draw
-    const titles = content.match(/#{2}\s+(.*)/g) || [];
-    titles.forEach((title, index) => {
-      const text = title.replace(/^#{2}\s+/, '').trim();
-      foundItems.push({ id: `section-${index}`, text });
-    });
+    if (content.includes('</h2>')) {
+      // HTML Path: Extract text from <h2>...</h2>
+      const h2HtmlRegex = /<h2[^>]*>(.*?)<\/h2>/g;
+      let match;
+      let index = 0;
+      while ((match = h2HtmlRegex.exec(content)) !== null) {
+        // Strip nested tags if any
+        const text = match[1].replace(/<[^>]*>/g, '').trim();
+        foundItems.push({ id: `section-${index}`, text });
+        index++;
+      }
+    } else {
+      // Markdown Path: Extract text from ## ...
+      const h2MdRegex = /#{2}\s+(.*)/g;
+      let match;
+      let index = 0;
+      while ((match = h2MdRegex.exec(content)) !== null) {
+        foundItems.push({ id: `section-${index}`, text: match[1].trim() });
+        index++;
+      }
+    }
     
     setItems(foundItems);
 
