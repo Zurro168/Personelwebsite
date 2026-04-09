@@ -172,11 +172,6 @@ body {
   transition: transform 0.1s ease;
 }
 
-/* Ensure the portal navbar doesn't overlap content too much */
-header + main {
-  padding-top: 5rem;
-}
-
 /* Custom Scrollbar for a sleek industrial look */
 ::-webkit-scrollbar {
   width: 6px;
