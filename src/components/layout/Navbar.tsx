@@ -23,7 +23,7 @@ export default function Navbar() {
           <Link href="/" className="flex items-center gap-1 group-hover:opacity-80 transition-opacity">
             <span className="text-white">硅基大宗</span>
             <span className="text-brand-blue/40 font-light">|</span>
-            <span className="text-brand-blue text-sm uppercase tracking-widest font-mono">Terminal</span>
+            <span className="text-brand-blue text-xs uppercase tracking-[0.3em] font-bold">Terminal</span>
           </Link>
         </span>
       </div>
