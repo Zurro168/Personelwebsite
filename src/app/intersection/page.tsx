@@ -1,31 +1,29 @@
-import { Microscope, Bot, Heart, Coffee } from 'lucide-react';
-import TableOfContents from '@/components/TableOfContents';
-
-const essays = [
-  {
-    id: 1,
-    title: '中医系统论：从脏腑平衡到大宗商品供给侧博弈的隐喻',
-    excerpt: '探寻中医整体观与大宗商品全球定价权的某种重合，如何用中医的平衡视角观察市场过热与寒凉...',
-    category: '中医系统论',
-    icon: <Heart size={24} className="text-red-400" />
-  },
-  {
-    id: 2,
-    title: '第一线认知：中游加工企业的成本管控与管理哲学思考',
-    excerpt: '在利润空间极度压缩的存量竞争时代，如何构建具备韧性的管理逻辑。',
-    category: '企业管理哲学',
-    icon: <Coffee size={24} className="text-brand-gold" />
-  },
-  {
-    id: 3,
-    title: 'AI 时代的信息生产：从碎片化搜索转向结构化知识合成',
-    excerpt: '记录我如何使用 Agent 技术重塑个人的大宗商品研究流程。',
-    category: 'AI 实践笔记',
-    icon: <Bot size={24} className="text-brand-blue" />
-  }
-];
+import { ALL_REPORTS } from '@/data/reports';
+import Link from 'next/link';
 
 export default function IntersectionPage() {
+  // 动态筛选「跨界实验」分类下的文章
+  const crossoverArticles = ALL_REPORTS.filter(r => r.tag === '跨界实验');
+  
+  // 智能匹配槽位逻辑
+  const slots = [
+    {
+      category: '中医系统论',
+      icon: <Heart size={24} className="text-red-400" />,
+      article: crossoverArticles.find(a => a.title.includes('中医') || a.slug.includes('tcm'))
+    },
+    {
+      category: '企业管理哲学',
+      icon: <Coffee size={24} className="text-brand-gold" />,
+      article: crossoverArticles.find(a => a.title.includes('管理') || a.title.includes('第一线') || a.slug.includes('management'))
+    },
+    {
+      category: 'AI 实践笔记',
+      icon: <Bot size={24} className="text-brand-blue" />,
+      article: crossoverArticles.find(a => a.title.includes('AI') || a.title.includes('信息') || a.slug.includes('ai'))
+    }
+  ];
+
   return (
     <div className="relative overflow-x-hidden">
       {/* Node-based Progress Tracker */}
@@ -44,23 +42,34 @@ export default function IntersectionPage() {
 
           {/* Grid Layout */}
           <div id="essays" className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {essays.map((essay) => (
-              <div key={essay.id} className="group relative bg-slate-900/40 border border-white/5 rounded-3xl p-10 hover:border-brand-blue/30 transition-all cursor-pointer shadow-xl">
-                <div className="space-y-8">
-                  <div className="w-14 h-14 bg-white/5 rounded-2xl flex items-center justify-center border border-white/10 group-hover:scale-110 group-hover:border-brand-blue/30 transition-all">
-                    {essay.icon}
+            {slots.map((slot, index) => {
+              const article = slot.article;
+              if (!article) return null;
+
+              return (
+                <Link key={index} href={`/portfolio/${article.slug}`}>
+                  <div className="group relative bg-slate-900/40 border border-white/5 rounded-3xl p-10 hover:border-brand-blue/30 transition-all cursor-pointer shadow-xl h-full flex flex-col justify-between">
+                    <div className="space-y-8">
+                      <div className="w-14 h-14 bg-white/5 rounded-2xl flex items-center justify-center border border-white/10 group-hover:scale-110 group-hover:border-brand-blue/30 transition-all">
+                        {slot.icon}
+                      </div>
+                      <div className="space-y-3">
+                        <span className="text-[10px] uppercase tracking-widest text-brand-blue font-mono font-bold italic">{slot.category}</span>
+                        <h3 className="text-2xl font-black text-white group-hover:text-brand-blue transition-colors leading-tight italic line-clamp-3">
+                          {article.title}
+                        </h3>
+                      </div>
+                      <p className="text-slate-400 leading-relaxed font-light italic line-clamp-4">
+                        &ldquo;{article.description || '点击探索深度跨界研报内容...'}&rdquo;
+                      </p>
+                      <div className="pt-4 flex items-center text-[10px] font-black text-brand-blue tracking-[0.3em] gap-3 opacity-0 group-hover:opacity-100 translate-x-2 group-hover:translate-x-0 transition-all">
+                         EXPLORE STORY <span>→</span>
+                      </div>
+                    </div>
                   </div>
-                  <div className="space-y-3">
-                    <span className="text-[10px] uppercase tracking-widest text-brand-blue font-mono font-bold italic">{essay.category}</span>
-                    <h3 className="text-2xl font-black text-white group-hover:text-brand-blue transition-colors leading-tight italic">{essay.title}</h3>
-                  </div>
-                  <p className="text-slate-400 leading-relaxed font-light italic">&ldquo;{essay.excerpt}&rdquo;</p>
-                  <div className="pt-4 flex items-center text-[10px] font-black text-brand-blue tracking-[0.3em] gap-3 opacity-0 group-hover:opacity-100 translate-x-2 group-hover:translate-x-0 transition-all">
-                     EXPLORE STORY <span>→</span>
-                  </div>
-                </div>
-              </div>
-            ))}
+                </Link>
+              );
+            })}
           </div>
 
           {/* Featured Quote / Philosophy */}
