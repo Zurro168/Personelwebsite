@@ -72,9 +72,11 @@ async function sync() {
           '有色金属': '商品研报',
           '黑色金属': '商品研报',
           '电池金属': '商品研报',
+          '能源化工': '商品研报',
           '宏观研报': '商品研报',
           '宏观周期': '商品研报',
-          '宏观研究': '商品研报'
+          '宏观研究': '商品研报',
+          '跨界': '跨界实验'
         };
         
         const folderCategory = categoryMap[rawCategory] || rawCategory;
