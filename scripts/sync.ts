@@ -62,9 +62,22 @@ async function sync() {
         const rawRelativeDir = path.dirname(path.relative(sourceRoot, filePath));
         const relativeDir = rawRelativeDir.split(path.sep).join('/');
         
-        // 自动计算分类：优先使用 Frontmatter tag，其次使用文件夹名，最后默认分类
+        // 自动计算分类：实施“大类归并”逻辑
         const categoryParts = relativeDir.split('/').filter(p => !['.', '..', '02_Queue', '03_Archives'].includes(p));
-        const folderCategory = categoryParts.length > 0 ? categoryParts[categoryParts.length - 1] : '未分类';
+        let rawCategory = categoryParts.length > 0 ? categoryParts[categoryParts.length - 1] : '商品研报';
+        
+        // 映射规则：将细分领域折叠进大类
+        const categoryMap: Record<string, string> = {
+          '未分类': '商品研报',
+          '有色金属': '商品研报',
+          '黑色金属': '商品研报',
+          '电池金属': '商品研报',
+          '宏观研报': '商品研报',
+          '宏观周期': '商品研报',
+          '宏观研究': '商品研报'
+        };
+        
+        const folderCategory = categoryMap[rawCategory] || rawCategory;
 
         const fileContent = fs.readFileSync(filePath, 'utf8');
         const { data, content } = matter(fileContent);
