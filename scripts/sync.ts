@@ -87,7 +87,8 @@ async function sync() {
             continue;
         }
 
-        const reportTag = data.tag || folderCategory;
+        const rawTag = data.tag || folderCategory;
+        const reportTag = categoryMap[rawTag] || rawTag;
 
         // --- 逻辑分流 A: 处理「内容研报」 (依据是否存在 slug + content 判定) ---
         // 只要有 slug 我们就认为是研报，除非明确是评分卡格式
