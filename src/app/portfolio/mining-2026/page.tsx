@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { 
   BarChart3, 
@@ -15,11 +15,12 @@ import {
   Activity,
   Layers,
   Cpu,
-  History,
+  History as HistoryIcon,
   LayoutList
 } from 'lucide-react';
 import Chart from 'chart.js/auto';
 import Breadcrumbs from '@/components/layout/Breadcrumbs';
+import TableOfContents from '@/components/TableOfContents';
 
 // --- Types ---
 interface Faction {
@@ -63,16 +64,17 @@ const factionData: Record<string, Faction> = {
 };
 
 export default function MiningReport() {
-  const [activeView, setActiveView] = useState('macro');
-  const [activeFaction, setActiveFaction] = useState('B');
   const macroChartRef = useRef<HTMLCanvasElement>(null);
-  const radarChartRef = useRef<HTMLCanvasElement>(null);
+  const radarChartRefA = useRef<HTMLCanvasElement>(null);
+  const radarChartRefB = useRef<HTMLCanvasElement>(null);
+  const radarChartRefC = useRef<HTMLCanvasElement>(null);
+  
   const macroInstance = useRef<Chart | null>(null);
-  const radarInstance = useRef<Chart | null>(null);
+  const radarInstances = useRef<Record<string, Chart | null>>({ A: null, B: null, C: null });
 
   useEffect(() => {
     // Initialize Macro Chart
-    if (activeView === 'macro' && macroChartRef.current) {
+    if (macroChartRef.current) {
         if (macroInstance.current) macroInstance.current.destroy();
         macroInstance.current = new Chart(macroChartRef.current, {
             type: 'bar',
@@ -119,11 +121,12 @@ export default function MiningReport() {
         });
     }
 
-    // Initialize Radar Chart
-    if (activeView === 'factions' && radarChartRef.current) {
-        const data = factionData[activeFaction];
-        if (radarInstance.current) radarInstance.current.destroy();
-        radarInstance.current = new Chart(radarChartRef.current, {
+    // Initialize Radar Charts
+    const initRadar = (id: string, ref: React.RefObject<HTMLCanvasElement | null>) => {
+      if (ref.current) {
+        const data = factionData[id];
+        if (radarInstances.current[id]) radarInstances.current[id]?.destroy();
+        radarInstances.current[id] = new Chart(ref.current, {
             type: 'radar',
             data: {
                 labels: ['买入存量资产', '新矿勘探意愿', '下游冶炼整合', '新能源金属押注', '逆周期投资能力'],
@@ -153,10 +156,18 @@ export default function MiningReport() {
                 }
             }
         });
-    }
-  }, [activeView, activeFaction]);
+      }
+    };
 
-  const f = factionData[activeFaction];
+    initRadar('A', radarChartRefA);
+    initRadar('B', radarChartRefB);
+    initRadar('C', radarChartRefC);
+
+    return () => {
+      macroInstance.current?.destroy();
+      Object.values(radarInstances.current).forEach(chart => chart?.destroy());
+    };
+  }, []);
 
   return (
     <div className="bg-[#0c0c0e] min-h-screen text-slate-200 font-sans selection:bg-brand-blue/30 overflow-x-hidden">
@@ -167,78 +178,30 @@ export default function MiningReport() {
       </div>
 
       {/* Node-based Progress Tracker */}
-      <nav className="fixed right-6 lg:right-12 top-1/2 -translate-y-1/2 z-40 hidden md:flex flex-col items-end gap-8 pointer-events-none">
-        {[
-          { id: 'macro', label: '01 宏观轴心', icon: <Globe2 size={12} /> },
-          { id: 'factions', label: '02 三大阵营', icon: <Layers size={12} /> },
-          { id: 'action', label: '03 战术预警', icon: <Zap size={12} /> }
-        ].map((item, idx) => {
-          const isActive = activeView === item.id;
-          return (
-            <div key={item.id} className="relative flex items-center justify-end group pointer-events-auto">
-              {/* Node Label */}
-              <div className={`
-                absolute right-10 transition-all duration-500
-                ${isActive ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-4 group-hover:opacity-60'}
-              `}>
-                <span className={`
-                  whitespace-nowrap text-[10px] font-black tracking-widest uppercase py-1 px-3 border rounded-sm
-                  ${isActive ? 'bg-brand-blue text-slate-900 border-brand-blue' : 'text-brand-blue/60 border-brand-blue/20 bg-slate-900/40'}
-                `}>
-                  {item.label}
-                </span>
-              </div>
-              
-              {/* Interaction Node */}
-              <button 
-                onClick={() => setActiveView(item.id)}
-                className={`
-                  w-8 h-8 flex items-center justify-center rounded-sm border transition-all duration-500 transform
-                  ${isActive 
-                    ? 'border-brand-blue bg-brand-blue text-slate-900 rotate-45 scale-125' 
-                    : 'border-white/10 bg-slate-900/60 text-white/20 hover:border-white/30 rotate-45'}
-                `}
-              >
-                <div className="-rotate-45">{item.icon}</div>
-              </button>
-            </div>
-          );
-        })}
-        {/* Connector Line */}
-        <div className="absolute right-[15px] top-0 bottom-0 w-[1px] bg-white/5 -z-10" />
-      </nav>
+      <TableOfContents content="" />
 
       <header className="border-b border-white/5 px-8 py-4 flex flex-col md:flex-row justify-between items-center sticky top-0 bg-background/80 backdrop-blur-xl z-50">
         <div className="flex items-center gap-6">
           <Link href="/portfolio" className="w-10 h-10 bg-brand-blue rounded-sm flex items-center justify-center text-slate-900 font-bold transition-all hover:scale-110 shadow-[0_0_20px_rgba(56,189,248,0.3)]">Si</Link>
           <div className="flex flex-col">
-            <span className="text-xl font-black tracking-tighter text-white">2026 矿业大博弈</span>
+            <span className="text-xl font-black tracking-tighter text-white uppercase italic">2026 矿业大博弈</span>
             <div className="flex items-center gap-2">
               <span className="text-[9px] font-black text-brand-blue uppercase tracking-[0.3em]">Deep Strategic Intelligence</span>
               <span className="w-1 h-1 bg-brand-blue rounded-full animate-pulse"></span>
             </div>
           </div>
         </div>
-        <nav className="flex gap-1 bg-slate-900/50 p-1 border border-white/5 rounded-sm mt-4 md:mt-0">
-          {[
-            { id: 'macro', label: '宏观轴心' },
-            { id: 'factions', label: '三大阵营' },
-            { id: 'action', label: '战术预警' }
-          ].map((v) => (
-            <button 
-              key={v.id}
-              onClick={() => setActiveView(v.id)}
-              className={`px-6 py-2 text-[10px] font-black uppercase tracking-wider transition-all rounded-sm ${activeView === v.id ? 'bg-brand-blue text-slate-900 shadow-lg' : 'text-slate-500 hover:text-white'}`}
-            >
-              {v.label}
-            </button>
-          ))}
+        <nav className="flex gap-8 text-[10px] font-black uppercase tracking-[0.2em] opacity-40">
+          <Link href="/portfolio" className="hover:text-brand-blue transition-colors">Archive</Link>
+          <Link href="/cycle-map" className="hover:text-brand-blue transition-colors">Cycle Map</Link>
         </nav>
       </header>
 
-      <main className="max-w-5xl mx-auto px-8 py-20 relative z-10">
-        {activeView === 'macro' && (
-          <div className="animate-in fade-in slide-in-from-bottom-4 duration-700">
+      <main className="max-w-7xl mx-auto px-8 lg:pr-96 py-20 relative z-10">
+        <div className="space-y-40">
+          
+          {/* Section 1: Macro */}
+          <section id="macro" className="animate-in fade-in slide-in-from-bottom-4 duration-700">
             <div className="grid lg:grid-cols-2 gap-20 items-center mb-20">
               <div className="space-y-10">
                 <div className="flex items-center gap-4">
@@ -275,7 +238,7 @@ export default function MiningReport() {
             <div className="grid md:grid-cols-3 gap-8">
               {[
                 { title: '铜：新时代的“原油”', icon: Zap, desc: '巨头们正通过并购直接获取存量铜资源，因为环保审批导致新矿开发周期已超过 15 年。' },
-                { title: '铁矿石：权重修正', icon: History, desc: '面对需求的结构性洗牌，铁矿石已不再是 Capex 分配的宠儿，全球需求进入平原期。' },
+                { title: '铁矿石：权重修正', icon: HistoryIcon, desc: '面对需求的结构性洗牌，铁矿石已不再是 Capex 分配的宠儿，全球需求进入平原期。' },
                 { title: '地缘政治溢价', icon: Globe2, desc: '资源国政府开始要求就地冶炼，提高进入门槛，重塑全球矿产流通路径。' }
               ].map((card, i) => (
                 <div key={i} className="group p-8 bg-slate-900/20 border border-white/5 rounded-sm hover:border-brand-blue/30 transition-all">
@@ -285,81 +248,80 @@ export default function MiningReport() {
                 </div>
               ))}
             </div>
-          </div>
-        )}
+          </section>
 
-        {activeView === 'factions' && (
-          <div className="animate-in fade-in slide-in-from-bottom-4 duration-700">
-            <h2 className="text-5xl font-black text-white italic tracking-tighter mb-16 text-center">三大战略流派的对峙</h2>
-            <div className="grid lg:grid-cols-3 gap-12">
-              <div className="space-y-3">
-                {Object.keys(factionData).map(id => (
-                  <button 
-                    key={id}
-                    onClick={() => setActiveFaction(id)}
-                    className={`w-full text-left p-6 border transition-all relative overflow-hidden group ${activeFaction === id ? 'bg-brand-blue/10 border-brand-blue shadow-[0_0_30px_rgba(56,189,248,0.1)]' : 'bg-slate-900/20 border-white/5 hover:border-white/20'}`}
-                  >
-                    {activeFaction === id && <div className="absolute left-0 top-0 w-1 h-full bg-brand-blue"></div>}
-                    <div className={`font-black uppercase tracking-tight text-lg mb-1 transition-colors ${activeFaction === id ? 'text-brand-blue' : 'text-slate-400 group-hover:text-white'}`}>{factionData[id].title}</div>
-                    <div className="text-[10px] text-slate-500 font-mono italic">{factionData[id].companies}</div>
-                  </button>
-                ))}
-              </div>
-              <div className="lg:col-span-2 space-y-8">
-                <div className="bg-slate-900/40 border border-white/10 p-10 rounded-sm relative shadow-2xl backdrop-blur-md overflow-hidden">
-                   <div className="absolute top-0 right-0 p-8 opacity-10"><Layers size={100} /></div>
-                   <div className="relative z-10 mb-10">
-                      <div className="inline-block px-2 py-0.5 bg-brand-blue text-slate-900 text-[10px] font-black uppercase mb-4 tracking-widest">Active Intelligence</div>
-                      <h4 className="text-2xl font-black text-white italic mb-4">{f.title}</h4>
-                      <p className="text-slate-400 leading-relaxed mb-6 font-light">{f.description}</p>
-                      <div className="p-4 bg-white/5 border-l-2 border-brand-blue text-brand-blue text-sm font-bold italic">
+          {/* Section 2: Factions */}
+          <section id="factions" className="animate-in fade-in slide-in-from-bottom-4 duration-700">
+            <div className="mb-20 space-y-4">
+               <div className="flex items-center gap-4">
+                  <div className="w-12 h-[2px] bg-brand-gold"></div>
+                  <span className="text-brand-gold text-[10px] font-black tracking-[0.4em] uppercase font-mono">Strategic Factions</span>
+               </div>
+               <h2 className="text-5xl font-black text-white italic tracking-tighter">三大战略流派的对峙</h2>
+            </div>
+            
+            <div className="space-y-32">
+              {Object.keys(factionData).map((id, idx) => {
+                const f = factionData[id];
+                const refs = { 'A': radarChartRefA, 'B': radarChartRefB, 'C': radarChartRefC };
+                return (
+                  <div key={id} className="grid lg:grid-cols-2 gap-16 items-center">
+                    <div className={`space-y-8 ${idx % 2 === 1 ? 'lg:order-last' : ''}`}>
+                      <div className="flex items-center gap-4">
+                        <span className="text-6xl font-black text-brand-blue/20 italic">{id}</span>
+                        <h3 className="text-3xl font-black text-white italic">{f.title}</h3>
+                      </div>
+                      <div className="text-[12px] text-brand-blue font-mono tracking-widest uppercase bg-brand-blue/5 py-1 px-3 border border-brand-blue/10 inline-block">{f.companies}</div>
+                      <p className="text-slate-400 text-lg leading-relaxed font-light">{f.description}</p>
+                      <div className="p-6 bg-slate-900/60 border-l-4 border-brand-blue text-brand-blue text-sm font-bold italic shadow-xl">
                         核心逻辑：{f.logic}
                       </div>
-                   </div>
-                   <div className="h-[400px] relative z-10 mt-10">
-                      <canvas ref={radarChartRef}></canvas>
-                   </div>
-                </div>
-              </div>
+                    </div>
+                    <div className="bg-slate-900/40 border border-white/10 p-10 rounded-sm relative shadow-2xl backdrop-blur-md h-[450px]">
+                      <canvas ref={refs[id as 'A' | 'B' | 'C']}></canvas>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
-          </div>
-        )}
+          </section>
 
-        {activeView === 'action' && (
-          <div className="animate-in fade-in slide-in-from-bottom-4 duration-700 space-y-12">
-             <div className="p-12 bg-brand-blue border-l-[12px] border-slate-900/20 text-slate-900 relative overflow-hidden group">
-                <div className="absolute top-0 right-0 p-10 opacity-10 group-hover:scale-110 transition-transform duration-1000"><Cpu size={120} /></div>
+          {/* Section 3: Action */}
+          <section id="action" className="animate-in fade-in slide-in-from-bottom-4 duration-700 space-y-12">
+             <div className="p-16 bg-brand-blue border-l-[20px] border-slate-900/20 text-slate-900 relative overflow-hidden group">
+                <div className="absolute top-0 right-0 p-10 opacity-10 group-hover:scale-110 transition-transform duration-1000"><Cpu size={160} /></div>
                 <h3 className="text-xs font-black uppercase tracking-[0.4em] mb-12 border-b border-slate-900/10 pb-4 inline-block italic">Strategic Action Framework</h3>
-                <div className="grid md:grid-cols-2 gap-16">
-                   <div className="space-y-6">
-                      <span className="text-[10px] font-black uppercase bg-slate-900/10 px-3 py-1 italic">Intelligence Alert 01</span>
-                      <h4 className="text-3xl font-black italic tracking-tighter leading-tight uppercase">资源民族主义 2.0</h4>
-                      <p className="text-slate-900/70 font-medium italic">资源国政府不再满足于税收分红，正强制要求“本国化冶炼”与“技术换主权”，这将极大抬高巨头们的Capex门槛。</p>
+                <div className="grid md:grid-cols-2 gap-16 relative z-10">
+                   <div className="space-y-8">
+                      <span className="text-[10px] font-black uppercase bg-slate-900/20 px-3 py-1 italic shadow-sm">Intelligence Alert 01</span>
+                      <h4 className="text-4xl font-black italic tracking-tighter leading-tight uppercase">资源民族主义 2.0</h4>
+                      <p className="text-slate-900/80 font-medium italic text-lg leading-relaxed">资源国政府不再满足于税收分红，正强制要求“本国化冶炼”与“技术换主权”，这将极大抬高巨头们的Capex门槛。</p>
                    </div>
-                   <div className="bg-slate-900/5 p-8 border border-slate-900/10 rounded backdrop-blur-sm self-center">
-                      <p className="text-xl font-black leading-tight italic">“当前核心逻辑：防守至上，静待流动性溢价面临二次修正后的极值机会。”</p>
+                   <div className="bg-slate-900/10 p-10 border border-slate-900/10 rounded-sm backdrop-blur-sm self-center shadow-inner">
+                      <p className="text-2xl font-black leading-tight italic">“当前核心逻辑：防守至上，静待流动性溢价面临二次修正后的极值机会。”</p>
                    </div>
                 </div>
              </div>
 
              <div className="grid md:grid-cols-2 gap-8">
-                <div className="p-10 bg-slate-900/30 border border-white/5 rounded-sm hover:border-brand-blue/40 transition-all">
-                   <ShieldCheck className="text-brand-blue mb-8" size={32} />
-                   <h4 className="text-xl font-black text-white italic mb-4">1. 现金流确定性</h4>
-                   <p className="text-slate-500 font-light leading-relaxed">关注那些在行业低迷期仍能保持稳定 Capex 投入并拥有高ROE优质矿产的公司，他们是周期的生存者。</p>
+                <div className="p-12 bg-slate-900/30 border border-white/5 rounded-sm hover:border-brand-blue/40 transition-all shadow-xl">
+                   <ShieldCheck className="text-brand-blue mb-8" size={40} />
+                   <h4 className="text-2xl font-black text-white italic mb-4">1. 现金流确定性</h4>
+                   <p className="text-slate-400 font-light leading-relaxed text-lg">关注那些在行业低迷期仍能保持稳定 Capex 投入并拥有高ROE优质矿产的公司，他们是周期的生存者。</p>
                 </div>
-                <div className="p-10 bg-slate-900/30 border border-white/5 rounded-sm hover:border-brand-blue/40 transition-all">
-                   <TrendingUp className="text-brand-blue mb-8" size={32} />
-                   <h4 className="text-xl font-black text-white italic mb-4">2. 并购溢价风险评估</h4>
-                   <p className="text-slate-500 font-light leading-relaxed">高溢价并购可能产生巨大的商誉泡沫，短期会打压股价，但应结合其通过整合后带来的协同规模效应进行二级定价。</p>
+                <div className="p-12 bg-slate-900/30 border border-white/5 rounded-sm hover:border-brand-blue/40 transition-all shadow-xl">
+                   <TrendingUp className="text-brand-blue mb-8" size={40} />
+                   <h4 className="text-2xl font-black text-white italic mb-4">2. 并购溢价风险评估</h4>
+                   <p className="text-slate-400 font-light leading-relaxed text-lg">高溢价并购可能产生巨大的商誉泡沫，短期会打压股价，但应结合其通过整合后带来的协同规模效应进行二级定价。</p>
                 </div>
              </div>
-          </div>
-        )}
+          </section>
+
+        </div>
       </main>
 
-      <footer className="py-20 border-t border-white/5 text-center flex flex-col items-center gap-4">
-        <div className="w-12 h-[1px] bg-white/10" />
+      <footer className="py-24 border-t border-white/5 text-center flex flex-col items-center gap-6 bg-slate-900/20">
+        <div className="w-16 h-[1px] bg-brand-blue/30" />
         <div className="text-white/20 text-[10px] tracking-[0.5em] font-mono uppercase italic">
           © 2026 SILICON COMMODITY | 产业观察部 099-B ALPHA CHANNEL
         </div>

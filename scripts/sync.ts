@@ -47,7 +47,9 @@ async function sync() {
         return;
     }
 
-    const files = getAllFiles(OBSIDIAN_PUBLISH_DIR);
+    const queueFiles = fs.existsSync(OBSIDIAN_PUBLISH_DIR) ? getAllFiles(OBSIDIAN_PUBLISH_DIR) : [];
+    const archiveFiles = fs.existsSync(ARCHIVE_DIR) ? getAllFiles(ARCHIVE_DIR) : [];
+    const files = [...queueFiles, ...archiveFiles];
 
     if (files.length === 0) {
         console.log('✨ No files to sync. Staying dormant.');
@@ -56,7 +58,8 @@ async function sync() {
 
     for (const filePath of files) {
         const fileName = path.basename(filePath);
-        const relativeDir = path.dirname(path.relative(OBSIDIAN_PUBLISH_DIR, filePath));
+        const sourceRoot = filePath.includes(ARCHIVE_DIR) ? ARCHIVE_DIR : OBSIDIAN_PUBLISH_DIR;
+        const relativeDir = path.dirname(path.relative(sourceRoot, filePath));
         
         // 自动计算分类：优先使用 Frontmatter tag，其次使用文件夹名，最后默认分类
         const folderCategory = relativeDir !== '.' ? relativeDir : '未分类';
@@ -99,26 +102,68 @@ async function sync() {
                 finalContent = finalContent.replace(/<footer[^>]*>[\s\S]*?<\/footer>/gi, '');
                 finalContent = finalContent.replace(/<script[^>]*src="[^"]*tailwindcss\.com[^"]*"[^>]*><\/script>/gi, '');
                 
-                // 适配暗色模式与清理红框
-                finalContent = finalContent.replace(/bg-stone-100/gi, '');
+                // 彻底清除背景色与文字色硬编码 (Nuclear background/text removal)
+                finalContent = finalContent.replace(/background-color:\s*#[a-fA-F0-9]{3,6};?/gi, '');
+                finalContent = finalContent.replace(/background:\s*#[a-fA-F0-9]{3,6};?/gi, '');
+                finalContent = finalContent.replace(/background-color:\s*rgb\([^)]+\);?/gi, '');
+                finalContent = finalContent.replace(/color:\s*#[a-fA-F0-9]{3,6};?/gi, '');
+                finalContent = finalContent.replace(/color:\s*rgb\([^)]+\);?/gi, '');
+                
+                // 修正 Tailwind 背景色与文字色
+                finalContent = finalContent.replace(/bg-stone-[0-9]00/gi, '');
+                finalContent = finalContent.replace(/bg-white/gi, 'bg-slate-900/40');
+                finalContent = finalContent.replace(/text-slate-800/gi, 'text-slate-100');
+                finalContent = finalContent.replace(/text-slate-700/gi, 'text-slate-200');
+                finalContent = finalContent.replace(/text-slate-600/gi, 'text-slate-300');
                 finalContent = finalContent.replace(/text-stone-800/gi, 'text-stone-300');
                 finalContent = finalContent.replace(/text-stone-900/gi, 'text-stone-100');
                 finalContent = finalContent.replace(/text-stone-600/gi, 'text-stone-400');
                 
                 // 彻底移除红框标识 (Red Box removal)
-                finalContent = finalContent.replace(/bg-red-600/gi, 'bg-brand-blue/20');
-                finalContent = finalContent.replace(/bg-red-500/gi, 'bg-brand-blue/20');
-                finalContent = finalContent.replace(/bg-red-100/gi, 'bg-white/5');
-                finalContent = finalContent.replace(/text-red-600/gi, 'text-brand-blue');
-                finalContent = finalContent.replace(/text-red-500/gi, 'text-brand-blue');
-                finalContent = finalContent.replace(/text-red-800/gi, 'text-white/70');
-                finalContent = finalContent.replace(/border-red-600/gi, 'border-brand-blue/30');
-                finalContent = finalContent.replace(/border-red-200/gi, 'border-white/10');
+                finalContent = finalContent.replace(/bg-red-[1-9]00/gi, 'bg-brand-blue/20');
+                finalContent = finalContent.replace(/text-red-[1-9]00/gi, 'text-brand-blue');
+                finalContent = finalContent.replace(/border-red-[1-9]00/gi, 'border-brand-blue/30');
+                
+                // 处理硬编码的红色 (Hex Colors especially in Chart.js)
+                finalContent = finalContent.replace(/#ef4444/gi, '#38bdf8');
+                finalContent = finalContent.replace(/rgb\(239, 68, 68\)/gi, 'rgb(56, 189, 248)');
+                finalContent = finalContent.replace(/#fca5a5/gi, 'rgba(56, 189, 248, 0.5)');
                 
                 // 适配工业风颜色
-                finalContent = finalContent.replace(/text-amber-700/gi, 'text-brand-blue');
-                finalContent = finalContent.replace(/bg-amber-50/gi, 'bg-brand-blue/10');
-                finalContent = finalContent.replace(/border-amber-100/gi, 'border-brand-blue/20');
+                finalContent = finalContent.replace(/text-amber-[1-9]00/gi, 'text-brand-blue');
+                finalContent = finalContent.replace(/bg-amber-[1-9]00/gi, 'bg-brand-blue/10');
+                finalContent = finalContent.replace(/border-amber-[1-9]00/gi, 'border-brand-blue/20');
+                finalContent = finalContent.replace(/text-orange-[1-9]00/gi, 'text-brand-blue');
+                finalContent = finalContent.replace(/bg-orange-[1-9]00/gi, 'bg-brand-blue/10');
+                finalContent = finalContent.replace(/border-orange-[1-9]00/gi, 'border-brand-blue/20');
+
+                // 强制修正容器宽度 (Force container constraints for ALL variants)
+                finalContent = finalContent.replace(/max-w-[0-9]xl/gi, 'max-w-full');
+                finalContent = finalContent.replace(/max-w-screen-[a-z0-9]+/gi, 'max-w-full');
+
+                // 移除 body 中的硬编码内联样式
+                finalContent = finalContent.replace(/<body[^>]*style="[^"]*"[^>]*>/gi, '<body>');
+
+                // 注入全局内容控制样式 (加固版)
+                const globalStyleInject = `
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@200..900&display=swap');
+  .report-body { max-width: 100% !important; border: none !important; font-family: 'Crimson Pro', serif !important; }
+  body { background-color: transparent !important; color: inherit !important; font-family: 'Crimson Pro', serif !important; }
+  table { width: 100% !important; max-width: 100% !important; display: block; overflow-x: auto; border-color: rgba(56,189,248,0.1) !important; border-collapse: collapse; }
+  .red-box, [class*="red-"], [class*="amber-"], [class*="orange-"] { 
+    border-color: #38bdf8 !important; 
+    background-color: rgba(56,189,248,0.05) !important; 
+    color: #fff !important; 
+    border-radius: 4px;
+    padding: 1rem;
+  }
+  img { max-width: 100% !important; height: auto !important; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05); }
+  canvas { max-width: 100% !important; width: 100% !important; }
+  .glass-panel { background: rgba(15, 23, 42, 0.6) !important; border-color: rgba(56, 189, 248, 0.1) !important; color: #fff !important; }
+</style>
+                `;
+                finalContent = globalStyleInject + finalContent;
             }
 
             // 1. 保存文章实体文件
@@ -153,9 +198,12 @@ async function sync() {
     hasContent: true
   },`;
 
-            const slugRegex = new RegExp(`slug:\\s*'${data.slug}'`, 'g');
+            const slugRegex = new RegExp(`\\{\\s*id:[^}]+slug:\\s*'${data.slug}'[^}]+\\}`, 'gs');
             if (slugRegex.test(registryContent)) {
-                console.log(`   - Entry already exists, content updated.`);
+                // Update existing entry (replace old object with new one)
+                registryContent = registryContent.replace(slugRegex, entryString.trim().replace(/,$/, ''));
+                fs.writeFileSync(REPORTS_REGISTRY_FILE, registryContent);
+                console.log(`   - Entry already exists, metadata updated.`);
             } else {
                 registryContent = registryContent.replace(
                     /export const ALL_REPORTS: Report\[\] = \[/,

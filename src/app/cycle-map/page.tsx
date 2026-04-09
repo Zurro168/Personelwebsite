@@ -3,6 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { Activity, Zap, TrendingUp, TrendingDown } from 'lucide-react';
+import TableOfContents from '@/components/TableOfContents';
 
 // --- Commodity Overview Data (Sync with your data/cycle-maps.ts) ---
 const COMMODITIES = [
@@ -51,7 +52,10 @@ const COMMODITIES = [
 export default function CycleMapPortal() {
   return (
     <div className="min-h-screen bg-background p-6 md:p-8">
-      <section className="max-w-7xl mx-auto py-6 space-y-2">
+      {/* Node-based Progress Tracker */}
+      <TableOfContents content="" />
+
+      <section id="header" className="max-w-7xl mx-auto py-6 space-y-2 lg:pr-96">
         <h1 className="text-5xl font-black text-white italic uppercase tracking-tighter">
           金属周期地图 <span className="text-brand-blue">/</span> Circle Map
         </h1>
@@ -61,7 +65,7 @@ export default function CycleMapPortal() {
       </section>
 
       {/* Grid List */}
-      <main className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10">
+      <main id="commodities" className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 lg:pr-96">
         {COMMODITIES.map((item) => (
           <Link 
             key={item.slug} 
@@ -118,7 +122,7 @@ export default function CycleMapPortal() {
       </main>
 
       {/* Data Footer */}
-      <footer className="max-w-7xl mx-auto mt-24 pt-12 border-t border-white/5 flex flex-wrap justify-between items-center text-white/20 font-mono text-[10px] tracking-[0.2em]">
+      <footer className="max-w-7xl mx-auto mt-24 pt-12 border-t border-white/5 flex flex-wrap justify-between items-center text-white/20 font-mono text-[10px] tracking-[0.2em] lg:pr-96">
         <div className="flex gap-10">
           <span>LATENCY: 1800s</span>
           <span>ENGINE: Si-V4.2</span>

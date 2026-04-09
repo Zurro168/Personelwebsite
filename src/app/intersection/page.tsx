@@ -1,4 +1,5 @@
 import { Microscope, Bot, Heart, Coffee } from 'lucide-react';
+import TableOfContents from '@/components/TableOfContents';
 
 const essays = [
   {
@@ -27,10 +28,13 @@ const essays = [
 export default function IntersectionPage() {
   return (
     <div className="relative overflow-x-hidden">
-      <main className="max-w-6xl mx-auto px-8 py-24">
+      {/* Node-based Progress Tracker */}
+      <TableOfContents content="" />
+
+      <main className="max-w-7xl mx-auto px-8 lg:pr-96 py-24">
         <div className="space-y-24">
           {/* Section Heading */}
-          <div className="space-y-6 pb-12 border-b border-white/5">
+          <div id="intro" className="space-y-6 pb-12 border-b border-white/5">
              <div className="inline-flex items-center gap-2 px-3 py-1 bg-brand-blue/10 border border-brand-blue/20 text-brand-blue text-[10px] font-black tracking-[0.3em] rounded uppercase font-mono">
                 Nexus Explorer Active
              </div>
@@ -39,7 +43,7 @@ export default function IntersectionPage() {
           </div>
 
           {/* Grid Layout */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div id="essays" className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {essays.map((essay) => (
               <div key={essay.id} className="group relative bg-slate-900/40 border border-white/5 rounded-3xl p-10 hover:border-brand-blue/30 transition-all cursor-pointer shadow-xl">
                 <div className="space-y-8">
@@ -60,7 +64,7 @@ export default function IntersectionPage() {
           </div>
 
           {/* Featured Quote / Philosophy */}
-          <section className="bg-slate-900/60 border border-white/5 p-16 rounded-[2.5rem] text-center relative overflow-hidden mt-20 group">
+          <section id="philosophy" className="bg-slate-900/60 border border-white/5 p-16 rounded-[2.5rem] text-center relative overflow-hidden mt-20 group">
              <div className="absolute top-0 right-0 p-8 opacity-5 group-hover:opacity-10 transition-opacity pointer-events-none">
                 <Microscope size={200} />
              </div>

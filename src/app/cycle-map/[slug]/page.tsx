@@ -5,6 +5,7 @@ import { ChevronRight, ShieldAlert, Activity, Loader2, Info, ArrowRight } from '
 import Link from 'next/link';
 import Breadcrumbs from '@/components/layout/Breadcrumbs';
 import { resolveCommodity, UnifiedCommodityData } from '@/lib/price-adapter';
+import TableOfContents from '@/components/TableOfContents';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -81,13 +82,16 @@ export default function CycleMapDetail({ params }: { params: Promise<{ slug: str
         }
       `}</style>
 
-      <div className="max-w-7xl mx-auto px-6 py-12">
+      {/* Node-based Progress Tracker */}
+      <TableOfContents content="" />
+
+      <div className="max-w-7xl mx-auto px-6 lg:pr-96 py-12">
         <div className="mb-12 opacity-60 hover:opacity-100 transition-opacity duration-500">
            <Breadcrumbs items={breadcrumbs} />
         </div>
 
         {/* --- 工业头部 (Premium Header) --- */}
-        <div className="bg-[#141417] border border-white/10 p-12 rounded-sm mb-10 shadow-2xl relative overflow-hidden">
+        <div id="overview" className="bg-[#141417] border border-white/10 p-12 rounded-sm mb-10 shadow-2xl relative overflow-hidden">
           <div className="absolute top-0 right-0 w-[600px] h-full bg-gradient-to-l from-brand-blue/[0.03] to-transparent pointer-events-none"></div>
           
           <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-20 gap-12 relative z-10">
@@ -164,7 +168,7 @@ export default function CycleMapDetail({ params }: { params: Promise<{ slug: str
         </div>
 
         {/* --- 宏观周期流程 (Liquid Interaction Flow) --- */}
-        <div className="bg-[#141417] border border-white/10 p-16 rounded-sm mb-10 shadow-2xl relative group">
+        <div id="cycle" className="bg-[#141417] border border-white/10 p-16 rounded-sm mb-10 shadow-2xl relative group">
             <div className="absolute -left-2 top-1/2 -translate-y-1/2 w-4 h-32 bg-brand-blue/20 blur-2xl opacity-10 group-hover:opacity-100 transition-opacity"></div>
             <h2 className="text-xs font-black text-brand-blue uppercase tracking-[0.5em] mb-16 italic text-center drop-shadow-sm">End-to-End Market Cycle Logic Linkage</h2>
             <div className="flex flex-col lg:flex-row items-stretch justify-between gap-6 lg:gap-4 lg:px-10">
@@ -190,7 +194,7 @@ export default function CycleMapDetail({ params }: { params: Promise<{ slug: str
 
         <div className="grid lg:grid-cols-3 gap-10">
             <div className="lg:col-span-2 space-y-12">
-                <div className="p-12 border border-white/10 bg-[#141417] rounded-sm shadow-2xl relative section-reveal">
+                <div id="intelligence" className="p-12 border border-white/10 bg-[#141417] rounded-sm shadow-2xl relative section-reveal">
                    <h2 className="text-xs font-black text-brand-blue uppercase tracking-widest mb-16 italic flex items-center gap-4">
                       <Activity className="w-6 h-6 text-brand-blue" />
                       Multidimensional Market Intelligence Narrative
@@ -302,7 +306,7 @@ export default function CycleMapDetail({ params }: { params: Promise<{ slug: str
             </div>
 
             <div className="space-y-10">
-                <div className="p-12 bg-brand-blue text-slate-900 border-l-[12px] border-slate-900/10 shadow-[0_20px_50px_rgba(59,130,246,0.3)] relative overflow-hidden group/strat">
+                <div id="strategy" className="p-12 bg-brand-blue text-slate-900 border-l-[12px] border-slate-900/10 shadow-[0_20px_50px_rgba(59,130,246,0.3)] relative overflow-hidden group/strat">
                     <div className="absolute top-0 right-0 p-8 opacity-20 transform group-hover/strat:scale-110 transition-transform duration-700"><ShieldAlert size={80} /></div>
                     <div className="text-xs font-black uppercase tracking-[0.3em] italic mb-10 border-b border-slate-900/10 pb-4 inline-block">AI Strategy Masterplan</div>
                     <p className="text-2xl font-black leading-tight mb-12 italic border-l-4 border-slate-900/10 pl-6">“库存拐点尚未确立，流动性溢价面临二次修正。当前核心逻辑：防守至上，静待极值爆发。”</p>
@@ -312,7 +316,7 @@ export default function CycleMapDetail({ params }: { params: Promise<{ slug: str
                     </div>
                 </div>
 
-                <div className="p-12 border border-white/10 bg-[#141417] shadow-2xl relative overflow-hidden">
+                <div id="signals" className="p-12 border border-white/10 bg-[#141417] shadow-2xl relative overflow-hidden">
                     <div className="absolute -right-10 -bottom-10 w-40 h-40 bg-brand-blue/5 rounded-full blur-3xl opacity-50"></div>
                     <h3 className="text-xs font-black text-brand-blue uppercase tracking-widest mb-10 italic flex items-center gap-4">
                         <Activity size={18} /> High-Fidelity Alpha Signals
@@ -336,7 +340,7 @@ export default function CycleMapDetail({ params }: { params: Promise<{ slug: str
         </div>
       </div>
 
-      <footer className="max-w-7xl mx-auto mt-32 py-16 border-t border-white/5 text-center">
+      <footer className="max-w-7xl mx-auto mt-32 py-16 border-t border-white/5 text-center lg:pr-96">
          <Link href="/cycle-map" className="text-white/20 hover:text-brand-blue text-xs font-black tracking-[0.5em] uppercase transition-all duration-500 hover:tracking-[0.8em] italic">
             BACK TO CENTRAL INTELLIGENCE COMMAND
          </Link>

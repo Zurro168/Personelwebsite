@@ -16,38 +16,62 @@ export default function TableOfContents({ content }: { content: string }) {
     // 1. Dual-mode parsing: works for raw Markdown (##) or Synced HTML (h2)
     const foundItems: TOCItem[] = [];
     
-    // Check if it's the 2026 Mining Battle report which has specific ID structures
-    // or standard synced reports
-    if (content.includes('</h2>')) {
-      // HTML Path: Extract text from <h2>...</h2>
-      // We look for both <h2> with IDs and without
-      const h2HtmlRegex = /<h2[^>]*>(.*?)<\/h2>/g;
-      let match;
-      let index = 0;
-      while ((match = h2HtmlRegex.exec(content)) !== null) {
-        const text = match[1].replace(/<[^>]*>/g, '').trim();
-        // Try to find if the h2 already has an ID (like in Mining Battle)
-        const idMatch = match[0].match(/id="([^"]+)"/);
-        const id = idMatch ? idMatch[1] : `section-${index}`;
-        
-        // Filter out obvious meta-headers if needed
-        if (text && !['2026 矿业版图', '导航'].includes(text)) {
-          foundItems.push({ id, text });
+    if (content) {
+      if (content.includes('</h2>')) {
+        // HTML Path: Extract text from <h2>...</h2>
+        const h2HtmlRegex = /<h2[^>]*>(.*?)<\/h2>/g;
+        let match;
+        let index = 0;
+        while ((match = h2HtmlRegex.exec(content)) !== null) {
+          const text = match[1].replace(/<[^>]*>/g, '').trim();
+          const idMatch = match[0].match(/id="([^"]+)"/);
+          const id = idMatch ? idMatch[1] : `section-${index}`;
+          
+          if (text && !['2026 矿业版图', '导航'].includes(text)) {
+            foundItems.push({ id, text });
+          }
+          index++;
         }
-        index++;
+      } else {
+        // Markdown Path: Extract text from ## ...
+        const h2MdRegex = /#{2}\s+(.*)/g;
+        let match;
+        let index = 0;
+        while ((match = h2MdRegex.exec(content)) !== null) {
+          foundItems.push({ id: `section-${index}`, text: match[1].trim() });
+          index++;
+        }
       }
+      setItems(foundItems);
     } else {
-      // Markdown Path: Extract text from ## ...
-      const h2MdRegex = /#{2}\s+(.*)/g;
-      let match;
-      let index = 0;
-      while ((match = h2MdRegex.exec(content)) !== null) {
-        foundItems.push({ id: `section-${index}`, text: match[1].trim() });
-        index++;
-      }
+      // 1b. Real-time DOM Scan Path: For non-dynamic pages like About
+      const scanDOM = () => {
+        const domSections = document.querySelectorAll('section[id], .prose-cyber h2, .report-html-content-wrapper h2');
+        const domItems: TOCItem[] = [];
+        domSections.forEach((el, idx) => {
+          const id = el.id || `node-${idx}`;
+          if (!el.id) el.id = id;
+          
+          // Get text: from h2 itself, or from an h2 inside the section
+          let text = '';
+          if (el.tagName === 'H2') {
+            text = el.textContent || '';
+          } else {
+            const h2 = el.querySelector('h2');
+            text = h2?.textContent || el.getAttribute('data-toc-title') || id;
+          }
+          
+          if (text && text.length < 50) {
+            domItems.push({ id, text: text.trim().toUpperCase() });
+          }
+        });
+        setItems(domItems);
+      };
+      
+      // Delay slightly to ensure DOM is ready
+      const timer = setTimeout(scanDOM, 500);
+      return () => clearTimeout(timer);
     }
-    
-    setItems(foundItems);
 
     // 2. Setup IntersectionObserver
     const observer = new IntersectionObserver(
@@ -61,9 +85,8 @@ export default function TableOfContents({ content }: { content: string }) {
       { rootMargin: '-10% 0px -80% 0px' }
     );
 
-    // 3. Bind elements
+    // 3. Bind elements for observation
     const timer = setTimeout(() => {
-      // Primary targets: manually assigned IDs or discovered ones
       const sectionElements = document.querySelectorAll(
         '.prose-cyber h2, .report-html-content-wrapper h2, section[id]'
       );

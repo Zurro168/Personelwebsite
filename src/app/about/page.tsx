@@ -1,5 +1,5 @@
-import React from 'react';
 import { Database, TrendingUp, Cpu, Activity } from 'lucide-react';
+import TableOfContents from '@/components/TableOfContents';
 
 export default function AboutPage() {
   return (
@@ -7,7 +7,11 @@ export default function AboutPage() {
       {/* Decorative Background Grid */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]"></div>
 
-      <main className="max-w-6xl mx-auto px-8 lg:px-20 py-24 relative">
+      {/* Node-based Progress Tracker */}
+      <TableOfContents content="" />
+
+      <main className="max-w-7xl mx-auto px-8 lg:pr-96 py-24 relative">
+
         <div className="space-y-32">
           {/* Hero Section */}
           <section className="space-y-10 animate-in fade-in slide-in-from-bottom-4 duration-700">
@@ -24,7 +28,7 @@ export default function AboutPage() {
           </section>
 
           {/* Experience Grid */}
-          <section className="grid lg:grid-cols-[180px_1fr] gap-10 border-t border-industrial-border pt-16 group">
+          <section id="background" className="grid lg:grid-cols-[180px_1fr] gap-10 border-t border-industrial-border pt-16 group">
             <div className="space-y-6">
               <div className="flex items-center gap-4">
                 <div className="w-1.5 h-10 bg-brand-blue shadow-[0_0_10px_rgba(56,189,248,0.5)]"></div>
@@ -63,7 +67,7 @@ export default function AboutPage() {
           </section>
 
           {/* Methodology */}
-          <section className="grid lg:grid-cols-[180px_1fr] gap-10 border-t border-industrial-border pt-16">
+          <section id="methodology" className="grid lg:grid-cols-[180px_1fr] gap-10 border-t border-industrial-border pt-16">
             <div className="flex items-center gap-4 self-start">
                <div className="w-1.5 h-10 bg-brand-gold shadow-[0_0_10px_rgba(251,191,36,0.3)]"></div>
                <h2 className="text-2xl font-black text-white tracking-widest uppercase font-mono italic">Methodology</h2>
@@ -95,7 +99,7 @@ export default function AboutPage() {
           </section>
 
           {/* Interests & Future */}
-          <section className="relative group">
+          <section id="future" className="relative group">
             <div className="absolute -inset-1 bg-gradient-to-r from-brand-blue/20 to-brand-gold/20 rounded-3xl blur-2xl opacity-20 group-hover:opacity-40 transition duration-1000"></div>
             <div className="relative bg-slate-900/40 border border-white/5 backdrop-blur-2xl rounded-3xl p-16 overflow-hidden">
                <div className="absolute -right-24 -top-24 text-brand-blue/5 pointer-events-none rotate-12">
@@ -130,7 +134,7 @@ export default function AboutPage() {
           </section>
 
           {/* Philosophy Section */}
-          <section className="text-center py-32 border-t border-industrial-border relative">
+          <section id="philosophy" className="text-center py-32 border-t border-industrial-border relative">
              <div className="absolute inset-0 pointer-events-none overflow-hidden">
                 <p className="text-[200px] font-black text-white/[0.02] absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 whitespace-nowrap select-none">MANIFESTO</p>
              </div>

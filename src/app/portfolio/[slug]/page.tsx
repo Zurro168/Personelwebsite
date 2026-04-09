@@ -81,7 +81,7 @@ export default async function ReportPage({ params }: { params: Promise<{ slug: s
         </nav>
       </header>
 
-      <main className={`${isHtml ? 'max-w-6xl' : 'max-w-4xl'} mx-auto px-8 lg:pr-96 py-20`}>
+      <main className={`${isHtml ? 'max-w-[90rem]' : 'max-w-5xl'} mx-auto px-6 lg:pl-16 lg:pr-[26rem] py-20`}>
         <div className="space-y-8">
           <Link href="/portfolio" className="flex items-center gap-2 text-white/40 hover:text-brand-blue transition-colors text-xs font-mono group">
             <ChevronLeft size={16} className="group-hover:-translate-x-1 transition-transform" /> BACK TO ARCHIVE
@@ -101,7 +101,7 @@ export default async function ReportPage({ params }: { params: Promise<{ slug: s
           </div>
 
           <div className="pt-16 border-t border-white/5">
-            <div className="prose prose-invert prose-cyber max-w-none">
+            <div className="prose prose-invert prose-cyber max-w-none overflow-x-hidden">
               {isHtml ? (
                 <ReportRenderer html={report.content} />
               ) : (

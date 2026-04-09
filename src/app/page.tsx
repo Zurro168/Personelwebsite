@@ -2,6 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import { Activity, ShieldCheck, Share2, Zap } from 'lucide-react';
 import PriceTicker from '@/components/layout/PriceTicker';
+import TableOfContents from '@/components/TableOfContents';
 
 export default function Home() {
   return (
@@ -9,8 +10,11 @@ export default function Home() {
       {/* Background Glow */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[600px] bg-brand-blue/5 blur-[120px] rounded-full pointer-events-none"></div>
 
+      {/* Node-based Progress Tracker */}
+      <TableOfContents content="" />
+
       {/* Hero Section */}
-      <section className="px-8 py-24 md:py-40 grid lg:grid-cols-2 gap-20 items-center max-w-7xl mx-auto relative content-center min-h-[70vh]">
+      <section id="hero" className="px-8 py-24 md:py-40 grid lg:grid-cols-2 gap-20 items-center max-w-7xl mx-auto lg:pr-96 relative content-center min-h-[70vh]">
         <div className="space-y-12 animate-in fade-in slide-in-from-left-8 duration-1000">
           <div className="flex items-center gap-3">
             <div className="w-1.5 h-1.5 bg-brand-blue rounded-full animate-pulse shadow-[0_0_8px_#38bdf8]"></div>
@@ -66,7 +70,7 @@ export default function Home() {
       <PriceTicker />
 
       {/* Feature Grid */}
-      <section className="px-8 py-32 max-w-7xl mx-auto grid md:grid-cols-3 gap-10">
+      <section id="features" className="px-8 py-32 max-w-7xl mx-auto lg:pr-96 grid md:grid-cols-3 gap-10">
         <Link href="/portfolio" className="group">
           <div className="h-full p-10 border border-white/5 rounded-2xl bg-gradient-to-b from-white/[0.03] to-transparent hover:border-brand-blue/40 hover:bg-brand-blue/5 transition-all duration-500 relative overflow-hidden">
              <div className="absolute -right-8 -bottom-8 text-brand-blue/5 group-hover:text-brand-blue/10 transition-colors opacity-50"><ShieldCheck size={120} /></div>
