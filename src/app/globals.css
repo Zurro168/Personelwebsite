@@ -134,6 +134,54 @@ body {
   box-shadow: -15px 0 40px -15px rgba(56, 189, 248, 0.3);
 }
 
+/* --- Premium Industrial Table Styling --- */
+.prose-cyber table {
+  width: 100% !important;
+  border-collapse: separate !important;
+  border-spacing: 0 !important;
+  margin: 3rem 0 !important;
+  border: 1px solid rgba(56, 189, 248, 0.15) !important;
+  border-radius: 0.75rem !important;
+  overflow: hidden !important;
+  font-size: 0.92rem !important;
+  background: rgba(255, 255, 255, 0.02) !important;
+  display: block;
+  overflow-x: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(56, 189, 248, 0.2) transparent;
+}
+
+.prose-cyber thead {
+  background: rgba(56, 189, 248, 0.12) !important;
+}
+
+.prose-cyber th {
+  color: var(--brand-blue) !important;
+  font-weight: 800 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+  padding: 1rem 1.25rem !important;
+  text-align: left !important;
+  border-bottom: 2px solid rgba(56, 189, 248, 0.2) !important;
+  white-space: nowrap;
+}
+
+.prose-cyber td {
+  padding: 0.85rem 1.25rem !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+  color: rgba(248, 250, 252, 0.75) !important;
+}
+
+.prose-cyber tr:nth-child(even) {
+  background: rgba(56, 189, 248, 0.02) !important;
+}
+
+.prose-cyber tr:hover td {
+  background: rgba(56, 189, 248, 0.08) !important;
+  color: #fff !important;
+  transition: all 0.2s ease;
+}
+
 .prose-cyber ul {
   list-style: none !important;
   padding-left: 0 !important;
