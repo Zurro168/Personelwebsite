@@ -7,6 +7,7 @@
   --foreground: #f8fafc;
   --brand-blue: #38bdf8;
   --brand-gold: #fbbf24;
+  --brand-experiment: #a855f7; /* Experimental Purple */
   --industrial-border: rgba(56, 189, 248, 0.1);
 }
 
@@ -15,6 +16,7 @@
   --color-foreground: var(--foreground);
   --color-brand-blue: var(--brand-blue);
   --color-brand-gold: var(--brand-gold);
+  --color-brand-experiment: var(--brand-experiment);
   --color-industrial-border: var(--industrial-border);
   --font-sans: 'Crimson Pro', 'Inter', 'PingFang SC', 'Microsoft YaHei', sans-serif;
   --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
