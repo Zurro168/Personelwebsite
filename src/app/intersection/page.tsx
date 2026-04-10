@@ -27,7 +27,7 @@ export default function IntersectionPage() {
   ];
 
   return (
-    <div className="relative overflow-x-hidden">
+    <div className="relative overflow-x-hidden font-sans">
       {/* Node-based Progress Tracker - Purple Variant */}
       <TableOfContents content="" variant="experiment" />
 
@@ -35,19 +35,19 @@ export default function IntersectionPage() {
         <div className="space-y-24">
           {/* Section Heading */}
           <div id="intro" className="space-y-6 pb-12 border-b border-white/5">
-             <div className="inline-flex items-center gap-2 px-3 py-1 bg-brand-experiment/10 border border-brand-experiment/20 text-brand-experiment text-[10px] font-black tracking-[0.3em] rounded uppercase font-mono">
+             <div className="inline-flex items-center gap-2 px-3 py-1 bg-brand-experiment/10 border border-brand-experiment/20 text-brand-experiment text-[10px] font-black tracking-[0.3em] rounded uppercase font-mono italic">
                 Cross-Domain Synthesis Active
              </div>
-             <h1 className="text-5xl md:text-7xl font-black tracking-tighter text-white">跨界实验室</h1>
-             <p className="text-slate-400 text-xl font-light leading-relaxed max-w-2xl italic border-l-2 border-brand-experiment pl-6">
+             <h1 className="text-5xl md:text-7xl font-black tracking-tighter text-white font-sans uppercase italic">跨界实验室</h1>
+             <p className="text-slate-400 text-xl font-light leading-relaxed max-w-2xl italic border-l-2 border-brand-experiment pl-6 font-sans">
                在不同领域的张力中寻找统一的底层规律 —— 跨越边界，重构认知。
              </p>
           </div>
 
           {/* Featured Zone - Top 3 Specific Slots */}
           <section id="featured">
-            <h2 className="text-[10px] font-black text-brand-experiment/40 uppercase tracking-[0.4em] mb-10 font-mono">Featured Experiments // 精选导引</h2>
-            <div id="essays" className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <h2 className="text-[10px] font-black text-brand-experiment/40 uppercase tracking-[0.4em] mb-10 font-mono italic">Featured Experiments // 精选导引</h2>
+            <div id="essays" className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 flex-wrap">
               {slots.map((slot, index) => {
                 const article = slot.article;
                 if (!article) return null;
@@ -92,14 +92,14 @@ export default function IntersectionPage() {
           {/* Full Archive Grid - For Scalability */}
           <section id="archive" className="pt-12">
             <div className="flex items-center justify-between mb-10 border-b border-white/5 pb-4">
-               <h2 className="text-[10px] font-black text-brand-experiment/40 uppercase tracking-[0.4em] font-mono">Experimental Archive // 全套档案</h2>
-               <div className="text-[10px] text-white/20 font-mono">TOTAL: {crossoverArticles.length} PROJECTS</div>
+               <h2 className="text-[10px] font-black text-brand-experiment/40 uppercase tracking-[0.4em] font-mono italic">Experimental Archive // 全套档案</h2>
+               <div className="text-[10px] text-white/20 font-mono italic uppercase tracking-widest">Total: {crossoverArticles.length} Projects</div>
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
               {crossoverArticles.map((report) => (
                 <article key={report.id} className="group flex flex-col">
-                  <div className="relative aspect-[16/10] overflow-hidden rounded mb-6 border border-white/5 bg-slate-900">
+                  <div className="relative aspect-[16/10] overflow-hidden rounded mb-6 border border-white/5 bg-slate-900 shadow-2xl">
                     <Link href={`/portfolio/${report.slug}`} className="block w-full h-full">
                       <img 
                         src={report.image} 
@@ -108,21 +108,21 @@ export default function IntersectionPage() {
                       />
                     </Link>
                     <div className="absolute top-4 left-4">
-                      <span className="text-brand-experiment text-[9px] font-black uppercase tracking-[0.3em] font-mono">{report.tag}</span>
+                      <span className="text-brand-experiment text-[9px] font-black uppercase tracking-[0.4em] font-mono italic px-2 py-0.5 bg-black/50 backdrop-blur-sm rounded-sm">{report.tag}</span>
                     </div>
                   </div>
                   
-                  <div className="space-y-4 flex-grow">
-                    <h2 className="text-xl font-bold text-white transition-colors group-hover:text-brand-experiment leading-tight tracking-tight">
+                  <div className="space-y-4 flex-grow font-sans">
+                    <h2 className="text-xl font-bold text-white transition-colors group-hover:text-brand-experiment leading-tight tracking-tight italic uppercase">
                       <Link href={`/portfolio/${report.slug}`}>{report.title}</Link>
                     </h2>
-                    <p className="text-sm text-slate-500 line-clamp-2 font-light leading-relaxed">
+                    <p className="text-sm text-slate-500 line-clamp-2 font-light leading-relaxed italic">
                       {report.description}
                     </p>
-                    <div className="pt-4 flex items-center justify-between">
-                      <span className="text-[10px] font-mono text-white/10 italic">#{report.id}</span>
-                      <Link href={`/portfolio/${report.slug}`} className="text-brand-experiment text-xs font-black hover:underline transition-all flex items-center gap-2 underline-offset-4 decoration-2">
-                        READ INSIGHT <span className="text-lg">→</span>
+                    <div className="pt-4 flex items-center justify-between font-mono">
+                      <span className="text-[10px] text-white/10 italic">#{report.id}</span>
+                      <Link href={`/portfolio/${report.slug}`} className="text-brand-experiment text-xs font-black hover:underline transition-all flex items-center gap-2 underline-offset-4 decoration-2 italic uppercase tracking-widest">
+                        Read Insight <span className="text-lg">→</span>
                       </Link>
                     </div>
                   </div>
