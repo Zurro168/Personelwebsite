@@ -31,15 +31,15 @@ export default function IntersectionPage() {
       {/* Node-based Progress Tracker - Purple Variant */}
       <TableOfContents content="" variant="experiment" />
 
-      <main className="max-w-7xl mx-auto px-8 py-24">
-        <div className="space-y-24">
+      <main className="max-w-7xl mx-auto px-8 py-8">
+        <div className="space-y-12">
           {/* Section Heading */}
-          <div id="intro" className="space-y-6 pb-12 border-b border-white/5">
+          <div id="intro" className="space-y-4 pb-6 border-b border-white/5">
              <div className="inline-flex items-center gap-2 px-3 py-1 bg-brand-experiment/10 border border-brand-experiment/20 text-brand-experiment text-[10px] font-black tracking-[0.3em] rounded uppercase font-mono italic">
                 Cross-Domain Synthesis Active
              </div>
              <h1 className="text-5xl md:text-7xl font-black tracking-tighter text-white font-sans uppercase italic">跨界实验室</h1>
-             <p className="text-slate-400 text-xl font-light leading-relaxed max-w-2xl italic border-l-2 border-brand-experiment pl-6 font-sans">
+             <p className="text-slate-400 text-lg font-light leading-relaxed max-w-2xl italic border-l-2 border-brand-experiment pl-6 font-sans">
                在不同领域的张力中寻找统一的底层规律 —— 跨越边界，重构认知。
              </p>
           </div>

@@ -1,6 +1,8 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
+import katex from 'katex';
+import renderMathInElement from 'katex/dist/contrib/auto-render';
 
 interface ReportRendererProps {
   html: string;
@@ -12,8 +14,19 @@ export default function ReportRenderer({ html }: ReportRendererProps) {
   useEffect(() => {
     if (!containerRef.current) return;
 
-    // 1. Clear existing content (optional, as dangerouslySetInnerHTML handles it)
-    
+    // 1. Manually trigger math rendering for any $$ patterns in the HTML
+    try {
+      renderMathInElement(containerRef.current, {
+        delimiters: [
+          { left: '$$', right: '$$', display: true },
+          { left: '$', right: '$', display: false },
+        ],
+        throwOnError: false,
+      });
+    } catch (err) {
+      console.error('KaTeX rendering error:', err);
+    }
+
     // 2. Find and execute scripts manually
     const scripts = containerRef.current.querySelectorAll('script');
     scripts.forEach((oldScript) => {
