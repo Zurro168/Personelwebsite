@@ -7,18 +7,28 @@ interface TOCItem {
   text: string;
 }
 
-export default function TableOfContents({ content }: { content: string }) {
+export default function TableOfContents({ 
+  content, 
+  variant = 'blue' 
+}: { 
+  content: string; 
+  variant?: 'blue' | 'experiment' 
+}) {
   const [items, setItems] = useState<TOCItem[]>([]);
   const [activeId, setActiveId] = useState<string>('');
   const [scrollProgress, setScrollProgress] = useState(0);
 
+  const themeColor = variant === 'experiment' ? 'var(--brand-experiment)' : 'var(--brand-blue)';
+  const themeAccent = variant === 'experiment' ? 'text-brand-experiment' : 'text-brand-blue';
+  const themeBorder = variant === 'experiment' ? 'border-brand-experiment' : 'border-brand-blue';
+  const themeBg = variant === 'experiment' ? 'bg-brand-experiment' : 'bg-brand-blue';
+
   useEffect(() => {
-    // 1. Dual-mode parsing: works for raw Markdown (##) or Synced HTML (h2)
+    // 1. Dual-mode parsing
     const foundItems: TOCItem[] = [];
     
     if (content) {
       if (content.includes('</h2>')) {
-        // HTML Path: Extract text from <h2>...</h2>
         const h2HtmlRegex = /<h2[^>]*>(.*?)<\/h2>/g;
         let match;
         let index = 0;
@@ -26,14 +36,12 @@ export default function TableOfContents({ content }: { content: string }) {
           const text = match[1].replace(/<[^>]*>/g, '').trim();
           const idMatch = match[0].match(/id="([^"]+)"/);
           const id = idMatch ? idMatch[1] : `section-${index}`;
-          
-          if (text && !['2026 矿业版图', '导航'].includes(text)) {
+          if (text && text.length < 40) {
             foundItems.push({ id, text });
           }
           index++;
         }
       } else {
-        // Markdown Path: Extract text from ## ...
         const h2MdRegex = /#{2}\s+(.*)/g;
         let match;
         let index = 0;
@@ -44,32 +52,33 @@ export default function TableOfContents({ content }: { content: string }) {
       }
       setItems(foundItems);
     } else {
-      // 1b. Real-time DOM Scan Path: For non-dynamic pages like About
       const scanDOM = () => {
-        const domSections = document.querySelectorAll('section[id], .prose-cyber h2, .report-html-content-wrapper h2');
+        // ONLY scan Major Landmarks with explicit IDs or specific landmarks
+        const domSections = document.querySelectorAll('section[id], main[id]');
         const domItems: TOCItem[] = [];
-        domSections.forEach((el, idx) => {
-          const id = el.id || `node-${idx}`;
-          if (!el.id) el.id = id;
-          
-          // Get text: from h2 itself, or from an h2 inside the section
-          let text = '';
-          if (el.tagName === 'H2') {
-            text = el.textContent || '';
-          } else {
-            const h2 = el.querySelector('h2');
-            text = h2?.textContent || el.getAttribute('data-toc-title') || id;
-          }
-          
-          if (text && text.length < 50) {
-            domItems.push({ id, text: text.trim().toUpperCase() });
+        
+        const friendlyNames: Record<string, string> = {
+          'header': '视角概览 // OVERVIEW',
+          'categories': '分类筛选 // FILTER',
+          'reports': '研报矩阵 // MATRIX',
+          'intro': '实验室引言 // INTRO',
+          'featured': '精选导引 // FEATURED',
+          'archive': '全套档案 // ARCHIVE',
+          'philosophy': '底层哲学 // THEORY'
+        };
+
+        domSections.forEach((el) => {
+          if (friendlyNames[el.id]) {
+            domItems.push({ 
+              id: el.id, 
+              text: friendlyNames[el.id] 
+            });
           }
         });
         setItems(domItems);
       };
       
-      // Delay slightly to ensure DOM is ready
-      const timer = setTimeout(scanDOM, 500);
+      const timer = setTimeout(scanDOM, 1000);
       return () => clearTimeout(timer);
     }
 
@@ -82,24 +91,17 @@ export default function TableOfContents({ content }: { content: string }) {
           }
         });
       },
-      { rootMargin: '-10% 0px -80% 0px' }
+      { rootMargin: '-20% 0px -60% 0px' }
     );
 
-    // 3. Bind elements for observation
     const timer = setTimeout(() => {
-      const sectionElements = document.querySelectorAll(
-        '.prose-cyber h2, .report-html-content-wrapper h2, section[id]'
-      );
-      
-      sectionElements.forEach((el, index) => {
-        if (!el.id) {
-          el.setAttribute('id', `section-${index}`);
-        }
-        observer.observe(el);
+      const landmarkIds = ['header', 'categories', 'reports', 'intro', 'featured', 'archive', 'philosophy'];
+      landmarkIds.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) observer.observe(el);
       });
-    }, 800);
+    }, 1200);
 
-    // 4. Global scroll progress for the vertical line
     const handleScroll = () => {
       const winScroll = document.documentElement.scrollTop;
       const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
@@ -108,7 +110,6 @@ export default function TableOfContents({ content }: { content: string }) {
     };
 
     window.addEventListener('scroll', handleScroll);
-
     return () => {
       clearTimeout(timer);
       observer.disconnect();
@@ -119,64 +120,45 @@ export default function TableOfContents({ content }: { content: string }) {
   if (items.length === 0) return null;
 
   return (
-    <nav className="fixed right-6 lg:right-12 top-1/2 -translate-y-1/2 z-40 hidden md:flex flex-col items-end group pointer-events-none">
-      <div className="relative flex flex-col items-center gap-12 py-12 pointer-events-auto">
-        {/* The Baseline Track - More visible */}
-        <div className="absolute top-0 bottom-0 w-[4px] bg-white/5 right-[10px] rounded-full" />
+    <nav className="fixed right-2 lg:right-6 top-1/2 -translate-y-1/2 z-50 hidden md:flex flex-col items-end group">
+      <div className="relative flex flex-col items-center gap-10 py-10">
+        <div className="absolute top-0 bottom-0 w-[1px] bg-white/10 right-[15px]" />
         
-        {/* The Active Progress Fill - Distinct glow */}
         <div 
-          className="absolute top-0 w-[4px] bg-brand-blue right-[10px] transition-all duration-300 shadow-[0_0_20px_rgba(56,189,248,0.5)] rounded-full" 
-          style={{ height: `${scrollProgress}%` }}
+          className={`absolute top-0 w-[1px] transition-all duration-300 right-[15px] ${themeBg}`}
+          style={{ height: `${scrollProgress}%`, boxShadow: `0 0 10px ${themeColor}` }}
         />
         
         {items.map((item, idx) => {
           const isActive = activeId === item.id;
           return (
             <div key={`${item.id}-${idx}`} className="relative flex items-center justify-end group/item">
-              {/* Optional Label - Always visible but dimmed if not active */}
-              {/* Fixed Width Label Container with Word-Wrap Support */}
               <div className={`
-                absolute right-10 w-64 flex flex-col items-end transition-all duration-500 text-right
-                ${isActive ? 'opacity-100 translate-x-0' : 'opacity-10 group-hover/item:opacity-50 translate-x-2'}
+                absolute right-10 w-40 px-3 py-2 rounded-lg border border-white/5 
+                backdrop-blur-2xl bg-slate-950/60 transition-all duration-500 text-right pointer-events-none
+                ${isActive ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-4 group-hover/item:opacity-100 group-hover/item:translate-x-0'}
               `}>
-                <div className="flex items-center gap-2 mb-1 justify-end">
-                  <span className="text-[8px] font-black text-brand-blue/40 font-mono tracking-tighter">NODE 0{idx + 1}</span>
-                  {isActive && <span className="text-[8px] font-black text-brand-blue animate-pulse font-mono">LIVE</span>}
+                <div className="flex items-center gap-2 mb-0.5 justify-end">
+                  <span className={`text-[7px] font-black font-mono tracking-tighter opacity-40 ${themeAccent}`}>LVL.0{idx + 1}</span>
+                  {isActive && <span className={`text-[7px] font-black animate-pulse font-mono ${themeAccent}`}>TRACKING</span>}
                 </div>
-                <span className={`
-                  whitespace-normal text-[11px] font-bold tracking-[0.1em] uppercase transition-colors leading-tight
-                  ${isActive ? 'text-white' : 'text-white/60'}
-                `}>
+                <span className={`text-[9px] font-bold tracking-[0.1em] uppercase leading-tight block ${isActive ? 'text-white' : 'text-white/40'}`}>
                   {item.text}
                 </span>
               </div>
               
-              {/* Milestone Node - Larger and more explicit */}
-              <a 
-                href={`#${item.id}`}
-                onClick={(e) => {
-                  e.preventDefault();
-                  document.getElementById(item.id)?.scrollIntoView({ behavior: 'smooth' });
-                }}
+              <button 
+                onClick={() => document.getElementById(item.id)?.scrollIntoView({ behavior: 'smooth' })}
                 className={`
-                  relative z-10 w-8 h-8 flex items-center justify-center rounded-sm border-2 transition-all duration-500 transform
-                  ${isActive 
-                    ? 'border-brand-blue bg-slate-900 rotate-45 scale-125 shadow-[0_0_20px_rgba(56,189,248,0.4)]' 
-                    : 'border-white/10 bg-background/80 hover:border-white/20 rotate-45 hover:scale-110'}
+                  relative z-10 w-8 h-8 flex items-center justify-center transition-all duration-500
+                  ${isActive ? 'scale-110' : 'hover:scale-110'}
                 `}
               >
-                {/* Inner Dot - Squares for industrial feel */}
                 <div className={`
-                  w-2.5 h-2.5 transition-all duration-500
-                  ${isActive ? 'bg-brand-blue' : 'bg-white/5'}
-                `} />
-                
-                {/* Active Indicator Pulse */}
-                {isActive && (
-                  <div className="absolute -inset-2 border border-brand-blue/20 rounded-sm animate-ping" />
-                )}
-              </a>
+                  w-1.5 h-1.5 transition-all duration-500 transform rotate-45
+                  ${isActive ? `${themeBg} scale-125` : 'bg-white/10 group-hover/item:bg-white/40'}
+                `} style={isActive ? { boxShadow: `0 0 8px ${themeColor}` } : {}} />
+              </button>
             </div>
           );
         })}

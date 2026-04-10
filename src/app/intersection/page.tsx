@@ -28,8 +28,8 @@ export default function IntersectionPage() {
 
   return (
     <div className="relative overflow-x-hidden">
-      {/* Node-based Progress Tracker */}
-      <TableOfContents content="" />
+      {/* Node-based Progress Tracker - Purple Variant */}
+      <TableOfContents content="" variant="experiment" />
 
       <main className="max-w-7xl mx-auto px-8 py-24">
         <div className="space-y-24">
