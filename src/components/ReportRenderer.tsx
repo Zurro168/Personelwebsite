@@ -4,7 +4,6 @@ import { useEffect, useRef } from 'react';
 import katex from 'katex';
 import renderMathInElement from 'katex/dist/contrib/auto-render';
 import { AUTHOR_INFO } from '@/data/biography';
-import { ShieldCheck } from 'lucide-react';
 
 interface ReportRendererProps {
   html: string;
