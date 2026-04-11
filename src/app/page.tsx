@@ -10,14 +10,14 @@ export default function Home() {
       {/* Background Ambience */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[800px] bg-cyan-500/5 blur-[120px] rounded-full pointer-events-none"></div>
 
-      {/* 1. Hero Section */}
-      <section id="hero" className="px-8 pt-32 pb-20 max-w-7xl mx-auto lg:pr-96 relative min-h-[70vh] flex flex-col justify-center">
-        <div className="space-y-10 animate-in fade-in slide-in-from-left-8 duration-1000">
+      {/* 1. Hero Section - EXTREME COMPACT */}
+      <section id="hero" className="px-8 pt-4 pb-12 max-w-7xl mx-auto lg:pr-96 relative flex flex-col">
+        <div className="space-y-6 animate-in fade-in slide-in-from-left-8 duration-1000">
           <div className="flex items-center gap-3">
             <div className="w-1.5 h-1.5 bg-cyan-500 rounded-full animate-pulse shadow-[0_0_8px_#38bdf8]"></div>
-            <span className="text-cyan-500/60 text-[10px] font-black tracking-[0.4em] uppercase font-mono">Operations Active</span>
+            <span className="text-cyan-500/60 text-[10px] font-black tracking-[0.4em] uppercase font-mono">Terminal Active / V2.0</span>
           </div>
-          <h1 className="text-6xl md:text-8xl font-black leading-[0.9] tracking-tighter text-white">
+          <h1 className="text-4xl md:text-6xl font-black leading-[1.0] tracking-tighter text-white">
             贸易的终局 <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-white to-cyan-400 bg-[length:200%_auto] animate-gradient italic">算法的起点</span>
           </h1>
