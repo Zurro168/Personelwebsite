@@ -36,16 +36,16 @@ export default function Portfolio() {
       <TableOfContents content="" />
 
       {/* Page Header */}
-      <section id="header" className="px-8 py-6 bg-slate-900/40 border-b border-industrial-border relative overflow-hidden">
+      <section id="header" className="py-10 bg-slate-900/40 border-b border-industrial-border relative overflow-hidden">
         <div className="absolute top-0 right-0 w-1/2 h-full bg-brand-blue/5 blur-[100px] pointer-events-none"></div>
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-end gap-10">
-          <div className="space-y-2">
+        <div className="max-w-7xl mx-auto px-8 flex flex-col md:flex-row justify-between items-end gap-10">
+          <div className="space-y-4">
             <h1 className="text-5xl font-black text-white italic uppercase tracking-tighter">深度研报 <span className="text-brand-blue">/</span> Deep Insights</h1>
             <p className="text-slate-500 max-w-xl font-light text-xs leading-relaxed">
               致力于用第一性原理拆解大宗商品背后的物理与资本逻辑。所有研报均基于硅基大宗专有模型与长期产业深度访谈。
             </p>
           </div>
-          <div className="flex bg-slate-800/50 p-1.5 rounded-lg border border-white/5 backdrop-blur-md">
+          <div className="flex bg-slate-800/50 p-1.5 rounded-lg border border-white/5 backdrop-blur-md mb-2">
             <input 
               type="text" 
               placeholder="搜索视角..." 
@@ -56,10 +56,8 @@ export default function Portfolio() {
         </div>
       </section>
 
-
-
-      <section id="categories" className="sticky top-[86px] z-40 bg-background/80 backdrop-blur-xl border-b border-white/5 px-8">
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
+      <section id="categories" className="sticky top-[86px] z-40 bg-background/80 backdrop-blur-xl border-b border-white/5">
+        <div className="max-w-7xl mx-auto px-8 flex items-center justify-between">
           <div className="flex gap-8 overflow-x-auto no-scrollbar py-3">
             {TAGS.map(tag => (
               <button 
