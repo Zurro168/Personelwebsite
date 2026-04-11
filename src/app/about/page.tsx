@@ -1,7 +1,7 @@
 import React from 'react';
 import fs from 'fs';
 import path from 'path';
-import { Database, TrendingUp, Cpu, Activity } from 'lucide-react';
+import { Database, TrendingUp, Cpu, Activity, ShieldCheck } from 'lucide-react';
 import TableOfContents from '@/components/TableOfContents';
 import ReportRenderer from '@/components/ReportRenderer';
 import { AUTHOR_INFO } from '@/data/biography';
