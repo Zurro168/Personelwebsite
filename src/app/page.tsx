@@ -13,7 +13,7 @@ export default function Home() {
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[800px] bg-cyan-500/5 blur-[120px] rounded-full pointer-events-none"></div>
 
       {/* 1. Hero Section - EXTREME COMPACT */}
-      <section id="hero" className="px-8 pt-4 pb-12 max-w-7xl mx-auto lg:pr-96 relative flex flex-col">
+      <section id="hero" className="px-8 pt-4 pb-12 max-w-7xl mx-auto relative flex flex-col">
           <div className="flex items-center gap-3">
             <div className="w-1.5 h-1.5 bg-cyan-500 rounded-full animate-pulse shadow-[0_0_8px_#38bdf8]"></div>
             <span className="text-cyan-500/60 text-[10px] font-black tracking-[0.4em] uppercase font-mono">Terminal Active / V2.0</span>
@@ -39,7 +39,7 @@ export default function Home() {
       <PriceTicker />
 
       {/* 3. Core Matrix (Features) */}
-      <section id="features" className="px-8 py-32 max-w-7xl mx-auto lg:pr-96 grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <section id="features" className="px-8 py-32 max-w-7xl mx-auto grid md:grid-cols-2 lg:grid-cols-3 gap-6">
         <Link href="/portfolio" className="group p-8 rounded-2xl border border-white/5 bg-white/[0.02] hover:border-cyan-500/30 transition-all duration-500">
           <div className="w-12 h-12 rounded-xl bg-cyan-500/10 flex items-center justify-center text-cyan-500 mb-6 group-hover:scale-110 transition-transform">
             <ShieldCheck size={24} />
@@ -173,36 +173,16 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Footer & Copyright Notice */}
-          <footer className="mt-40 pt-12 border-t border-white/5">
-            <div className="flex flex-col md:flex-row justify-between items-start gap-12">
-              <div className="space-y-4 max-w-2xl">
-                <h4 className="text-white font-black tracking-widest uppercase text-xs italic">
-                  Copyright Notice & Reprint Policy
-                </h4>
-                <p className="text-slate-500 text-sm leading-relaxed">
-                  {AUTHOR_INFO.copyright.notice} <br />
-                  <span className="text-cyan-500/50 mt-2 block">{AUTHOR_INFO.copyright.reprintGuide}</span>
-                </p>
-                <div className="pt-4 text-slate-400 text-xs font-mono">
-                   &copy; {AUTHOR_INFO.copyright.year} {AUTHOR_INFO.copyright.owner} / ALL ASSETS DIGITIZED
-                </div>
-              </div>
-              <div className="flex gap-12">
-                <div className="space-y-4">
-                  <h4 className="text-white font-bold text-xs">Navigate</h4>
-                  <div className="flex flex-col gap-2 text-sm text-slate-500">
-                    <Link href="/portfolio" className="hover:text-cyan-400 transition-colors">Reports Archive</Link>
-                    <Link href="/about" className="hover:text-cyan-400 transition-colors">Resume & Identity</Link>
-                  </div>
-                </div>
-                <div className="space-y-4 text-right">
-                  <h4 className="text-white font-bold text-xs">Terminal</h4>
-                  <div className="text-[10px] text-slate-600 font-mono uppercase tracking-[0.3em]">
-                    Version 3.2 // SLCN-CMD
-                  </div>
-                </div>
-              </div>
+          {/* Minimal Copyright Line */}
+          <footer className="mt-40 pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6 text-[10px] text-white/20 font-mono tracking-widest uppercase">
+            <div className="flex items-center gap-2">
+              <ShieldCheck size={12} className="text-brand-blue/40" />
+              <span>© {AUTHOR_INFO.copyright.year} {AUTHOR_INFO.copyright.owner} | {AUTHOR_INFO.copyright.notice.split('。')[0]}</span>
+            </div>
+            <div className="flex gap-8">
+              <Link href="/portfolio" className="hover:text-brand-blue transition-colors">ARCHIVE</Link>
+              <Link href="/about" className="hover:text-brand-blue transition-colors">IP GUIDE</Link>
+              <span className="text-white/10 italic">TERMINAL V3.2</span>
             </div>
           </footer>
         </div>

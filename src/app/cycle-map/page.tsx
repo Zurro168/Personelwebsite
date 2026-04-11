@@ -55,7 +55,7 @@ export default function CycleMapPortal() {
       {/* Node-based Progress Tracker */}
       <TableOfContents content="" />
 
-      <section id="header" className="max-w-7xl mx-auto px-8 py-12 space-y-4 lg:pr-96">
+      <section id="header" className="max-w-7xl mx-auto px-8 py-12 space-y-4">
         <h1 className="text-5xl font-black text-white italic uppercase tracking-tighter">
           金属周期地图 <span className="text-brand-blue">/</span> Circle Map
         </h1>
@@ -65,7 +65,7 @@ export default function CycleMapPortal() {
       </section>
 
       {/* Grid List */}
-      <main id="commodities" className="max-w-7xl mx-auto px-8 grid grid-cols-1 md:grid-cols-2 gap-10 lg:pr-96">
+      <main id="commodities" className="max-w-7xl mx-auto px-8 grid grid-cols-1 md:grid-cols-2 gap-10">
         {COMMODITIES.map((item) => (
           <Link 
             key={item.slug} 
@@ -122,7 +122,7 @@ export default function CycleMapPortal() {
       </main>
 
       {/* Data Footer */}
-      <footer className="max-w-7xl mx-auto px-8 mt-24 py-12 border-t border-white/5 flex flex-wrap justify-between items-center text-white/20 font-mono text-[10px] tracking-[0.2em] lg:pr-96">
+      <footer className="max-w-7xl mx-auto px-8 mt-24 py-12 border-t border-white/5 flex flex-wrap justify-between items-center text-white/20 font-mono text-[10px] tracking-[0.2em]">
         <div className="flex gap-10">
           <span>LATENCY: 1800s</span>
           <span>ENGINE: Si-V4.2</span>

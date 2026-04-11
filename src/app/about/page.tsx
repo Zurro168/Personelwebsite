@@ -29,7 +29,7 @@ export default async function AboutPage() {
       {/* Node-based Progress Tracker */}
       <TableOfContents content={customContent || ""} />
 
-      <main className="max-w-7xl mx-auto px-8 lg:pr-96 py-24 relative">
+      <section id="identity" className="max-w-7xl mx-auto px-8 py-32 grid lg:grid-cols-2 gap-24 items-start">
 
         <div className="space-y-32">
           {/* Hero Section - Powered by AUTHOR_INFO */}
@@ -105,8 +105,15 @@ export default async function AboutPage() {
                </p>
              </div>
           </section>
+          {/* Minimal Copyright Line */}
+          <footer className="mt-20 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6 text-[10px] text-white/20 font-mono tracking-widest uppercase">
+            <div className="flex items-center gap-2 text-white/30">
+              <ShieldCheck size={12} className="text-brand-blue/30" />
+              <span>TERMINAL IDENTITY VERIFIED | © {AUTHOR_INFO.copyright.year} {AUTHOR_INFO.copyright.owner}</span>
+            </div>
+          </footer>
         </div>
-      </main>
+      </section>
     </div>
   );
 }

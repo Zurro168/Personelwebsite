@@ -85,7 +85,8 @@ export default function CycleMapDetail({ params }: { params: Promise<{ slug: str
       {/* Node-based Progress Tracker */}
       <TableOfContents content="" />
 
-      <div className="max-w-7xl mx-auto px-6 lg:pr-96 py-12">
+      {/* Standardized Container aligned to Navbar */}
+      <main className="max-w-7xl mx-auto px-8 py-12">
         <div className="mb-12 opacity-60 hover:opacity-100 transition-opacity duration-500">
            <Breadcrumbs items={breadcrumbs} />
         </div>
@@ -338,12 +339,17 @@ export default function CycleMapDetail({ params }: { params: Promise<{ slug: str
                 </div>
             </div>
         </div>
-      </div>
+      </main>
 
-      <footer className="max-w-7xl mx-auto mt-32 py-16 border-t border-white/5 text-center lg:pr-96">
-         <Link href="/cycle-map" className="text-white/20 hover:text-brand-blue text-xs font-black tracking-[0.5em] uppercase transition-all duration-500 hover:tracking-[0.8em] italic">
-            BACK TO CENTRAL INTELLIGENCE COMMAND
-         </Link>
+      {/* Minimal Copyright Footer */}
+      <footer className="max-w-7xl mx-auto px-8 py-20 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6 text-[10px] text-white/20 font-mono tracking-widest uppercase">
+        <div className="flex items-center gap-2">
+          <ShieldCheck size={12} className="text-brand-blue/40" />
+          <span>IP PROTECTED | © {AUTHOR_INFO.copyright.year} {AUTHOR_INFO.copyright.owner}</span>
+        </div>
+        <Link href="/cycle-map" className="hover:text-brand-blue transition-colors italic">
+          BACK TO COMMAND CENTER
+        </Link>
       </footer>
     </div>
   );

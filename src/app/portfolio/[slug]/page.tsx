@@ -54,10 +54,8 @@ export default async function ReportPage({ params }: { params: Promise<{ slug: s
   }
 
   // Detect if the content is likely HTML (starts with <!DOCTYPE or contains tags)
-  const isHtml = report.content.trim().startsWith('<!DOCTYPE') || 
-                 report.content.includes('<html') || 
-                 report.content.includes('<div') ||
-                 report.content.includes('<script');
+  // Trust report metadata over heuristic detection for rendering mode
+  const isHtml = report.isHtml;
 
   return (
     <div className="min-h-screen bg-background text-foreground font-sans selection:bg-brand-blue/30">
@@ -69,8 +67,8 @@ export default async function ReportPage({ params }: { params: Promise<{ slug: s
       {/* Node-based Progress Tracker (Side Menu) */}
       <TableOfContents content={report.content} />
 
-      {/* Main Content Area - Aligned to Global Navbar (px-8) */}
-      <main className={`${isHtml ? 'max-w-[100rem]' : 'max-w-7xl'} mx-auto px-8 lg:pr-[20rem] py-12`}>
+      {/* Main Content Area - Aligned to Global Navbar (7xl) */}
+      <main className="max-w-7xl mx-auto px-8 py-12">
         <div className="space-y-8">
           <Link href="/portfolio" className="flex items-center gap-2 text-white/40 hover:text-brand-blue transition-colors text-[10px] font-bold tracking-[0.2em] group">
             <ChevronLeft size={16} className="group-hover:-translate-x-1 transition-transform" /> BACK TO ARCHIVE
@@ -101,42 +99,23 @@ export default async function ReportPage({ params }: { params: Promise<{ slug: s
             </div>
           </div>
 
-          {/* Copyright Section */}
-          <div className="mt-24 p-8 rounded-2xl bg-white/[0.02] border border-white/10 space-y-6 relative overflow-hidden group">
-            <div className="absolute top-0 right-0 w-32 h-32 bg-brand-blue/5 blur-3xl rounded-full" />
-            <div className="flex items-center gap-4 text-brand-blue">
-               <ShieldCheck size={20} />
-               <span className="text-[10px] font-black tracking-[0.3em] uppercase">Copyright Notice / 版权申明</span>
+          {/* Minimal Copyright Line */}
+          <div className="mt-20 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] text-white/20 font-mono tracking-widest uppercase">
+            <div className="flex items-center gap-2">
+              <ShieldCheck size={12} className="text-brand-blue/40" />
+              <span>© {AUTHOR_INFO.copyright.year} {AUTHOR_INFO.copyright.owner} | {AUTHOR_INFO.copyright.notice.split('。')[0]}</span>
             </div>
-            <div className="space-y-4 relative z-10">
-               <p className="text-slate-400 text-sm leading-relaxed font-light">
-                 本文著作权归 <span className="text-white font-black">{AUTHOR_INFO.copyright.owner}</span> 所有。
-                 {AUTHOR_INFO.copyright.notice}
-               </p>
-               <p className="text-slate-500 text-xs leading-relaxed italic">
-                 {AUTHOR_INFO.copyright.reprintGuide}
-               </p>
-            </div>
+            <Link href="/about" className="hover:text-brand-blue transition-colors">
+              IP & REPRINT GUIDE
+            </Link>
           </div>
         </div>
       </main>
 
-      {/* Client-side script for top progress bar */}
-      <script dangerouslySetInnerHTML={{ __html: `
-        window.addEventListener('scroll', () => {
-          const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-          const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-          const scrolled = (winScroll / height);
-          const bar = document.getElementById('reading-progress');
-          if (bar) bar.style.transform = 'scaleX(' + scrolled + ')';
-        });
-      `}} />
-
       {/* Footer */}
-      <footer className="border-t border-white/5 px-8 py-20 text-center flex flex-col items-center gap-4">
-        <div className="w-10 h-[1px] bg-white/20" />
-        <div className="text-white/20 text-[10px] tracking-[0.4em] font-mono uppercase">
-          © {AUTHOR_INFO.copyright.year} {AUTHOR_INFO.copyright.owner.toUpperCase()} | RESEARCH ARCHIVE
+      <footer className="px-8 py-12 text-center">
+        <div className="text-white/10 text-[9px] tracking-[0.5em] font-mono uppercase">
+           RESEARCH ARCHIVE SYSTEM TERMINAL
         </div>
       </footer>
     </div>

@@ -92,31 +92,8 @@ export default function ReportRenderer({ html }: ReportRendererProps) {
         className="report-html-content-wrapper prose prose-invert max-w-none"
       />
 
-      {/* 🛡️ Dynamic Copyright & IP Footer */}
-      <div className="mt-16 pt-8 border-t border-white/5 border-dashed">
-        <div className="bg-white/5 rounded-2xl p-6 md:p-8 backdrop-blur-sm border border-white/10">
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
-            <div className="space-y-2">
-              <h4 className="text-white font-bold text-lg">© {AUTHOR_INFO.copyright.year} {AUTHOR_INFO.copyright.owner}</h4>
-              <p className="text-slate-400 text-sm leading-relaxed max-w-2xl">
-                {AUTHOR_INFO.copyright.notice}
-              </p>
-            </div>
-            <div className="flex -space-x-2">
-              {/* Profile Image Preview in Footer */}
-              <div className="w-10 h-10 rounded-full border-2 border-slate-900 bg-cyan-500/20 flex items-center justify-center text-cyan-400 font-bold text-xs">
-                SC
-              </div>
-            </div>
-          </div>
-          
-          <div className="mt-6 p-4 bg-cyan-500/5 rounded-xl border border-cyan-500/10">
-            <p className="text-cyan-200/70 text-xs italic">
-              {AUTHOR_INFO.copyright.reprintGuide}
-            </p>
-          </div>
-        </div>
-      </div>
+      {/* Minimal Bottom Space or Separator if needed */}
+      <div className="pt-12" />
     </div>
   );
 }

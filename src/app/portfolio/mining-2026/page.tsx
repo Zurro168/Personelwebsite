@@ -197,7 +197,7 @@ export default function MiningReport() {
         </nav>
       </header>
 
-      <main className="max-w-7xl mx-auto px-8 lg:pr-96 py-20 relative z-10">
+      <main className="max-w-7xl mx-auto px-8 py-20 relative z-10">
         <div className="space-y-40">
           
           {/* Section 1: Macro */}
@@ -320,11 +320,16 @@ export default function MiningReport() {
         </div>
       </main>
 
-      <footer className="py-24 border-t border-white/5 text-center flex flex-col items-center gap-6 bg-slate-900/20">
-        <div className="w-16 h-[1px] bg-brand-blue/30" />
-        <div className="text-white/20 text-[10px] tracking-[0.5em] font-mono uppercase italic">
-          © 2026 SILICON COMMODITY | 产业观察部 099-B ALPHA CHANNEL
-        </div>
+      {/* Minimal footer */}
+      <footer className="max-w-7xl mx-auto px-8 py-20 border-t border-white/5 flex flex-wrap justify-between items-center gap-6 text-[10px] text-white/20 font-mono tracking-widest uppercase">
+          <div className="flex items-center gap-2">
+            <ShieldCheck size={12} className="text-brand-blue/40" />
+            <span>ALGORITHM VERIFIED | © {AUTHOR_INFO.copyright.year} {AUTHOR_INFO.copyright.owner}</span>
+          </div>
+          <div className="flex gap-10 italic">
+            <span>VERSION 4.2.0</span>
+            <Link href="/portfolio" className="hover:text-brand-blue transition-colors">BACK TO ARCHIVE</Link>
+          </div>
       </footer>
     </div>
   );
