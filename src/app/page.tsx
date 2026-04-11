@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import { Activity, ShieldCheck, Share2, Zap, MessageCircle, Rss, Twitter, ChevronRight } from 'lucide-react';
+import { Activity, ShieldCheck, Share2, Zap, MessageCircle, Rss, ChevronRight } from 'lucide-react';
 import { AUTHOR_INFO } from '@/data/biography';
 import PriceTicker from '@/components/layout/PriceTicker';
 
@@ -163,7 +163,7 @@ export default function Home() {
 
               <a href={AUTHOR_INFO.social.x} target="_blank" className="flex items-center justify-between p-5 rounded-xl bg-white/5 border border-white/5 hover:bg-white/10 hover:border-white/30 transition-all group">
                 <div className="flex items-center gap-3">
-                  <Twitter className="text-slate-500 group-hover:text-white" size={20} />
+                  <Share2 className="text-slate-500 group-hover:text-white" size={20} />
                   <span className="text-sm font-medium">Twitter / X</span>
                 </div>
                 <ChevronRight size={16} className="text-slate-600 group-hover:translate-x-1 transition-transform" />
