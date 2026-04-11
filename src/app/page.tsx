@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import Link from 'next/link';
 import { Activity, ShieldCheck, Share2, Zap, MessageCircle, Rss, ChevronRight } from 'lucide-react';
