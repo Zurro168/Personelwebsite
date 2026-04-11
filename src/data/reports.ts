@@ -12,7 +12,7 @@ export interface Report {
 
 export const ALL_REPORTS: Report[] = [
   {
-    id: 'SCC-2026-623',
+    id: 'SCC-2026-671',
     title: '主理人简历',
     description: '自动同步的深度研究报告',
     tag: '00_Identity',
@@ -23,7 +23,7 @@ export const ALL_REPORTS: Report[] = [
     hasContent: true
   },
   {
-    id: 'SCC-2026-432',
+    id: 'SCC-2026-104',
     title: '第一线认知：中游加工企业的成本管控与管理哲学思考',
     description: '自动同步的深度研究报告',
     tag: '跨界实验',
@@ -35,17 +35,28 @@ export const ALL_REPORTS: Report[] = [
   },
   {
     id: 'SCC-2026-784',
-    title: '中医系统论：从脏腑平衡到大宗商品供给侧博弈的隐喻',
-    description: '自动同步的深度研究报告',
+    title: '中医系统论：从脏腑平衡到大宗商品供给侧博弈的隐喻 (交互版)',
+    description: '集成 Chart.js 动态可视化，通过阴阳指数与五行雷达透视全球大宗商品周期平衡。',
     tag: '跨界实验',
     date: '2026-04-11',
-    readTime: '10 min',
+    readTime: '15 min',
     image: '/images/reports/mining-strategy.png',
-    slug: 'tcm-commodity-metaphor',
+    slug: 'tcm-interactive',
     hasContent: true
   },
   {
-    id: 'SCC-2026-179',
+    id: 'SCC-2026-785',
+    title: '中医系统论：从脏腑平衡到大宗商品供给侧博弈的隐喻 (理论版)',
+    description: '深度文字解析：将全球大宗市场视为人体脏腑，探讨供给侧博弈中的虚实寒热与经络流转。',
+    tag: '跨界实验',
+    date: '2026-04-11',
+    readTime: '12 min',
+    image: '/images/reports/mining-strategy.png',
+    slug: 'tcm-theory',
+    hasContent: true
+  },
+  {
+    id: 'SCC-2026-807',
     title: 'AI 时代的信息生产：从碎片化搜索转向结构化知识合成',
     description: '自动同步的深度研究报告',
     tag: '跨界实验',
@@ -89,7 +100,7 @@ export const ALL_REPORTS: Report[] = [
     hasContent: true
   },
   {
-    id: 'SCC-2026-111',
+    id: 'SCC-2026-804',
     title: '深度解析‘看对行情却赚不到钱’的盈亏悖论与破局之道 网页代码',
     description: '自动同步的深度研究报告',
     tag: '交易员笔记',
@@ -100,7 +111,7 @@ export const ALL_REPORTS: Report[] = [
     hasContent: true
   },
   {
-    id: 'SCC-2026-717',
+    id: 'SCC-2026-557',
     title: '跨越鸿沟：为什么你赢了判断，却输了账户？',
     description: '自动同步的深度研究报告',
     tag: '交易员笔记',
@@ -122,7 +133,7 @@ export const ALL_REPORTS: Report[] = [
     hasContent: true
   },
   {
-    id: 'SCC-2026-274',
+    id: 'SCC-2026-611',
     title: '2026 全球矿业巨头大博弈',
     description: '从算法到原子的跨代竞争：解析必和必拓、紫金矿业等巨头在全球资源民族主义背景下的地缘抉择。',
     tag: '商品研报',
