@@ -3,7 +3,7 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
-import { Calendar, ChevronLeft } from 'lucide-react';
+import { Calendar, ChevronLeft, ShieldCheck } from 'lucide-react';
 import ReportRenderer from '@/components/ReportRenderer';
 import { AUTHOR_INFO } from '@/data/biography';
 import TableOfContents from '@/components/TableOfContents';
