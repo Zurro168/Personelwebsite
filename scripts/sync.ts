@@ -151,14 +151,18 @@ async function sync() {
                 finalContent = finalContent.replace(/color:\s*rgb\([^)]+\);?/gi, '');
                 
                 // 修正 Tailwind 背景色与文字色
-                finalContent = finalContent.replace(/bg-stone-[0-9]00/gi, '');
-                finalContent = finalContent.replace(/bg-white/gi, 'bg-slate-900/40');
-                finalContent = finalContent.replace(/text-slate-800/gi, 'text-slate-100');
-                finalContent = finalContent.replace(/text-slate-700/gi, 'text-slate-200');
-                finalContent = finalContent.replace(/text-slate-600/gi, 'text-slate-300');
-                finalContent = finalContent.replace(/text-stone-800/gi, 'text-stone-300');
+                finalContent = finalContent.replace(/text-slate-950/gi, 'text-white');
+                finalContent = finalContent.replace(/text-slate-900/gi, 'text-slate-100');
+                finalContent = finalContent.replace(/text-slate-800/gi, 'text-slate-200');
+                finalContent = finalContent.replace(/text-slate-700/gi, 'text-slate-300');
+                finalContent = finalContent.replace(/text-slate-600/gi, 'text-slate-400');
                 finalContent = finalContent.replace(/text-stone-900/gi, 'text-stone-100');
+                finalContent = finalContent.replace(/text-stone-800/gi, 'text-stone-200');
+                finalContent = finalContent.replace(/text-stone-700/gi, 'text-stone-300');
                 finalContent = finalContent.replace(/text-stone-600/gi, 'text-stone-400');
+                finalContent = finalContent.replace(/text-black/gi, 'text-white');
+                finalContent = finalContent.replace(/text-gray-900/gi, 'text-gray-100');
+                finalContent = finalContent.replace(/text-zinc-900/gi, 'text-zinc-100');
                 
                 // 彻底移除红框标识 (Red Box removal)
                 finalContent = finalContent.replace(/bg-red-[1-9]00/gi, 'bg-brand-blue/20');
