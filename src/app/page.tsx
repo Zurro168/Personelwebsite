@@ -12,7 +12,9 @@ export default function Home() {
 
       {/* 1. Hero Section - EXTREME COMPACT */}
       <section id="hero" className="px-8 pt-4 pb-12 max-w-7xl mx-auto lg:pr-96 relative flex flex-col">
-        <div className="space-y-6 animate-in fade-in slide-in-from-left-8 duration-1000">
+          <div className="bg-red-600 text-white p-4 font-black text-center animate-bounce rounded-xl shadow-[0_0_50px_rgba(220,38,38,0.5)]">
+            🚀 智库 IP 2.0 系统已上线！如果你看到这个红框，说明同步成功！
+          </div>
           <div className="flex items-center gap-3">
             <div className="w-1.5 h-1.5 bg-cyan-500 rounded-full animate-pulse shadow-[0_0_8px_#38bdf8]"></div>
             <span className="text-cyan-500/60 text-[10px] font-black tracking-[0.4em] uppercase font-mono">Terminal Active / V2.0</span>
