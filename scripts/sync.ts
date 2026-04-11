@@ -17,10 +17,15 @@ const ARCHIVE_DIR = 'D:/iCloudDrive/iCloud~md~obsidian/Obsidian Vault/SiliconCom
 const COMMODITY_DATA_DIR = path.join(process.cwd(), 'src/data/commodities');
 const REPORTS_REGISTRY_FILE = path.join(process.cwd(), 'src/data/reports.ts');
 const PUBLIC_REPORTS_DIR = path.join(process.cwd(), 'public/content/reports');
+const PUBLIC_SYSTEM_DIR = path.join(process.cwd(), 'public/content/system');
+const SYSTEM_DIR = 'D:/iCloudDrive/iCloud~md~obsidian/Obsidian Vault/SiliconCommand/00_Identity';
 
 // 确保目录存在
 if (!fs.existsSync(PUBLIC_REPORTS_DIR)) {
     fs.mkdirSync(PUBLIC_REPORTS_DIR, { recursive: true });
+}
+if (!fs.existsSync(PUBLIC_SYSTEM_DIR)) {
+    fs.mkdirSync(PUBLIC_SYSTEM_DIR, { recursive: true });
 }
 
 /**
@@ -49,7 +54,8 @@ async function sync() {
 
     const queueFiles = fs.existsSync(OBSIDIAN_PUBLISH_DIR) ? getAllFiles(OBSIDIAN_PUBLISH_DIR) : [];
     const archiveFiles = fs.existsSync(ARCHIVE_DIR) ? getAllFiles(ARCHIVE_DIR) : [];
-    const files = [...queueFiles, ...archiveFiles];
+    const systemFiles = fs.existsSync(SYSTEM_DIR) ? getAllFiles(SYSTEM_DIR) : [];
+    const files = [...queueFiles, ...archiveFiles, ...systemFiles];
 
     if (files.length === 0) {
         console.log('✨ No files to sync. Staying dormant.');
@@ -58,7 +64,8 @@ async function sync() {
 
     for (const filePath of files) {
         const fileName = path.basename(filePath);
-        const sourceRoot = filePath.includes(ARCHIVE_DIR) ? ARCHIVE_DIR : OBSIDIAN_PUBLISH_DIR;
+        const sourceRoot = filePath.includes(ARCHIVE_DIR) ? ARCHIVE_DIR : 
+                           filePath.includes(SYSTEM_DIR) ? SYSTEM_DIR : OBSIDIAN_PUBLISH_DIR;
         const rawRelativeDir = path.dirname(path.relative(sourceRoot, filePath));
         const relativeDir = rawRelativeDir.split(path.sep).join('/');
         
@@ -84,13 +91,29 @@ async function sync() {
         const fileContent = fs.readFileSync(filePath, 'utf8');
         const { data, content } = matter(fileContent);
 
-        if (!data.slug) {
+        if (!data.slug && !filePath.includes(SYSTEM_DIR)) {
             console.warn(`⚠️ Skipping ${fileName}: Missing 'slug' in Frontmatter.`);
             continue;
         }
 
+        const isSystemFile = filePath.includes(SYSTEM_DIR);
         const rawTag = data.tag || folderCategory;
         const reportTag = categoryMap[rawTag] || rawTag;
+
+        // --- 逻辑分流 S: 处理「系统页面」(Bio/About) ---
+        if (isSystemFile) {
+            console.log(`📡 Processing System Resource: ${fileName}`);
+            const systemSlug = data.slug || fileName.replace('.md', '').toLowerCase();
+            const systemContentPath = path.join(PUBLIC_SYSTEM_DIR, `${systemSlug}.html`);
+            
+            // 简单的内容清理与样式注入 (重用部分逻辑)
+            let finalContent = content.trim();
+            // ... 同 Report 的 HTML 清理逻辑 ...
+            fs.writeFileSync(systemContentPath, finalContent);
+            console.log(`   - System resource synced to site structure.`);
+            // 注意：系统文件不移动，保持在 04_System 方便反复维护
+            continue;
+        }
 
         // --- 逻辑分流 A: 处理「内容研报」 (依据是否存在 slug + content 判定) ---
         // 只要有 slug 我们就认为是研报，除非明确是评分卡格式

@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { Activity, ShieldCheck, Share2, Zap } from 'lucide-react';
+import { AUTHOR_INFO } from '@/data/biography';
 import PriceTicker from '@/components/layout/PriceTicker';
 import TableOfContents from '@/components/TableOfContents';
 
@@ -95,6 +96,103 @@ export default function Home() {
              <span className="text-[10px] font-black text-brand-blue tracking-[0.3em] uppercase">Read Intel &rarr;</span>
           </div>
         </Link>
+      {/* Personal Branding & Connect Section */}
+      <section id="connect" className="px-8 py-24 max-w-7xl mx-auto lg:pr-96 border-t border-white/5 relative">
+        <div className="absolute top-0 right-0 w-64 h-64 bg-brand-blue/5 blur-[100px] rounded-full pointer-events-none"></div>
+        <div className="grid lg:grid-cols-2 gap-20 items-center">
+          <div className="space-y-8">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-blue/10 border border-brand-blue/20">
+              <span className="w-1.5 h-1.5 bg-brand-blue rounded-full"></span>
+              <span className="text-[10px] font-black text-brand-blue tracking-widest uppercase">Digital Identity</span>
+            </div>
+            <h2 className="text-4xl md:text-5xl font-black text-white tracking-tighter">
+              链接思维 <br />
+              <span className="text-slate-500">共建大宗商品的硅基未来</span>
+            </h2>
+            <p className="text-slate-400 text-lg font-light leading-relaxed max-w-md">
+              这里不仅是报告的终点，更是深度连接的起点。欢迎探讨数据治理、大宗套利与系统演化。
+            </p>
+            
+            {/* Social Matrix */}
+            <div className="grid grid-cols-2 gap-4">
+              <div className="p-6 rounded-2xl bg-white/5 border border-white/5 hover:border-brand-blue/50 hover:bg-brand-blue/5 transition-all group relative overflow-hidden cursor-pointer">
+                <div className="flex items-center justify-between mb-4">
+                  <div className="w-10 h-10 rounded-xl bg-slate-800 flex items-center justify-center group-hover:bg-brand-blue/20 transition-colors">
+                    <Share2 className="text-slate-400 group-hover:text-brand-blue" size={20} />
+                  </div>
+                </div>
+                <h4 className="text-white font-bold mb-1">{AUTHOR_INFO.social.wechat.label}</h4>
+                <p className="text-[10px] text-slate-500 uppercase tracking-widest">{AUTHOR_INFO.social.wechat.id}</p>
+                <div className="absolute right-[-10px] bottom-[-10px] opacity-10 group-hover:opacity-20 transition-opacity">
+                  <Activity size={80} />
+                </div>
+              </div>
+
+              <div className="p-6 rounded-2xl bg-white/5 border border-white/5 hover:border-brand-blue/50 hover:bg-brand-blue/5 transition-all group relative overflow-hidden cursor-pointer">
+                <div className="flex items-center justify-between mb-4">
+                  <div className="w-10 h-10 rounded-xl bg-slate-800 flex items-center justify-center group-hover:bg-brand-blue/20 transition-colors">
+                    <Zap className="text-slate-400 group-hover:text-brand-blue" size={20} />
+                  </div>
+                </div>
+                <h4 className="text-white font-bold mb-1">{AUTHOR_INFO.social.officialAccount.label}</h4>
+                <p className="text-[10px] text-slate-500 uppercase tracking-widest">{AUTHOR_INFO.social.officialAccount.name}</p>
+              </div>
+
+              <a href={AUTHOR_INFO.social.linkedin} target="_blank" className="p-6 rounded-2xl bg-white/5 border border-white/5 hover:border-[#0077b5]/50 hover:bg-[#0077b5]/5 transition-all group relative overflow-hidden">
+                <div className="flex items-center justify-between mb-4">
+                  <div className="w-10 h-10 rounded-xl bg-slate-800 flex items-center justify-center group-hover:bg-[#0077b5]/20 transition-colors">
+                    <ShieldCheck className="text-slate-400 group-hover:text-[#0077b5]" size={20} />
+                  </div>
+                </div>
+                <h4 className="text-white font-bold mb-1">LinkedIn</h4>
+                <p className="text-[10px] text-slate-500 uppercase tracking-widest">Explore Profile</p>
+              </a>
+
+              <a href={AUTHOR_INFO.social.x} target="_blank" className="p-6 rounded-2xl bg-white/5 border border-white/5 hover:border-white/50 hover:bg-white/5 transition-all group relative overflow-hidden">
+                <div className="flex items-center justify-between mb-4">
+                  <div className="w-10 h-10 rounded-xl bg-slate-800 flex items-center justify-center group-hover:bg-white/20 transition-colors">
+                    <Zap className="text-slate-400 group-hover:text-white" size={20} />
+                  </div>
+                </div>
+                <h4 className="text-white font-bold mb-1">X / Twitter</h4>
+                <p className="text-[10px] text-slate-500 uppercase tracking-widest">Intelligence Feed</p>
+              </a>
+            </div>
+          </div>
+
+          {/* IP Card / Visual Anchor */}
+          <div className="relative">
+            <div className="absolute -inset-4 bg-brand-blue/10 blur-3xl opacity-50 rounded-full"></div>
+            <div className="relative p-10 rounded-3xl bg-slate-900/40 border border-white/10 backdrop-blur-xl">
+               <div className="space-y-6">
+                 <div className="flex items-center gap-6">
+                    <div className="w-20 h-20 rounded-2xl bg-gradient-to-tr from-brand-blue to-cyan-500 flex items-center justify-center text-4xl font-black text-slate-900 shadow-[0_0_30px_rgba(56,189,248,0.3)]">
+                      {AUTHOR_INFO.name.substring(0,2)}
+                    </div>
+                    <div className="space-y-1">
+                      <h3 className="text-2xl font-black text-white leading-none whitespace-nowrap">{AUTHOR_INFO.name}</h3>
+                      <p className="text-brand-blue font-mono text-[10px] tracking-[0.2em] uppercase">Status: Evolution Active</p>
+                    </div>
+                 </div>
+                 <div className="space-y-4">
+                    <div className="p-4 rounded-xl bg-white/5 border border-white/5 flex items-center justify-between">
+                       <span className="text-xs text-slate-400">领域 Focus</span>
+                       <span className="text-xs text-white font-black italic">{AUTHOR_INFO.focus[0]}</span>
+                    </div>
+                    <div className="p-4 rounded-xl bg-white/5 border border-white/5 flex items-center justify-between">
+                       <span className="text-xs text-slate-400">坐标 Location</span>
+                       <span className="text-xs text-white font-black">{AUTHOR_INFO.location}</span>
+                    </div>
+                    <div className="pt-4 flex flex-wrap gap-2">
+                       {AUTHOR_INFO.tags.map(tag => (
+                         <span key={tag} className="text-[9px] px-2 py-1 border border-white/10 rounded uppercase tracking-wider text-slate-500 font-mono">{tag}</span>
+                       ))}
+                    </div>
+                 </div>
+               </div>
+            </div>
+          </div>
+        </div>
       </section>
     </div>
   );

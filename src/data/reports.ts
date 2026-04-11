@@ -12,7 +12,18 @@ export interface Report {
 
 export const ALL_REPORTS: Report[] = [
   {
-    id: 'SCC-2026-996',
+    id: 'SCC-2026-853',
+    title: '主理人简历',
+    description: '自动同步的深度研究报告',
+    tag: '00_Identity',
+    date: '2026-04-10',
+    readTime: '15 min',
+    image: '/images/reports/mining-strategy.png',
+    slug: 'about',
+    hasContent: true
+  },
+  {
+    id: 'SCC-2026-961',
     title: '第一线认知：中游加工企业的成本管控与管理哲学思考',
     description: '自动同步的深度研究报告',
     tag: '跨界实验',
@@ -23,7 +34,7 @@ export const ALL_REPORTS: Report[] = [
     hasContent: true
   },
   {
-    id: 'SCC-2026-556',
+    id: 'SCC-2026-529',
     title: '中医系统论：从脏腑平衡到大宗商品供给侧博弈的隐喻',
     description: '自动同步的深度研究报告',
     tag: '跨界实验',
@@ -34,7 +45,7 @@ export const ALL_REPORTS: Report[] = [
     hasContent: true
   },
   {
-    id: 'SCC-2026-234',
+    id: 'SCC-2026-940',
     title: 'AI 时代的信息生产：从碎片化搜索转向结构化知识合成',
     description: '自动同步的深度研究报告',
     tag: '跨界实验',
@@ -78,7 +89,7 @@ export const ALL_REPORTS: Report[] = [
     hasContent: true
   },
   {
-    id: 'SCC-2026-111',
+    id: 'SCC-2026-806',
     title: '深度解析‘看对行情却赚不到钱’的盈亏悖论与破局之道 网页代码',
     description: '自动同步的深度研究报告',
     tag: '交易员笔记',
@@ -89,7 +100,7 @@ export const ALL_REPORTS: Report[] = [
     hasContent: true
   },
   {
-    id: 'SCC-2026-422',
+    id: 'SCC-2026-400',
     title: '跨越鸿沟：为什么你赢了判断，却输了账户？',
     description: '自动同步的深度研究报告',
     tag: '交易员笔记',
@@ -111,7 +122,7 @@ export const ALL_REPORTS: Report[] = [
     hasContent: true
   },
   {
-    id: 'SCC-2026-542',
+    id: 'SCC-2026-602',
     title: '2026 全球矿业巨头大博弈',
     description: '从算法到原子的跨代竞争：解析必和必拓、紫金矿业等巨头在全球资源民族主义背景下的地缘抉择。',
     tag: '商品研报',

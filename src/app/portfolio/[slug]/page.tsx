@@ -5,6 +5,7 @@ import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
 import { Calendar, ChevronLeft } from 'lucide-react';
 import ReportRenderer from '@/components/ReportRenderer';
+import { AUTHOR_INFO } from '@/data/biography';
 import TableOfContents from '@/components/TableOfContents';
 
 import fs from 'fs';
@@ -118,6 +119,24 @@ export default async function ReportPage({ params }: { params: Promise<{ slug: s
               )}
             </div>
           </div>
+
+          {/* Copyright Section */}
+          <div className="mt-24 p-8 rounded-2xl bg-white/[0.02] border border-white/10 space-y-6 relative overflow-hidden group">
+            <div className="absolute top-0 right-0 w-32 h-32 bg-brand-blue/5 blur-3xl rounded-full" />
+            <div className="flex items-center gap-4 text-brand-blue">
+               <ShieldCheck size={20} />
+               <span className="text-[10px] font-black tracking-[0.3em] uppercase">Copyright Notice / 版权申明</span>
+            </div>
+            <div className="space-y-4 relative z-10">
+               <p className="text-slate-400 text-sm leading-relaxed font-light">
+                 本文著作权归 <span className="text-white font-black">{AUTHOR_INFO.copyright.owner}</span> 所有。
+                 {AUTHOR_INFO.copyright.notice}
+               </p>
+               <p className="text-slate-500 text-xs leading-relaxed italic">
+                 {AUTHOR_INFO.copyright.reprintGuide}
+               </p>
+            </div>
+          </div>
         </div>
       </main>
 
@@ -136,7 +155,7 @@ export default async function ReportPage({ params }: { params: Promise<{ slug: s
       <footer className="border-t border-white/5 px-8 py-20 text-center flex flex-col items-center gap-4">
         <div className="w-10 h-[1px] bg-white/20" />
         <div className="text-white/20 text-[10px] tracking-[0.4em] font-mono uppercase">
-          © 2026 SILICON COMMODITY | RESEARCH ARCHIVE
+          © {AUTHOR_INFO.copyright.year} {AUTHOR_INFO.copyright.owner.toUpperCase()} | RESEARCH ARCHIVE
         </div>
       </footer>
     </div>
