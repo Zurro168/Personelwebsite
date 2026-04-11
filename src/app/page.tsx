@@ -63,26 +63,42 @@ export default function Home() {
               
               <div className="space-y-6 font-mono text-[10px]">
                 <div className="space-y-2">
-                  <p className="text-cyan-500/80">{'['} INFRASTRUCTURE SECURED {']'}</p>
-                  <p className="text-white/40 leading-relaxed italic">
-                    Mapping global commodity cycles through the lens of algorithmic entropy...
+                  <p className="text-cyan-400 font-bold">{'>>'} INITIALIZING_ARCHIVE_NODE...</p>
+                  <p className="text-white/70 leading-relaxed italic border-l border-cyan-500/30 pl-3">
+                    Mapping global commodity cycles through the lens of algorithmic entropy—calculating price-to-sentiment correlations in real-time.
                   </p>
                 </div>
                 
-                <div className="grid grid-cols-2 gap-4 pt-4 border-t border-white/5">
+                <div className="grid grid-cols-2 gap-4 py-4 border-y border-white/5">
                   <div className="space-y-1">
-                    <span className="text-white/20 block uppercase">Latency</span>
-                    <span className="text-cyan-500">14.2ms</span>
+                    <span className="text-white/40 block uppercase tracking-tighter">Sync Latency</span>
+                    <span className="text-cyan-400 font-bold">14.2ms</span>
                   </div>
                   <div className="space-y-1">
-                    <span className="text-white/20 block uppercase">Stability</span>
-                    <span className="text-emerald-500">99.98%</span>
+                    <span className="text-white/40 block uppercase tracking-tighter">Throughput</span>
+                    <span className="text-emerald-400 font-bold">1,240 pkts/s</span>
                   </div>
                 </div>
 
-                <div className="bg-white/5 p-4 rounded border border-white/5 flex items-center justify-between group-hover:border-cyan-500/30 transition-colors">
-                  <span className="text-white/40 tracking-tighter italic">Predictive Mode</span>
-                  <Activity size={12} className="text-cyan-500 animate-pulse" />
+                {/* Sub-content: Terminal Logs */}
+                <div className="space-y-1.5 opacity-60">
+                  <div className="flex justify-between items-center text-[8px] text-white/30">
+                    <span>{'>'} LOADING_MODULE: CYCLE_PREDICT_v0.1</span>
+                    <span className="text-emerald-500/80">OK</span>
+                  </div>
+                  <div className="flex justify-between items-center text-[8px] text-white/30">
+                    <span>{'>'} UPDATING_DATABASE: ZIRCONIUM_SPOT</span>
+                    <span className="text-cyan-500/80">IN_PROG...</span>
+                  </div>
+                  <div className="flex justify-between items-center text-[8px] text-white/30">
+                    <span>{'>'} ANALYZING_MACRO_FLOWS: SHANGHAI_CN</span>
+                    <span className="text-emerald-500/80">READY</span>
+                  </div>
+                </div>
+
+                <div className="bg-cyan-500/10 p-4 rounded border border-cyan-500/20 flex items-center justify-between group-hover:bg-cyan-500/20 transition-all duration-500">
+                  <span className="text-cyan-400 font-bold tracking-tighter uppercase italic">Predictive Engine Active</span>
+                  <Activity size={12} className="text-cyan-400 animate-pulse" />
                 </div>
               </div>
             </div>
