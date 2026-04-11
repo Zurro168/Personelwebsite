@@ -8,6 +8,7 @@ export interface Report {
   image: string;
   slug: string;
   hasContent: boolean;
+  isHtml?: boolean;
 }
 
 export const ALL_REPORTS: Report[] = [
