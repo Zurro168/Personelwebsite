@@ -3,6 +3,7 @@
 import React, { use, useEffect, useState } from 'react';
 import { ChevronRight, ShieldAlert, ShieldCheck, Activity, Loader2, Info, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
+import { AUTHOR_INFO } from '@/data/biography';
 import Breadcrumbs from '@/components/layout/Breadcrumbs';
 import { resolveCommodity, UnifiedCommodityData } from '@/lib/price-adapter';
 import TableOfContents from '@/components/TableOfContents';

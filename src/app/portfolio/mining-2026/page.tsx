@@ -19,6 +19,7 @@ import {
   LayoutList
 } from 'lucide-react';
 import Chart from 'chart.js/auto';
+import { AUTHOR_INFO } from '@/data/biography';
 import Breadcrumbs from '@/components/layout/Breadcrumbs';
 import TableOfContents from '@/components/TableOfContents';
 
