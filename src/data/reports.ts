@@ -43,7 +43,8 @@ export const ALL_REPORTS: Report[] = [
     readTime: '15 min',
     image: '/images/reports/mining-strategy.png',
     slug: 'tcm-interactive',
-    hasContent: true
+    hasContent: true,
+    isHtml: true
   },
   {
     id: 'SCC-2026-785',
@@ -109,7 +110,8 @@ export const ALL_REPORTS: Report[] = [
     readTime: '5 min',
     image: '/images/reports/mining-strategy.png',
     slug: 'profit-loss-paradox',
-    hasContent: true
+    hasContent: true,
+    isHtml: true
   },
   {
     id: 'SCC-2026-557',
