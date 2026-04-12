@@ -37,5 +37,12 @@ export const AUTHOR_INFO = {
     year: 2026,
     notice: "本文著作权归 硅基大宗 所有。非经书面授权，禁止任何形式的转载、摘编或建立镜像。",
     reprintGuide: "如需转载、引用或进行深度商业合作，请通过上方社交矩阵联系主理人进行授权验证。"
-  }
+  },
+
+  // 🖱️ 系统审计日志 (展示在首页身份卡片下方)
+  auditLog: [
+    { date: "04.12", action: "processed_market_sentiment_matrix_v2.1" },
+    { date: "04.10", action: "deployed_autonomous_intel_node_sh" },
+    { date: "04.08", action: "archived_tcm_systems_refactor_notes" },
+  ]
 };

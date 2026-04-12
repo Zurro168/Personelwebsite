@@ -193,18 +193,12 @@ export default function Home() {
                       <span className="flex items-center gap-1.5 animate-pulse"><span className="w-1 h-1 bg-emerald-500 rounded-full"></span> LIVE_FEED</span>
                     </div>
                     <div className="space-y-3 opacity-60 text-[10px] font-mono lowercase tracking-tight">
-                      <div className="flex gap-4">
-                        <span className="text-white/20">04.12</span>
-                        <span className="text-white/60">processed_market_sentiment_matrix_v2.1</span>
-                      </div>
-                      <div className="flex gap-4">
-                        <span className="text-white/20">04.10</span>
-                        <span className="text-white/60">deployed_autonomous_intel_node_sh</span>
-                      </div>
-                      <div className="flex gap-4">
-                        <span className="text-white/20">04.08</span>
-                        <span className="text-white/60">archived_tcm_systems_refactor_notes</span>
-                      </div>
+                      {AUTHOR_INFO.auditLog.map((log, idx) => (
+                        <div key={idx} className="flex gap-4">
+                          <span className="text-white/20">{log.date}</span>
+                          <span className="text-white/60">{log.action}</span>
+                        </div>
+                      ))}
                     </div>
                   </div>
                 </div>
