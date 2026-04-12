@@ -154,6 +154,11 @@ export default function Home() {
                   <p className="text-lg text-slate-400 font-light max-w-md">
                     寻求深度合作、研报授权或系统治理探讨，请通过以下矩阵联系我。
                   </p>
+                  <div className="flex gap-4 opacity-40">
+                    {["#商业合作", "#系统咨询", "#版权授权"].map(tag => (
+                      <span key={tag} className="text-[9px] font-mono text-cyan-500 tracking-tighter">{tag}</span>
+                    ))}
+                  </div>
                 </div>
 
                 <div className="p-10 rounded-3xl bg-slate-900/50 border border-white/10 relative overflow-hidden group shadow-2xl backdrop-blur-sm">
@@ -171,30 +176,52 @@ export default function Home() {
                   </div>
                   
                   <div className="space-y-4 relative">
-                    <div className="flex items-center justify-between p-5 rounded-xl bg-white/5 border border-white/5">
+                    <div className="flex items-center justify-between p-5 rounded-xl bg-white/5 border border-white/5 group-hover:bg-white/10 transition-colors">
                       <span className="text-xs text-slate-500">领域 / Focus</span>
                       <span className="text-xs text-white font-bold">{AUTHOR_INFO.focus[0]}</span>
                     </div>
-                    <div className="flex items-center justify-between p-5 rounded-xl bg-white/5 border border-white/5">
+                    <div className="flex items-center justify-between p-5 rounded-xl bg-white/5 border border-white/5 group-hover:bg-white/10 transition-colors">
                       <span className="text-xs text-slate-500">坐标 / Location</span>
                       <span className="text-xs text-white font-bold tracking-tight">{AUTHOR_INFO.location}</span>
                     </div>
-                    <div className="flex flex-wrap gap-3 pt-2">
-                      {AUTHOR_INFO.tags.map(tag => (
-                        <span key={tag} className="text-[9px] px-3 py-1 bg-cyan-500/5 border border-cyan-500/10 rounded uppercase text-cyan-400 font-mono">#{tag}</span>
-                      ))}
+                  </div>
+
+                  {/* Audit Log / Recent Activity */}
+                  <div className="mt-10 pt-8 border-t border-white/5 space-y-4 relative">
+                    <div className="flex items-center justify-between text-[9px] font-mono text-cyan-500/50 uppercase tracking-[0.2em]">
+                      <span>SYSTEM_AUDIT_LOG</span>
+                      <span className="flex items-center gap-1.5 animate-pulse"><span className="w-1 h-1 bg-emerald-500 rounded-full"></span> LIVE_FEED</span>
+                    </div>
+                    <div className="space-y-3 opacity-60 text-[10px] font-mono lowercase tracking-tight">
+                      <div className="flex gap-4">
+                        <span className="text-white/20">04.12</span>
+                        <span className="text-white/60">processed_market_sentiment_matrix_v2.1</span>
+                      </div>
+                      <div className="flex gap-4">
+                        <span className="text-white/20">04.10</span>
+                        <span className="text-white/60">deployed_autonomous_intel_node_sh</span>
+                      </div>
+                      <div className="flex gap-4">
+                        <span className="text-white/20">04.08</span>
+                        <span className="text-white/60">archived_tcm_systems_refactor_notes</span>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
 
-              <div className="grid sm:grid-cols-2 gap-8">
-                <div className="p-8 rounded-2xl bg-slate-900 border border-white/10 hover:border-cyan-500/30 transition-all group shadow-xl">
-                  <div className="flex items-center gap-3 mb-6">
-                    <div className="p-2 bg-emerald-500/10 rounded-lg text-emerald-400"><MessageCircle size={20}/></div>
-                    <span className="text-sm font-bold text-white">{AUTHOR_INFO.social.wechat.label}</span>
+              <div className="grid sm:grid-cols-2 gap-6 items-start">
+                {/* WeChat QR Cards */}
+                <div className="p-8 rounded-3xl bg-slate-900 border border-white/10 hover:border-cyan-500/30 transition-all group relative overflow-hidden shadow-2xl">
+                  <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-cyan-500/30 to-transparent"></div>
+                  <div className="flex items-center gap-4 mb-8">
+                    <div className="p-2.5 bg-emerald-500/10 rounded-xl text-emerald-400 border border-emerald-500/20 group-hover:scale-110 transition-transform"><MessageCircle size={22}/></div>
+                    <div>
+                       <span className="text-xs font-black text-white block uppercase tracking-tighter">{AUTHOR_INFO.social.wechat.label}</span>
+                       <span className="text-[8px] text-slate-600 font-mono tracking-widest uppercase">ENCRYPTED_COMMS</span>
+                    </div>
                   </div>
-                  <div className="aspect-square bg-white rounded-xl overflow-hidden p-2 group-hover:scale-[1.02] transition-transform">
+                  <div className="aspect-square bg-white rounded-2xl overflow-hidden p-3 group-hover:scale-[1.02] transition-all duration-500 shadow-inner relative">
                     <img 
                       src={AUTHOR_INFO.social.wechat.qrCode} 
                       alt="Personal WeChat" 
@@ -203,39 +230,58 @@ export default function Home() {
                         (e.target as HTMLImageElement).src = `https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${AUTHOR_INFO.social.wechat.id}`;
                       }}
                     />
+                    <div className="absolute inset-0 border-[8px] border-white pointer-events-none"></div>
                   </div>
-                  <p className="mt-4 text-center text-[10px] text-slate-500 font-mono uppercase tracking-widest">ID: {AUTHOR_INFO.social.wechat.id}</p>
+                  <p className="mt-8 text-center text-[10px] text-slate-500 font-mono bg-white/5 py-2.5 rounded-xl border border-white/5 uppercase tracking-[0.3em]">ID: {AUTHOR_INFO.social.wechat.id}</p>
                 </div>
 
-                <div className="p-8 rounded-2xl bg-slate-900 border border-white/10 hover:border-cyan-500/30 transition-all group shadow-xl">
-                  <div className="flex items-center gap-3 mb-6">
-                    <div className="p-2 bg-cyan-500/10 rounded-lg text-cyan-400"><Rss size={20}/></div>
-                    <span className="text-sm font-bold text-white">{AUTHOR_INFO.social.officialAccount.label}</span>
+                <div className="p-8 rounded-3xl bg-slate-900 border border-white/10 hover:border-cyan-500/30 transition-all group relative overflow-hidden shadow-2xl">
+                  <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-cyan-500/30 to-transparent"></div>
+                  <div className="flex items-center gap-4 mb-8">
+                    <div className="p-2.5 bg-cyan-500/10 rounded-xl text-cyan-400 border border-cyan-500/20 group-hover:scale-110 transition-transform"><Rss size={22}/></div>
+                    <div>
+                       <span className="text-xs font-black text-white block uppercase tracking-tighter">{AUTHOR_INFO.social.officialAccount.label}</span>
+                       <span className="text-[8px] text-slate-600 font-mono tracking-widest uppercase">PUBLIC_INTEL</span>
+                    </div>
                   </div>
-                  <div className="aspect-square bg-white rounded-xl overflow-hidden p-2 group-hover:scale-[1.02] transition-transform">
+                  <div className="aspect-square bg-white rounded-2xl overflow-hidden p-3 group-hover:scale-[1.02] transition-all duration-500 shadow-inner relative">
                     <img 
                       src={AUTHOR_INFO.social.officialAccount.qrCode} 
                       alt="Official Account" 
                       className="w-full h-full object-cover"
                     />
+                    <div className="absolute inset-0 border-[8px] border-white pointer-events-none"></div>
                   </div>
-                  <p className="mt-4 text-center text-[10px] text-slate-500 font-mono uppercase tracking-widest">@{AUTHOR_INFO.social.officialAccount.name}</p>
+                  <p className="mt-8 text-center text-[10px] text-slate-500 font-mono bg-white/5 py-2.5 rounded-xl border border-white/5 uppercase tracking-[0.3em]">@{AUTHOR_INFO.social.officialAccount.name}</p>
                 </div>
 
-                <a href={AUTHOR_INFO.social.linkedin} target="_blank" className="flex items-center justify-between p-6 rounded-xl bg-white/5 border border-white/5 hover:bg-white/10 hover:border-[#0077b5]/50 transition-all group">
-                  <div className="flex items-center gap-3">
-                    <Share2 className="text-slate-500 group-hover:text-[#0077b5]" size={20} />
-                    <span className="text-sm font-medium">LinkedIn Profile</span>
+                {/* Links - Restyled as high-density slots */}
+                <a href={AUTHOR_INFO.social.linkedin} target="_blank" className="relative group p-6 rounded-2xl bg-slate-900 border border-white/10 overflow-hidden transition-all hover:bg-slate-800">
+                  <div className="absolute inset-y-0 left-0 w-[2px] bg-blue-500 transition-transform scale-y-0 group-hover:scale-y-100"></div>
+                  <div className="flex items-center justify-between relative z-10">
+                    <div className="flex items-center gap-4">
+                      <div className="w-10 h-10 rounded-lg bg-blue-500/10 flex items-center justify-center text-blue-500 group-hover:scale-110 transition-transform"><Share2 size={18}/></div>
+                      <div>
+                        <span className="block text-xs font-black text-white uppercase tracking-widest leading-none mb-1">LinkedIn</span>
+                        <span className="text-[9px] text-slate-600 font-mono">PROFESSIONAL_GRAPH</span>
+                      </div>
+                    </div>
+                    <ChevronRight size={14} className="text-slate-600 group-hover:translate-x-1 transition-transform" />
                   </div>
-                  <ChevronRight size={16} className="text-slate-600 group-hover:translate-x-1 transition-transform" />
                 </a>
 
-                <a href={AUTHOR_INFO.social.x} target="_blank" className="flex items-center justify-between p-6 rounded-xl bg-white/5 border border-white/5 hover:bg-white/10 hover:border-white/30 transition-all group">
-                  <div className="flex items-center gap-3">
-                    <Share2 className="text-slate-500 group-hover:text-white" size={20} />
-                    <span className="text-sm font-medium">Twitter / X</span>
+                <a href={AUTHOR_INFO.social.x} target="_blank" className="relative group p-6 rounded-2xl bg-slate-900 border border-white/10 overflow-hidden transition-all hover:bg-slate-800">
+                  <div className="absolute inset-y-0 left-0 w-[2px] bg-white transition-transform scale-y-0 group-hover:scale-y-100"></div>
+                  <div className="flex items-center justify-between relative z-10">
+                    <div className="flex items-center gap-4">
+                      <div className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center text-white group-hover:scale-110 transition-transform"><Share2 size={18}/></div>
+                      <div>
+                        <span className="block text-xs font-black text-white uppercase tracking-widest leading-none mb-1">Twitter / X</span>
+                        <span className="text-[9px] text-slate-600 font-mono">GLOBAL_SIGNALS</span>
+                      </div>
+                    </div>
+                    <ChevronRight size={14} className="text-slate-600 group-hover:translate-x-1 transition-transform" />
                   </div>
-                  <ChevronRight size={16} className="text-slate-600 group-hover:translate-x-1 transition-transform" />
                 </a>
               </div>
             </div>
