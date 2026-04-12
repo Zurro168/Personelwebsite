@@ -18,17 +18,17 @@ export const AUTHOR_INFO = {
   social: {
     wechat: {
       label: "个人微信号",
-      id: "SiliconCommand", 
+      id: "zurro_w", 
       qrCode: "/brand/wechat-personal.png", 
     },
     officialAccount: {
       label: "微信公众号",
-      name: "硅基大宗",
+      name: "Siliconcommodity",
       qrCode: "/brand/official-account.png",
     },
-    linkedin: "https://linkedin.com/in/your-profile", 
+    linkedin: "www.linkedin.com/in/gordon-wang-63622821", 
     x: "#", 
-    email: "contact@silicon-commodity.com"
+    email: "zurro_w@foxmail.com"
   },
 
   // 版权申明模板
