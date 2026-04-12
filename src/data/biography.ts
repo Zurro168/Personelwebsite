@@ -1,9 +1,7 @@
-
 /**
  * 🛰️ Silicon Commodity: Global Biography & IP Configuration
  * ---------------------------------------------------------
  * 作用：集中管理个人联系方式、社交链接、版权申明及 IP 标签。
- * 修改此处数据可同步更新全站（首页社交矩阵、文章底部声明、关于页面）。
  */
 
 export const AUTHOR_INFO = {
@@ -20,16 +18,16 @@ export const AUTHOR_INFO = {
   social: {
     wechat: {
       label: "个人微信号",
-      id: "SiliconCommand", // 请修改为您的真实微信号
-      qrCode: "/brand/wechat-personal.png", // 建议存放在 public/brand/
+      id: "SiliconCommand", 
+      qrCode: "/brand/wechat-personal.png", 
     },
     officialAccount: {
       label: "微信公众号",
       name: "硅基大宗",
       qrCode: "/brand/official-account.png",
     },
-    linkedin: "https://linkedin.com/in/your-profile", // 请修改
-    x: "https://x.com/your-handle", // 请修改
+    linkedin: "https://linkedin.com/in/your-profile", 
+    x: "#", 
     email: "contact@silicon-commodity.com"
   },
 
