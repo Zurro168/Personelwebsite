@@ -144,77 +144,68 @@ export default function Home() {
               <Activity size={24} />
             </div>
             <h3 className="text-xl font-bold text-white mb-4">关于主理人</h3>
-            <p className="text-sm text-slate-500 leading-relaxed font-light italic">从西交大老兵到全球贸易领域的数字化转型记录。</p>
-          </Link>
-        </section>
+            <section id="connect" className="px-8 py-32 bg-gradient-to-b from-transparent to-cyan-950/10 border-t border-white/5">
+          <div className="max-w-7xl mx-auto space-y-20">
+            {/* 文字模块：独立置顶 */}
+            <div className="space-y-4 max-w-2xl">
+              <div className="inline-flex items-center gap-2 px-3 py-1 bg-cyan-500/10 border border-cyan-500/20 rounded-full">
+                <span className="w-1.5 h-1.5 bg-cyan-500 rounded-full animate-pulse"></span>
+                <span className="text-[10px] font-black text-cyan-400 tracking-widest uppercase">Digital Identity</span>
+              </div>
+              <h2 className="text-5xl font-black text-white tracking-tighter leading-tight">
+                硅基逻辑下的 <br />
+                <span className="text-cyan-500 italic">跨界共鸣</span>
+              </h2>
+              <p className="text-lg text-slate-400 font-light max-w-lg">
+                寻求深度合作、研报授权或系统治理探讨，请通过以下矩阵联系我。
+              </p>
+            </div>
 
-        {/* 5. Contact Section */}
-        <section id="connect" className="px-8 py-32 bg-gradient-to-b from-transparent to-cyan-950/10 border-t border-white/5">
-          <div className="max-w-7xl mx-auto">
-            <div className="grid lg:grid-cols-2 gap-24 items-start">
-              <div className="space-y-12">
-                <div className="space-y-4">
-                  <div className="inline-flex items-center gap-2 px-3 py-1 bg-cyan-500/10 border border-cyan-500/20 rounded-full">
-                    <span className="w-1.5 h-1.5 bg-cyan-500 rounded-full animate-pulse"></span>
-                    <span className="text-[10px] font-black text-cyan-400 tracking-widest uppercase">Digital Identity</span>
+            <div className="grid lg:grid-cols-2 gap-12 items-start">
+              {/* 左侧：身份卡片 - 提升至与右侧平齐 */}
+              <div className="p-10 rounded-3xl bg-slate-900/50 border border-white/10 relative overflow-hidden group shadow-2xl backdrop-blur-sm min-h-full">
+                <div className="absolute top-0 right-0 w-32 h-32 bg-cyan-500/10 blur-3xl -mr-16 -mt-16"></div>
+                <div className="flex items-center gap-6 mb-10 relative">
+                  <div className="w-20 h-20 rounded-2xl bg-gradient-to-tr from-cyan-600 to-cyan-400 p-0.5 flex items-center justify-center">
+                    <div className="w-full h-full bg-[#0a0f1a] rounded-[14px] flex items-center justify-center text-3xl font-black text-cyan-400">
+                      {AUTHOR_INFO.name.substring(0,2)}
+                    </div>
                   </div>
-                  <h2 className="text-5xl font-black text-white tracking-tighter leading-tight">
-                    硅基逻辑下的 <br />
-                    <span className="text-cyan-500 italic">跨界共鸣</span>
-                  </h2>
-                  <p className="text-lg text-slate-400 font-light max-w-md">
-                    寻求深度合作、研报授权或系统治理探讨，请通过以下矩阵联系我。
-                  </p>
-                  <div className="flex gap-4 opacity-40">
-                    {["#商业合作", "#系统咨询", "#版权授权"].map(tag => (
-                      <span key={tag} className="text-[9px] font-mono text-cyan-500 tracking-tighter">{tag}</span>
-                    ))}
+                  <div>
+                    <h3 className="text-2xl font-black text-white leading-none mb-2">{AUTHOR_INFO.name}</h3>
+                    <p className="text-cyan-500/60 font-mono text-[10px] tracking-widest uppercase">{AUTHOR_INFO.title}</p>
+                  </div>
+                </div>
+                
+                <div className="space-y-4 relative">
+                  <div className="flex items-center justify-between p-5 rounded-xl bg-white/5 border border-white/5">
+                    <span className="text-xs text-slate-500">领域 / Focus</span>
+                    <span className="text-xs text-white font-bold">{AUTHOR_INFO.focus[0]}</span>
+                  </div>
+                  <div className="flex items-center justify-between p-5 rounded-xl bg-white/5 border border-white/5">
+                    <span className="text-xs text-slate-500">坐标 / Location</span>
+                    <span className="text-xs text-white font-bold tracking-tight">{AUTHOR_INFO.location}</span>
                   </div>
                 </div>
 
-                <div className="p-10 rounded-3xl bg-slate-900/50 border border-white/10 relative overflow-hidden group shadow-2xl backdrop-blur-sm">
-                  <div className="absolute top-0 right-0 w-32 h-32 bg-cyan-500/10 blur-3xl -mr-16 -mt-16"></div>
-                  <div className="flex items-center gap-6 mb-10 relative">
-                    <div className="w-20 h-20 rounded-2xl bg-gradient-to-tr from-cyan-600 to-cyan-400 p-0.5 flex items-center justify-center">
-                      <div className="w-full h-full bg-[#0a0f1a] rounded-[14px] flex items-center justify-center text-3xl font-black text-cyan-400">
-                        {AUTHOR_INFO.name.substring(0,2)}
+                {/* Audit Log / Recent Activity */}
+                <div className="mt-12 pt-8 border-t border-white/5 space-y-4 relative">
+                  <div className="flex items-center justify-between text-[9px] font-mono text-cyan-500/50 uppercase tracking-[0.2em]">
+                    <span>SYSTEM_AUDIT_LOG</span>
+                    <span className="flex items-center gap-1.5 animate-pulse"><span className="w-1 h-1 bg-emerald-500 rounded-full"></span> LIVE_FEED</span>
+                  </div>
+                  <div className="space-y-3 opacity-60 text-[10px] font-mono lowercase tracking-tight">
+                    {AUTHOR_INFO.systemLogs.map((log) => (
+                      <div key={log.id} className="flex justify-between gap-4">
+                        <span className="text-white/60">{`> ${log.text}`}</span>
+                        <span className="text-cyan-500 font-bold uppercase">{log.status}</span>
                       </div>
-                    </div>
-                    <div>
-                      <h3 className="text-2xl font-black text-white leading-none mb-2">{AUTHOR_INFO.name}</h3>
-                      <p className="text-cyan-500/60 font-mono text-[10px] tracking-widest uppercase">{AUTHOR_INFO.title}</p>
-                    </div>
-                  </div>
-                  
-                  <div className="space-y-4 relative">
-                    <div className="flex items-center justify-between p-5 rounded-xl bg-white/5 border border-white/5 group-hover:bg-white/10 transition-colors">
-                      <span className="text-xs text-slate-500">领域 / Focus</span>
-                      <span className="text-xs text-white font-bold">{AUTHOR_INFO.focus[0]}</span>
-                    </div>
-                    <div className="flex items-center justify-between p-5 rounded-xl bg-white/5 border border-white/5 group-hover:bg-white/10 transition-colors">
-                      <span className="text-xs text-slate-500">坐标 / Location</span>
-                      <span className="text-xs text-white font-bold tracking-tight">{AUTHOR_INFO.location}</span>
-                    </div>
-                  </div>
-
-                  {/* Audit Log / Recent Activity */}
-                  <div className="mt-10 pt-8 border-t border-white/5 space-y-4 relative">
-                    <div className="flex items-center justify-between text-[9px] font-mono text-cyan-500/50 uppercase tracking-[0.2em]">
-                      <span>SYSTEM_AUDIT_LOG</span>
-                      <span className="flex items-center gap-1.5 animate-pulse"><span className="w-1 h-1 bg-emerald-500 rounded-full"></span> LIVE_FEED</span>
-                    </div>
-                    <div className="space-y-3 opacity-60 text-[10px] font-mono lowercase tracking-tight">
-                      {AUTHOR_INFO.systemLogs.map((log) => (
-                        <div key={log.id} className="flex justify-between gap-4">
-                          <span className="text-white/60">{`> ${log.text}`}</span>
-                          <span className="text-cyan-500 font-bold uppercase">{log.status}</span>
-                        </div>
-                      ))}
-                    </div>
+                    ))}
                   </div>
                 </div>
               </div>
 
+              {/* 右侧：社交矩阵 */}
               <div className="grid sm:grid-cols-2 gap-6 items-start">
                 {/* WeChat QR Cards */}
                 <div className="p-8 rounded-3xl bg-slate-900 border border-white/10 hover:border-cyan-500/30 transition-all group relative overflow-hidden shadow-2xl">
@@ -231,11 +222,7 @@ export default function Home() {
                       src={AUTHOR_INFO.social.wechat.qrCode} 
                       alt="Personal WeChat" 
                       className="w-full h-full object-cover"
-                      onError={(e) => {
-                        (e.target as HTMLImageElement).src = `https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${AUTHOR_INFO.social.wechat.id}`;
-                      }}
                     />
-                    <div className="absolute inset-0 border-[8px] border-white pointer-events-none"></div>
                   </div>
                   <p className="mt-8 text-center text-[10px] text-slate-500 font-mono bg-white/5 py-2.5 rounded-xl border border-white/5 uppercase tracking-[0.3em]">ID: {AUTHOR_INFO.social.wechat.id}</p>
                 </div>
@@ -255,12 +242,11 @@ export default function Home() {
                       alt="Official Account" 
                       className="w-full h-full object-cover"
                     />
-                    <div className="absolute inset-0 border-[8px] border-white pointer-events-none"></div>
                   </div>
                   <p className="mt-8 text-center text-[10px] text-slate-500 font-mono bg-white/5 py-2.5 rounded-xl border border-white/5 uppercase tracking-[0.3em]">@{AUTHOR_INFO.social.officialAccount.name}</p>
                 </div>
 
-                {/* Links - Restyled as high-density slots */}
+                {/* 其他社交链接... */}
                 <a href={AUTHOR_INFO.social.linkedin} target="_blank" className="relative group p-6 rounded-2xl bg-slate-900 border border-white/10 overflow-hidden transition-all hover:bg-slate-800">
                   <div className="absolute inset-y-0 left-0 w-[2px] bg-blue-500 transition-transform scale-y-0 group-hover:scale-y-100"></div>
                   <div className="flex items-center justify-between relative z-10">
@@ -271,7 +257,7 @@ export default function Home() {
                         <span className="text-[9px] text-slate-600 font-mono">PROFESSIONAL_GRAPH</span>
                       </div>
                     </div>
-                    <ChevronRight size={14} className="text-slate-600 group-hover:translate-x-1 transition-transform" />
+                    <ChevronRight size={14} className="text-slate-700 group-hover:text-blue-500 group-hover:translate-x-1 transition-all" />
                   </div>
                 </a>
 
@@ -279,13 +265,13 @@ export default function Home() {
                   <div className="absolute inset-y-0 left-0 w-[2px] bg-white transition-transform scale-y-0 group-hover:scale-y-100"></div>
                   <div className="flex items-center justify-between relative z-10">
                     <div className="flex items-center gap-4">
-                      <div className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center text-white group-hover:scale-110 transition-transform"><Share2 size={18}/></div>
+                      <div className="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center text-white group-hover:scale-110 transition-transform"><Share2 size={18}/></div>
                       <div>
                         <span className="block text-xs font-black text-white uppercase tracking-widest leading-none mb-1">Twitter / X</span>
                         <span className="text-[9px] text-slate-600 font-mono">GLOBAL_SIGNALS</span>
                       </div>
                     </div>
-                    <ChevronRight size={14} className="text-slate-600 group-hover:translate-x-1 transition-transform" />
+                    <ChevronRight size={14} className="text-slate-700 group-hover:text-white group-hover:translate-x-1 transition-all" />
                   </div>
                 </a>
               </div>
