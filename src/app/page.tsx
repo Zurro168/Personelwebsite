@@ -144,10 +144,17 @@ export default function Home() {
               <Activity size={24} />
             </div>
             <h3 className="text-xl font-bold text-white mb-4">关于主理人</h3>
-            <section id="connect" className="px-8 py-32 bg-gradient-to-b from-transparent to-cyan-950/10 border-t border-white/5">
-          <div className="max-w-7xl mx-auto space-y-20">
-            {/* 文字模块：独立置顶 */}
-            <div className="space-y-4 max-w-2xl">
+            <p className="text-sm text-slate-500 leading-relaxed font-light italic">探索硅基逻辑与人类认知的边界，构建属于未来的数字资产观。</p>
+          </Link>
+        </section>
+
+        {/* 6. Contact Section - Optimized & Aligned */}
+        <section id="connect" className="py-32 px-8 relative overflow-hidden bg-[#0a0f1a]">
+          {/* Background Decor */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-cyan-500/[0.02] blur-[150px] pointer-events-none"></div>
+          
+          <div className="container max-w-7xl mx-auto relative">
+            <div className="space-y-4 max-w-2xl mb-16">
               <div className="inline-flex items-center gap-2 px-3 py-1 bg-cyan-500/10 border border-cyan-500/20 rounded-full">
                 <span className="w-1.5 h-1.5 bg-cyan-500 rounded-full animate-pulse"></span>
                 <span className="text-[10px] font-black text-cyan-400 tracking-widest uppercase">Digital Identity</span>
@@ -162,8 +169,8 @@ export default function Home() {
             </div>
 
             <div className="grid lg:grid-cols-2 gap-12 items-start">
-              {/* 左侧：身份卡片 - 提升至与右侧平齐 */}
-              <div className="p-10 rounded-3xl bg-slate-900/50 border border-white/10 relative overflow-hidden group shadow-2xl backdrop-blur-sm min-h-full">
+              {/* 左侧：身份卡片 */}
+              <div className="p-10 rounded-3xl bg-slate-900/50 border border-white/10 relative overflow-hidden group shadow-2xl backdrop-blur-sm">
                 <div className="absolute top-0 right-0 w-32 h-32 bg-cyan-500/10 blur-3xl -mr-16 -mt-16"></div>
                 <div className="flex items-center gap-6 mb-10 relative">
                   <div className="w-20 h-20 rounded-2xl bg-gradient-to-tr from-cyan-600 to-cyan-400 p-0.5 flex items-center justify-center">
@@ -188,7 +195,6 @@ export default function Home() {
                   </div>
                 </div>
 
-                {/* Audit Log / Recent Activity */}
                 <div className="mt-12 pt-8 border-t border-white/5 space-y-4 relative">
                   <div className="flex items-center justify-between text-[9px] font-mono text-cyan-500/50 uppercase tracking-[0.2em]">
                     <span>SYSTEM_AUDIT_LOG</span>
@@ -207,7 +213,6 @@ export default function Home() {
 
               {/* 右侧：社交矩阵 */}
               <div className="grid sm:grid-cols-2 gap-6 items-start">
-                {/* WeChat QR Cards */}
                 <div className="p-8 rounded-3xl bg-slate-900 border border-white/10 hover:border-cyan-500/30 transition-all group relative overflow-hidden shadow-2xl">
                   <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-cyan-500/30 to-transparent"></div>
                   <div className="flex items-center gap-4 mb-8">
@@ -217,12 +222,8 @@ export default function Home() {
                        <span className="text-[8px] text-slate-600 font-mono tracking-widest uppercase">ENCRYPTED_COMMS</span>
                     </div>
                   </div>
-                  <div className="aspect-square bg-white rounded-2xl overflow-hidden p-3 group-hover:scale-[1.02] transition-all duration-500 shadow-inner relative">
-                    <img 
-                      src={AUTHOR_INFO.social.wechat.qrCode} 
-                      alt="Personal WeChat" 
-                      className="w-full h-full object-cover"
-                    />
+                  <div className="aspect-square bg-white rounded-2xl overflow-hidden p-3 group-hover:scale-[1.02] transition-all duration-500">
+                    <img src={AUTHOR_INFO.social.wechat.qrCode} alt="WeChat" className="w-full h-full object-cover" />
                   </div>
                   <p className="mt-8 text-center text-[10px] text-slate-500 font-mono bg-white/5 py-2.5 rounded-xl border border-white/5 uppercase tracking-[0.3em]">ID: {AUTHOR_INFO.social.wechat.id}</p>
                 </div>
@@ -236,17 +237,12 @@ export default function Home() {
                        <span className="text-[8px] text-slate-600 font-mono tracking-widest uppercase">PUBLIC_INTEL</span>
                     </div>
                   </div>
-                  <div className="aspect-square bg-white rounded-2xl overflow-hidden p-3 group-hover:scale-[1.02] transition-all duration-500 shadow-inner relative">
-                    <img 
-                      src={AUTHOR_INFO.social.officialAccount.qrCode} 
-                      alt="Official Account" 
-                      className="w-full h-full object-cover"
-                    />
+                  <div className="aspect-square bg-white rounded-2xl overflow-hidden p-3 group-hover:scale-[1.02] transition-all duration-500">
+                    <img src={AUTHOR_INFO.social.officialAccount.qrCode} alt="Official Account" className="w-full h-full object-cover" />
                   </div>
                   <p className="mt-8 text-center text-[10px] text-slate-500 font-mono bg-white/5 py-2.5 rounded-xl border border-white/5 uppercase tracking-[0.3em]">@{AUTHOR_INFO.social.officialAccount.name}</p>
                 </div>
 
-                {/* 其他社交链接... */}
                 <a href={AUTHOR_INFO.social.linkedin} target="_blank" className="relative group p-6 rounded-2xl bg-slate-900 border border-white/10 overflow-hidden transition-all hover:bg-slate-800">
                   <div className="absolute inset-y-0 left-0 w-[2px] bg-blue-500 transition-transform scale-y-0 group-hover:scale-y-100"></div>
                   <div className="flex items-center justify-between relative z-10">
@@ -271,13 +267,13 @@ export default function Home() {
                         <span className="text-[9px] text-slate-600 font-mono">GLOBAL_SIGNALS</span>
                       </div>
                     </div>
-                    <ChevronRight size={14} className="text-slate-700 group-hover:text-white group-hover:translate-x-1 transition-all" />
+                    <ChevronRight size={14} className="text-white group-hover:translate-x-1 transition-transform" />
                   </div>
                 </a>
               </div>
             </div>
 
-            {/* Minimal Copyright Line */}
+            {/* Footer */}
             <footer className="mt-40 pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-8 text-[10px] text-white/20 font-mono tracking-widest uppercase">
               <div className="flex items-center gap-3">
                 <ShieldCheck size={12} className="text-cyan-500/40" />
