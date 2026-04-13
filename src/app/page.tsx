@@ -12,22 +12,10 @@ export default function Home() {
       {/* Background Ambience */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[800px] bg-cyan-500/5 blur-[120px] rounded-full pointer-events-none"></div>
 
-      {/* 1. Command Center Header: Integrated Nav + Ticker */}
-      <header className="sticky top-0 z-50 border-b border-white/5 bg-[#0a0f1a]/80 backdrop-blur-xl">
+      {/* 1. Integrated Ticker - Terminal Header Style */}
+      <div className="border-b border-white/5 bg-[#0a0f1a]/50 backdrop-blur-sm">
         <PriceTicker />
-        <div className="max-w-7xl mx-auto px-10 py-5 flex flex-col md:flex-row justify-between items-center gap-6">
-          <Link href="/" className="group flex items-center gap-3 self-start md:self-auto">
-            <div className="w-8 h-8 bg-cyan-500 rounded flex items-center justify-center text-slate-900 font-black text-xs">SC</div>
-            <span className="text-base font-black text-white tracking-widest uppercase group-hover:text-cyan-400 transition-colors">Silicon Command</span>
-          </Link>
-          
-          <nav className="flex items-center gap-10">
-            <Link href="/portfolio" className="text-[10px] font-bold text-white/40 hover:text-cyan-400 transition-colors tracking-[0.2em] uppercase">研报库</Link>
-            <Link href="/intersection" className="text-[10px] font-bold text-white/40 hover:text-cyan-400 transition-colors tracking-[0.2em] uppercase">实验</Link>
-            <Link href="/about" className="text-[10px] font-bold text-white/40 hover:text-cyan-400 transition-colors tracking-[0.2em] uppercase">关于</Link>
-          </nav>
-        </div>
-      </header>
+      </div>
 
       <main className="relative z-10">
         {/* 2. Hero Section - Strategic Spacing & Balanced Grid */}
