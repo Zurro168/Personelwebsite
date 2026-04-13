@@ -39,13 +39,13 @@ export const AUTHOR_INFO = {
     reprintGuide: "如需转载、引用或进行深度商业合作，请通过上方社交矩阵联系主理人进行授权验证。"
   },
 
-  // 🖱️ 系统审计日志 (展示在首页身份卡片下方)
+  // 🖱️ 系统审计日志 (展示在首页情报看板)
   systemLogs: [
-    { id: 1, text: 'INIT_KERNEL_v2.0.4... SUCCESS', status: 'OK' },
-    { id: 2, text: 'FETCHING_NYMEX_CRUDE_LIVE_STREAM...', status: '240.52 KB/s' },
-    { id: 3, text: '[ALGO] ANALYZING_GEO_POLITICAL_SENTIMENT_NODE_09...', status: 'COMPLETED' },
-    { id: 4, text: 'CALCULATING_ALPHA_VECTOR: METALS_GLOBAL_H1', status: 'IN_PROG' },
-    { id: 5, text: 'MAPPING_SYSTEM_ENTROPY: CURRENT_VALUE_0.842', status: 'STABLE' },
+    { id: 1, text: 'PARSING_OBSIDIAN_VAULT: 124_NODES_IDENTIFIED', status: 'READY' },
+    { id: 2, text: 'SCANNING_NYMEX_WTI_SENTIMENT_CLUSTERS...', status: 'FETCHING' },
+    { id: 3, text: 'GENERATING_COPPER_SUPPLY_CHAIN_MATRIX_V4', status: 'COMPLETED' },
+    { id: 4, text: 'SYNCING_HTML_REPORTS_TO_PRODUCTION...', status: 'SUCCESS' },
+    { id: 5, text: 'MAPPING_MACRO_ENTROPY_ACROSS_AGRI_SECTOR', status: 'ACTIVE' },
   ],
   telemetry: {
     latency: '14.2ms',

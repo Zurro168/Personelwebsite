@@ -83,26 +83,20 @@ export default function Home() {
                 
                 <div className="grid grid-cols-2 gap-4 py-4 border-y border-white/5">
                   <div className="space-y-1">
-                    <span className="text-white/40 block uppercase tracking-tighter">Sync Latency</span>
-                    <span className="text-cyan-400 font-bold">14.2ms</span>
+                    <span className="text-white/40 block uppercase tracking-tighter">Vault Sync Status</span>
+                    <span className="text-emerald-400 font-bold">READY / 0.04s</span>
                   </div>
                   <div className="space-y-1">
-                    <span className="text-white/40 block uppercase tracking-tighter">Throughput</span>
-                    <span className="text-emerald-400 font-bold">1,240 pkts/s</span>
+                    <span className="text-white/40 block uppercase tracking-tighter">Knowledge Matrix</span>
+                    <span className="text-cyan-400 font-bold">ACTIVE / 124 Nodes</span>
                   </div>
                 </div>
 
-                {/* CORE_ENGINE_v2: 实时遥测面板 */}
+                {/* CORE_ENGINE_v2: 实时情报流 */}
                 <div className="pt-6 border-t border-white/5 space-y-4">
-                  <div className="grid grid-cols-2 gap-4">
-                    <div>
-                      <div className="text-[8px] text-white/20 uppercase tracking-widest mb-1">Sync Latency</div>
-                      <div className="text-sm text-cyan-400 font-mono font-bold animate-pulse">14.2ms</div>
-                    </div>
-                    <div>
-                      <div className="text-[8px] text-white/20 uppercase tracking-widest mb-1">Throughput</div>
-                      <div className="text-sm text-emerald-400 font-mono font-bold">1,240 pkts/s</div>
-                    </div>
+                  <div className="flex justify-between items-center px-1">
+                    <div className="text-[8px] text-white/20 uppercase tracking-widest">Global Intelligence Feed</div>
+                    <div className="text-[8px] text-cyan-500/60 font-mono italic">REFRESH_RATE: 1.5s</div>
                   </div>
                   
                   <div className="space-y-1.5 bg-black/20 p-3 rounded-lg border border-white/5">
