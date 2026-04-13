@@ -19,7 +19,7 @@ export default function Home() {
 
       <main className="relative z-10">
         {/* 2. Hero Section - Strategic Spacing & Balanced Grid */}
-        <section id="hero" className="px-8 pt-24 pb-32 max-w-7xl mx-auto relative grid lg:grid-cols-2 items-center gap-16">
+        <section id="hero" className="px-8 pt-24 pb-32 max-w-7xl mx-auto relative grid lg:grid-cols-[1.1fr_0.9fr] items-center gap-16">
           <div className="flex flex-col space-y-10">
             <div className="flex items-center gap-3">
               <div className="w-1.5 h-1.5 bg-cyan-500 rounded-full animate-pulse shadow-[0_0_8px_#38bdf8]"></div>
@@ -27,14 +27,14 @@ export default function Home() {
             </div>
             
             <div className="space-y-8">
-              <h1 className="text-5xl md:text-7xl font-black leading-[1.15] tracking-tight text-white mb-2">
+              <h1 className="text-5xl md:text-7xl font-black leading-[0.95] tracking-[0.05em] text-white mb-2">
                 贸易的终局 <br />
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-white to-cyan-400 bg-[length:200%_auto] animate-gradient italic font-serif">算法的起点</span>
               </h1>
-              <div className="h-0.5 w-24 bg-gradient-to-r from-cyan-500/80 via-cyan-500/20 to-transparent"></div>
+              <div className="h-0.5 w-32 bg-gradient-to-r from-cyan-500/80 via-cyan-500/20 to-transparent"></div>
             </div>
 
-            <p className="text-xl text-slate-400 max-w-lg leading-relaxed font-light italic opacity-80">
+            <p className="text-xl text-slate-400 max-w-xl leading-relaxed font-light italic opacity-80">
               {AUTHOR_INFO.motto}
             </p>
 
