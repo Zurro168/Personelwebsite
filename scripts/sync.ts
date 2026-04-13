@@ -12,13 +12,17 @@ import matter from 'gray-matter';
  * 3. 极简运维：通过文件夹移动即可改变网页展示逻辑。
  */
 
-const OBSIDIAN_PUBLISH_DIR = 'D:/iCloudDrive/iCloud~md~obsidian/Obsidian Vault/SiliconCommand/02_Queue';
-const ARCHIVE_DIR = 'D:/iCloudDrive/iCloud~md~obsidian/Obsidian Vault/SiliconCommand/03_Archives';
+// ── Obsidian Vault 路径（基于 2026-04 Vault 重组后的新结构）────────────
+// 旧结构: 02_Queue / 03_Archives / 00_Identity
+// 新结构: 10_Content/02_Queue / 10_Content/03_Published / 00_Brand
+const SC_BASE = 'D:/iCloudDrive/iCloud~md~obsidian/Obsidian Vault/SiliconCommand';
+const OBSIDIAN_PUBLISH_DIR = `${SC_BASE}/10_Content/02_Queue`;      // 待发布队列
+const ARCHIVE_DIR          = `${SC_BASE}/10_Content/03_Published`;   // 已发布存档（原 03_Archives）
+const SYSTEM_DIR           = `${SC_BASE}/00_Brand`;                  // IP/品牌资源（原 00_Identity）
 const COMMODITY_DATA_DIR = path.join(process.cwd(), 'src/data/commodities');
 const REPORTS_REGISTRY_FILE = path.join(process.cwd(), 'src/data/reports.ts');
 const PUBLIC_REPORTS_DIR = path.join(process.cwd(), 'public/content/reports');
 const PUBLIC_SYSTEM_DIR = path.join(process.cwd(), 'public/content/system');
-const SYSTEM_DIR = 'D:/iCloudDrive/iCloud~md~obsidian/Obsidian Vault/SiliconCommand/00_Identity';
 
 // 确保目录存在
 if (!fs.existsSync(PUBLIC_REPORTS_DIR)) {
@@ -70,7 +74,12 @@ async function sync() {
         const relativeDir = rawRelativeDir.split(path.sep).join('/');
         
         // 自动计算分类：实施“大类归并”逻辑
-        const categoryParts = relativeDir.split('/').filter(p => !['.', '..', '02_Queue', '03_Archives'].includes(p));
+        // 过滤掉容器文件夹名（旧结构 + 新结构均兼容）
+        const categoryParts = relativeDir.split('/').filter(p => ![
+            '.', '..', 
+            '02_Queue', '03_Archives',          // 旧结构
+            '10_Content', '03_Published',        // 新结构
+        ].includes(p));
         let rawCategory = categoryParts.length > 0 ? categoryParts[categoryParts.length - 1] : '商品研报';
         
         // 映射规则：将细分领域折叠进大类
@@ -300,7 +309,7 @@ async function sync() {
         
         const archivePath = path.join(archiveDest, fileName);
         fs.renameSync(filePath, archivePath);
-        console.log(`📦 Archived: ${fileName} moved to 03_Archives/${relativeDir}.\n`);
+        console.log(`📦 Archived: ${fileName} moved to 10_Content/03_Published/${relativeDir}.\n`);
     }
 
     console.log('🏆 All-Pass Sync Complete. Industrial Intelligence Terminal updated.');

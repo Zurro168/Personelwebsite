@@ -6,6 +6,11 @@
 3. **Set Flags**: 
    - If it contains `<script>` or `<canvas>` (Chart.js), set `isHtml: true`.
    - If it is standard Markdown, omit `isHtml`.
+4. **Backfill Obsidian Metadata**: 
+   - **MANDATORY**: Update the source file in Obsidian Vault with:
+     - `slug: [assigned-slug]`
+     - `status: published`
+     - `published_at: [current-date]`
 
 ## 2. Interactive Report Standards
 Interactive reports should be self-contained HTML strings.
