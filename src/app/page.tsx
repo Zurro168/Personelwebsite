@@ -80,25 +80,36 @@ export default function Home() {
                   </div>
                 </div>
 
-                {/* Sub-content: Terminal Logs */}
-                <div className="space-y-1.5 opacity-60">
-                  <div className="flex justify-between items-center text-[8px] text-white/30">
-                    <span>{'>'} LOADING_MODULE: CYCLE_PREDICT_v0.1</span>
-                    <span className="text-emerald-500/80">OK</span>
+                {/* CORE_ENGINE_v2: 实时遥测面板 */}
+                <div className="pt-6 border-t border-white/5 space-y-4">
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <div className="text-[8px] text-white/20 uppercase tracking-widest mb-1">Sync Latency</div>
+                      <div className="text-sm text-cyan-400 font-mono font-bold animate-pulse">14.2ms</div>
+                    </div>
+                    <div>
+                      <div className="text-[8px] text-white/20 uppercase tracking-widest mb-1">Throughput</div>
+                      <div className="text-sm text-emerald-400 font-mono font-bold">1,240 pkts/s</div>
+                    </div>
                   </div>
-                  <div className="flex justify-between items-center text-[8px] text-white/30">
-                    <span>{'>'} UPDATING_DATABASE: ZIRCONIUM_SPOT</span>
-                    <span className="text-cyan-500/80">IN_PROG...</span>
+                  
+                  <div className="space-y-1.5 bg-black/20 p-3 rounded-lg border border-white/5">
+                    {AUTHOR_INFO.systemLogs.slice(0, 3).map((log) => (
+                      <div key={log.id} className="flex justify-between items-center text-[8px] font-mono">
+                        <span className="text-white/40">{`> ${log.text}`}</span>
+                        <span className="text-cyan-500/80 font-bold">{log.status}</span>
+                      </div>
+                    ))}
                   </div>
-                  <div className="flex justify-between items-center text-[8px] text-white/30">
-                    <span>{'>'} ANALYZING_MACRO_FLOWS: SHANGHAI_CN</span>
-                    <span className="text-emerald-500/80">READY</span>
-                  </div>
-                </div>
 
-                <div className="bg-cyan-500/10 p-4 rounded border border-cyan-500/20 flex items-center justify-between group-hover:bg-cyan-500/20 transition-all duration-500">
-                  <span className="text-cyan-400 font-bold tracking-tighter uppercase italic">Predictive Engine Active</span>
-                  <Activity size={12} className="text-cyan-400 animate-pulse" />
+                  <div className="bg-cyan-500/10 p-4 rounded border border-cyan-500/20 flex items-center justify-between group-hover:bg-cyan-500/20 transition-all duration-500">
+                    <span className="text-cyan-400 text-[10px] font-bold tracking-widest uppercase italic">Predictive Engine Active</span>
+                    <div className="flex space-x-1">
+                      {[1, 2, 3].map((i) => (
+                        <div key={i} className="w-1 h-3 bg-cyan-500/40 animate-pulse" style={{ animationDelay: `${i * 0.2}s` }} />
+                      ))}
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -193,10 +204,10 @@ export default function Home() {
                       <span className="flex items-center gap-1.5 animate-pulse"><span className="w-1 h-1 bg-emerald-500 rounded-full"></span> LIVE_FEED</span>
                     </div>
                     <div className="space-y-3 opacity-60 text-[10px] font-mono lowercase tracking-tight">
-                      {AUTHOR_INFO.auditLog.map((log, idx) => (
-                        <div key={idx} className="flex gap-4">
-                          <span className="text-white/20">{log.date}</span>
-                          <span className="text-white/60">{log.action}</span>
+                      {AUTHOR_INFO.systemLogs.map((log) => (
+                        <div key={log.id} className="flex justify-between gap-4">
+                          <span className="text-white/60">{`> ${log.text}`}</span>
+                          <span className="text-cyan-500 font-bold uppercase">{log.status}</span>
                         </div>
                       ))}
                     </div>

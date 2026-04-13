@@ -40,9 +40,17 @@ export const AUTHOR_INFO = {
   },
 
   // 🖱️ 系统审计日志 (展示在首页身份卡片下方)
-  auditLog: [
-    { date: "04.12", action: "processed_market_sentiment_matrix_v2.1" },
-    { date: "04.10", action: "deployed_autonomous_intel_node_sh" },
-    { date: "04.08", action: "archived_tcm_systems_refactor_notes" },
-  ]
+  systemLogs: [
+    { id: 1, text: 'INIT_KERNEL_v2.0.4... SUCCESS', status: 'OK' },
+    { id: 2, text: 'FETCHING_NYMEX_CRUDE_LIVE_STREAM...', status: '240.52 KB/s' },
+    { id: 3, text: '[ALGO] ANALYZING_GEO_POLITICAL_SENTIMENT_NODE_09...', status: 'COMPLETED' },
+    { id: 4, text: 'CALCULATING_ALPHA_VECTOR: METALS_GLOBAL_H1', status: 'IN_PROG' },
+    { id: 5, text: 'MAPPING_SYSTEM_ENTROPY: CURRENT_VALUE_0.842', status: 'STABLE' },
+  ],
+  telemetry: {
+    latency: '14.2ms',
+    throughput: '1,240 pkts/s',
+    entropy: '0.842'
+  },
+  copyright: "© 2026 SILICON COMMODITY PORTAL. ALL RIGHTS RESERVED."
 };
