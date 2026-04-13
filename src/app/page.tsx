@@ -15,23 +15,23 @@ export default function Home() {
       {/* 1. Command Center Header: Integrated Nav + Ticker */}
       <header className="sticky top-0 z-50 border-b border-white/5 bg-[#0a0f1a]/80 backdrop-blur-xl">
         <PriceTicker />
-        <div className="max-w-7xl mx-auto px-8 py-4 flex flex-col md:flex-row justify-between items-center gap-6">
-          <Link href="/" className="group flex items-center gap-2">
-            <div className="w-6 h-6 bg-cyan-500 rounded flex items-center justify-center text-slate-900 font-black text-[10px]">SC</div>
-            <span className="text-sm font-black text-white tracking-widest uppercase group-hover:text-cyan-400 transition-colors">Silicon Command</span>
+        <div className="max-w-7xl mx-auto px-10 py-5 flex flex-col md:flex-row justify-between items-center gap-6">
+          <Link href="/" className="group flex items-center gap-3 self-start md:self-auto">
+            <div className="w-8 h-8 bg-cyan-500 rounded flex items-center justify-center text-slate-900 font-black text-xs">SC</div>
+            <span className="text-base font-black text-white tracking-widest uppercase group-hover:text-cyan-400 transition-colors">Silicon Command</span>
           </Link>
           
           <nav className="flex items-center gap-10">
-            <Link href="/portfolio" className="text-[10px] font-bold text-white/40 hover:text-cyan-400 transition-colors tracking-[0.2em] uppercase">硬核研报库</Link>
-            <Link href="/intersection" className="text-[10px] font-bold text-white/40 hover:text-cyan-400 transition-colors tracking-[0.2em] uppercase">跨界实验室</Link>
-            <Link href="/about" className="text-[10px] font-bold text-white/40 hover:text-cyan-400 transition-colors tracking-[0.2em] uppercase">关于主理人</Link>
+            <Link href="/portfolio" className="text-[10px] font-bold text-white/40 hover:text-cyan-400 transition-colors tracking-[0.2em] uppercase">研报库</Link>
+            <Link href="/intersection" className="text-[10px] font-bold text-white/40 hover:text-cyan-400 transition-colors tracking-[0.2em] uppercase">实验</Link>
+            <Link href="/about" className="text-[10px] font-bold text-white/40 hover:text-cyan-400 transition-colors tracking-[0.2em] uppercase">关于</Link>
           </nav>
         </div>
       </header>
 
       <main className="relative z-10">
         {/* 2. Hero Section - Strategic Spacing & Balanced Grid */}
-        <section id="hero" className="px-8 pt-24 pb-32 max-w-7xl mx-auto relative grid lg:grid-cols-[1.1fr_0.9fr] items-center gap-16">
+        <section id="hero" className="px-10 pt-24 pb-32 max-w-7xl mx-auto relative grid lg:grid-cols-[1.1fr_0.9fr] items-center gap-20">
           <div className="flex flex-col space-y-10">
             <div className="flex items-center gap-3">
               <div className="w-1.5 h-1.5 bg-cyan-500 rounded-full animate-pulse shadow-[0_0_8px_#38bdf8]"></div>
@@ -128,12 +128,11 @@ export default function Home() {
         </section>
 
 
-        {/* 6. Contact Section - Optimized & Aligned */}
-        <section id="connect" className="py-32 px-8 relative overflow-hidden bg-[#0a0f1a]">
+        <section id="connect" className="py-32 px-10 relative overflow-hidden bg-[#0a0f1a]">
           {/* Background Decor */}
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-cyan-500/[0.02] blur-[150px] pointer-events-none"></div>
           
-          <div className="container max-w-7xl mx-auto relative">
+          <div className="max-w-7xl mx-auto relative">
             <div className="space-y-4 max-w-2xl mb-16">
               <div className="inline-flex items-center gap-2 px-3 py-1 bg-cyan-500/10 border border-cyan-500/20 rounded-full">
                 <span className="w-1.5 h-1.5 bg-cyan-500 rounded-full animate-pulse"></span>
