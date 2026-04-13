@@ -26,12 +26,12 @@ export default function Home() {
               <span className="text-cyan-500/60 text-[10px] font-black tracking-[0.4em] uppercase font-mono">Terminal Active / V2.1</span>
             </div>
             
-            <div className="space-y-4">
-              <h1 className="text-5xl md:text-7xl font-black leading-[0.9] tracking-tighter text-white">
+            <div className="space-y-8">
+              <h1 className="text-5xl md:text-7xl font-black leading-[1.15] tracking-tight text-white mb-2">
                 贸易的终局 <br />
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-white to-cyan-400 bg-[length:200%_auto] animate-gradient italic font-serif">算法的起点</span>
               </h1>
-              <div className="h-1 w-20 bg-gradient-to-r from-cyan-500 to-transparent"></div>
+              <div className="h-0.5 w-24 bg-gradient-to-r from-cyan-500/80 via-cyan-500/20 to-transparent"></div>
             </div>
 
             <p className="text-xl text-slate-400 max-w-lg leading-relaxed font-light italic opacity-80">
