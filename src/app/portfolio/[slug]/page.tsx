@@ -98,7 +98,7 @@ export default async function ReportPage({ params }: { params: Promise<{ slug: s
           </div>
 
           <div className="pt-16 border-t border-white/5">
-            <div className="prose prose-invert prose-cyber max-w-none overflow-x-hidden">
+            <div className="prose prose-invert prose-cyber max-w-4xl overflow-x-hidden">
               {isHtml ? (
                 <ReportRenderer html={report.content} />
               ) : (

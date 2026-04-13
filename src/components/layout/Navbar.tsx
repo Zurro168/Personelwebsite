@@ -17,7 +17,7 @@ export default function Navbar() {
 
   return (
     <header className="border-b border-white/5 sticky top-0 bg-[#0a0f1a]/80 backdrop-blur-xl z-50">
-      <div className="max-w-[1600px] mx-auto px-10 md:px-16 py-3 flex justify-between items-center">
+      <div className="max-w-7xl mx-auto px-10 py-3 flex justify-between items-center">
         <div className="flex items-center gap-4 group">
           <Link href="/" className="w-9 h-9 bg-cyan-500 rounded flex items-center justify-center text-slate-900 font-black cursor-pointer transition-transform group-hover:rotate-6 group-hover:scale-110 shrink-0 shadow-[0_0_15px_rgba(56,189,248,0.2)]">
             Si

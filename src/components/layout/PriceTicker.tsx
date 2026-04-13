@@ -26,7 +26,7 @@ export default function PriceTicker() {
 
   return (
     <section className="border-y border-white/5 bg-slate-900/60 py-2.5 backdrop-blur-md overflow-hidden">
-      <div className="max-w-[1600px] mx-auto px-10 md:px-16 overflow-hidden">
+      <div className="max-w-7xl mx-auto px-10 overflow-hidden">
         <div className="flex gap-20 whitespace-nowrap animate-scroll">
           {/* 这里渲染两遍价格，以实现流畅的无缝循环动画 */}
           {[...prices, ...prices].map((item, i) => (
