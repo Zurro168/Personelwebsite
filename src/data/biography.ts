@@ -51,6 +51,5 @@ export const AUTHOR_INFO = {
     latency: '14.2ms',
     throughput: '1,240 pkts/s',
     entropy: '0.842'
-  },
-  copyright: "© 2026 SILICON COMMODITY PORTAL. ALL RIGHTS RESERVED."
+  }
 };
