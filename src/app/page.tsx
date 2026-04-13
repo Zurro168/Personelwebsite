@@ -12,10 +12,22 @@ export default function Home() {
       {/* Background Ambience */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[800px] bg-cyan-500/5 blur-[120px] rounded-full pointer-events-none"></div>
 
-      {/* 1. Integrated Ticker - Terminal Header Style */}
-      <div className="border-b border-white/5 bg-[#0a0f1a]/50 backdrop-blur-sm">
+      {/* 1. Command Center Header: Integrated Nav + Ticker */}
+      <header className="sticky top-0 z-50 border-b border-white/5 bg-[#0a0f1a]/80 backdrop-blur-xl">
         <PriceTicker />
-      </div>
+        <div className="max-w-7xl mx-auto px-8 py-4 flex flex-col md:flex-row justify-between items-center gap-6">
+          <Link href="/" className="group flex items-center gap-2">
+            <div className="w-6 h-6 bg-cyan-500 rounded flex items-center justify-center text-slate-900 font-black text-[10px]">SC</div>
+            <span className="text-sm font-black text-white tracking-widest uppercase group-hover:text-cyan-400 transition-colors">Silicon Command</span>
+          </Link>
+          
+          <nav className="flex items-center gap-10">
+            <Link href="/portfolio" className="text-[10px] font-bold text-white/40 hover:text-cyan-400 transition-colors tracking-[0.2em] uppercase">硬核研报库</Link>
+            <Link href="/intersection" className="text-[10px] font-bold text-white/40 hover:text-cyan-400 transition-colors tracking-[0.2em] uppercase">跨界实验室</Link>
+            <Link href="/about" className="text-[10px] font-bold text-white/40 hover:text-cyan-400 transition-colors tracking-[0.2em] uppercase">关于主理人</Link>
+          </nav>
+        </div>
+      </header>
 
       <main className="relative z-10">
         {/* 2. Hero Section - Strategic Spacing & Balanced Grid */}
@@ -121,32 +133,6 @@ export default function Home() {
           </div>
         </section>
 
-        {/* 4. Core Matrix (Features) */}
-        <section id="features" className="px-8 py-32 max-w-7xl mx-auto grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <Link href="/portfolio" className="group p-10 rounded-2xl border border-white/5 bg-white/[0.01] hover:border-cyan-500/30 transition-all duration-500 hover:bg-white/[0.02]">
-            <div className="w-12 h-12 rounded-xl bg-cyan-500/10 flex items-center justify-center text-cyan-500 mb-8 group-hover:scale-110 transition-transform">
-              <ShieldCheck size={24} />
-            </div>
-            <h3 className="text-xl font-bold text-white mb-4">硬核研报库</h3>
-            <p className="text-sm text-slate-500 leading-relaxed font-light italic">提供基于数据模型与实地调研的大宗商品深度分析报告。</p>
-          </Link>
-
-          <Link href="/intersection" className="group p-10 rounded-2xl border border-white/5 bg-white/[0.01] hover:border-cyan-500/30 transition-all duration-500 hover:bg-white/[0.02]">
-            <div className="w-12 h-12 rounded-xl bg-emerald-500/10 flex items-center justify-center text-emerald-500 mb-8 group-hover:scale-110 transition-transform">
-              <Zap size={24} />
-            </div>
-            <h3 className="text-xl font-bold text-white mb-4">跨界实验室</h3>
-            <p className="text-sm text-slate-500 leading-relaxed font-light italic">中医系统论与现代管理哲学在数字时代的耦合实践。</p>
-          </Link>
-
-          <Link href="/about" className="group p-10 rounded-2xl border border-white/5 bg-white/[0.01] hover:border-cyan-500/30 transition-all duration-500 hover:bg-white/[0.02]">
-            <div className="w-12 h-12 rounded-xl bg-amber-500/10 flex items-center justify-center text-amber-500 mb-8 group-hover:scale-110 transition-transform">
-              <Activity size={24} />
-            </div>
-            <h3 className="text-xl font-bold text-white mb-4">关于主理人</h3>
-            <p className="text-sm text-slate-500 leading-relaxed font-light italic">探索硅基逻辑与人类认知的边界，构建属于未来的数字资产观。</p>
-          </Link>
-        </section>
 
         {/* 6. Contact Section - Optimized & Aligned */}
         <section id="connect" className="py-32 px-8 relative overflow-hidden bg-[#0a0f1a]">
