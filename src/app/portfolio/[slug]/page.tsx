@@ -26,7 +26,16 @@ async function getReport(slug: string) {
   
   try {
     if (fs.existsSync(contentPath)) {
-      content = fs.readFileSync(contentPath, 'utf8');
+      let rawContent = fs.readFileSync(contentPath, 'utf8');
+      
+      // Sanitization: Remove injected <style> blocks from publisher
+      rawContent = rawContent.replace(/<style>[\s\S]*?<\/style>/gi, '');
+      
+      // Sanitization: Remove duplicate H1 headings (Obsidian often adds # Title)
+      // This matches "# Title" at the very beginning of the string or after whitespace
+      rawContent = rawContent.replace(/^(\s*#\s+.*$)/m, '');
+
+      content = rawContent.trim();
     } else {
       content = '⚠️ 报告内容正在同步中，请稍后再试...';
     }
@@ -55,7 +64,8 @@ export default async function ReportPage({ params }: { params: Promise<{ slug: s
 
   // Detect if the content is likely HTML (starts with <!DOCTYPE or contains tags)
   // Trust report metadata over heuristic detection for rendering mode
-  const isHtml = report.isHtml;
+  // Heuristic HTML detection: if it has tags, treat as HTML for better rendering
+  const isHtml = report.isHtml || (report.content.includes('<') && report.content.includes('>'));
 
   return (
     <div className="min-h-screen bg-background text-foreground font-sans selection:bg-brand-blue/30">
