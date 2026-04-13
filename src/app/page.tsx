@@ -19,7 +19,8 @@ export default function Home() {
 
       <main className="relative z-10">
         {/* 2. Hero Section - Strategic Spacing & Balanced Grid */}
-        <section id="hero" className="px-10 pt-24 pb-32 max-w-7xl mx-auto relative grid lg:grid-cols-[1.1fr_0.9fr] items-center gap-20">
+        <section id="hero" className="relative group overflow-hidden">
+          <div className="max-w-[1600px] mx-auto px-10 md:px-16 pt-24 pb-32 grid lg:grid-cols-[1.1fr_0.9fr] items-center gap-20 relative z-10">
           <div className="flex flex-col space-y-10">
             <div className="flex items-center gap-3">
               <div className="w-1.5 h-1.5 bg-cyan-500 rounded-full animate-pulse shadow-[0_0_8px_#38bdf8]"></div>
@@ -112,15 +113,16 @@ export default function Home() {
             <div className="absolute -bottom-10 -right-10 opacity-5 grayscale invert">
               <Cpu size={240} />
             </div>
+            </div>
           </div>
         </section>
 
 
-        <section id="connect" className="py-32 px-10 relative overflow-hidden bg-[#0a0f1a]">
+        <section id="connect" className="py-32 relative overflow-hidden bg-[#0a0f1a]">
           {/* Background Decor */}
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-cyan-500/[0.02] blur-[150px] pointer-events-none"></div>
           
-          <div className="max-w-7xl mx-auto relative">
+          <div className="max-w-[1600px] mx-auto px-10 md:px-16 relative">
             <div className="space-y-4 max-w-2xl mb-16">
               <div className="inline-flex items-center gap-2 px-3 py-1 bg-cyan-500/10 border border-cyan-500/20 rounded-full">
                 <span className="w-1.5 h-1.5 bg-cyan-500 rounded-full animate-pulse"></span>
