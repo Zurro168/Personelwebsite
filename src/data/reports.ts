@@ -364,17 +364,5 @@ export const ALL_REPORTS: Report[] = [
     image: 'https://images.unsplash.com/photo-1518186285589-2f7649de83e0?q=80&w=800',
     slug: 'ai-trading',
     hasContent: false
-  },
-  // --- 自动补齐其余 90 篇 ---
-  ...Array.from({ length: 90 }).map((_, i) => ({
-    id: `SCC-2026-${String(11 + i).padStart(3, '0')}`,
-    title: `深度专题 ${11 + i}：大宗商品供应链风险校准`,
-    description: '本系列专题旨在通过对全球核心资源节点的实时监测，提供具有实战价值的供应链风险预警逻辑。',
-    tag: (['商品研报', '交易员笔记', '矿业与产业链', 'AI × 供应链', '跨界实验'][i % 5]) as Report['tag'],
-    date: '2026-03-20',
-    readTime: '10 min',
-    image: `https://images.unsplash.com/photo-${1500000000000 + i}?q=80&w=800&auto=format&fit=crop`,
-    slug: `placeholder-topic-${i}`,
-    hasContent: false
-  }))
+  }
 ];
