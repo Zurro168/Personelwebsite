@@ -279,6 +279,29 @@ export const AUTHOR_INFO = ${JSON.stringify(newBioData, null, 2)};
             const dateMatch = registryContent.match(new RegExp(`slug:\\s*'${data.slug}'[^}]+date:\\s*'([^']+)'`, 's'));
             const existingDate = dateMatch ? dateMatch[1] : null;
 
+            // 🖼️ 自动封面图检索逻辑：优先 YAML -> 次选本地同名图片 -> 最后保底 Unsplash
+            let finalImage = data.image || data.cover; 
+            if (!finalImage) {
+                const possibleExtensions = ['.jpg', '.png', '.webp', '.jpeg'];
+                const imagesDir = path.join(process.cwd(), 'public/images/reports');
+                
+                // 确保目录存在（防死锁）
+                if (fs.existsSync(imagesDir)) {
+                    for (const ext of possibleExtensions) {
+                        const localFileName = `${data.slug}${ext}`;
+                        if (fs.existsSync(path.join(imagesDir, localFileName))) {
+                            finalImage = `/images/reports/${localFileName}`;
+                            console.log(`   - Detected local matching cover: ${localFileName}`);
+                            break;
+                        }
+                    }
+                }
+            }
+            // 依旧没找到则使用高质感保底图
+            if (!finalImage) {
+                finalImage = 'https://images.unsplash.com/photo-1579546929518-9e396f3cc809?q=80&w=1200&auto=format&fit=crop';
+            }
+
             const newEntry = {
                 id: `SCC-2026-${Math.floor(Math.random() * 900) + 100}`,
                 title: data.title || fileName.replace('.md', ''),
@@ -286,7 +309,7 @@ export const AUTHOR_INFO = ${JSON.stringify(newBioData, null, 2)};
                 tag: reportTag,
                 date: existingDate || finalDate, // 优先保留已存在的日期
                 readTime: data.readTime || '15 min',
-                image: data.image || '/images/reports/mining-strategy.png',
+                image: finalImage,
                 slug: data.slug,
                 hasContent: true
             };
