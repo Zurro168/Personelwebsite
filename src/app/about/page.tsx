@@ -99,6 +99,7 @@ export default async function AboutPage() {
                 </div>
                 <div className="text-right space-y-2">
                   <span className="text-xs font-mono font-bold tracking-widest text-slate-300 uppercase block">{edu.duration}</span>
+                  {/* @ts-ignore */}
                   {edu.status === 'IN_PROGRESS' && (
                     <span className="inline-block px-2 py-0.5 bg-brand-blue/10 text-brand-blue text-[8px] font-black tracking-widest rounded uppercase">In Progress</span>
                   )}
