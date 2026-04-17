@@ -51,5 +51,67 @@ export const AUTHOR_INFO = {
     latency: '14.2ms',
     throughput: '1,240 pkts/s',
     entropy: '0.842'
-  }
+  },
+
+  // 🎓 教育背景 (Education)
+  education: [
+    {
+      degree: "产业经济学 / 硕士",
+      school: "双一流重点大学",
+      duration: "2010 - 2013",
+      status: "GRADUATED"
+    },
+    {
+      degree: "国际贸易与金融 / 学士",
+      school: "重点财经大学",
+      duration: "2006 - 2010",
+      status: "GRADUATED"
+    }
+  ],
+
+  // 💼 工作经历 (Work Experience)
+  experience: [
+    {
+      role: "主理人 & 架构师",
+      company: "硅基大宗 (Silicon Commodity)",
+      duration: "2024 - PRESENT",
+      description: "主导大宗商品投研体系的数字化转型，构建基于 AI Agent 的情报自动化采集与研报生成流水线。"
+    },
+    {
+      role: "资深投研经理",
+      company: "某大型有色金属产业集团",
+      duration: "2016 - 2024",
+      description: "深耕铜、铝、锌及战略金属产业链，负责全球供应平衡表建模及跨国矿山项目投后资产管理。"
+    },
+    {
+      role: "初级分析师",
+      company: "大宗商品贸易行",
+      duration: "2013 - 2016",
+      description: "负责基础金属现货贸易风险管理，执行 LME/SHFE 跨市套利与基差交易策略方案。"
+    }
+  ],
+
+  // 🏆 荣誉奖项 (Awards)
+  awards: [
+    {
+      title: "年度数字化转型创新奖",
+      source: "行业技术高峰论坛",
+      year: "2025"
+    },
+    {
+      title: "最佳有色金属策略师",
+      source: "大宗商品研究协会",
+      year: "2022"
+    }
+  ],
+
+  // ⚡ 技能矩阵 (Skills - 用于底部动态环)
+  skills: [
+    { name: "Python / AI", level: 92 },
+    { name: "投研建模", level: 95 },
+    { name: "供应链治理", level: 88 },
+    { name: "全栈开发", level: 85 },
+    { name: "现货风控", level: 90 },
+    { name: "双语商务", level: 80 }
+  ]
 };
