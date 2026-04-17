@@ -82,31 +82,29 @@ async function sync() {
         ].includes(p));
         let rawCategory = categoryParts.length > 0 ? categoryParts[categoryParts.length - 1] : '商品研报';
         
-        // 映射规则：将细分领域折叠进大类
+        // 映射规则：公众号同名专栏收敛逻辑
         const categoryMap: Record<string, string> = {
-          '未分类': '商品研报',
-          '有色金属': '商品研报',
-          '黑色金属': '商品研报',
-          '电池金属': '商品研报',
-          '能源化工': '商品研报',
-          '宏观研报': '商品研报',
-          '宏观周期': '商品研报',
-          '宏观研究': '商品研报',
+          '00_Brand': '关于我们',
+          '00_Identity': '关于我们',
+          '关于': '关于我们',
+          '宏观周期': '宏观觉悟',
+          '宏观研究': '宏观觉悟',
+          '宏观研报': '宏观觉悟',
+          '#宏观觉悟': '宏观觉悟',
+          '商品研报': '硬核商品',
+          '矿业与产业链': '硬核商品',
+          '#硬核商品': '硬核商品',
+          '有色金属': '硬核商品',
+          '战略金属': '硬核商品',
+          'AI × 供应链': '硅基供应链',
+          'AI Agent': '硅基供应链',
+          '供应链风险校准': '硅基供应链',
+          '交易员笔记': '交易员笔记',
+          '跨界实验': '跨界实验',
           '跨界': '跨界实验'
         };
         
-        const folderCategory = categoryMap[rawCategory] || rawCategory;
-
-        const fileContent = fs.readFileSync(filePath, 'utf8');
-        const { data, content } = matter(fileContent);
-
-        if (!data.slug && !filePath.includes(SYSTEM_DIR)) {
-            console.warn(`⚠️ Skipping ${fileName}: Missing 'slug' in Frontmatter.`);
-            continue;
-        }
-
-        const isSystemFile = filePath.includes(SYSTEM_DIR);
-        const rawTag = data.tag || folderCategory;
+        const rawTag = data.tag ? data.tag.replace('#', '') : folderCategory;
         const reportTag = categoryMap[rawTag] || rawTag;
 
         // --- 逻辑分流 S: 处理「系统页面」(Bio/About) ---
