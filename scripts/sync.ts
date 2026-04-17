@@ -144,12 +144,12 @@ async function sync() {
                        email: data.email || "zurro_w@foxmail.com",
                        wechat: { id: "zurro_w" },
                        officialAccount: { name: "Siliconcommodity" },
-                       linkedin: (data.linkedin || "www.linkedin.com/in/gordon-wang-63622821").startsWith('http') 
+                       linkedin: ((data.linkedin || "www.linkedin.com/in/gordon-wang-63622821").startsWith('http') 
                                  ? (data.linkedin || "www.linkedin.com/in/gordon-wang-63622821") 
-                                 : `https://${data.linkedin || "www.linkedin.com/in/gordon-wang-63622821"}`,
-                       x: (data.twitter || data.x || "x.com/Gordon800619").startsWith('http')
+                                 : `https://${data.linkedin || "www.linkedin.com/in/gordon-wang-63622821"}`),
+                       x: ((data.twitter || data.x || "x.com/Gordon800619").startsWith('http')
                                  ? (data.twitter || data.x || "x.com/Gordon800619")
-                                 : `https://${data.twitter || data.x || "x.com/Gordon800619"}`
+                                 : `https://${data.twitter || data.x || "x.com/Gordon800619"}`)
                     },
                     copyright: {
                         owner: "硅基大宗 (Silicon Commodity)",
