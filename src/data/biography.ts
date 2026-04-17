@@ -101,6 +101,18 @@ export const AUTHOR_INFO = {
     "linkedin": "https://www.linkedin.com/in/gordon-wang-63622821",
     "x": "https://x.com/Gordon800619"
   },
+  "location": "Decision Frontier / 决策前沿",
+  "focus": [
+    "Commodities (大宗商品)",
+    "AI Architecture (AI 架构)",
+    "Systemic Governance (系统治理)"
+  ],
+  "tags": [
+    "Systemic",
+    "Resilient",
+    "Algorithm-Driven",
+    "Evolutionary"
+  ],
   "systemLogs": [
     {
       "id": 1,

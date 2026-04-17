@@ -151,6 +151,9 @@ async function sync() {
                                  ? (data.twitter || data.x || "x.com/Gordon800619")
                                  : `https://${data.twitter || data.x || "x.com/Gordon800619"}`)
                     },
+                    location: "Decision Frontier / 决策前沿",
+                    focus: ["Commodities (大宗商品)", "AI Architecture (AI 架构)", "Systemic Governance (系统治理)"],
+                    tags: ["Systemic", "Resilient", "Algorithm-Driven", "Evolutionary"],
                     systemLogs: [
                         { id: 1, text: `VAULT_SCAN: KNOWLEDGE_VAULT_RELOADED`, status: 'SUCCESS' },
                         { id: 2, text: `DATA_PIPELINE: PORTFOLIO_INDEX_REFRESHED`, status: 'ACTIVE' },
