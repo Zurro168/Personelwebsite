@@ -1,389 +1,364 @@
-<!DOCTYPE html>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@200..900&display=swap');
+  .report-body { max-width: 100% !important; border: none !important; font-family: 'Crimson Pro', serif !important; }
+  body { background-color: transparent !important; color: inherit !important; font-family: 'Crimson Pro', serif !important; }
+  table { width: 100% !important; max-width: 100% !important; display: block; overflow-x: auto; border-color: rgba(56,189,248,0.1) !important; border-collapse: collapse; }
+  .red-box, [class*="red-"], [class*="amber-"], [class*="orange-"] { 
+    border-color: #38bdf8 !important; 
+    background-color: rgba(56,189,248,0.05) !important; 
+    color: #fff !important; 
+    border-radius: 4px;
+    padding: 1rem;
+  }
+  img { max-width: 100% !important; height: auto !important; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05); }
+  canvas { max-width: 100% !important; width: 100% !important; }
+  .glass-panel { background: rgba(15, 23, 42, 0.6) !important; border-color: rgba(56, 189, 248, 0.1) !important; color: #fff !important; }
+</style>
+                <style>
 
-<html lang="zh-CN">
+        body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; }
 
-<head>
+       .chart-container {
 
-    <meta charset="UTF-8">
+            position: relative;
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            width: 100%;
 
-    <title>中医系统论：大宗商品供给侧博弈 (2018-2026)</title>
+            max-width: 800px;
 
-    <script src="https://cdn.tailwindcss.com"></script>
+            margin-left: auto;
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+            margin-right: auto;
 
-    <style>
+            height: 350px;
 
-        body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; }
+        }
 
-       .chart-container {
+       .citation { font-size: 0.75rem;  vertical-align: super; margin-left: 2px; }
 
-            position: relative;
+       .flow-card { transition: all 0.3s ease; }
 
-            width: 100%;
+       .flow-card:hover { transform: translateY(-5px); box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); }
 
-            max-width: 800px;
+    </style>
 
-            margin-left: auto;
-
-            margin-right: auto;
-
-            height: 350px;
-
-        }
-
-       .citation { font-size: 0.75rem; color: #94a3b8; vertical-align: super; margin-left: 2px; }
-
-       .flow-card { transition: all 0.3s ease; }
-
-       .flow-card:hover { transform: translateY(-5px); box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); }
-
-    </style>
-
-</head>
-
-<body class="bg-slate-50 text-slate-800">
 
   
 
-    <header class="bg-slate-900 text-white py-12 px-4 shadow-xl border-b-4 border-amber-500">
-
-        <div class="max-w-7xl mx-auto">
-
-            <h1 class="text-3xl md:text-5xl font-extrabold mb-4 tracking-tight">中医系统论：大宗商品走势深度诊断 (2018-2026)</h1>
-
-            <p class="text-lg md:text-xl text-slate-300 max-w-4xl leading-relaxed">
-
-                本报告将2018-2026年的宏观周期抽象为“气血”运行。2026年4月，生意社BPI报收1114点 [1]，全球商品阴阳比例呈现2:1的“阴盛阳衰”格局，反映了传统能源（火）的衰落与绿色转型（金）的结构性错配。
-
-            </p>
-
-        </div>
-
-    </header>
+    
 
   
 
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-16">
+    <main class="max-w-full mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-16">
 
   
 
-        <section>
+        <section>
 
-            <div class="mb-8">
+            <div class="mb-8">
 
-                <h2 class="text-2xl md:text-3xl font-bold text-slate-900 border-l-4 border-cyan-500 pl-4 mb-4">第一诊：阴阳之辨 —— 流动性与实物库存的背离</h2>
+                <h2 class="text-2xl md:text-3xl font-bold text-slate-100 border-l-4 border-cyan-500 pl-4 mb-4">第一诊：阴阳之辨 —— 流动性与实物库存的背离</h2>
 
-                <p class="text-slate-600 text-lg leading-relaxed">
+                <p class="text-slate-400 text-lg leading-relaxed">
 
-                    2026年2月，全球M2流动性（阳）升至100.86万亿美元。然而，原油市场由于非OPEC+供应过剩（1.2 mb/d）表现出显著的“阴性”压制，导致WTI原油在4月初大幅跳水16.41%。
+                    2026年2月，全球M2流动性（阳）升至100.86万亿美元。然而，原油市场由于非OPEC+供应过剩（1.2 mb/d）表现出显著的“阴性”压制，导致WTI原油在4月初大幅跳水16.41%。
 
-                </p>
+                </p>
 
-            </div>
+            </div>
 
-            <div class="bg-white rounded-2xl shadow-md p-6 border border-slate-100">
+            <div class="bg-white rounded-2xl shadow-md p-6 border border-slate-100">
 
-                <h3 class="text-xl font-bold text-center mb-2 text-slate-800">全球商品阴阳指数走势 (2018-2026.04)</h3>
+                <h3 class="text-xl font-bold text-center mb-2 text-slate-200">全球商品阴阳指数走势 (2018-2026.04)</h3>
 
-                <div class="chart-container">
+                <div class="chart-container">
 
-                    <canvas id="yinYangChart"></canvas>
+                    <canvas id="yinYangChart"></canvas>
 
-                </div>
+                </div>
 
-                <p class="text-center text-sm text-slate-500 mt-4">
+                <p class="text-center text-sm text-slate-500 mt-4">
 
-                    实线：全球M2货币总量（阳）；虚线：大宗商品实物价格/库存深度（阴）。
+                    实线：全球M2货币总量（阳）；虚线：大宗商品实物价格/库存深度（阴）。
 
-                </p>
+                </p>
 
-            </div>
+            </div>
 
-        </section>
-
-  
-
-        <section>
-
-            <div class="mb-8">
-
-                <h2 class="text-2xl md:text-3xl font-bold text-slate-900 border-l-4 border-emerald-500 pl-4 mb-4">第二诊：五行能量 —— 板块分化与结构转型</h2>
-
-                <p class="text-slate-600 text-lg leading-relaxed">
-
-                    2026年4月，<strong>土（贵金属）</strong>由于避险与央行购金需求持续暴涨，金价较2019年近乎翻倍。相比之下，<strong>火（能源）</strong>因需求放缓而降温，而<strong>金（工业金属）</strong>则受AI与电网需求支撑，表现出极强的韧性。
-
-                </p>
-
-            </div>
-
-            <div class="bg-white rounded-2xl shadow-md p-6 border border-slate-100">
-
-                <h3 class="text-xl font-bold text-center mb-2 text-slate-800">2026年4月大宗商品五行热度诊断</h3>
-
-                <div class="chart-container">
-
-                    <canvas id="fiveElementsChart"></canvas>
-
-                </div>
-
-                <p class="text-center text-sm text-slate-500 mt-4">
-
-                    雷达图显示“金、土”两旺，“火、水”转弱的失衡态势。
-
-                </p>
-
-            </div>
-
-        </section>
+        </section>
 
   
 
-        <section>
+        <section>
 
-            <div class="mb-8">
+            <div class="mb-8">
 
-                <h2 class="text-2xl md:text-3xl font-bold text-slate-900 border-l-4 border-red-500 pl-4 mb-4">第三诊：脏腑经络 —— 全球产业链的系统性博弈</h2>
+                <h2 class="text-2xl md:text-3xl font-bold text-slate-100 border-l-4 border-emerald-500 pl-4 mb-4">第二诊：五行能量 —— 板块分化与结构转型</h2>
 
-                <p class="text-slate-600 text-lg leading-relaxed mb-6">
+                <p class="text-slate-400 text-lg leading-relaxed">
 
-                    在“资源民族主义”[2]背景下，各脏腑功能正发生漂移：
+                    2026年4月，<strong>土（贵金属）</strong>由于避险与央行购金需求持续暴涨，金价较2019年近乎翻倍。相比之下，<strong>火（能源）</strong>因需求放缓而降温，而<strong>金（工业金属）</strong>则受AI与电网需求支撑，表现出极强的韧性。
 
-                </p>
+                </p>
 
-                <div class="bg-slate-900 rounded-2xl p-6 md:p-10 text-white shadow-xl">
+            </div>
 
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+            <div class="bg-white rounded-2xl shadow-md p-6 border border-slate-100">
 
-                        <div class="flow-card bg-red-900 border-2 border-red-500 rounded-xl p-4">
+                <h3 class="text-xl font-bold text-center mb-2 text-slate-200">2026年4月大宗商品五行热度诊断</h3>
 
-                            <div class="text-3xl mb-2">❤️</div>
+                <div class="chart-container">
 
-                            <h4 class="font-bold text-lg text-red-300">心 (金融定价)</h4>
+                    <canvas id="fiveElementsChart"></canvas>
 
-                            <p class="text-sm mt-2 text-slate-300">美联储降息预期<br>左右黄金与美元定价周期</p>
+                </div>
 
-                        </div>
+                <p class="text-center text-sm text-slate-500 mt-4">
 
-                        <div class="hidden md:flex items-center justify-center text-slate-500 text-3xl">↔️</div>
+                    雷达图显示“金、土”两旺，“火、水”转弱的失衡态势。
 
-                        <div class="flow-card bg-emerald-900 border-2 border-emerald-500 rounded-xl p-4">
+                </p>
 
-                            <div class="text-3xl mb-2">⚒️</div>
+            </div>
 
-                            <h4 class="font-bold text-lg text-emerald-300">肝 (资源供给)</h4>
-
-                            <p class="text-sm mt-2 text-slate-300">OPEC+减产与非OPEC增产<br>引发生产格局剧变</p>
-
-                        </div>
-
-                        <div class="flow-card bg-amber-900 border-2 border-amber-500 rounded-xl p-4">
-
-                            <div class="text-3xl mb-2">⚙️</div>
-
-                            <h4 class="font-bold text-lg text-amber-300">脾 (制造转化)</h4>
-
-                            <p class="text-sm mt-2 text-slate-300">中国工业活动放缓<br>对传统能源形成“压制”</p>
-
-                        </div>
-
-                        <div class="hidden md:flex items-center justify-center text-slate-500 text-3xl">↔️</div>
-
-                        <div class="flow-card bg-slate-800 border-2 border-slate-500 rounded-xl p-4">
-
-                            <div class="text-3xl mb-2">🚢</div>
-
-                            <h4 class="font-bold text-lg text-slate-300">肺 (物流呼吸)</h4>
-
-                            <p class="text-sm mt-2 text-slate-400">红海因素与新船入市<br>导致运力在震荡中过剩</p>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
+        </section>
 
   
 
-        <section>
+        <section>
 
-            <div class="mb-8">
+            <div class="mb-8">
 
-                <h2 class="text-2xl md:text-3xl font-bold text-slate-900 border-l-4 border-amber-500 pl-4 mb-4">第四诊：望闻问切 —— 定价权的颗粒化 (2026 新规)</h2>
+                <h2 class="text-2xl md:text-3xl font-bold text-slate-100 border-l-4 border-brand-blue/30 pl-4 mb-4">第三诊：脏腑经络 —— 全球产业链的系统性博弈</h2>
 
-                <p class="text-slate-600 text-lg leading-relaxed">
+                <p class="text-slate-400 text-lg leading-relaxed mb-6">
 
-                    彭博2026年4月推出的<strong>单资产指数 (BCOM Global Singles)</strong> 标志着定价权正从大品种向“颗粒化”小品种转移。非美货币计价权正在特定资源（如锂、稀土）领域崛起。
+                    在“资源民族主义”[2]背景下，各脏腑功能正发生漂移：
 
-                </p>
+                </p>
 
-            </div>
+                <div class="bg-slate-900 rounded-2xl p-6 md:p-10 text-white shadow-xl">
 
-            <div class="bg-white rounded-2xl shadow-md p-6 border border-slate-100">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
 
-                <h3 class="text-xl font-bold text-center mb-2 text-slate-800">2026 全球大宗定价权聚散模型</h3>
+                        <div class="flow-card bg-brand-blue/20 border-2 border-brand-blue/30 rounded-xl p-4">
 
-                <div class="chart-container">
+                            <div class="text-3xl mb-2">❤️</div>
 
-                    <canvas id="pricingPowerChart"></canvas>
+                            <h4 class="font-bold text-lg text-brand-blue">心 (金融定价)</h4>
 
-                </div>
+                            <p class="text-sm mt-2 text-slate-300">美联储降息预期<br>左右黄金与美元定价周期</p>
 
-            </div>
+                        </div>
 
-        </section>
+                        <div class="hidden md:flex items-center justify-center text-slate-500 text-3xl">↔️</div>
 
-  
+                        <div class="flow-card bg-emerald-900 border-2 border-emerald-500 rounded-xl p-4">
 
-    </main>
+                            <div class="text-3xl mb-2">⚒️</div>
 
-  
+                            <h4 class="font-bold text-lg text-emerald-300">肝 (资源供给)</h4>
 
-    <footer class="bg-slate-900 text-slate-400 py-6 text-center text-sm">
+                            <p class="text-sm mt-2 text-slate-300">OPEC+减产与非OPEC增产<br>引发生产格局剧变</p>
 
-        <p>基于 2026.04 最新研究数据整合 &copy; 大宗商品系统论实验室</p>
+                        </div>
 
-    </footer>
+                        <div class="flow-card bg-brand-blue/10 border-2 border-brand-blue/20 rounded-xl p-4">
 
-  
+                            <div class="text-3xl mb-2">⚙️</div>
 
-    <script>
+                            <h4 class="font-bold text-lg text-brand-blue">脾 (制造转化)</h4>
 
-        const wrapLabel = (text) => (typeof text === 'string' && text.length > 12)? [text.slice(0, 12), text.slice(12)] : text;
+                            <p class="text-sm mt-2 text-slate-300">中国工业活动放缓<br>对传统能源形成“压制”</p>
 
-  
+                        </div>
 
-        // Yin-Yang Chart: M2 Liquidity vs Commodity Index
+                        <div class="hidden md:flex items-center justify-center text-slate-500 text-3xl">↔️</div>
 
-        new Chart(document.getElementById('yinYangChart'), {
+                        <div class="flow-card bg-slate-800 border-2 border-slate-500 rounded-xl p-4">
 
-            type: 'line',
+                            <div class="text-3xl mb-2">🚢</div>
 
-            data: {
+                            <h4 class="font-bold text-lg text-slate-300">肺 (物流呼吸)</h4>
 
-                labels: ['2018', '2020', '2021', '2022', '2023', '2024', '2025', '2026.Q1'],
+                            <p class="text-sm mt-2 text-slate-400">红海因素与新船入市<br>导致运力在震荡中过剩</p>
 
-                datasets: [
+                        </div>
 
-                    {
+                    </div>
 
-                        label: '全球流动性 (M2 阳)',
+                </div>
 
-                        data: [80, 85, 94, 98, 95, 96, 98, 100.8],
+            </div>
 
-                        borderColor: '#ef4444',
-
-                        backgroundColor: 'rgba(239, 68, 68, 0.1)',
-
-                        fill: true,
-
-                        tension: 0.3
-
-                    },
-
-                    {
-
-                        label: '实物价格/库存 (阴)',
-
-                        data: [100, 75, 110, 120, 105, 102, 115, 111],
-
-                        borderColor: '#06b6d4',
-
-                        borderDash: [5, 5],
-
-                        tension: 0.3
-
-                    }
-
-                ]
-
-            },
-
-            options: { responsive: true, maintainAspectRatio: false }
-
-        });
+        </section>
 
   
 
-        // Five Elements Radar Chart
+        <section>
 
-        new Chart(document.getElementById('fiveElementsChart'), {
+            <div class="mb-8">
 
-            type: 'radar',
+                <h2 class="text-2xl md:text-3xl font-bold text-slate-100 border-l-4 border-brand-blue/20 pl-4 mb-4">第四诊：望闻问切 —— 定价权的颗粒化 (2026 新规)</h2>
 
-            data: {
+                <p class="text-slate-400 text-lg leading-relaxed">
 
-                labels: ['火 (能源)', '土 (贵金属)', '金 (工业金属)', '水 (航运)', '木 (农产品)'],
+                    彭博2026年4月推出的<strong>单资产指数 (BCOM Global Singles)</strong> 标志着定价权正从大品种向“颗粒化”小品种转移。非美货币计价权正在特定资源（如锂、稀土）领域崛起。
 
-                datasets: [{
+                </p>
 
-                    label: '2026 市场能量分布',
+            </div>
 
-                    data: [45, 95, 80, 55, 65],
+            <div class="bg-white rounded-2xl shadow-md p-6 border border-slate-100">
 
-                    backgroundColor: 'rgba(245, 158, 11, 0.2)',
+                <h3 class="text-xl font-bold text-center mb-2 text-slate-200">2026 全球大宗定价权聚散模型</h3>
 
-                    borderColor: '#f59e0b',
+                <div class="chart-container">
 
-                    pointBackgroundColor: '#ef4444'
+                    <canvas id="pricingPowerChart"></canvas>
 
-                }]
+                </div>
 
-            },
+            </div>
 
-            options: { responsive: true, maintainAspectRatio: false, scales: { r: { min: 0, max: 100 } } }
-
-        });
+        </section>
 
   
 
-        // Pricing Power Bubble
+    </main>
 
-        new Chart(document.getElementById('pricingPowerChart'), {
+  
 
-            type: 'bubble',
+    
 
-            data: {
+  
 
-                datasets: [
+    <script>
 
-                    { label: '北美 (心-金融权)', data: [{x: 55, y: 95, r: 25}], backgroundColor: '#ef4444' },
+        const wrapLabel = (text) => (typeof text === 'string' && text.length > 12)? [text.slice(0, 12), text.slice(12)] : text;
 
-                    { label: '东亚 (脾-实体权)', data: [{x: 90, y: 60, r: 35}], backgroundColor: '#f59e0b' },
+  
 
-                    { label: '中东/澳洲 (肝-资源权)', data: [{x: 85, y: 30, r: 20}], backgroundColor: '#10b981' }
+        // Yin-Yang Chart: M2 Liquidity vs Commodity Index
 
-                ]
+        new Chart(document.getElementById('yinYangChart'), {
 
-            },
+            type: 'line',
 
-            options: {
+            data: {
 
-                responsive: true,
+                labels: ['2018', '2020', '2021', '2022', '2023', '2024', '2025', '2026.Q1'],
 
-                maintainAspectRatio: false,
+                datasets: [
 
-                scales: {
+                    {
 
-                    x: { title: { display: true, text: '实物掌控力 (0-100)' } },
+                        label: '全球流动性 (M2 阳)',
 
-                    y: { title: { display: true, text: '金融定价权 (0-100)' } }
+                        data: [80, 85, 94, 98, 95, 96, 98, 100.8],
 
-                }
+                        borderColor: '#38bdf8',
 
-            }
+                        backgroundColor: 'rgba(239, 68, 68, 0.1)',
 
-        });
+                        fill: true,
 
-    </script>
+                        tension: 0.3
 
-</body>
+                    },
 
-</html>
+                    {
+
+                        label: '实物价格/库存 (阴)',
+
+                        data: ,
+
+                        borderColor: '#06b6d4',
+
+                        borderDash: [5, 5],
+
+                        tension: 0.3
+
+                    }
+
+                ]
+
+            },
+
+            options: { responsive: true, maintainAspectRatio: false }
+
+        });
+
+  
+
+        // Five Elements Radar Chart
+
+        new Chart(document.getElementById('fiveElementsChart'), {
+
+            type: 'radar',
+
+            data: {
+
+                labels: ['火 (能源)', '土 (贵金属)', '金 (工业金属)', '水 (航运)', '木 (农产品)'],
+
+                datasets: [{
+
+                    label: '2026 市场能量分布',
+
+                    data: ,
+
+                    backgroundColor: 'rgba(245, 158, 11, 0.2)',
+
+                    borderColor: '#f59e0b',
+
+                    pointBackgroundColor: '#38bdf8'
+
+                }]
+
+            },
+
+            options: { responsive: true, maintainAspectRatio: false, scales: { r: { min: 0, max: 100 } } }
+
+        });
+
+  
+
+        // Pricing Power Bubble
+
+        new Chart(document.getElementById('pricingPowerChart'), {
+
+            type: 'bubble',
+
+            data: {
+
+                datasets: [
+
+                    { label: '北美 (心-金融权)', data: [{x: 55, y: 95, r: 25}], backgroundColor: '#38bdf8' },
+
+                    { label: '东亚 (脾-实体权)', data: [{x: 90, y: 60, r: 35}], backgroundColor: '#f59e0b' },
+
+                    { label: '中东/澳洲 (肝-资源权)', data: [{x: 85, y: 30, r: 20}], backgroundColor: '#10b981' }
+
+                ]
+
+            },
+
+            options: {
+
+                responsive: true,
+
+                maintainAspectRatio: false,
+
+                scales: {
+
+                    x: { title: { display: true, text: '实物掌控力 (0-100)' } },
+
+                    y: { title: { display: true, text: '金融定价权 (0-100)' } }
+
+                }
+
+            }
+
+        });
+
+    </script>

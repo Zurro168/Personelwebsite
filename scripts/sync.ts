@@ -308,8 +308,12 @@ async function sync() {
         if (!fs.existsSync(archiveDest)) fs.mkdirSync(archiveDest, { recursive: true });
         
         const archivePath = path.join(archiveDest, fileName);
-        fs.renameSync(filePath, archivePath);
-        console.log(`📦 Archived: ${fileName} moved to 10_Content/03_Published/${relativeDir}.\n`);
+        if (filePath !== archivePath) {
+            fs.renameSync(filePath, archivePath);
+            console.log(`📦 Archived: ${fileName} moved to 10_Content/03_Published/${relativeDir}.\n`);
+        } else {
+            console.log(`✅ ${fileName} is already in archive. Skipping move.\n`);
+        }
     }
 
     console.log('🏆 All-Pass Sync Complete. Industrial Intelligence Terminal updated.');
