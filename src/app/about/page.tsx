@@ -92,16 +92,33 @@ export default async function AboutPage() {
           </div>
           <div className="space-y-16">
             {AUTHOR_INFO.education.map((edu, idx) => (
-              <div key={idx} className="group grid md:grid-cols-[1fr_auto] gap-4">
-                <div className="space-y-2">
-                  <h3 className="text-2xl font-bold group-hover:text-brand-blue transition-colors">{edu.degree}</h3>
+              <div key={idx} className="group grid md:grid-cols-[auto_1fr_auto] gap-8 items-center">
+                {/* 🏛️ School Logo Section */}
+                <div className="w-20 h-20 rounded-2xl bg-slate-50 border border-slate-100 p-3 flex items-center justify-center overflow-hidden shrink-0 group-hover:bg-white group-hover:border-brand-blue/30 transition-all duration-500 shadow-sm relative">
+                   <div className="absolute inset-0 bg-gradient-to-br from-brand-blue/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+                   {/* @ts-ignore */}
+                   {edu.logo ? (
+                     <img 
+                       /* @ts-ignore */
+                       src={edu.logo} 
+                       alt={edu.school} 
+                       className="w-full h-full object-contain filter grayscale group-hover:grayscale-0 transition-all duration-700 relative z-10"
+                     />
+                   ) : (
+                     <GraduationCap className="text-slate-300 relative z-10" size={32} />
+                   )}
+                </div>
+
+                <div className="space-y-1">
+                  <h3 className="text-2xl font-bold group-hover:text-brand-blue transition-all duration-300">{edu.degree}</h3>
                   <p className="text-slate-500 text-lg font-light tracking-wide">{edu.school}</p>
                 </div>
+
                 <div className="text-right space-y-2">
-                  <span className="text-xs font-mono font-bold tracking-widest text-slate-300 uppercase block">{edu.duration}</span>
+                  <span className="text-sm font-mono font-bold tracking-widest text-slate-300 uppercase block">{edu.duration}</span>
                   {/* @ts-ignore */}
                   {edu.status === 'IN_PROGRESS' && (
-                    <span className="inline-block px-2 py-0.5 bg-brand-blue/10 text-brand-blue text-[8px] font-black tracking-widest rounded uppercase">In Progress</span>
+                    <span className="inline-block px-2 py-0.5 bg-brand-blue/10 text-brand-blue text-[8px] font-black tracking-widest rounded uppercase animate-pulse">In Progress</span>
                   )}
                 </div>
               </div>

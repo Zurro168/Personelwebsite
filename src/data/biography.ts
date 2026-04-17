@@ -16,12 +16,14 @@ export const AUTHOR_INFO = {
     {
       "degree": "全球运营管理（GOM） / 硕士",
       "school": "香港大学Space商学院",
-      "duration": "2015 - 2016"
+      "duration": "2015 - 2016",
+      "logo": "/brand/hku.png"
     },
     {
       "degree": "电子商务 / 学士",
       "school": "西安交通大学",
-      "duration": "1998 - 2002"
+      "duration": "1998 - 2002",
+      "logo": "/brand/xjtu.png"
     }
   ],
   "experience": [
