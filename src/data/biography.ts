@@ -26,8 +26,9 @@ export const AUTHOR_INFO = {
       name: "Siliconcommodity",
       qrCode: "/brand/official-account.png",
     },
-    linkedin: "www.linkedin.com/in/gordon-wang-63622821", 
-    x: "#", 
+    linkedin: "https://www.linkedin.com/in/gordon-wang-63622821", 
+    x: "https://x.com/Gordon800619", 
+    github: "https://github.com/Zurro168",
     email: "zurro_w@foxmail.com"
   },
 
