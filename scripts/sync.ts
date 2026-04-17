@@ -310,6 +310,12 @@ export const AUTHOR_INFO = ${JSON.stringify(newBioData, null, 2)};
 
             const isPinned = fileName.toLowerCase() === 'about.md';
 
+            // 🛑 Path Sanitization: Stop local Windows paths from breaking the build
+            let safeImage = finalImage;
+            if (safeImage.includes('\\') || (safeImage.includes(':') && !safeImage.startsWith('http'))) {
+                safeImage = `/images/reports/${data.slug}.png`;
+            }
+
             const newEntry = {
                 id: `SCC-2026-${Math.floor(Math.random() * 900) + 100}`,
                 title: data.title || fileName.replace('.md', ''),
@@ -317,7 +323,7 @@ export const AUTHOR_INFO = ${JSON.stringify(newBioData, null, 2)};
                 tag: isPinned ? '关于我们' : reportTag,
                 date: existingDate || finalDate, // 优先保留已存在的日期
                 readTime: data.readTime || '15 min',
-                image: finalImage,
+                image: safeImage,
                 slug: data.slug,
                 hasContent: true,
                 isPinned: isPinned
