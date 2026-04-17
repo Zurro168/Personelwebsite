@@ -28,8 +28,12 @@ obsidianFiles.forEach(filePath => {
     
     if (slug) {
         const stats = fs.statSync(filePath);
-        // 优先使用 Frontmatter 里的日期，否则用物理创建日期
-        const actualDate = data.date || stats.birthtime.toISOString().split('T')[0];
+        // 优先使用 YAML 里的发布日期声明，确保格式为 YYYY-MM-DD
+        let rawDate = data.publish_date || data.date || stats.birthtime;
+        if (rawDate instanceof Date) {
+            rawDate = rawDate.toISOString().split('T')[0];
+        }
+        const actualDate = rawDate;
         
         // 正则：找到该 slug 对应的 date 行进行替换
         const slugRegex = new RegExp(`(slug:\\s*'${slug}'[^{}]*?date:\\s*')[^']+(')`, 's');

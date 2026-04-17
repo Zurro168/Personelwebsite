@@ -223,10 +223,10 @@ async function sync() {
             fs.writeFileSync(reportContentPath, finalContent.trim());
             console.log(`   - Content saved to public assets.`);
 
-            // 1.5 提取日期逻辑：优先 Frontmatter，次选物理创建时间，最后保底今天
+            // 1.5 提取日期逻辑：优先 YAML 的 publish_date 或 date，次选物理创建时间，最后保底今天
             const stats = fs.statSync(filePath);
             const physicalDate = stats.birthtime.toISOString().split('T')[0];
-            const finalDate = data.date || physicalDate || new Date().toISOString().split('T')[0];
+            const finalDate = data.publish_date || data.date || physicalDate || new Date().toISOString().split('T')[0];
 
             // 2. 更新 reports.ts 注册表
             let registryContent = fs.readFileSync(REPORTS_REGISTRY_FILE, 'utf8');
