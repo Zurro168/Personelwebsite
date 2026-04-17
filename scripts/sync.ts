@@ -88,7 +88,8 @@ async function sync() {
       '跨界': '跨界实验'
     };
 
-    for (const filePath of files) {
+    for (let rawFilePath of files) {
+        const filePath = rawFilePath.split(path.sep).join('/');
         const fileName = path.basename(filePath);
         const sourceRoot = filePath.includes(ARCHIVE_DIR) ? ARCHIVE_DIR : 
                            filePath.includes(SYSTEM_DIR) ? SYSTEM_DIR : OBSIDIAN_PUBLISH_DIR;
@@ -130,7 +131,7 @@ async function sync() {
             // ... 同 Report 的 HTML 清理逻辑 ...
             fs.writeFileSync(systemContentPath, finalContent);
             console.log(`   - System resource synced to site structure.`);
-            // 注意：系统文件不移动，保持在 04_System 方便反复维护
+            // 注意：系统文件不移动，保持在 00_Brand 方便反复维护
             continue;
         }
 

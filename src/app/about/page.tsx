@@ -76,7 +76,7 @@ export default async function AboutPage() {
                   </div>
                   <div className="space-y-12 text-xl md:text-2xl font-medium leading-[1.8] text-slate-300">
                     <p>
-                      主理人深耕国际大宗商品领域。为了便于你灵活更新，请在 Obsidian 的 <code className="text-brand-blue">04_System/About.md</code> 中编写您的详细履历。
+                      主理人深耕国际大宗商品领域。为了便于你灵活更新，请在 Obsidian 的 <code className="text-brand-blue">00_Brand/About.md</code> 中编写您的详细履历。
                     </p>
                     <p className="text-slate-500 italic text-lg text-center py-20 border border-dashed border-white/10 rounded-2xl">
                       期待您的同步内容...
