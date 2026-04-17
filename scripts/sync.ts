@@ -142,8 +142,16 @@ async function sync() {
                     motto: data.motto || "碳基经验的终局，算法逻辑的起点。",
                     social: {
                        email: data.email || "zurro_w@foxmail.com",
-                       wechat: { id: "zurro_w" },
-                       officialAccount: { name: "Siliconcommodity" },
+                       wechat: { 
+                           label: "个人微信号",
+                           id: "zurro_w", 
+                           qrCode: "/brand/wechat-personal.png"
+                       },
+                       officialAccount: { 
+                           label: "微信公众号",
+                           name: "Siliconcommodity",
+                           qrCode: "/brand/official-account.png"
+                       },
                        linkedin: ((data.linkedin || "www.linkedin.com/in/gordon-wang-63622821").startsWith('http') 
                                  ? (data.linkedin || "www.linkedin.com/in/gordon-wang-63622821") 
                                  : `https://${data.linkedin || "www.linkedin.com/in/gordon-wang-63622821"}`),

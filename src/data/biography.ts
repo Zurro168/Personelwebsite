@@ -93,10 +93,14 @@ export const AUTHOR_INFO = {
   "social": {
     "email": "zurro_w@foxmail.com",
     "wechat": {
-      "id": "zurro_w"
+      "label": "个人微信号",
+      "id": "zurro_w",
+      "qrCode": "/brand/wechat-personal.png"
     },
     "officialAccount": {
-      "name": "Siliconcommodity"
+      "label": "微信公众号",
+      "name": "Siliconcommodity",
+      "qrCode": "/brand/official-account.png"
     },
     "linkedin": "https://www.linkedin.com/in/gordon-wang-63622821",
     "x": "https://x.com/Gordon800619"
