@@ -101,6 +101,23 @@ export const AUTHOR_INFO = {
     "linkedin": "https://www.linkedin.com/in/gordon-wang-63622821",
     "x": "https://x.com/Gordon800619"
   },
+  "systemLogs": [
+    {
+      "id": 1,
+      "text": "VAULT_SCAN: KNOWLEDGE_VAULT_RELOADED",
+      "status": "SUCCESS"
+    },
+    {
+      "id": 2,
+      "text": "DATA_PIPELINE: PORTFOLIO_INDEX_REFRESHED",
+      "status": "ACTIVE"
+    },
+    {
+      "id": 3,
+      "text": "IP_AUTH: AUTHOR_PROFILE_STANDARDIZED",
+      "status": "READY"
+    }
+  ],
   "copyright": {
     "owner": "硅基大宗 (Silicon Commodity)",
     "year": 2026,
