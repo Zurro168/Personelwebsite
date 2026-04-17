@@ -15,11 +15,17 @@ export default function Portfolio() {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 6; // Increased density
 
-  // Smart Sorting: hasContent (boolean) first, then date (string)
+  // Smart Sorting: isPinned (boolean) first, then hasContent, then date descending
   const sortedReports = [...ALL_REPORTS].sort((a, b) => {
+    // 1. Pinned articles always stay at the top
+    if (a.isPinned !== b.isPinned) {
+      return a.isPinned ? -1 : 1;
+    }
+    // 2. Functional articles before placeholders
     if (a.hasContent !== b.hasContent) {
       return a.hasContent ? -1 : 1;
     }
+    // 3. Standard chronological order for the rest
     return new Date(b.date).getTime() - new Date(a.date).getTime();
   });
 

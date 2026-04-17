@@ -9,6 +9,7 @@ export interface Report {
   slug: string;
   hasContent: boolean;
   isHtml?: boolean;
+  isPinned?: boolean;
 }
 
 export const ALL_REPORTS: Report[] = [

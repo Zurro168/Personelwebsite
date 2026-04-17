@@ -302,16 +302,19 @@ export const AUTHOR_INFO = ${JSON.stringify(newBioData, null, 2)};
                 finalImage = 'https://images.unsplash.com/photo-1579546929518-9e396f3cc809?q=80&w=1200&auto=format&fit=crop';
             }
 
+            const isPinned = fileName.toLowerCase() === 'about.md';
+
             const newEntry = {
                 id: `SCC-2026-${Math.floor(Math.random() * 900) + 100}`,
                 title: data.title || fileName.replace('.md', ''),
                 description: data.description || '自动同步的深度研究报告',
-                tag: reportTag,
+                tag: isPinned ? '关于我们' : reportTag,
                 date: existingDate || finalDate, // 优先保留已存在的日期
                 readTime: data.readTime || '15 min',
                 image: finalImage,
                 slug: data.slug,
-                hasContent: true
+                hasContent: true,
+                isPinned: isPinned
             };
 
             const entryString = `  {
@@ -323,7 +326,8 @@ export const AUTHOR_INFO = ${JSON.stringify(newBioData, null, 2)};
     readTime: '${newEntry.readTime}',
     image: '${newEntry.image}',
     slug: '${newEntry.slug}',
-    hasContent: true
+    hasContent: true,
+    isPinned: ${newEntry.isPinned}
   },`;
 
             const slugRegex = new RegExp(`\\{\\s*id:[^}]+slug:\\s*'${data.slug}'[^}]+\\}`, 'gs');
