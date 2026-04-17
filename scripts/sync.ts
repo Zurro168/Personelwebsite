@@ -128,10 +128,41 @@ async function sync() {
             
             // 简单的内容清理与样式注入 (重用部分逻辑)
             let finalContent = content.trim();
-            // ... 同 Report 的 HTML 清理逻辑 ...
+
+            // 🌟 核心增强：如果处理的是 About.md，则同步更新 biography.ts
+            if (fileName.toLowerCase() === 'about.md') {
+                console.log(`   - Updating Bio-Registry from Metadata...`);
+                const bioFilePath = path.join(process.cwd(), 'src/data/biography.ts');
+                
+                // 构造最新的 AUTHOR_INFO 对象（保留基础架构，替换动态内容）
+                const newBioData = {
+                    ...data,
+                    name: data.name || "Silicon Researcher",
+                    title: data.title || "硅基大宗主理人",
+                    motto: data.motto || "碳基经验的终局，算法逻辑的起点。",
+                    social: {
+                       email: data.email || "zurro_w@foxmail.com",
+                       wechat: { id: "zurro_w" },
+                       officialAccount: { name: "Siliconcommodity" }
+                    },
+                    copyright: {
+                        owner: "硅基大宗 (Silicon Commodity)",
+                        year: 2026,
+                        notice: "本文著作权归 硅基大宗 所有。"
+                    }
+                };
+
+                const updatedBioTS = `/**
+ * 🛰️ Silicon Commodity: Global Biography (Auto-Synced from Obsidian v3.0)
+ */
+export const AUTHOR_INFO = ${JSON.stringify(newBioData, null, 2)};
+`;
+                fs.writeFileSync(bioFilePath, updatedBioTS);
+                console.log(`   - biography.ts updated with latest stats.`);
+            }
+
             fs.writeFileSync(systemContentPath, finalContent);
             console.log(`   - System resource synced to site structure.`);
-            // 注意：系统文件不移动，保持在 00_Brand 方便反复维护
             continue;
         }
 
