@@ -223,15 +223,24 @@ async function sync() {
             fs.writeFileSync(reportContentPath, finalContent.trim());
             console.log(`   - Content saved to public assets.`);
 
+            // 1.5 提取日期逻辑：优先 Frontmatter，次选物理创建时间，最后保底今天
+            const stats = fs.statSync(filePath);
+            const physicalDate = stats.birthtime.toISOString().split('T')[0];
+            const finalDate = data.date || physicalDate || new Date().toISOString().split('T')[0];
+
             // 2. 更新 reports.ts 注册表
             let registryContent = fs.readFileSync(REPORTS_REGISTRY_FILE, 'utf8');
             
+            // 检查之前是否已经存在该条目，尝试保留原有日期
+            const dateMatch = registryContent.match(new RegExp(`slug:\\s*'${data.slug}'[^}]+date:\\s*'([^']+)'`, 's'));
+            const existingDate = dateMatch ? dateMatch[1] : null;
+
             const newEntry = {
-                id: `SCC-${new Date().getFullYear()}-${Math.floor(Math.random() * 900) + 100}`,
+                id: `SCC-2026-${Math.floor(Math.random() * 900) + 100}`,
                 title: data.title || fileName.replace('.md', ''),
                 description: data.description || '自动同步的深度研究报告',
                 tag: reportTag,
-                date: new Date().toISOString().split('T')[0],
+                date: existingDate || finalDate, // 优先保留已存在的日期
                 readTime: data.readTime || '15 min',
                 image: data.image || '/images/reports/mining-strategy.png',
                 slug: data.slug,
