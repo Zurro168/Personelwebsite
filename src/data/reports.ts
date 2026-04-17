@@ -13,18 +13,18 @@ export interface Report {
 
 export const ALL_REPORTS: Report[] = [
   {
-    id: 'SCC-2026-915',
+    id: 'SCC-2026-380',
     title: '主理人简历',
     description: '自动同步的深度研究报告',
     tag: '关于我们',
-    date: '2026-04-17',
+    date: '2026-04-13',
     readTime: '15 min',
     image: '/images/reports/mining-strategy.png',
     slug: 'about',
     hasContent: true
   },
   {
-    id: 'SCC-2026-829',
+    id: 'SCC-2026-691',
     title: '第一线认知：中游加工企业的成本管控与管理哲学思考',
     description: '自动同步的深度研究报告',
     tag: '跨界实验',
@@ -35,7 +35,7 @@ export const ALL_REPORTS: Report[] = [
     hasContent: true
   },
   {
-    id: 'SCC-2026-133',
+    id: 'SCC-2026-987',
     title: '中医系统论：从脏腑平衡到大宗商品供给侧博弈的隐喻',
     description: '自动同步的深度研究报告',
     tag: '跨界实验',
@@ -46,7 +46,7 @@ export const ALL_REPORTS: Report[] = [
     hasContent: true
   },
   {
-    id: 'SCC-2026-978',
+    id: 'SCC-2026-673',
     title: '中医系统论：从脏腑平衡到大宗商品供给侧博弈的隐喻Html',
     description: '自动同步的深度研究报告',
     tag: '跨界实验',
@@ -57,7 +57,7 @@ export const ALL_REPORTS: Report[] = [
     hasContent: true
   },
   {
-    id: 'SCC-2026-193',
+    id: 'SCC-2026-812',
     title: 'AI 时代的信息生产：从碎片化搜索转向结构化知识合成',
     description: '自动同步的深度研究报告',
     tag: '跨界实验',
@@ -68,10 +68,10 @@ export const ALL_REPORTS: Report[] = [
     hasContent: true
   },
   {
-    id: 'SCC-2026-221',
+    id: 'SCC-2026-154',
     title: '2026 全球矿业巨头大博弈',
     description: '从算法到原子的跨代竞争：解析必和必拓、紫金矿业等巨头在全球资源民族主义背景下的地缘抉择。',
-    tag: '硬核商品',
+    tag: '宏观觉悟',
     date: '2026-04-13',
     readTime: '15 min',
     image: '/images/reports/mining-strategy.png',
@@ -79,33 +79,33 @@ export const ALL_REPORTS: Report[] = [
     hasContent: true
   },
   {
-    id: 'SCC-2026-195',
+    id: 'SCC-2026-711',
     title: '加蓬锰矿出口政策变动背后的产业博弈与实操判断',
     description: '深度拆解加蓬锰矿产业地位、2029禁令细节及全球锰源替代实操预判。针对LMFP爆发背景下的供应链布局提供决策参考。',
     tag: '硬核商品',
-    date: '2026-04-17',
+    date: 'Fri Apr 17 2026 08:00:00 GMT+0800 (中国标准时间)',
     readTime: '12 min',
     image: '/images/reports/mining-strategy.png',
     slug: 'gabon-manganese-export-ban-analysis',
     hasContent: true
   },
   {
-    id: 'SCC-2026-145',
+    id: 'SCC-2026-648',
     title: '2026年全球战略金属市场深度分析报告：锡、锆、钛的品类深化与产业链重构',
     description: '全景透视三大战略金属的供需红线，分析核能复兴、AI算力以及航空航天扩张带来的产业链重构机遇。',
     tag: '硬核商品',
-    date: '2026-04-17',
+    date: 'Fri Apr 17 2026 08:00:00 GMT+0800 (中国标准时间)',
     readTime: '10 min',
     image: '/images/reports/mining-strategy.png',
     slug: '2026-strategic-metals-analysis-tin-zirconium-titanium',
     hasContent: true
   },
   {
-    id: 'SCC-2026-938',
+    id: 'SCC-2026-994',
     title: '美元周期与全球大宗商品的宏观引力：2026年铜金属性定价的系统性重构与风险对策报告',
     description: '深度解析美元指数与大宗商品价格的非线性相关性，探讨去美元化背景下定价权的碎片化趋势。',
     tag: '宏观觉悟',
-    date: '2026-04-17',
+    date: 'Fri Apr 17 2026 08:00:00 GMT+0800 (中国标准时间)',
     readTime: '8 min',
     image: '/images/reports/mining-strategy.png',
     slug: 'dollar-cycle-and-commodity-gravity-2026',
@@ -234,7 +234,7 @@ export const ALL_REPORTS: Report[] = [
     "hasContent": true
   },
   {
-    id: 'SCC-2026-846',
+    id: 'SCC-2026-658',
     title: '深度解析‘看对行情却赚不到钱’的盈亏悖论与破局之道 网页代码',
     description: '自动同步的深度研究报告',
     tag: '交易员笔记',
@@ -245,7 +245,7 @@ export const ALL_REPORTS: Report[] = [
     hasContent: true
   },
   {
-    id: 'SCC-2026-956',
+    id: 'SCC-2026-778',
     title: '跨越鸿沟：为什么你赢了判断，却输了账户？',
     description: '自动同步的深度研究报告',
     tag: '交易员笔记',

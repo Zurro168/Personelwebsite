@@ -66,6 +66,28 @@ async function sync() {
         return;
     }
 
+    // 映射规则：公众号同名专栏收敛逻辑 (提取到循环外)
+    const categoryMap: Record<string, string> = {
+      '00_Brand': '关于我们',
+      '00_Identity': '关于我们',
+      '关于': '关于我们',
+      '宏观周期': '宏观觉悟',
+      '宏观研究': '宏观觉悟',
+      '宏观研报': '宏观觉悟',
+      '#宏观觉悟': '宏观觉悟',
+      '商品研报': '硬核商品',
+      '矿业与产业链': '硬核商品',
+      '#硬核商品': '硬核商品',
+      '有色金属': '硬核商品',
+      '战略金属': '硬核商品',
+      'AI × 供应链': '硅基供应链',
+      'AI Agent': '硅基供应链',
+      '供应链风险校准': '硅基供应链',
+      '交易员笔记': '交易员笔记',
+      '跨界实验': '跨界实验',
+      '跨界': '跨界实验'
+    };
+
     for (const filePath of files) {
         const fileName = path.basename(filePath);
         const sourceRoot = filePath.includes(ARCHIVE_DIR) ? ARCHIVE_DIR : 
@@ -82,28 +104,18 @@ async function sync() {
         ].includes(p));
         let rawCategory = categoryParts.length > 0 ? categoryParts[categoryParts.length - 1] : '商品研报';
         
-        // 映射规则：公众号同名专栏收敛逻辑
-        const categoryMap: Record<string, string> = {
-          '00_Brand': '关于我们',
-          '00_Identity': '关于我们',
-          '关于': '关于我们',
-          '宏观周期': '宏观觉悟',
-          '宏观研究': '宏观觉悟',
-          '宏观研报': '宏观觉悟',
-          '#宏观觉悟': '宏观觉悟',
-          '商品研报': '硬核商品',
-          '矿业与产业链': '硬核商品',
-          '#硬核商品': '硬核商品',
-          '有色金属': '硬核商品',
-          '战略金属': '硬核商品',
-          'AI × 供应链': '硅基供应链',
-          'AI Agent': '硅基供应链',
-          '供应链风险校准': '硅基供应链',
-          '交易员笔记': '交易员笔记',
-          '跨界实验': '跨界实验',
-          '跨界': '跨界实验'
-        };
+        const fileContent = fs.readFileSync(filePath, 'utf8');
+        const { data, content } = matter(fileContent);
+
+        if (!data.slug && !filePath.includes(SYSTEM_DIR)) {
+            console.warn(`⚠️ Skipping ${fileName}: Missing 'slug' in Frontmatter.`);
+            continue;
+        }
+
+        const isSystemFile = filePath.includes(SYSTEM_DIR);
+        const folderCategory = categoryMap[rawCategory] || rawCategory;
         
+        // 1. 映射规则：公众号同名专栏收敛逻辑
         const rawTag = data.tag ? data.tag.replace('#', '') : folderCategory;
         const reportTag = categoryMap[rawTag] || rawTag;
 
