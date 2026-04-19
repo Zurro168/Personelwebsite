@@ -35,7 +35,7 @@ export default async function AboutPage() {
       <section className="relative h-[650px] overflow-hidden group">
         <div 
           className="absolute inset-0 bg-cover bg-center transition-transform duration-[3s] group-hover:scale-110"
-          style={{ backgroundImage: 'url("https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2000&auto=format&fit=crop")' }}
+          style={{ backgroundImage: 'url("/brand/hero-me.jpg")' }}
         >
           <div className="absolute inset-0 bg-slate-900/60 backdrop-blur-[2px]"></div>
         </div>
