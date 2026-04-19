@@ -63,7 +63,7 @@ export default function Portfolio() {
       </section>
 
       <section id="categories" className="sticky top-[86px] z-40 bg-background/80 backdrop-blur-xl border-b border-white/5">
-        <div className="max-w-7xl mx-auto px-8 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-10 flex items-center justify-between">
           <div className="flex gap-8 overflow-x-auto no-scrollbar py-3">
             {TAGS.map(tag => (
               <button 
@@ -82,12 +82,12 @@ export default function Portfolio() {
       </section>
 
       {/* Breadcrumbs Section */}
-      <div className="max-w-7xl mx-auto px-8 pt-4">
+      <div className="max-w-7xl mx-auto px-10 pt-4">
         <Breadcrumbs items={[{ name: '深度研报', href: '/portfolio' }]} />
       </div>
 
       {/* Reports Grid */}
-      <main id="reports" className="max-w-7xl mx-auto px-8 py-8">
+      <main id="reports" className="max-w-7xl mx-auto px-10 py-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
           {currentReports.map((report) => (
             <article 

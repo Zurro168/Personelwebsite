@@ -292,14 +292,17 @@ export const AUTHOR_INFO = ${JSON.stringify(newBioData, null, 2)};
             // 1.5 提取日期逻辑：优先 YAML 的 publish_date 或 date，次选物理创建时间，最后保底今天
             const stats = fs.statSync(filePath);
             const physicalDate = stats.birthtime.toISOString().split('T')[0];
-            const finalDate = data.publish_date || data.date || physicalDate || new Date().toISOString().split('T')[0];
+            const finalDate = String(data.publish_date || data.date || physicalDate || new Date().toISOString()).split('T')[0];
 
             // 2. 更新 reports.ts 注册表
             let registryContent = fs.readFileSync(REPORTS_REGISTRY_FILE, 'utf8');
             
-            // 检查之前是否已经存在该条目，尝试保留原有日期
+            // 检查之前是否已经存在该条目，尝试保留原有日期 (只保留标准的 YYYY-MM-DD)
             const dateMatch = registryContent.match(new RegExp(`slug:\\s*'${data.slug}'[^}]+date:\\s*'([^']+)'`, 's'));
-            const existingDate = dateMatch ? dateMatch[1] : null;
+            let existingDate = dateMatch ? dateMatch[1] : null;
+            if (existingDate && !/^\d{4}-\d{2}-\d{2}$/.test(existingDate)) {
+                existingDate = null; // 格式不对，强制重置
+            }
 
             // 🖼️ 自动封面图检索逻辑：优先 YAML -> 次选本地同名图片 -> 最后保底 Unsplash
             let finalImage = data.image || data.cover; 
@@ -334,7 +337,7 @@ export const AUTHOR_INFO = ${JSON.stringify(newBioData, null, 2)};
 
             const newEntry = {
                 id: `SCC-2026-${Math.floor(Math.random() * 900) + 100}`,
-                title: data.title || fileName.replace('.md', ''),
+                title: (data.title || fileName.replace('.md', '')).replace(/\[\[|\]\]/g, ''),
                 description: data.description || '自动同步的深度研究报告',
                 tag: isPinned ? '关于我们' : reportTag,
                 date: existingDate || finalDate, // 优先保留已存在的日期

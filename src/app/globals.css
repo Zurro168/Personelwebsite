@@ -241,19 +241,38 @@ body {
   background: var(--brand-blue);
 }
 
-/* --- Global Content Cleanup & Layout Control --- */
+/* --- Global Content Cleanup & Layout Control (WeChat Style) --- */
 .report-html-content-wrapper {
-  max-width: 100% !important;
+  max-width: 800px !important;
+  margin: 0 auto !important;
   word-wrap: break-word;
-  overflow-x: hidden; /* Prevent horizontal scrolling of the main container */
+  background: var(--background);
+  padding: 2.5rem !important;
+  border-radius: 1rem;
+  border: 1px solid rgba(56, 189, 248, 0.05);
+  box-shadow: 0 0 100px rgba(0, 0, 0, 0.3);
+}
+
+.report-html-content-wrapper p {
+  line-height: 2.1 !important;
+  font-size: 1.15rem !important;
+  letter-spacing: 0.02em;
+  margin-bottom: 2rem;
+  color: rgba(248, 250, 252, 0.9);
+}
+
+.report-html-content-wrapper h1, 
+.report-html-content-wrapper h2 {
+  text-align: center;
+  margin: 4rem 0 2rem 0 !important;
 }
 
 .report-html-content-wrapper table {
   width: 100% !important;
   display: block;
-  overflow-x: auto; /* Individual tables can still scroll if needed */
+  overflow-x: auto;
   border-collapse: collapse;
-  margin: 2rem 0;
+  margin: 3rem 0;
   border: 1px solid rgba(56, 189, 248, 0.1) !important;
 }
 
