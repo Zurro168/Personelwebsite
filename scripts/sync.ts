@@ -177,7 +177,7 @@ async function sync() {
         console.log(`📄 Processing: ${data.title || fileName}`);
 
         // --- Industrial Rendering Logic ---
-        let htmlContent = marked.parse(content);
+        let htmlContent = await marked.parse(content);
         
         // 1. Table Optimization
         htmlContent = htmlContent.replace(/<table>/g, '<div class="table-container"><table>').replace(/<\/table>/g, '</table></div>');
