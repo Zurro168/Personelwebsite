@@ -238,9 +238,15 @@ async function sync() {
         // --- Layout Strategy ---
         let fullHtml = '';
         if (layout === 'interactive') {
+            // Interactive mode stays dark/transparent to blend with the site
+            const interactiveStyles = INDUSTRIAL_CSS
+                .replace('.report-body', '.interactive-base')
+                .replace('background: #FFFFFF !important;', 'background: transparent !important;')
+                .replace('color: #1A1A2E !important;', 'color: #E0E0E0 !important;');
+            
             fullHtml = `
-              <div class="interactive-base" style="font-family: 'Inter', sans-serif; line-height: 1.6; color: inherit;">
-                ${INDUSTRIAL_CSS.replace('.report-body', '.interactive-base')} 
+              <div class="interactive-base" style="font-family: 'Inter', sans-serif; line-height: 1.6; color: #E0E0E0;">
+                ${interactiveStyles} 
                 ${htmlContent}
               </div>
             `;

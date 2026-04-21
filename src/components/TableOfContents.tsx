@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 interface TOCItem {
   id: string;
   text: string;
+  topPos: number; // Percentage from top
 }
 
 export default function TableOfContents({ 
@@ -33,21 +34,30 @@ export default function TableOfContents({
           }
         });
       },
-      { rootMargin: '-20% 0px -60% 0px' }
+      { rootMargin: '-10% 0px -70% 0px' }
     );
 
     const extractHeadings = () => {
       const container = document.querySelector('.report-body');
       if (!container) return;
 
+      const totalHeight = document.documentElement.scrollHeight;
       const headingElements = Array.from(container.querySelectorAll('h2, h3')) as HTMLElement[];
+      
       const foundItems: TOCItem[] = headingElements.map((el, index) => {
         if (!el.id) {
           el.id = `heading-ref-${index}`;
         }
+        
+        // Calculate physical percentage position
+        const rect = el.getBoundingClientRect();
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        const topPos = ((rect.top + scrollTop) / totalHeight) * 100;
+
         return {
           id: el.id,
-          text: el.innerText.trim()
+          text: el.innerText.trim(),
+          topPos: Math.min(Math.max(topPos, 5), 95) // Clamp to track
         };
       });
 
@@ -65,7 +75,7 @@ export default function TableOfContents({
       });
     };
 
-    const initTimer = setTimeout(extractHeadings, 1000);
+    const initTimer = setTimeout(extractHeadings, 1200);
 
     const handleScroll = () => {
       const winScroll = document.documentElement.scrollTop;
@@ -89,32 +99,40 @@ export default function TableOfContents({
 
   return (
     <nav className="sticky top-24 z-50 hidden md:flex flex-col items-end w-[280px] shrink-0">
-      <div className="relative flex flex-col items-center gap-10 py-10 w-full">
-        <div className="absolute top-0 bottom-0 w-[1px] bg-white/10 right-[15px]" />
+      <div className="relative h-[70vh] w-full">
+        {/* Track Line - Flush Right */}
+        <div className="absolute top-0 bottom-0 w-[1px] bg-white/5 right-0" />
         
+        {/* Progress Bar - Flush Right */}
         <div 
-          className={`absolute top-0 w-[1px] transition-all duration-300 right-[15px] ${themeBg}`}
-          style={{ height: `${scrollProgress}%`, boxShadow: `0 0 10px ${themeColor}` }}
+          className={`absolute top-0 w-[1px] transition-all duration-300 right-0 ${themeBg}`}
+          style={{ height: `${scrollProgress}%`, boxShadow: `0 0 15px ${themeColor}` }}
         />
         
         {items.map((item, idx) => {
           const isActive = activeId === item.id;
           return (
-            <div key={`${item.id}-${idx}`} className="relative flex items-center justify-end group/item w-full">
+            <div 
+              key={`${item.id}-${idx}`} 
+              className="absolute right-0 flex items-center justify-end group/item w-full transition-all duration-700"
+              style={{ top: `${item.topPos}%` }}
+            >
+              {/* Tooltip Label */}
               <div className={`
-                absolute right-10 w-52 px-3 py-2 rounded-lg border border-white/5 
-                backdrop-blur-2xl bg-slate-950/60 transition-all duration-500 text-right pointer-events-none
-                ${isActive ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-4 group-hover/item:opacity-100 group-hover/item:translate-x-0'}
+                absolute right-8 w-60 px-4 py-3 rounded-lg border border-white/5 
+                backdrop-blur-3xl transition-all duration-500 text-right pointer-events-none
+                ${isActive ? 'opacity-100 translate-x-0 bg-slate-900/80' : 'opacity-0 translate-x-4 group-hover/item:opacity-100 group-hover/item:translate-x-0 bg-slate-950/40'}
               `}>
-                <div className="flex items-center gap-2 mb-0.5 justify-end">
-                  <span className={`text-[7px] font-black font-mono tracking-tighter opacity-40 ${themeAccent}`}>LVL.0{idx + 1}</span>
-                  {isActive && <span className={`text-[7px] font-black animate-pulse font-mono ${themeAccent}`}>TRACKING</span>}
+                <div className="flex items-center gap-2 mb-1 justify-end">
+                  <span className={`text-[8px] font-black font-mono tracking-widest ${isActive ? 'text-white' : 'text-white/20'}`}>LVL.0{idx + 1}</span>
+                  {isActive && <span className={`text-[8px] font-black animate-pulse font-mono ${themeAccent} drop-shadow-[0_0_8px_rgba(56,189,248,0.5)]`}>TRACKING</span>}
                 </div>
-                <span className={`text-[9px] font-bold tracking-[0.1em] uppercase leading-tight block break-words whitespace-normal ${isActive ? 'text-white' : 'text-white/40'}`}>
+                <span className={`text-[10px] font-black tracking-[0.05em] uppercase leading-tight block break-words whitespace-normal px-1 ${isActive ? 'text-white' : 'text-white/20'}`}>
                   {item.text}
                 </span>
               </div>
               
+              {/* Anchor Button - The Diamond */}
               <button 
                 onClick={() => {
                   const el = document.getElementById(item.id);
@@ -131,14 +149,14 @@ export default function TableOfContents({
                   }
                 }}
                 className={`
-                  relative z-10 w-8 h-8 flex items-center justify-center transition-all duration-500
-                  ${isActive ? 'scale-110' : 'hover:scale-110'}
+                  relative z-10 w-6 h-6 flex items-center justify-end transition-all duration-500
+                  ${isActive ? 'scale-125' : 'hover:scale-110'}
                 `}
               >
                 <div className={`
-                  w-1.5 h-1.5 transition-all duration-500 transform rotate-45
-                  ${isActive ? `${themeBg} scale-125` : 'bg-white/10 group-hover/item:bg-white/40'}
-                `} style={isActive ? { boxShadow: `0 0 8px ${themeColor}` } : {}} />
+                  w-1.5 h-1.5 transition-all duration-500 transform rotate-45 mr-[-2px]
+                  ${isActive ? `${themeBg} scale-150` : 'bg-white/10 group-hover/item:bg-white/40'}
+                `} style={isActive ? { boxShadow: `0 0 12px ${themeColor}`, backgroundColor: '#FFFFFF' } : {}} />
               </button>
             </div>
           );
