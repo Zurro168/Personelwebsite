@@ -24,13 +24,24 @@ export default function TableOfContents({
   const themeBg = variant === 'experiment' ? 'bg-brand-experiment' : 'bg-brand-blue';
 
   useEffect(() => {
+    // 1. Setup IntersectionObserver FIRST
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveId(entry.target.id);
+          }
+        });
+      },
+      { rootMargin: '-20% 0px -60% 0px' }
+    );
+
     const extractHeadings = () => {
       const container = document.querySelector('.report-body');
       if (!container) return;
 
       const headingElements = Array.from(container.querySelectorAll('h2, h3'));
       const foundItems: TOCItem[] = headingElements.map((el, index) => {
-        // Use existing ID if present, else generate one
         if (!el.id) {
           el.id = `heading-ref-${index}`;
         }
@@ -45,42 +56,30 @@ export default function TableOfContents({
       // Re-observe after items are set
       observer.disconnect();
       headingElements.forEach(el => observer.observe(el));
-    };
-
-    const timer = setTimeout(extractHeadings, 1000); // Wait for renderer to settle
-    
-    // ... setup scroll handle ...
-
-    // 2. Setup IntersectionObserver
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveId(entry.target.id);
-          }
-        });
-      },
-      { rootMargin: '-20% 0px -60% 0px' }
-    );
-
-    const timer = setTimeout(() => {
+      
+      // Also observe major landmarks
       const landmarkIds = ['header', 'categories', 'reports', 'intro', 'featured', 'archive', 'philosophy'];
       landmarkIds.forEach(id => {
         const el = document.getElementById(id);
         if (el) observer.observe(el);
       });
-    }, 1200);
+    };
+
+    const initTimer = setTimeout(extractHeadings, 1000);
 
     const handleScroll = () => {
       const winScroll = document.documentElement.scrollTop;
       const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      if (height <= 0) return;
       const scrolled = (winScroll / height) * 100;
       setScrollProgress(scrolled);
     };
 
     window.addEventListener('scroll', handleScroll);
+    handleScroll();
+
     return () => {
-      clearTimeout(timer);
+      clearTimeout(initTimer);
       observer.disconnect();
       window.removeEventListener('scroll', handleScroll);
     };
