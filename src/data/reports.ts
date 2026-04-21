@@ -6,7 +6,7 @@ export interface Report {
 }
 export const ALL_REPORTS: Report[] = [
   {
-    "id": "SCC-2026-713",
+    "id": "SCC-2026-468",
     "title": "为什么每一轮铜牛市都与美元走弱有关？揭秘大宗定价与宏观流动的‘镜像效应’",
     "description": "深度剖析美元指数与铜价的高负相关性逻辑，探讨在2026年宏观流动性与产业缺口共振背景下，美元走弱对铜价的‘助燃剂’作用。",
     "tag": "#宏观觉悟",
@@ -18,7 +18,7 @@ export const ALL_REPORTS: Report[] = [
     "isPinned": false
   },
   {
-    "id": "SCC-2026-300",
+    "id": "SCC-2026-678",
     "title": "利率上升时，矿业投资决策改变",
     "description": "自动同步的研报",
     "tag": "#宏观觉悟",
@@ -30,7 +30,7 @@ export const ALL_REPORTS: Report[] = [
     "isPinned": false
   },
   {
-    "id": "SCC-2026-145",
+    "id": "SCC-2026-177",
     "title": "铜冶炼行业利润结构正在重塑",
     "description": "自动同步的研报",
     "tag": "#硬核商品",
@@ -42,7 +42,7 @@ export const ALL_REPORTS: Report[] = [
     "isPinned": false
   },
   {
-    "id": "SCC-2026-194",
+    "id": "SCC-2026-443",
     "title": "为什么铜库存如此重要",
     "description": "自动同步的研报",
     "tag": "#硬核商品",
@@ -54,7 +54,7 @@ export const ALL_REPORTS: Report[] = [
     "isPinned": false
   },
   {
-    "id": "SCC-2026-728",
+    "id": "SCC-2026-260",
     "title": "矿业公司的资本周期：为什么在价格高位，巨头们反而变得‘吝啬’了？",
     "description": "深度解析矿业Lassonde曲线在2026年的变形，探讨资本纪律、开发周期拉长与矿端‘产出悬崖’对全球供应的长期压制。",
     "tag": "#产业结构",
@@ -66,7 +66,7 @@ export const ALL_REPORTS: Report[] = [
     "isPinned": false
   },
   {
-    "id": "SCC-2026-411",
+    "id": "SCC-2026-196",
     "title": "为什么矿业投资周期如此长",
     "description": "自动同步的研报",
     "tag": "#产业结构",
@@ -78,7 +78,7 @@ export const ALL_REPORTS: Report[] = [
     "isPinned": false
   },
   {
-    "id": "SCC-2026-609",
+    "id": "SCC-2026-838",
     "title": "矿山开发的真实成本结构：2026年全球矿业高边际成本时代的‘硬支撑’逻辑",
     "description": "深度拆解矿业All-In Sustaining Costs (AISC)的构成变化，分析剥采比与品位下降对定价权的结构性支撑。",
     "tag": "#产业结构",
@@ -90,7 +90,7 @@ export const ALL_REPORTS: Report[] = [
     "isPinned": false
   },
   {
-    "id": "SCC-2026-576",
+    "id": "SCC-2026-100",
     "title": "锌冶炼厂利润降至历史低位背后的产业博弈",
     "description": "透视锌冶炼行业的盈亏平衡线，分析高昂能源成本下的全球供给侧再平衡逻辑。",
     "tag": "#产业结构",
@@ -102,7 +102,7 @@ export const ALL_REPORTS: Report[] = [
     "isPinned": false
   },
   {
-    "id": "SCC-2026-532",
+    "id": "SCC-2026-323",
     "title": "AI Agent 如何改变采购决策",
     "description": "深度探讨AI Agent在采购领域的技术演进及其对传统供应链决策模式带来的降维打击。",
     "tag": "#硅基采购",
@@ -114,7 +114,7 @@ export const ALL_REPORTS: Report[] = [
     "isPinned": false
   },
   {
-    "id": "SCC-2026-698",
+    "id": "SCC-2026-986",
     "title": "智能库存系统如何降低成本",
     "description": "自动同步的研报",
     "tag": "#硅基采购",
@@ -126,7 +126,7 @@ export const ALL_REPORTS: Report[] = [
     "isPinned": false
   },
   {
-    "id": "SCC-2026-927",
+    "id": "SCC-2026-759",
     "title": "AI 预测商品需求深度实践",
     "description": "自动同步的研报",
     "tag": "#硅基采购",
@@ -138,7 +138,7 @@ export const ALL_REPORTS: Report[] = [
     "isPinned": false
   },
   {
-    "id": "SCC-2026-878",
+    "id": "SCC-2026-566",
     "title": "交易员最重要的能力是什么？2026年，请在算法的丛林里找回你的‘人类直觉’",
     "description": "探讨在AI时代商品交易员能力的范式转移，分析数据素养、心理韧性与物理供应链认知在大宗商品交易中的核心价值。",
     "tag": "#交易员笔记",
@@ -150,7 +150,7 @@ export const ALL_REPORTS: Report[] = [
     "isPinned": false
   },
   {
-    "id": "SCC-2026-591",
+    "id": "SCC-2026-128",
     "title": "如何判断商品周期？2026年，请放下你的库存指标，盯紧这三个硬核维度",
     "description": "深度拆解商品周期的宏观驱动与微观信号，探讨在2026年能源转型与AI扩容背景下，如何通过资本开支、库存/消费比及地缘溢价判断大趋势。",
     "tag": "#交易员笔记",
@@ -162,7 +162,7 @@ export const ALL_REPORTS: Report[] = [
     "isPinned": false
   },
   {
-    "id": "SCC-2026-588",
+    "id": "SCC-2026-496",
     "title": "库存与价格的博弈关系",
     "description": "自动同步的研报",
     "tag": "#交易员笔记",
@@ -174,7 +174,7 @@ export const ALL_REPORTS: Report[] = [
     "isPinned": false
   },
   {
-    "id": "SCC-2026-511",
+    "id": "SCC-2026-784",
     "title": "在此输入文章标题（建议不超过20字）",
     "description": "在此输入50-100字的SEO描述，将用于网页搜索摘要。",
     "tag": "#硬核商品",
@@ -186,7 +186,7 @@ export const ALL_REPORTS: Report[] = [
     "isPinned": false
   },
   {
-    "id": "SCC-2026-647",
+    "id": "SCC-2026-508",
     "title": "美元周期与全球大宗商品的宏观引力：2026年铜金属性定价的系统性重构与风险对策报告",
     "description": "深度解析美元指数与大宗商品价格的非线性相关性，探讨去美元化背景下定价权的碎片化趋势。",
     "tag": "#宏观觉悟",
@@ -198,7 +198,7 @@ export const ALL_REPORTS: Report[] = [
     "isPinned": false
   },
   {
-    "id": "SCC-2026-141",
+    "id": "SCC-2026-323",
     "title": "2026年全球战略金属市场深度分析报告：锡、锆、钛的品类深化与产业链重构",
     "description": "全景透视三大战略金属的供需红线，分析核能复兴、AI算力以及航空航天扩张带来的产业链重构机遇。",
     "tag": "#硬核商品",
@@ -210,7 +210,7 @@ export const ALL_REPORTS: Report[] = [
     "isPinned": false
   },
   {
-    "id": "SCC-2026-469",
+    "id": "SCC-2026-928",
     "title": "加蓬锰矿出口政策变动背后的产业博弈与实操判断",
     "description": "深度拆解加蓬锰矿产业地位、2029禁令细节及全球锰源替代实操预判。针对LMFP爆发背景下的供应链布局提供决策参考。",
     "tag": "#硬核商品",
@@ -222,7 +222,7 @@ export const ALL_REPORTS: Report[] = [
     "isPinned": false
   },
   {
-    "id": "SCC-2026-250",
+    "id": "SCC-2026-919",
     "title": "全球铜矿供给正在进入瓶颈吗：深挖智利/秘鲁核心资产的结构性变量",
     "description": "深度拆解智利与秘鲁铜矿资产衰减现状，分析AI与能源转型带来的结构性缺口，并提供跨周期应对策略与未来5年价格中枢预判。",
     "tag": "#矿业与产业链",
@@ -234,31 +234,7 @@ export const ALL_REPORTS: Report[] = [
     "isPinned": false
   },
   {
-    "id": "SCC-2026-421",
-    "title": "全球铜矿供给正在进入瓶颈吗",
-    "description": "深度剖析全球铜矿供给侧的结构性矛盾，从资源品位、资本开支到政策风险，全方位还原铜价上涨的物理基石。",
-    "tag": "#硬核商品",
-    "date": "2026-04-14",
-    "readTime": "15 min",
-    "image": "https://images.unsplash.com/photo-1579546929518-9e396f3cc809?q=80&w=1200",
-    "slug": "global-copper-supply-bottleneck",
-    "hasContent": true,
-    "isPinned": false
-  },
-  {
-    "id": "SCC-2026-133",
-    "title": "硅基大宗商品周期地图 (Silicon Commodity Cycle Map)",
-    "description": "贸易的终局，算法的起点。用一张结构图解释大宗商品周期的核心运行逻辑。",
-    "tag": "硬核商品",
-    "date": "2026-04-10",
-    "readTime": "15 min",
-    "image": "https://images.unsplash.com/photo-1579546929518-9e396f3cc809?q=80&w=1200",
-    "slug": "commodity-cycle-map",
-    "hasContent": true,
-    "isPinned": false
-  },
-  {
-    "id": "SCC-2026-990",
+    "id": "SCC-2026-930",
     "title": "深度解析‘看对行情却赚不到钱’的盈亏悖论与破局之道 网页代码",
     "description": "自动同步的研报",
     "tag": "硬核商品",
@@ -270,7 +246,7 @@ export const ALL_REPORTS: Report[] = [
     "isPinned": false
   },
   {
-    "id": "SCC-2026-120",
+    "id": "SCC-2026-279",
     "title": "跨越鸿沟：为什么你赢了判断，却输了账户？",
     "description": "自动同步的研报",
     "tag": "硬核商品",
@@ -282,7 +258,7 @@ export const ALL_REPORTS: Report[] = [
     "isPinned": false
   },
   {
-    "id": "SCC-2026-359",
+    "id": "SCC-2026-428",
     "title": "2026 全球矿业巨头大博弈",
     "description": "从算法到原子的跨代竞争：解析必和必拓、紫金矿业等巨头在全球资源民族主义背景下的地缘抉择。",
     "tag": "宏观研报",
@@ -294,7 +270,7 @@ export const ALL_REPORTS: Report[] = [
     "isPinned": false
   },
   {
-    "id": "SCC-2026-832",
+    "id": "SCC-2026-795",
     "title": "AI 时代的信息生产：从碎片化搜索转向结构化知识合成",
     "description": "自动同步的研报",
     "tag": "硬核商品",
@@ -306,7 +282,7 @@ export const ALL_REPORTS: Report[] = [
     "isPinned": false
   },
   {
-    "id": "SCC-2026-963",
+    "id": "SCC-2026-375",
     "title": "中医系统论：从脏腑平衡到大宗商品供给侧博弈的隐喻Html",
     "description": "自动同步的研报",
     "tag": "硬核商品",
@@ -318,7 +294,7 @@ export const ALL_REPORTS: Report[] = [
     "isPinned": false
   },
   {
-    "id": "SCC-2026-478",
+    "id": "SCC-2026-486",
     "title": "中医系统论：从脏腑平衡到大宗商品供给侧博弈的隐喻",
     "description": "自动同步的研报",
     "tag": "硬核商品",
@@ -330,7 +306,7 @@ export const ALL_REPORTS: Report[] = [
     "isPinned": false
   },
   {
-    "id": "SCC-2026-473",
+    "id": "SCC-2026-612",
     "title": "第一线认知：中游加工企业的成本管控与管理哲学思考",
     "description": "自动同步的研报",
     "tag": "硬核商品",
@@ -342,7 +318,7 @@ export const ALL_REPORTS: Report[] = [
     "isPinned": false
   },
   {
-    "id": "SCC-2026-148",
+    "id": "SCC-2026-722",
     "title": "主理人简历",
     "description": "自动同步的研报",
     "tag": "关于我们",

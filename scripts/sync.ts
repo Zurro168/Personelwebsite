@@ -27,73 +27,77 @@ const INDUSTRIAL_CSS = `
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono&display=swap');
   
   .report-body {
-    max-width: 960px;
+    max-width: 1100px;
     margin: 40px auto;
     background: #FFFFFF !important;
     color: #1A1A2E !important;
     font-family: 'Inter', -apple-system, 'Microsoft YaHei', sans-serif;
     line-height: 1.8;
-    letter-spacing: 0.3px;
-    padding: 60px 80px !important;
+    letter-spacing: 0.2px;
+    padding: 60px 100px !important;
     border-radius: 4px !important;
     box-shadow: 0 40px 100px rgba(0,0,0,0.5) !important;
+    overflow-wrap: break-word !important;
+    word-wrap: break-word !important;
+    word-break: normal !important;
   }
   
-  /* 🛡️ Theme Bleed Protection */
+  /* 🛡️ Theme & Layout Protection */
   .report-body p, 
   .report-body li, 
   .report-body span,
-  .report-body div:not(.reference-zone) {
+  .report-body div:not(.reference-zone):not(.table-container) {
     color: #1A1A2E !important;
+    max-width: 100% !important;
+  }
+
+  /* 📊 Scrollable Financial Tables */
+  .table-container {
+    width: 100% !important;
+    overflow-x: auto !important;
+    margin: 40px 0 !important;
+    background: #f8fafc !important;
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 8px !important;
+  }
+  
+  table {
+    min-width: 100% !important;
+    width: max-content !important; /* Allow tables to be wider than container but scrollable */
   }
 
   h2 {
     background: #003366 !important;
     color: #FFFFFF !important;
-    padding: 15px 25px !important;
+    padding: 20px 35px !important;
     border-radius: 4px !important;
-    font-size: 1.6rem !important;
-    font-weight: 800 !important;
-    margin: 50px 0 30px 0 !important;
+    font-size: 1.8rem !important;
+    font-weight: 900 !important;
+    margin: 60px 0 35px 0 !important;
     display: flex !important;
     align-items: center !important;
+    line-height: 1.2 !important;
     box-shadow: 0 4px 12px rgba(0,51,102,0.1) !important;
   }
   
   h3 {
     color: #003366 !important;
-    border-left: 5px solid #B87333 !important;
-    padding-left: 20px !important;
-    margin: 40px 0 20px 0 !important;
-    font-size: 1.3rem !important;
-    font-weight: 700 !important;
+    border-left: 6px solid #B87333 !important;
+    padding-left: 25px !important;
+    margin: 45px 0 25px 0 !important;
+    font-size: 1.4rem !important;
+    font-weight: 800 !important;
   }
   
-  p { margin-bottom: 24px !important; text-align: justify !important; }
+  p { margin-bottom: 28px !important; text-align: justify !important; width: 100% !important; }
   
-  strong { color: #003366 !important; font-weight: 700 !important; }
-  
-  .highlight-gold {
-    color: #B87333 !important;
-    font-weight: 600 !important;
+  ul, ol {
+    margin-bottom: 28px !important;
+    padding-left: 25px !important;
   }
   
-  /* 📊 Financial Table Styles */
-  .table-container {
-    width: 100% !important;
-    overflow-x: auto !important;
-    margin: 30px 0 !important;
-    border-radius: 8px !important;
-    border: 1px solid #E2E8F0 !important;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05) !important;
-  }
-  
-  table {
-    width: 100% !important;
-    border-collapse: collapse !important;
-    background: white !important;
-    font-size: 0.9rem !important;
-    margin: 0 !important;
+  li {
+    margin-bottom: 12px !important;
   }
   
   th {
