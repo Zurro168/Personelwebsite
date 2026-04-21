@@ -4,6 +4,15 @@
 
 ---
 
+## 🛰️ 生态联动协议 (Ecosystem Protocol)
+本项目与“硅基大宗”公众号共享内容源。所有管理、路径及 YAML 规范均需遵守 Obsidian 根目录下的主协议：
+*   **协议位置**：`D:\...\SiliconCommand\ECOSYSTEM_PROTOCOL.md`
+*   **同步准则**：
+    1. 修改 `10_Content` 下的目录结构前必看协议。
+    2. 视觉展示风格（CSS）保持独立演进，但正文 Markdown 逻辑需保持通用。
+
+---
+
 ## 1. 核心技术架构 (Tech Stack)
 - **Frontend**: Next.js 16 (App Router)
 - **Styling**: Tailwind CSS (自定义工业深邃蓝主题)

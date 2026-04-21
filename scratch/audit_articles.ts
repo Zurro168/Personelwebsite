@@ -12,7 +12,7 @@ function audit() {
     const localSlugs = new Set();
     const files = [];
     
-    function scanDir(dir) {
+    function scanDir(dir: string) {
         const entries = fs.readdirSync(dir, { withFileTypes: true });
         for (const entry of entries) {
             const fullPath = path.join(dir, entry.name);

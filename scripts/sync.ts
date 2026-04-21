@@ -14,7 +14,7 @@ import { marked } from 'marked';
  */
 
 const SC_BASE = 'D:/iCloudDrive/iCloud~md~obsidian/Obsidian Vault/SiliconCommand';
-const OBSIDIAN_PUBLISH_DIR = `${SC_BASE}/10_Content/02_Queue`;      
+const OBSIDIAN_PUBLISH_DIR = `${SC_BASE}/10_Content/01_Drafts`;      
 const ARCHIVE_DIR          = `${SC_BASE}/10_Content/03_Published`;   
 const SYSTEM_DIR           = `${SC_BASE}/00_Brand`;                  
 const REPORTS_REGISTRY_FILE = path.join(process.cwd(), 'src/data/reports.ts');
@@ -161,6 +161,12 @@ async function sync() {
             continue;
         }
 
+        // 🚨 ECOSYSTEM PROTOCOL V1.0: Respect web_sync status
+        if (data.web_sync === false) {
+            console.log(`⏩ Skipping: ${fileName} (web_sync disabled)`);
+            continue;
+        }
+
         const isSystemFile = filePath.includes(SYSTEM_DIR);
         const outSlug = data.slug || 'about';
         
@@ -197,9 +203,9 @@ async function sync() {
             title: data.title || fileName.replace('.md', ''),
             description: data.description || '自动同步的研报',
             tag: isSystemFile ? '关于我们' : (data.tag || '硬核商品'),
-            date: new Date(data.publish_date || data.date || fs.statSync(filePath).birthtime).toISOString().split('T')[0],
+            date: new Date(data.publish_date || data.date || fs.statSync(filePath).mtime).toISOString().split('T')[0],
             readTime: data.readTime || '15 min',
-            image: data.image || data.cover || 'https://images.unsplash.com/photo-1579546929518-9e396f3cc809?q=80&w=1200',
+            image: data.cover || data.image || 'https://images.unsplash.com/photo-1579546929518-9e396f3cc809?q=80&w=1200',
             slug: outSlug,
             hasContent: true,
             isPinned: isSystemFile
