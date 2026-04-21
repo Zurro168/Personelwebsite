@@ -27,27 +27,36 @@ const INDUSTRIAL_CSS = `
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono&display=swap');
   
   .report-body {
-    max-width: 1300px;
-    margin: 0 auto;
+    width: 1300px !important;
+    max-width: 1300px !important;
+    margin: 0 auto !important;
     background: #FFFFFF !important;
     color: #1A1A2E !important;
     font-family: 'Inter', -apple-system, 'Microsoft YaHei', sans-serif;
     line-height: 1.8;
     letter-spacing: 0.1px;
-    padding: 80px 60px !important; /* Fixed tight padding */
+    padding: 100px 80px !important; /* Fixed V6.0 Specs */
     overflow-wrap: break-word !important;
     word-wrap: break-word !important;
     word-break: normal !important;
     min-height: 100vh;
+    box-sizing: border-box !important;
   }
   
-  /* 🚀 Force Width Override for Internal Content */
-  .report-body > *, 
-  .report-body div, 
-  .report-body section, 
-  .report-body p {
+  /* 🚀 Total Width Domination: No elements can escape the 1140px text zone */
+  .report-body * {
     max-width: none !important;
+    box-sizing: border-box !important;
+  }
+
+  .report-body > div, 
+  .report-body section, 
+  .report-body .mx-auto,
+  .report-body [class*="max-w-"] {
+    max-width: 100% !important;
     width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
   }
   
   /* 🛡️ Theme & Layout Protection */
