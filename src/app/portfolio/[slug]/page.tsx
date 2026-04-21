@@ -28,9 +28,6 @@ async function getReport(slug: string) {
     if (fs.existsSync(contentPath)) {
       let rawContent = fs.readFileSync(contentPath, 'utf8');
       
-      // Sanitization: Remove injected <style> blocks from publisher
-      rawContent = rawContent.replace(/<style>[\s\S]*?<\/style>/gi, '');
-      
       // Sanitization: Remove duplicate H1 headings (Obsidian often adds # Title)
       // This matches "# Title" at the very beginning of the string or after whitespace
       rawContent = rawContent.replace(/^(\s*#\s+.*$)/m, '');
@@ -98,7 +95,7 @@ export default async function ReportPage({ params }: { params: Promise<{ slug: s
           </div>
 
           <div className="pt-16 border-t border-white/5">
-            <div className="prose prose-invert prose-cyber max-w-4xl overflow-x-hidden">
+            <div className={isHtml ? "max-w-4xl overflow-x-hidden" : "prose prose-invert prose-cyber max-w-4xl overflow-x-hidden"}>
               {isHtml ? (
                 <ReportRenderer html={report.content} />
               ) : (

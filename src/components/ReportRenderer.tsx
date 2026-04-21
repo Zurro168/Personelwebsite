@@ -89,7 +89,7 @@ export default function ReportRenderer({ html }: ReportRendererProps) {
       <div 
         ref={containerRef}
         dangerouslySetInnerHTML={{ __html: html }} 
-        className="report-html-content-wrapper prose prose-invert max-w-none"
+        className="report-html-content-wrapper report-body"
       />
 
       {/* Minimal Bottom Space or Separator if needed */}

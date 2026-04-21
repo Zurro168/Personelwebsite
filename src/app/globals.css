@@ -137,120 +137,85 @@ body {
   box-shadow: -15px 0 40px -15px rgba(56, 189, 248, 0.3);
 }
 
-/* --- Premium Industrial Table Styling --- */
-.prose-cyber table {
-  width: 100% !important;
-  border-collapse: separate !important;
-  border-spacing: 0 !important;
-  margin: 3rem 0 !important;
-  border: 1px solid rgba(56, 189, 248, 0.15) !important;
-  border-radius: 0.75rem !important;
-  overflow: hidden !important;
-  font-size: 0.92rem !important;
-  background: rgba(255, 255, 255, 0.02) !important;
-  display: block;
-  overflow-x: auto;
-  scrollbar-width: thin;
-  scrollbar-color: rgba(56, 189, 248, 0.2) transparent;
-}
-
-.prose-cyber thead {
-  background: rgba(56, 189, 248, 0.12) !important;
-}
-
-.prose-cyber th {
-  color: var(--brand-blue) !important;
-  font-weight: 800 !important;
-  text-transform: uppercase !important;
-  letter-spacing: 0.05em !important;
-  padding: 1rem 1.25rem !important;
-  text-align: left !important;
-  border-bottom: 2px solid rgba(56, 189, 248, 0.2) !important;
-  white-space: nowrap;
-}
-
-.prose-cyber td {
-  padding: 0.85rem 1.25rem !important;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
-  color: rgba(248, 250, 252, 0.75) !important;
-}
-
-.prose-cyber tr:nth-child(even) {
-  background: rgba(56, 189, 248, 0.02) !important;
-}
-
-.prose-cyber tr:hover td {
-  background: rgba(56, 189, 248, 0.08) !important;
-  color: #fff !important;
-  transition: all 0.2s ease;
-}
-
-.prose-cyber ul {
-  list-style: none !important;
-  padding-left: 0 !important;
-  margin: 2rem 0 !important;
-}
-
-.prose-cyber ul li {
-  position: relative;
-  padding-left: 1.75rem !important;
-  margin-bottom: 1rem !important;
-}
-
-.prose-cyber ul li::before {
-  content: "»";
-  position: absolute;
-  left: 0;
-  color: var(--brand-blue);
-  font-family: var(--font-mono);
-  font-weight: bold;
-  opacity: 0.6;
-}
-
-.report-html-content-wrapper img, .prose-cyber img {
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 0.75rem;
-  margin: 3rem auto;
-  display: block;
-  box-shadow: 0 0 60px rgba(56, 189, 248, 0.05);
-  max-width: 100%;
-  height: auto;
-}
-
-/* --- Navigation & Interactive --- */
-#reading-progress {
-  transform-origin: left;
-  transition: transform 0.1s ease;
-}
-
-/* Custom Scrollbar for a sleek industrial look */
-::-webkit-scrollbar {
-  width: 6px;
-}
-
-::-webkit-scrollbar-track {
-  background: var(--background);
-}
-
-::-webkit-scrollbar-thumb {
-  background: rgba(56, 189, 248, 0.2);
-  border-radius: 3px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: var(--brand-blue);
-}
-
-/* --- Global Content Cleanup & Layout Control (WeChat Style) --- */
+/* --- 🏛️ Silicon Institutional Identity: Reconciled WeChat Style (v3.0) --- */
 .report-html-content-wrapper {
-  max-width: 800px !important;
+  max-width: 680px !important; /* 严格公众号阅读带宽 */
   margin: 0 auto !important;
-  word-wrap: break-word;
-  background: var(--background);
+  background: rgba(15, 23, 42, 0.4); /* 深度蓝黑纸张感 */
+  padding: 3.5rem 3rem !important;
+  border-radius: 4px;
+  border: 1px solid var(--industrial-border);
+  box-shadow: 0 40px 100px -20px rgba(0, 0, 0, 0.5);
+  font-family: var(--font-sans);
+  letter-spacing: 0.05em; /* 0.5px 呼吸感 */
+  line-height: 1.9;
+  color: rgba(248, 250, 252, 0.85); /* 柔和高对比度 */
+}
+
+/* ⚡ STRATEGIC DIGEST: 战略摘要组件 */
+.strategic-digest {
+  background: linear-gradient(135deg, rgba(56, 189, 248, 0.05), transparent);
+  border-left: 4px solid var(--brand-blue);
   padding: 2.5rem !important;
-  border-radius: 1rem;
-  border: 1px solid rgba(56, 189, 248, 0.05);
-  box-shadow: 0 0 100px rgba(0, 0, 0, 0.3);
+  margin: 4rem 0 !important;
+  border-radius: 0 8px 8px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.strategic-digest::before {
+  content: "⚡ STRATEGIC DIGEST / 核心摘要";
+  display: block;
+  font-family: var(--font-mono);
+  font-weight: 900;
+  color: var(--brand-gold);
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  margin-bottom: 1.5rem;
+  opacity: 0.8;
+}
+
+/* 罗马序号二级标题 (Coordination: Dark Indigo + Gold Sphere) */
+.report-html-content-wrapper h2 {
+  background: #0f172a !important; /* 深度蓝 */
+  color: #fff !important;
+  padding: 1.5rem 2rem !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 1.5rem;
+  border: none !important;
+  border-radius: 4px;
+  margin-top: 6rem !important;
+  margin-bottom: 2.5rem !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.report-html-content-wrapper h2::before {
+  /* 由 JS 注入或 Markdown 生成的罗马数字保持 Serif 风格 */
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  color: var(--brand-gold);
+}
+
+/* 工业级表格协同 */
+.report-html-content-wrapper table {
+  background: rgba(255, 255, 255, 0.02) !important;
+  border: 1px solid rgba(255, 255, 255, 0.05) !important;
+  border-bottom: 2px solid var(--brand-gold) !important; /* 底部金色底线 */
+  margin: 3.5rem 0 !important;
+}
+
+.report-html-content-wrapper th {
+  background: #1e293b !important;
+  color: var(--brand-blue) !important;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+}
+
+.report-html-content-wrapper p {
+  margin-bottom: 2rem;
+  text-align: justify;
 }
 
 .report-html-content-wrapper p {

@@ -23,12 +23,12 @@ export default async function AboutPage() {
   return (
     <div className="bg-white min-h-screen font-sans selection:bg-brand-blue/30 selection:text-slate-900">
       
-      {/* 🚀 TOP NAVIGATION ICONS (Resume Style) */}
-      <div className="fixed top-0 left-0 right-0 h-14 bg-slate-900 z-50 flex justify-center items-center gap-12 text-slate-400">
-        <User size={20} className="hover:text-white transition-colors cursor-pointer" />
-        <FileText size={20} className="text-white cursor-pointer" />
-        <Briefcase size={20} className="hover:text-white transition-colors cursor-pointer" />
-        <Mail size={20} className="hover:text-white transition-colors cursor-pointer" />
+      {/* 🚀 SUB-NAV FOR RESUME (Moved from Fixed-Top to relative) */}
+      <div className="bg-slate-900/50 backdrop-blur-md border-b border-white/5 h-12 flex justify-center items-center gap-12 text-slate-500">
+        <User size={16} className="text-brand-blue cursor-pointer" />
+        <FileText size={16} className="hover:text-white transition-colors cursor-pointer" />
+        <Briefcase size={16} className="hover:text-white transition-colors cursor-pointer" />
+        <Mail size={16} className="hover:text-white transition-colors cursor-pointer" />
       </div>
 
       {/* 🖼️ HERO HEADER */}

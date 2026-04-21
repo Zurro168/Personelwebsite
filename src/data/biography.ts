@@ -1,6 +1,3 @@
-/**
- * 🛰️ Silicon Commodity: Global Biography (Auto-Synced from Obsidian v3.0)
- */
 export const AUTHOR_INFO = {
   "slug": "about",
   "title": "主理人简历",
@@ -92,53 +89,9 @@ export const AUTHOR_INFO = {
       "level": 90
     }
   ],
-  "social": {
-    "email": "zurro_w@foxmail.com",
-    "wechat": {
-      "label": "个人微信号",
-      "id": "zurro_w",
-      "qrCode": "/brand/wechat-personal.png"
-    },
-    "officialAccount": {
-      "label": "微信公众号",
-      "name": "Siliconcommodity",
-      "qrCode": "/brand/official-account.png"
-    },
-    "linkedin": "https://www.linkedin.com/in/gordon-wang-63622821",
-    "x": "https://x.com/Gordon800619"
-  },
-  "location": "Decision Frontier / 决策前沿",
-  "focus": [
-    "Commodities (大宗商品)",
-    "AI Architecture (AI 架构)",
-    "Systemic Governance (系统治理)"
-  ],
-  "tags": [
-    "Systemic",
-    "Resilient",
-    "Algorithm-Driven",
-    "Evolutionary"
-  ],
-  "systemLogs": [
-    {
-      "id": 1,
-      "text": "VAULT_SCAN: KNOWLEDGE_VAULT_RELOADED",
-      "status": "SUCCESS"
-    },
-    {
-      "id": 2,
-      "text": "DATA_PIPELINE: PORTFOLIO_INDEX_REFRESHED",
-      "status": "ACTIVE"
-    },
-    {
-      "id": 3,
-      "text": "IP_AUTH: AUTHOR_PROFILE_STANDARDIZED",
-      "status": "READY"
-    }
-  ],
   "copyright": {
-    "owner": "硅基大宗 (Silicon Commodity)",
+    "owner": "硅基大宗",
     "year": 2026,
-    "notice": "本文著作权归 硅基大宗 所有。"
+    "notice": "著作权所有"
   }
 };
