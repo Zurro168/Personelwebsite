@@ -33,15 +33,33 @@ const INDUSTRIAL_CSS = `
     color: #1A1A2E !important;
     font-family: 'Inter', -apple-system, 'Microsoft YaHei', sans-serif;
     line-height: 1.8;
-    letter-spacing: 0.15px;
-    padding: 80px 12% !important;
+    letter-spacing: 0.1px;
+    padding: 80px 60px !important; /* Fixed tight padding */
     overflow-wrap: break-word !important;
     word-wrap: break-word !important;
     word-break: normal !important;
     min-height: 100vh;
   }
   
+  /* 🚀 Force Width Override for Internal Content */
+  .report-body > *, 
+  .report-body div, 
+  .report-body section, 
+  .report-body p {
+    max-width: none !important;
+    width: 100% !important;
+  }
+  
   /* 🛡️ Theme & Layout Protection */
+  .report-body p, 
+  .report-body li, 
+  .report-body h2, 
+  .report-body h3 {
+    max-width: none !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    text-align: justify;
+  }
   .report-body p, 
   .report-body li, 
   .report-body span,
