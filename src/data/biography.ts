@@ -89,6 +89,21 @@ export const AUTHOR_INFO = {
       "level": 90
     }
   ],
+  "social": {
+    "email": "zurro_w@foxmail.com",
+    "linkedin": "https://www.linkedin.com/in/gordon-wang-63622821",
+    "x": "https://x.com/Gordon800619",
+    "wechat": {
+      "label": "个人微信",
+      "id": "zurro168",
+      "qrCode": "/brand/wechat-qr.png"
+    },
+    "officialAccount": {
+      "label": "硅基大宗",
+      "name": "硅基大宗",
+      "qrCode": "/brand/official-account-qr.png"
+    }
+  },
   "copyright": {
     "owner": "硅基大宗",
     "year": 2026,
