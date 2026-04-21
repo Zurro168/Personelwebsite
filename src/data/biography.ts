@@ -110,6 +110,8 @@ export const AUTHOR_INFO = {
     { "id": "log-3", "text": "AI_INTELLIGENCE_LAYER_SYNCHRONIZED", "status": "STABLE" },
     { "id": "log-4", "text": "METADATA_ASSET_CLEANUP_SUCCESS", "status": "DONE" }
   ],
+  "focus": ["全球大宗供应链", "AI 产业数字化", "跨境风控建模"],
+  "location": "中国 · 广东 · 广州 (GBA)",
   "copyright": {
     "owner": "硅基大宗",
     "year": 2026,
