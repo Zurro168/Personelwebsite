@@ -72,13 +72,14 @@ export default async function ReportPage({ params }: { params: Promise<{ slug: s
       </div>
 
       {/* Dual-Column Industrial Layout */}
-      <div className={report.layout === 'interactive' ? "w-full" : "max-w-[1300px] mx-auto flex items-start gap-10 px-8 relative"}>
+      {/* Dual-Column Industrial Layout */}
+      <div className={report.layout === 'interactive' ? "w-full" : "max-w-[1300px] mx-auto flex items-start gap-4 pl-8 pr-0 relative"}>
         
         {/* Left Column: Authoritative Content (1000px fixed in paper mode) */}
         <div className={report.layout === 'interactive' ? "w-full" : "w-[980px] shrink-0"}>
           <main className="py-12">
-            <div className={report.layout === 'interactive' ? "" : "space-y-8"}>
-              {report.layout !== 'interactive' && (
+            <div className={report.layout === 'interactive' && !report.title ? "" : "space-y-8"}>
+              {(report.layout !== 'interactive' || (report.layout === 'interactive' && report.title)) && (
                 <div className="mb-12">
                   <Link href="/portfolio" className="flex items-center gap-2 text-white/40 hover:text-brand-blue transition-colors text-[10px] font-bold tracking-[0.2em] group mb-8">
                     <ChevronLeft size={16} className="group-hover:-translate-x-1 transition-transform" /> BACK TO ARCHIVE

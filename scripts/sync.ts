@@ -217,7 +217,16 @@ async function sync() {
         console.log(`📄 Processing [${layout}]: ${data.title || fileName}`);
 
         // --- Industrial Rendering Logic ---
-        let htmlContent = await marked.parse(content);
+        let htmlContent = '';
+        const lowerContent = content.trim().toLowerCase();
+        const isRawHtml = lowerContent.startsWith('<html') || lowerContent.startsWith('<div') || lowerContent.startsWith('<!doctype');
+        
+        if (isRawHtml) {
+            console.log(`🔌 Detected Raw HTML - Skipping Markdown Parse`);
+            htmlContent = content; 
+        } else {
+            htmlContent = await marked.parse(content);
+        }
         
         if (layout === 'paper') {
             htmlContent = htmlContent.replace(/<table>/g, '<div class="table-container"><table>').replace(/<\/table>/g, '</table></div>');
@@ -229,7 +238,12 @@ async function sync() {
         // --- Layout Strategy ---
         let fullHtml = '';
         if (layout === 'interactive') {
-            fullHtml = htmlContent;
+            fullHtml = `
+              <div class="interactive-base" style="font-family: 'Inter', sans-serif; line-height: 1.6; color: inherit;">
+                ${INDUSTRIAL_CSS.replace('.report-body', '.interactive-base')} 
+                ${htmlContent}
+              </div>
+            `;
         } else {
             fullHtml = `
               <div class="report-body">

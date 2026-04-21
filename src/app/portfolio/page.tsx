@@ -5,7 +5,6 @@ import Link from 'next/link';
 import { Search, Filter, ChevronLeft, ChevronRight, Clock } from 'lucide-react';
 import { ALL_REPORTS } from '@/data/reports';
 import Breadcrumbs from '@/components/layout/Breadcrumbs';
-import TableOfContents from '@/components/TableOfContents';
 
 // 动态获取所有分类，确保与 reports.ts 同步
 const TAGS = ['全部', ...Array.from(new Set(ALL_REPORTS.map(r => r.tag)))];
@@ -38,9 +37,6 @@ export default function Portfolio() {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Node-based Progress Tracker */}
-      <TableOfContents content="" />
-
       {/* Page Header */}
       <section id="header" className="py-10 bg-slate-900/40 border-b border-industrial-border relative overflow-hidden">
         <div className="absolute top-0 right-0 w-1/2 h-full bg-brand-blue/5 blur-[100px] pointer-events-none"></div>

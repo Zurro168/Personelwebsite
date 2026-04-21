@@ -24,63 +24,32 @@ export default function TableOfContents({
   const themeBg = variant === 'experiment' ? 'bg-brand-experiment' : 'bg-brand-blue';
 
   useEffect(() => {
-    // 1. Dual-mode parsing
-    const foundItems: TOCItem[] = [];
-    
-    if (content) {
-      if (content.includes('</h2>')) {
-        const h2HtmlRegex = /<h2[^>]*>(.*?)<\/h2>/g;
-        let match;
-        let index = 0;
-        while ((match = h2HtmlRegex.exec(content)) !== null) {
-          const text = match[1].replace(/<[^>]*>/g, '').trim();
-          const idMatch = match[0].match(/id="([^"]+)"/);
-          const id = idMatch ? idMatch[1] : `section-${index}`;
-          if (text && text.length < 40) {
-            foundItems.push({ id, text });
-          }
-          index++;
-        }
-      } else {
-        const h2MdRegex = /#{2}\s+(.*)/g;
-        let match;
-        let index = 0;
-        while ((match = h2MdRegex.exec(content)) !== null) {
-          foundItems.push({ id: `section-${index}`, text: match[1].trim() });
-          index++;
-        }
-      }
-      setItems(foundItems);
-    } else {
-      const scanDOM = () => {
-        // ONLY scan Major Landmarks with explicit IDs or specific landmarks
-        const domSections = document.querySelectorAll('section[id], main[id]');
-        const domItems: TOCItem[] = [];
-        
-        const friendlyNames: Record<string, string> = {
-          'header': '视角概览 // OVERVIEW',
-          'categories': '分类筛选 // FILTER',
-          'reports': '研报矩阵 // MATRIX',
-          'intro': '实验室引言 // INTRO',
-          'featured': '精选导引 // FEATURED',
-          'archive': '全套档案 // ARCHIVE',
-          'philosophy': '底层哲学 // THEORY'
-        };
+    const extractHeadings = () => {
+      const container = document.querySelector('.report-body');
+      if (!container) return;
 
-        domSections.forEach((el) => {
-          if (friendlyNames[el.id]) {
-            domItems.push({ 
-              id: el.id, 
-              text: friendlyNames[el.id] 
-            });
-          }
-        });
-        setItems(domItems);
-      };
+      const headingElements = Array.from(container.querySelectorAll('h2, h3'));
+      const foundItems: TOCItem[] = headingElements.map((el, index) => {
+        // Use existing ID if present, else generate one
+        if (!el.id) {
+          el.id = `heading-ref-${index}`;
+        }
+        return {
+          id: el.id,
+          text: el.innerText.trim()
+        };
+      });
+
+      setItems(foundItems);
       
-      const timer = setTimeout(scanDOM, 1000);
-      return () => clearTimeout(timer);
-    }
+      // Re-observe after items are set
+      observer.disconnect();
+      headingElements.forEach(el => observer.observe(el));
+    };
+
+    const timer = setTimeout(extractHeadings, 1000); // Wait for renderer to settle
+    
+    // ... setup scroll handle ...
 
     // 2. Setup IntersectionObserver
     const observer = new IntersectionObserver(
@@ -132,7 +101,7 @@ export default function TableOfContents({
         {items.map((item, idx) => {
           const isActive = activeId === item.id;
           return (
-            <div key={`${item.id}-${idx}`} className="relative flex items-center justify-end group/item w-full pr-12">
+            <div key={`${item.id}-${idx}`} className="relative flex items-center justify-end group/item w-full">
               <div className={`
                 absolute right-10 w-52 px-3 py-2 rounded-lg border border-white/5 
                 backdrop-blur-2xl bg-slate-950/60 transition-all duration-500 text-right pointer-events-none
