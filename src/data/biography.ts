@@ -104,6 +104,12 @@ export const AUTHOR_INFO = {
       "qrCode": "/brand/official-account-qr.png"
     }
   },
+  "systemLogs": [
+    { "id": "log-1", "text": "GLOBAL_COMMODITY_SCAN_INITIATED", "status": "COMPLETED" },
+    { "id": "log-2", "text": "SUPPLY_CHAIN_RISK_PROTOCOL_v4.1", "status": "ACTIVE" },
+    { "id": "log-3", "text": "AI_INTELLIGENCE_LAYER_SYNCHRONIZED", "status": "STABLE" },
+    { "id": "log-4", "text": "METADATA_ASSET_CLEANUP_SUCCESS", "status": "DONE" }
+  ],
   "copyright": {
     "owner": "硅基大宗",
     "year": 2026,
