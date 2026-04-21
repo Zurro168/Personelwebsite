@@ -27,25 +27,34 @@ const INDUSTRIAL_CSS = `
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono&display=swap');
   
   .report-body {
-    max-width: 800px;
+    max-width: 960px;
     margin: 40px auto;
     background: #FFFFFF !important;
     color: #1A1A2E !important;
     font-family: 'Inter', -apple-system, 'Microsoft YaHei', sans-serif;
     line-height: 1.8;
-    letter-spacing: 0.5px;
-    padding: 60px !important;
+    letter-spacing: 0.3px;
+    padding: 60px 80px !important;
     border-radius: 4px !important;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.3) !important;
+    box-shadow: 0 40px 100px rgba(0,0,0,0.5) !important;
   }
   
+  /* 🛡️ Theme Bleed Protection */
+  .report-body p, 
+  .report-body li, 
+  .report-body span,
+  .report-body div:not(.reference-zone) {
+    color: #1A1A2E !important;
+  }
+
   h2 {
     background: #003366 !important;
-    color: white !important;
-    padding: 12px 20px !important;
+    color: #FFFFFF !important;
+    padding: 15px 25px !important;
     border-radius: 4px !important;
-    font-size: 1.4rem !important;
-    margin-top: 40px !important;
+    font-size: 1.6rem !important;
+    font-weight: 800 !important;
+    margin: 50px 0 30px 0 !important;
     display: flex !important;
     align-items: center !important;
     box-shadow: 0 4px 12px rgba(0,51,102,0.1) !important;
@@ -53,10 +62,11 @@ const INDUSTRIAL_CSS = `
   
   h3 {
     color: #003366 !important;
-    border-left: 4px solid #B87333 !important;
-    padding-left: 15px !important;
-    margin-top: 30px !important;
-    font-size: 1.2rem !important;
+    border-left: 5px solid #B87333 !important;
+    padding-left: 20px !important;
+    margin: 40px 0 20px 0 !important;
+    font-size: 1.3rem !important;
+    font-weight: 700 !important;
   }
   
   p { margin-bottom: 24px !important; text-align: justify !important; }
