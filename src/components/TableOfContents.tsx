@@ -25,90 +25,104 @@ export default function TableOfContents({
   const themeBg = variant === 'experiment' ? 'bg-brand-experiment' : 'bg-brand-blue';
 
   useEffect(() => {
-    // 1. Setup IntersectionObserver FIRST
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveId(entry.target.id);
-          }
-        });
-      },
-      { rootMargin: '-10% 0px -70% 0px' }
-    );
-
-    const extractHeadings = () => {
-      const container = document.querySelector('.report-body');
-      if (!container) return;
-
-      const containerHeight = container.scrollHeight;
-      const headingElements = Array.from(container.querySelectorAll('h2, h3')) as HTMLElement[];
+    const timer = setTimeout(() => {
+      const containerEl = document.querySelector('.report-layout-container') as HTMLElement;
+      if (!containerEl) return;
       
-      const foundItems: TOCItem[] = headingElements.map((el, index) => {
-        if (!el.id) {
-          el.id = `heading-ref-${index}`;
-        }
+      const containerRect = containerEl.getBoundingClientRect();
+      const hElements = document.querySelectorAll('.report-body h2, .report-body h3, .interactive-base h1, .interactive-base h2, .interactive-base h3, #reports, #intro, #market-structure');
+      
+      let extracted: TOCItem[] = [];
+      
+      hElements.forEach(el => {
+        const id = el.id || el.textContent?.trim().toLowerCase().replace(/\s+/g, '-');
+        if (!el.id) el.id = id || '';
         
-        // Calculate position relative to container ONLY
-        const relativeTop = el.offsetTop;
-        const topPos = (relativeTop / containerHeight) * 100;
+        if (id && el.textContent) {
+          let text = el.textContent.trim();
+          // Clean up markdown/emoji prefixes
+          text = text.replace(/^#+\s*/, '').replace(/^[\u{1F300}-\u{1F9FF}]\s*/u, '').trim();
 
-        return {
-          id: el.id,
-          text: el.innerText.trim(),
-          topPos: Math.min(Math.max(topPos, 2), 98) // Clamp within track
-        };
+          const rect = el.getBoundingClientRect();
+          // Calculate Top relative to our shared layout container
+          const topPos = rect.top - containerRect.top;
+
+          extracted.push({ id, text, topPos });
+        }
       });
 
-      setItems(foundItems);
-      
-      // Re-observe after items are set
-      observer.disconnect();
-      headingElements.forEach(el => observer.observe(el));
-      
-      // Also observe major landmarks
-      const landmarkIds = ['header', 'categories', 'reports', 'intro', 'featured', 'archive', 'philosophy'];
-      landmarkIds.forEach(id => {
-        const el = document.getElementById(id);
-        if (el) observer.observe(el);
-      });
-    };
+      // Sort vertically
+      extracted.sort((a, b) => a.topPos - b.topPos);
 
-    const initTimer = setTimeout(extractHeadings, 1200);
+      // Avoid overlap for items that are too close
+      for (let i = 1; i < extracted.length; i++) {
+        if (extracted[i].topPos - extracted[i-1].topPos < 40) {
+          extracted[i].topPos = extracted[i-1].topPos + 40;
+        }
+      }
+
+      setItems(extracted);
+    }, 500);
+
+    return () => clearTimeout(timer);
+  }, [content]);
+
+  useEffect(() => {
+    let ticking = false;
 
     const handleScroll = () => {
-      const container = document.querySelector('.report-body');
-      if (!container) return;
-      
-      const rect = container.getBoundingClientRect();
-      const containerHeight = container.scrollHeight;
-      const scrolledInContainer = Math.max(0, -rect.top);
-      const scrolled = (scrolledInContainer / containerHeight) * 100;
-      setScrollProgress(Math.min(scrolled, 100));
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const containerEl = document.querySelector('.report-layout-container');
+          if (!containerEl) return;
+
+          const containerRect = containerEl.getBoundingClientRect();
+          const scrollPos = -containerRect.top + 200;
+          
+          let currentId = items[0]?.id;
+          let currentLineHeight = 0;
+
+          let activeIndex = -1;
+          for (let i = 0; i < items.length; i++) {
+            if (items[i].topPos <= scrollPos) {
+              currentId = items[i].id;
+              activeIndex = i;
+            } else {
+              break;
+            }
+          }
+
+          if (activeIndex >= 0) {
+            currentLineHeight = items[activeIndex].topPos;
+          }
+
+          setActiveId(currentId || '');
+          setScrollProgress(currentLineHeight);
+          
+          ticking = false;
+        });
+        ticking = true;
+      }
     };
 
     window.addEventListener('scroll', handleScroll);
     handleScroll();
 
     return () => {
-      clearTimeout(initTimer);
-      observer.disconnect();
       window.removeEventListener('scroll', handleScroll);
     };
-  }, [content]);
+  }, [items]);
 
   if (items.length === 0) return null;
 
   return (
-    <nav className="sticky top-32 z-50 hidden md:flex flex-col items-end w-[280px] shrink-0 mt-[120px]">
-      <div className="relative h-[70vh] w-full">
-        {/* Track Line - Flush Right */}
+    <nav className="absolute inset-y-0 right-[-32px] md:right-8 w-[280px] pointer-events-none hidden md:block">
+      <div className="relative h-full w-full">
         <div className="absolute top-0 bottom-0 w-[1px] bg-white/5 right-0" />
         
-        {/* Progress Bar - Flush Right */}
         <div 
           className={`absolute top-0 w-[1px] transition-all duration-300 right-0 ${themeBg}`}
-          style={{ height: `${scrollProgress}%`, boxShadow: `0 0 15px ${themeColor}` }}
+          style={{ height: `${scrollProgress}px`, boxShadow: `0 0 15px ${themeColor}` }}
         />
         
         {items.map((item, idx) => {
@@ -116,38 +130,36 @@ export default function TableOfContents({
           return (
             <div 
               key={`${item.id}-${idx}`} 
-              className="absolute right-0 flex items-center justify-end group/item w-full transition-all duration-700"
-              style={{ top: `${item.topPos}%` }}
+              className={`absolute right-0 flex items-center justify-end group/item w-full transition-all duration-700 ${isActive ? 'z-50' : 'z-10'}`}
+              style={{ top: `${item.topPos}px` }}
             >
-              {/* Tooltip Label */}
               <div className={`
-                absolute right-8 w-60 px-4 py-3 rounded-lg border border-white/5 
-                backdrop-blur-3xl transition-all duration-500 text-right pointer-events-none
-                ${isActive ? 'opacity-100 translate-x-0 bg-slate-900/80' : 'opacity-0 translate-x-4 group-hover/item:opacity-100 group-hover/item:translate-x-0 bg-slate-950/40'}
-              `}>
+                absolute right-8 w-60 px-4 py-3 rounded-lg border backdrop-blur-3xl transition-all duration-500 text-right pointer-events-auto cursor-pointer
+                ${isActive ? 'opacity-100 translate-x-0 bg-slate-900/80 border-white/20' : 'opacity-100 translate-x-0 bg-transparent border-transparent hover:bg-slate-950/40 hover:border-white/5'}
+              `}
+              onClick={() => {
+                const el = document.getElementById(item.id);
+                if (el) {
+                  const y = el.getBoundingClientRect().top + window.scrollY - 100;
+                  window.scrollTo({ top: y, behavior: 'smooth' });
+                }
+              }}
+              >
                 <div className="flex items-center gap-2 mb-1 justify-end">
                   <span className={`text-[8px] font-black font-mono tracking-widest ${isActive ? 'text-white' : 'text-white/20'}`}>LVL.0{idx + 1}</span>
                   {isActive && <span className={`text-[8px] font-black animate-pulse font-mono ${themeAccent} drop-shadow-[0_0_10px_rgba(255,255,255,0.8)]`}>TRACKING</span>}
                 </div>
-                <span className={`text-[10px] font-black tracking-[0.05em] uppercase leading-tight block break-words whitespace-normal px-1 ${isActive ? 'text-white' : 'text-white/10'}`}>
+                <span className={`text-[10px] font-black tracking-[0.05em] uppercase leading-tight block break-words whitespace-normal px-1 ${isActive ? 'text-white' : 'text-white/30'}`}>
                   {item.text}
                 </span>
               </div>
               
-              {/* Anchor Button - The Diamond */}
               <button 
                 onClick={() => {
                   const el = document.getElementById(item.id);
                   if (el) {
-                    const offset = 100;
-                    const bodyRect = document.body.getBoundingClientRect().top;
-                    const elementRect = el.getBoundingClientRect().top;
-                    const elementPosition = elementRect - bodyRect;
-                    const offsetPosition = elementPosition - offset;
-                    window.scrollTo({
-                      top: offsetPosition,
-                      behavior: 'smooth'
-                    });
+                    const y = el.getBoundingClientRect().top + window.scrollY - 100;
+                    window.scrollTo({ top: y, behavior: 'smooth' });
                   }
                 }}
                 className={`

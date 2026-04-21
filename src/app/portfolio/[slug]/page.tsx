@@ -73,7 +73,7 @@ export default async function ReportPage({ params }: { params: Promise<{ slug: s
 
       {/* Dual-Column Industrial Layout */}
       {/* Dual-Column Industrial Layout */}
-      <div className={report.layout === 'interactive' ? "w-full" : "max-w-[1300px] mx-auto flex items-start gap-4 pl-8 pr-0 relative"}>
+      <div className={report.layout === 'interactive' ? "w-full report-layout-container" : "max-w-[1300px] mx-auto flex items-start gap-4 pl-8 pr-0 relative report-layout-container"}>
         
         {/* Left Column: Authoritative Content (1000px fixed in paper mode) */}
         <div className={report.layout === 'interactive' ? "w-full" : "w-[980px] shrink-0"}>

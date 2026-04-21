@@ -58,7 +58,7 @@ export const ALL_REPORTS: Report[] = [
     "layout": "paper"
   },
   {
-    "id": "SCC-2026-176",
+    "id": "SCC-2026-502",
     "title": "‘看对行情却赚不到钱’的盈亏悖论与破局之道 网页代码",
     "description": "自动同步的研报",
     "tag": "硬核商品",
@@ -71,7 +71,7 @@ export const ALL_REPORTS: Report[] = [
     "layout": "interactive"
   },
   {
-    "id": "SCC-2026-493",
+    "id": "SCC-2026-240",
     "title": "跨越鸿沟：为什么你赢了判断，却输了账户？",
     "description": "自动同步的研报",
     "tag": "硬核商品",
@@ -84,7 +84,7 @@ export const ALL_REPORTS: Report[] = [
     "layout": "paper"
   },
   {
-    "id": "SCC-2026-988",
+    "id": "SCC-2026-944",
     "title": "2026 全球矿业巨头大博弈",
     "description": "从算法到原子的跨代竞争：解析必和必拓、紫金矿业等巨头在全球资源民族主义背景下的地缘抉择。",
     "tag": "宏观研报",
@@ -97,7 +97,7 @@ export const ALL_REPORTS: Report[] = [
     "layout": "interactive"
   },
   {
-    "id": "SCC-2026-127",
+    "id": "SCC-2026-392",
     "title": "重塑版图：全球十大矿业巨头2026战略大博弈",
     "description": "自动同步的研报",
     "tag": "硬核商品",
@@ -110,7 +110,7 @@ export const ALL_REPORTS: Report[] = [
     "layout": "paper"
   },
   {
-    "id": "SCC-2026-568",
+    "id": "SCC-2026-601",
     "title": "AI 时代的信息生产：从碎片化搜索转向结构化知识合成",
     "description": "自动同步的研报",
     "tag": "硬核商品",
@@ -123,7 +123,7 @@ export const ALL_REPORTS: Report[] = [
     "layout": "paper"
   },
   {
-    "id": "SCC-2026-255",
+    "id": "SCC-2026-385",
     "title": "中医系统论：从脏腑平衡到大宗商品供给侧博弈的隐喻Html",
     "description": "自动同步的研报",
     "tag": "硬核商品",
@@ -136,7 +136,7 @@ export const ALL_REPORTS: Report[] = [
     "layout": "interactive"
   },
   {
-    "id": "SCC-2026-101",
+    "id": "SCC-2026-453",
     "title": "中医系统论：从脏腑平衡到大宗商品供给侧博弈的隐喻",
     "description": "自动同步的研报",
     "tag": "硬核商品",
@@ -149,7 +149,7 @@ export const ALL_REPORTS: Report[] = [
     "layout": "paper"
   },
   {
-    "id": "SCC-2026-536",
+    "id": "SCC-2026-858",
     "title": "第一线认知：中游加工企业的成本管控与管理哲学思考",
     "description": "自动同步的研报",
     "tag": "硬核商品",
@@ -162,7 +162,7 @@ export const ALL_REPORTS: Report[] = [
     "layout": "paper"
   },
   {
-    "id": "SCC-2026-968",
+    "id": "SCC-2026-375",
     "title": "主理人简历",
     "description": "自动同步的研报",
     "tag": "关于我们",

@@ -18,13 +18,97 @@
                 <div class="html-content-root">
                   
 
+
+
+
+
+    
+
+    
+
+    
+
+    
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Chosen Palette: 暖沙砾石 (Warm Neutrals) with Slate and subtle Rust/Emerald accents for a premium, earthy, and serious tone. -->
+
+    <!-- Application Structure Plan: A single-page storytelling dashboard layout. It begins with the macro-context (AI vs. Atoms), funnels down to the main players (Top 10 Interactive Chart), explores their strategies (Factions Tabs), outlines the geopolitical risks (Cards Grid), and concludes with the technological solution (AI Simulation Chart). This linear yet interactive flow guides the user from problem to actors to resolution, prioritizing comprehension of the complex geopolitical and physical constraints. -->
+
+    <!-- Visualization & Content Choices: 1. Top 10 Giants -> Compare -> Horizontal Bar Chart (Chart.js) -> Clicking a bar updates a detail panel -> Easy comparison of market caps while hiding dense text until requested. 2. Three Factions -> Organize -> Interactive CSS Tabs -> Clicking tab switches content -> Groups complex strategies logically without overwhelming the page. 3. Geopolitics -> Organize -> Hover/Click Info Cards -> Reveals specific country policies -> Makes reading discrete policy changes engaging. 4. Ore Grade vs Energy -> Change/Relationship -> Line Chart (Chart.js) with Toggle -> Shows the 'AI Effect' on physical limits -> Highlights the core technological conclusion of the report. Confirming NO SVG/Mermaid. -->
+
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+
+    <style>
+
+        .chart-container {
+
+            position: relative;
+
+            width: 100%;
+
+            max-width: 1200px;
+
+            margin-left: auto;
+
+            margin-right: auto;
+
+            height: 50vh;
+
+            max-height: 450px;
+
+        }
+
+        @media (max-width: 768px) {
+
+            .chart-container {
+
+                height: 40vh;
+
+                max-height: 350px;
+
+            }
+
+        }
+
+        .tab-active {
+
+            border-bottom: 2px solid #b45309;
+
+            color: #b45309;
+
+            font-weight: bold;
+
+        }
+
+        .hide-scroll::-webkit-scrollbar {
+
+            display: none;
+
+        }
+
+        .hide-scroll {
+
+            -ms-overflow-style: none;
+
+            scrollbar-width: none;
+
+        }
+
+    </style>
+
+
+
+
+
   
 
     
 
   
 
-    <header class="bg-stone-900 text-stone-100 py-20 px-4">
+    
 
         <div class="max-w-5xl mx-auto text-center">
 
@@ -38,7 +122,7 @@
 
         </div>
 
-    </header>
+    
 
   
 
@@ -979,6 +1063,9 @@
         document.head.appendChild(styleSheet);
 
     </script>
+
+
+
 
 
                 </div>

@@ -244,11 +244,14 @@ async function sync() {
             let safeHtml = htmlContent.replace(/<script[^>]*tailwindcss\.com[^>]*><\/script>/gi, '');
             safeHtml = safeHtml.replace(/<nav[^>]*>[\s\S]*?<\/nav>/gi, ''); // Remove hardcoded fixed navbars to avoid overlapping our site navbar
             
-            // 2. Extract only the body if it's a full document
-            const bodyMatch = safeHtml.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
-            if (bodyMatch) {
-                safeHtml = bodyMatch[1];
-            }
+            // 2. We cannot just extract <body> because we will lose <style> and <script> placed in <head>.
+            // Instead, we strip out the document shell tags to let all styles/scripts fall into our wrapper.
+            safeHtml = safeHtml.replace(/<!DOCTYPE[^>]*>/gi, '');
+            safeHtml = safeHtml.replace(/<\/?html[^>]*>/gi, '');
+            safeHtml = safeHtml.replace(/<\/?head[^>]*>/gi, '');
+            safeHtml = safeHtml.replace(/<\/?body[^>]*>/gi, '');
+            safeHtml = safeHtml.replace(/<title>[\s\S]*?<\/title>/gi, '');
+            safeHtml = safeHtml.replace(/<meta[^>]*>/gi, '');
 
             // 3. Prevent global CSS conflicts by scoping custom body styles to our container
             safeHtml = safeHtml.replace(/body\s*{([^}]*)}/gi, '.html-content-root { $1 }');

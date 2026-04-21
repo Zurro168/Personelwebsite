@@ -65,6 +65,14 @@ export default function ReportRenderer({ html, layout = 'paper' }: ReportRendere
         await scriptPromise;
         oldScript.parentNode?.removeChild(oldScript);
       }
+
+      // 3. Force trigger window.onload if it was overwritten by the injected scripts
+      // because the natural window load event has already fired before React mounted this
+      if (typeof window.onload === 'function') {
+        const loadEvent = new Event('load');
+        // @ts-ignore
+        window.onload(loadEvent);
+      }
     };
 
     executeScripts();
