@@ -40,7 +40,7 @@ export default function TableOfContents({
       const container = document.querySelector('.report-body');
       if (!container) return;
 
-      const headingElements = Array.from(container.querySelectorAll('h2, h3'));
+      const headingElements = Array.from(container.querySelectorAll('h2, h3')) as HTMLElement[];
       const foundItems: TOCItem[] = headingElements.map((el, index) => {
         if (!el.id) {
           el.id = `heading-ref-${index}`;
