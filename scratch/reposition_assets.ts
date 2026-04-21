@@ -95,7 +95,10 @@ ASSETS.forEach(asset => {
     if (asset.slug) data.slug = asset.slug;
     if (asset.layout) data.layout = asset.layout;
     if (!data.author) data.author = '硅基大宗';
-    if (!data.title) data.title = asset.path.split('/').pop().replace('.md', '');
+    if (!data.title) {
+        const fileName = asset.path.split('/').pop();
+        data.title = fileName ? fileName.replace('.md', '') : 'Untitled Asset';
+    }
 
     const newContent = matter.stringify(body, data);
     fs.writeFileSync(asset.path, newContent, 'utf-8');
