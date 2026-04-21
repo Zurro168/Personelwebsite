@@ -72,7 +72,7 @@ export default function ReportRenderer({ html, layout = 'paper' }: ReportRendere
 
   // Determine container classes based on layout
   const containerClasses = layout === 'interactive' 
-    ? "report-html-content-wrapper w-full" // Zero styling for interactive
+    ? "w-full" // Completely zero styling for isolated interactive apps
     : "report-html-content-wrapper report-body mx-auto"; // Paper styles for standard
 
   return (

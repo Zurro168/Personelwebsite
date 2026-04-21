@@ -238,29 +238,42 @@ async function sync() {
         // --- Layout Strategy ---
         let fullHtml = '';
         if (layout === 'interactive') {
-            // Ensure interactive HTML has a minimum height and visible default colors
-            const interactiveStyles = INDUSTRIAL_CSS
-                .replace('.report-body', '.interactive-base')
-                .replace('background: #FFFFFF !important;', 'background: transparent !important;')
-                .replace('color: #1A1A2E !important;', 'color: #D1D5DB !important;'); // Soft gray default
             
+            // For interactive (HTML) reports, we must absolutely preserve their internal DOM structure
+            // 1. Strip harmful external scripts that conflict with Next.js
+            let safeHtml = htmlContent.replace(/<script[^>]*tailwindcss\.com[^>]*><\/script>/gi, '');
+            safeHtml = safeHtml.replace(/<nav[^>]*>.*?<\/nav>/gis, ''); // Remove hardcoded fixed navbars to avoid overlapping our site navbar
+            
+            // 2. Extract only the body if it's a full document
+            const bodyMatch = safeHtml.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
+            if (bodyMatch) {
+                safeHtml = bodyMatch[1];
+            }
+
+            // 3. Prevent global CSS conflicts by scoping custom body styles to our container
+            safeHtml = safeHtml.replace(/body\s*{([^}]*)}/gi, '.html-content-root { $1 }');
+            
+            // Do NOT apply INDUSTRIAL_CSS to interactive content as it forces 100% width on all divs 
+            // and completely breaks any flex/grid layouts crafted by the author.
             fullHtml = `
               <div class="interactive-base" style="
                 font-family: 'Inter', -apple-system, sans-serif; 
-                line-height: 1.6; 
                 color: #D1D5DB; 
                 min-height: 50vh; 
                 width: 100%;
                 overflow-x: hidden;
               ">
                 <style>
-                  .interactive-base h1, .interactive-base h2, .interactive-base h3 { color: #FFFFFF !important; margin-top: 1.5em; margin-bottom: 0.5em; }
-                  .interactive-base p { margin-bottom: 1.25em; }
+                  .interactive-base h1, .interactive-base h2, .interactive-base h3 { color: #FFFFFF; font-weight: bold; margin-top: 1.5em; margin-bottom: 0.5em; }
+                  /* Minimal safeguard for images */
                   .interactive-base img { max-width: 100%; height: auto; border-radius: 8px; }
+                  
+                  /* Clean up any inherited dark mode text colors in custom cards */
+                  .html-content-root { background: transparent !important; }
+                  .html-content-root p { color: inherit; }
                 </style>
-                ${interactiveStyles} 
                 <div class="html-content-root">
-                  ${htmlContent}
+                  ${safeHtml}
                 </div>
               </div>
             `;

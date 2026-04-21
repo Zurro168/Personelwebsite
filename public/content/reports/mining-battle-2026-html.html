@@ -1,270 +1,26 @@
 
               <div class="interactive-base" style="
                 font-family: 'Inter', -apple-system, sans-serif; 
-                line-height: 1.6; 
                 color: #D1D5DB; 
                 min-height: 50vh; 
                 width: 100%;
                 overflow-x: hidden;
               ">
                 <style>
-                  .interactive-base h1, .interactive-base h2, .interactive-base h3 { color: #FFFFFF !important; margin-top: 1.5em; margin-bottom: 0.5em; }
-                  .interactive-base p { margin-bottom: 1.25em; }
+                  .interactive-base h1, .interactive-base h2, .interactive-base h3 { color: #FFFFFF; font-weight: bold; margin-top: 1.5em; margin-bottom: 0.5em; }
+                  /* Minimal safeguard for images */
                   .interactive-base img { max-width: 100%; height: auto; border-radius: 8px; }
+                  
+                  /* Clean up any inherited dark mode text colors in custom cards */
+                  .html-content-root { background: transparent !important; }
+                  .html-content-root p { color: inherit; }
                 </style>
-                
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono&display=swap');
-  
-  .interactive-base {
-    width: 980px !important;
-    max-width: 980px !important;
-    margin: 0 auto !important;
-    background: transparent !important;
-    color: #D1D5DB !important;
-    font-family: 'Inter', -apple-system, 'Microsoft YaHei', sans-serif;
-    line-height: 1.8;
-    letter-spacing: 0.1px;
-    padding: 80px 60px !important; /* Industrial Standard V6.1 */
-    overflow-wrap: break-word !important;
-    word-wrap: break-word !important;
-    word-break: normal !important;
-    min-height: 100vh;
-    box-sizing: border-box !important;
-  }
-  
-  /* 🚀 Total Width Domination: No elements can escape the 1140px text zone */
-  .report-body * {
-    max-width: none !important;
-    box-sizing: border-box !important;
-  }
-
-  .report-body > div, 
-  .report-body section, 
-  .report-body .mx-auto,
-  .report-body [class*="max-w-"] {
-    max-width: 100% !important;
-    width: 100% !important;
-    margin-left: 0 !important;
-    margin-right: 0 !important;
-  }
-  
-  /* 🛡️ Theme & Layout Protection */
-  .report-body p, 
-  .report-body li, 
-  .report-body h2, 
-  .report-body h3 {
-    max-width: none !important;
-    margin-left: 0 !important;
-    margin-right: 0 !important;
-    text-align: justify;
-  }
-  .report-body p, 
-  .report-body li, 
-  .report-body span,
-  .report-body div:not(.reference-zone):not(.table-container) {
-    color: #1A1A2E !important;
-    max-width: 100% !important;
-  }
-
-  /* 📊 Scrollable Financial Tables */
-  .table-container {
-    width: 100% !important;
-    overflow-x: auto !important;
-    margin: 40px 0 !important;
-    background: #f8fafc !important;
-    border: 1px solid #e2e8f0 !important;
-    border-radius: 8px !important;
-  }
-  
-  table {
-    min-width: 100% !important;
-    width: max-content !important; /* Allow tables to be wider than container but scrollable */
-  }
-
-  h2 {
-    background: #003366 !important;
-    color: #FFFFFF !important;
-    padding: 20px 35px !important;
-    border-radius: 4px !important;
-    font-size: 1.8rem !important;
-    font-weight: 900 !important;
-    margin: 60px 0 35px 0 !important;
-    display: flex !important;
-    align-items: center !important;
-    line-height: 1.2 !important;
-    box-shadow: 0 4px 12px rgba(0,51,102,0.1) !important;
-  }
-  
-  h3 {
-    color: #003366 !important;
-    border-left: 6px solid #B87333 !important;
-    padding-left: 25px !important;
-    margin: 45px 0 25px 0 !important;
-    font-size: 1.4rem !important;
-    font-weight: 800 !important;
-  }
-  
-  p { margin-bottom: 28px !important; text-align: justify !important; width: 100% !important; }
-  
-  ul, ol {
-    margin-bottom: 28px !important;
-    padding-left: 25px !important;
-  }
-  
-  li {
-    margin-bottom: 12px !important;
-  }
-  
-  th {
-    background: #F8FAFC !important;
-    color: #003366 !important;
-    font-weight: 600 !important;
-    text-align: left !important;
-    padding: 12px 15px !important;
-    border-bottom: 2px solid #003366 !important;
-  }
-  
-  td {
-    padding: 12px 15px !important;
-    border-bottom: 1px solid #E2E8F0 !important;
-  }
-  
-  tr:nth-child(even) { background: #FBFDFF !important; }
-  
-  /* 📑 Reference / Terminal Zone */
-  .reference-zone {
-    background: #1E1E1E;
-    color: #E0E0E0;
-    padding: 25px;
-    border-radius: 8px;
-    font-family: 'JetBrains Mono', monospace;
-    margin-top: 60px;
-    font-size: 0.85rem;
-    border-left: 5px solid #B87333;
-  }
-  
-  .reference-zone h4 { color: #B87333; margin-top: 0; }
-  .reference-zone a { color: #64B5F6; text-decoration: none; }
-  .reference-zone a:hover { text-decoration: underline; }
-</style>
- 
                 <div class="html-content-root">
-                  <!DOCTYPE html>
-
-<html lang="zh-CN" class="scroll-smooth">
-
-<head>
-
-    <meta charset="UTF-8">
-
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>2026 全球矿业巨头大博弈 - 贸易的终局，算法的起点</title>
-
-    <script src="https://cdn.tailwindcss.com"></script>
-
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-    <!-- Chosen Palette: 暖沙砾石 (Warm Neutrals) with Slate and subtle Rust/Emerald accents for a premium, earthy, and serious tone. -->
-
-    <!-- Application Structure Plan: A single-page storytelling dashboard layout. It begins with the macro-context (AI vs. Atoms), funnels down to the main players (Top 10 Interactive Chart), explores their strategies (Factions Tabs), outlines the geopolitical risks (Cards Grid), and concludes with the technological solution (AI Simulation Chart). This linear yet interactive flow guides the user from problem to actors to resolution, prioritizing comprehension of the complex geopolitical and physical constraints. -->
-
-    <!-- Visualization & Content Choices: 1. Top 10 Giants -> Compare -> Horizontal Bar Chart (Chart.js) -> Clicking a bar updates a detail panel -> Easy comparison of market caps while hiding dense text until requested. 2. Three Factions -> Organize -> Interactive CSS Tabs -> Clicking tab switches content -> Groups complex strategies logically without overwhelming the page. 3. Geopolitics -> Organize -> Hover/Click Info Cards -> Reveals specific country policies -> Makes reading discrete policy changes engaging. 4. Ore Grade vs Energy -> Change/Relationship -> Line Chart (Chart.js) with Toggle -> Shows the 'AI Effect' on physical limits -> Highlights the core technological conclusion of the report. Confirming NO SVG/Mermaid. -->
-
-    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
-
-    <style>
-
-        .chart-container {
-
-            position: relative;
-
-            width: 100%;
-
-            max-width: 1200px;
-
-            margin-left: auto;
-
-            margin-right: auto;
-
-            height: 50vh;
-
-            max-height: 450px;
-
-        }
-
-        @media (max-width: 768px) {
-
-            .chart-container {
-
-                height: 40vh;
-
-                max-height: 350px;
-
-            }
-
-        }
-
-        .tab-active {
-
-            border-bottom: 2px solid #b45309;
-
-            color: #b45309;
-
-            font-weight: bold;
-
-        }
-
-        .hide-scroll::-webkit-scrollbar {
-
-            display: none;
-
-        }
-
-        .hide-scroll {
-
-            -ms-overflow-style: none;
-
-            scrollbar-width: none;
-
-        }
-
-    </style>
-
-</head>
-
-<body class="bg-stone-100 text-stone-800 font-sans antialiased">
+                  
 
   
 
-    <nav class="sticky top-0 z-50 bg-stone-100/90 backdrop-blur-md border-b border-stone-200">
-
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-
-            <div class="flex justify-between h-16 items-center overflow-x-auto hide-scroll whitespace-nowrap">
-
-                <span class="font-bold text-xl tracking-tight text-stone-900 mr-8">2026 矿业版图</span>
-
-                <div class="flex space-x-6 text-sm font-medium text-stone-600">
-
-                    <a href="#context" class="hover:text-amber-700 transition-colors">物理纪元</a>
-
-                    <a href="#players" class="hover:text-amber-700 transition-colors">巨头榜单</a>
-
-                    <a href="#factions" class="hover:text-amber-700 transition-colors">三大阵营</a>
-
-                    <a href="#geopolitics" class="hover:text-amber-700 transition-colors">资源民族主义</a>
-
-                    <a href="#future" class="hover:text-amber-700 transition-colors">AI 救赎</a>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </nav>
+    
 
   
 
@@ -1224,9 +980,6 @@
 
     </script>
 
-</body>
-
-</html>
 
                 </div>
               </div>
