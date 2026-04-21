@@ -71,62 +71,71 @@ export default async function ReportPage({ params }: { params: Promise<{ slug: s
         <div id="reading-progress" className="h-full bg-brand-blue w-full scale-x-0" />
       </div>
 
-      {/* Node-based Progress Tracker (Side Menu) */}
-      <TableOfContents content={report.content} />
+      {/* Dual-Column Industrial Layout */}
+      <div className={report.layout === 'interactive' ? "w-full" : "max-w-[1300px] mx-auto flex items-start gap-10 px-8 relative"}>
+        
+        {/* Left Column: Authoritative Content (1000px fixed in paper mode) */}
+        <div className={report.layout === 'interactive' ? "w-full" : "w-[980px] shrink-0"}>
+          <main className="py-12">
+            <div className={report.layout === 'interactive' ? "" : "space-y-8"}>
+              {report.layout !== 'interactive' && (
+                <div className="mb-12">
+                  <Link href="/portfolio" className="flex items-center gap-2 text-white/40 hover:text-brand-blue transition-colors text-[10px] font-bold tracking-[0.2em] group mb-8">
+                    <ChevronLeft size={16} className="group-hover:-translate-x-1 transition-transform" /> BACK TO ARCHIVE
+                  </Link>
+                  
+                  <div className="space-y-4">
+                     <div className="inline-block px-3 py-1 bg-brand-blue/10 border border-brand-blue/20 text-brand-blue text-[10px] font-bold tracking-[0.2em] rounded uppercase">
+                       {report.tag}
+                     </div>
+                     <h1 className="text-4xl md:text-6xl font-black tracking-tighter leading-[1.1] text-white">
+                       {report.title}
+                     </h1>
+                     <div className="flex flex-wrap gap-4 text-xs font-mono text-white/30 pt-4 items-center">
+                        <span className="flex items-center gap-1 bg-white/5 px-2 py-1 rounded"><Calendar size={14} /> {report.date}</span>
+                        <span className="text-white/10 italic">#{report.id}</span>
+                     </div>
+                  </div>
 
-      {/* Main Content Area - Aligned to Global Navbar (7xl) */}
-      {/* Main Content Area - Aligned to Global Navbar (7xl) */}
-      <main className={report.layout === 'interactive' ? "w-full min-h-screen" : "max-w-[1300px] mx-auto py-12"}>
-        <div className={report.layout === 'interactive' ? "" : "space-y-8"}>
-          {report.layout !== 'interactive' && (
-            <div className="px-8">
-              <Link href="/portfolio" className="flex items-center gap-2 text-white/40 hover:text-brand-blue transition-colors text-[10px] font-bold tracking-[0.2em] group">
-                <ChevronLeft size={16} className="group-hover:-translate-x-1 transition-transform" /> BACK TO ARCHIVE
-              </Link>
-              
-              <div className="space-y-4">
-                 <div className="inline-block px-3 py-1 bg-brand-blue/10 border border-brand-blue/20 text-brand-blue text-[10px] font-bold tracking-[0.2em] rounded uppercase">
-                   {report.tag}
-                 </div>
-                 <h1 className="text-4xl md:text-6xl font-black tracking-tighter leading-[1.1] text-white">
-                   {report.title}
-                 </h1>
-                 <div className="flex flex-wrap gap-4 text-xs font-mono text-white/30 pt-4 items-center">
-                    <span className="flex items-center gap-1 bg-white/5 px-2 py-1 rounded"><Calendar size={14} /> {report.date}</span>
-                    <span className="text-white/10 italic">#{report.id}</span>
-                 </div>
-              </div>
-
-              <div className="pt-16 border-t border-white/5" />
-            </div>
-          )}
-
-          <div className="max-w-none mx-auto overflow-x-hidden">
-            {isHtml ? (
-              <ReportRenderer html={report.content} layout={report.layout} />
-            ) : (
-              <div className="px-8 flex justify-center">
-                <div className="prose prose-invert prose-cyber max-w-4xl w-full">
-                  <ReactMarkdown remarkPlugins={[remarkGfm, remarkMath]} rehypePlugins={[rehypeKatex]}>
-                    {report.content}
-                  </ReactMarkdown>
+                  <div className="pt-16 border-t border-white/5" />
                 </div>
-              </div>
-            )}
-          </div>
+              )}
 
-          {/* Minimal Copyright Line */}
-          <div className="mt-20 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] text-white/20 font-mono tracking-widest uppercase">
-            <div className="flex items-center gap-2">
-              <ShieldCheck size={12} className="text-brand-blue/40" />
-              <span>© {AUTHOR_INFO.copyright.year} {AUTHOR_INFO.copyright.owner} | {AUTHOR_INFO.copyright.notice.split('。')[0]}</span>
+              <div className="max-w-none overflow-x-hidden">
+                {isHtml ? (
+                  <ReportRenderer html={report.content} layout={report.layout} />
+                ) : (
+                  <div className="flex justify-center">
+                    <div className="prose prose-invert prose-cyber max-w-4xl w-full">
+                      <ReactMarkdown remarkPlugins={[remarkGfm, remarkMath]} rehypePlugins={[rehypeKatex]}>
+                        {report.content}
+                      </ReactMarkdown>
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {/* Minimal Copyright Line */}
+              <div className="mt-20 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] text-white/20 font-mono tracking-widest uppercase">
+                <div className="flex items-center gap-2">
+                  <ShieldCheck size={12} className="text-brand-blue/40" />
+                  <span>© {AUTHOR_INFO.copyright.year} {AUTHOR_INFO.copyright.owner} | {AUTHOR_INFO.copyright.notice.split('。')[0]}</span>
+                </div>
+                <Link href="/about" className="hover:text-brand-blue transition-colors">
+                  IP & REPRINT GUIDE
+                </Link>
+              </div>
             </div>
-            <Link href="/about" className="hover:text-brand-blue transition-colors">
-              IP & REPRINT GUIDE
-            </Link>
-          </div>
+          </main>
         </div>
-      </main>
+
+        {/* Right Column: Industrial Guide (Sticky) */}
+        {report.layout !== 'interactive' && (
+          <aside className="hidden lg:block pt-32">
+             <TableOfContents content={report.content} />
+          </aside>
+        )}
+      </div>
 
       {/* Footer */}
       <footer className="px-8 py-12 text-center">

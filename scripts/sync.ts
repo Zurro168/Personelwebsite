@@ -27,15 +27,15 @@ const INDUSTRIAL_CSS = `
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono&display=swap');
   
   .report-body {
-    width: 1300px !important;
-    max-width: 1300px !important;
+    width: 980px !important;
+    max-width: 980px !important;
     margin: 0 auto !important;
     background: #FFFFFF !important;
     color: #1A1A2E !important;
     font-family: 'Inter', -apple-system, 'Microsoft YaHei', sans-serif;
     line-height: 1.8;
     letter-spacing: 0.1px;
-    padding: 100px 80px !important; /* Fixed V6.0 Specs */
+    padding: 80px 60px !important; /* Industrial Standard V6.1 */
     overflow-wrap: break-word !important;
     word-wrap: break-word !important;
     word-break: normal !important;
@@ -175,10 +175,10 @@ function getAllFiles(dir: string, allFiles: string[] = []) {
 }
 
 async function sync() {
-    console.log('🏭 SC Industrial Intelligence Pipeline v4.0 Active...');
+    console.log('🏭 SC Industrial Intelligence Pipeline v4.5 Active...');
     
+    // Only scan Authority (Published) and System (About) folders
     const files = [
-        ...getAllFiles(OBSIDIAN_PUBLISH_DIR),
         ...getAllFiles(ARCHIVE_DIR),
         ...getAllFiles(SYSTEM_DIR)
     ];
@@ -191,17 +191,17 @@ async function sync() {
         const fileContent = fs.readFileSync(filePath, 'utf8');
         const { data, content } = matter(fileContent);
 
-        // 🚨 资产转换逻辑：将旧预警版重定向到权威 04-17 禁令版
+        // 🚨 Redirect/Skip Logic
         if (fileName.includes('加蓬锰矿出口关税调整预警')) {
             console.log(`🔀 Redirecting Legacy Gabon Article -> 04-17 Authority Version`);
-            continue; // Skip the old version
+            continue; 
         }
 
         if (!data.slug && fileName.toLowerCase() !== 'about.md') {
             continue;
         }
 
-        // 🚨 ECOSYSTEM PROTOCOL V1.0: Respect web_sync status
+        // 🚨 Respect web_sync status (Default to true if not specified in Published)
         if (data.web_sync === false) {
             console.log(`⏩ Skipping: ${fileName} (web_sync disabled)`);
             continue;
@@ -209,9 +209,8 @@ async function sync() {
 
         const isSystemFile = filePath.includes(SYSTEM_DIR);
         const outSlug = data.slug || 'about';
-        const layout = data.layout || 'paper'; // Default to paper
+        const layout = data.layout || 'paper'; 
         
-        // 防止重复采集
         if (processedSlugs.has(outSlug)) continue;
         processedSlugs.add(outSlug);
 
@@ -220,11 +219,8 @@ async function sync() {
         // --- Industrial Rendering Logic ---
         let htmlContent = await marked.parse(content);
         
-        // 1. Table Optimization (Only for paper reports)
         if (layout === 'paper') {
             htmlContent = htmlContent.replace(/<table>/g, '<div class="table-container"><table>').replace(/<\/table>/g, '</table></div>');
-            
-            // 2. Reference Zone Detection
             if (htmlContent.includes('参考文献')) {
                 htmlContent = htmlContent.replace(/<h2>参考文献<\/h2>([\s\S]*)/i, '<div class="reference-zone"><h4>参考文献 REFERENCE</h4>$1</div>');
             }
@@ -233,10 +229,8 @@ async function sync() {
         // --- Layout Strategy ---
         let fullHtml = '';
         if (layout === 'interactive') {
-            // Raw HTML mode: No wrapping, no standard CSS
             fullHtml = htmlContent;
         } else {
-            // Standard Paper mode: Wrap with industrial visual system
             fullHtml = `
               <div class="report-body">
                 ${INDUSTRIAL_CSS}
@@ -248,19 +242,18 @@ async function sync() {
         const outPath = isSystemFile ? path.join(PUBLIC_SYSTEM_DIR, `${outSlug}.html`) : path.join(PUBLIC_REPORTS_DIR, `${outSlug}.html`);
         fs.writeFileSync(outPath, fullHtml);
 
-        // --- Collect Data for Registry ---
         allReports.push({
-            id: `SCC-2026-${Math.floor(Math.random()*900)+100}`,
+            id: data.topic_id ? `SCC-2026-${data.topic_id}` : `SCC-2026-${Math.floor(Math.random()*900)+100}`,
             title: data.title || fileName.replace('.md', ''),
             description: data.description || '自动同步的研报',
-            tag: isSystemFile ? '关于我们' : (data.tag || '硬核商品'),
+            tag: isSystemFile ? '关于我们' : (data.tag ? data.tag.replace(/['#]/g, '') : '硬核商品'),
             date: new Date(data.publish_date || data.date || fs.statSync(filePath).mtime).toISOString().split('T')[0],
             readTime: data.readTime || '15 min',
-            image: data.cover || data.image || 'https://images.unsplash.com/photo-1579546929518-9e396f3cc809?q=80&w=1200',
+            image: data.cover || data.image || '/covers/default-report.png',
             slug: outSlug,
             hasContent: true,
             isPinned: isSystemFile,
-            layout: layout // Store layout in registry
+            layout: layout
         });
     }
 
@@ -273,7 +266,7 @@ export interface Report {
 export const ALL_REPORTS: Report[] = ${JSON.stringify(allReports, null, 2)};
 `;
     fs.writeFileSync(REPORTS_REGISTRY_FILE, registryContent);
-    console.log(`✅ Pipeline Complete. Registry synchronized with Industrial Visual Standards.`);
+    console.log(`✅ Pipeline Complete. Registry synchronized with V6.1 Side-by-Side Standards.`);
 }
 
 sync();

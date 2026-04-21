@@ -120,8 +120,8 @@ export default function TableOfContents({
   if (items.length === 0) return null;
 
   return (
-    <nav className="fixed right-2 lg:right-6 top-1/2 -translate-y-1/2 z-50 hidden md:flex flex-col items-end group">
-      <div className="relative flex flex-col items-center gap-10 py-10">
+    <nav className="sticky top-24 z-50 hidden md:flex flex-col items-end w-[280px] shrink-0">
+      <div className="relative flex flex-col items-center gap-10 py-10 w-full">
         <div className="absolute top-0 bottom-0 w-[1px] bg-white/10 right-[15px]" />
         
         <div 
@@ -132,9 +132,9 @@ export default function TableOfContents({
         {items.map((item, idx) => {
           const isActive = activeId === item.id;
           return (
-            <div key={`${item.id}-${idx}`} className="relative flex items-center justify-end group/item">
+            <div key={`${item.id}-${idx}`} className="relative flex items-center justify-end group/item w-full pr-12">
               <div className={`
-                absolute right-10 w-40 px-3 py-2 rounded-lg border border-white/5 
+                absolute right-10 w-52 px-3 py-2 rounded-lg border border-white/5 
                 backdrop-blur-2xl bg-slate-950/60 transition-all duration-500 text-right pointer-events-none
                 ${isActive ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-4 group-hover/item:opacity-100 group-hover/item:translate-x-0'}
               `}>
@@ -142,13 +142,26 @@ export default function TableOfContents({
                   <span className={`text-[7px] font-black font-mono tracking-tighter opacity-40 ${themeAccent}`}>LVL.0{idx + 1}</span>
                   {isActive && <span className={`text-[7px] font-black animate-pulse font-mono ${themeAccent}`}>TRACKING</span>}
                 </div>
-                <span className={`text-[9px] font-bold tracking-[0.1em] uppercase leading-tight block ${isActive ? 'text-white' : 'text-white/40'}`}>
+                <span className={`text-[9px] font-bold tracking-[0.1em] uppercase leading-tight block break-words whitespace-normal ${isActive ? 'text-white' : 'text-white/40'}`}>
                   {item.text}
                 </span>
               </div>
               
               <button 
-                onClick={() => document.getElementById(item.id)?.scrollIntoView({ behavior: 'smooth' })}
+                onClick={() => {
+                  const el = document.getElementById(item.id);
+                  if (el) {
+                    const offset = 100;
+                    const bodyRect = document.body.getBoundingClientRect().top;
+                    const elementRect = el.getBoundingClientRect().top;
+                    const elementPosition = elementRect - bodyRect;
+                    const offsetPosition = elementPosition - offset;
+                    window.scrollTo({
+                      top: offsetPosition,
+                      behavior: 'smooth'
+                    });
+                  }
+                }}
                 className={`
                   relative z-10 w-8 h-8 flex items-center justify-center transition-all duration-500
                   ${isActive ? 'scale-110' : 'hover:scale-110'}
