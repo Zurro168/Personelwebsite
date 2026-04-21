@@ -238,16 +238,30 @@ async function sync() {
         // --- Layout Strategy ---
         let fullHtml = '';
         if (layout === 'interactive') {
-            // Interactive mode stays dark/transparent to blend with the site
+            // Ensure interactive HTML has a minimum height and visible default colors
             const interactiveStyles = INDUSTRIAL_CSS
                 .replace('.report-body', '.interactive-base')
                 .replace('background: #FFFFFF !important;', 'background: transparent !important;')
-                .replace('color: #1A1A2E !important;', 'color: #E0E0E0 !important;');
+                .replace('color: #1A1A2E !important;', 'color: #D1D5DB !important;'); // Soft gray default
             
             fullHtml = `
-              <div class="interactive-base" style="font-family: 'Inter', sans-serif; line-height: 1.6; color: #E0E0E0;">
+              <div class="interactive-base" style="
+                font-family: 'Inter', -apple-system, sans-serif; 
+                line-height: 1.6; 
+                color: #D1D5DB; 
+                min-height: 50vh; 
+                width: 100%;
+                overflow-x: hidden;
+              ">
+                <style>
+                  .interactive-base h1, .interactive-base h2, .interactive-base h3 { color: #FFFFFF !important; margin-top: 1.5em; margin-bottom: 0.5em; }
+                  .interactive-base p { margin-bottom: 1.25em; }
+                  .interactive-base img { max-width: 100%; height: auto; border-radius: 8px; }
+                </style>
                 ${interactiveStyles} 
-                ${htmlContent}
+                <div class="html-content-root">
+                  ${htmlContent}
+                </div>
               </div>
             `;
         } else {

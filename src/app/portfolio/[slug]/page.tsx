@@ -132,7 +132,7 @@ export default async function ReportPage({ params }: { params: Promise<{ slug: s
 
         {/* Right Column: Industrial Guide (Sticky) */}
         {report.layout !== 'interactive' && (
-          <aside className="hidden lg:block pt-32">
+          <aside className="hidden lg:block pt-8">
              <TableOfContents content={report.content} />
           </aside>
         )}

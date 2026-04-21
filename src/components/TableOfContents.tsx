@@ -41,7 +41,7 @@ export default function TableOfContents({
       const container = document.querySelector('.report-body');
       if (!container) return;
 
-      const totalHeight = document.documentElement.scrollHeight;
+      const containerHeight = container.scrollHeight;
       const headingElements = Array.from(container.querySelectorAll('h2, h3')) as HTMLElement[];
       
       const foundItems: TOCItem[] = headingElements.map((el, index) => {
@@ -49,15 +49,14 @@ export default function TableOfContents({
           el.id = `heading-ref-${index}`;
         }
         
-        // Calculate physical percentage position
-        const rect = el.getBoundingClientRect();
-        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        const topPos = ((rect.top + scrollTop) / totalHeight) * 100;
+        // Calculate position relative to container ONLY
+        const relativeTop = el.offsetTop;
+        const topPos = (relativeTop / containerHeight) * 100;
 
         return {
           id: el.id,
           text: el.innerText.trim(),
-          topPos: Math.min(Math.max(topPos, 5), 95) // Clamp to track
+          topPos: Math.min(Math.max(topPos, 2), 98) // Clamp within track
         };
       });
 
@@ -78,11 +77,14 @@ export default function TableOfContents({
     const initTimer = setTimeout(extractHeadings, 1200);
 
     const handleScroll = () => {
-      const winScroll = document.documentElement.scrollTop;
-      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-      if (height <= 0) return;
-      const scrolled = (winScroll / height) * 100;
-      setScrollProgress(scrolled);
+      const container = document.querySelector('.report-body');
+      if (!container) return;
+      
+      const rect = container.getBoundingClientRect();
+      const containerHeight = container.scrollHeight;
+      const scrolledInContainer = Math.max(0, -rect.top);
+      const scrolled = (scrolledInContainer / containerHeight) * 100;
+      setScrollProgress(Math.min(scrolled, 100));
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -98,7 +100,7 @@ export default function TableOfContents({
   if (items.length === 0) return null;
 
   return (
-    <nav className="sticky top-24 z-50 hidden md:flex flex-col items-end w-[280px] shrink-0">
+    <nav className="sticky top-32 z-50 hidden md:flex flex-col items-end w-[280px] shrink-0 mt-[120px]">
       <div className="relative h-[70vh] w-full">
         {/* Track Line - Flush Right */}
         <div className="absolute top-0 bottom-0 w-[1px] bg-white/5 right-0" />
@@ -125,9 +127,9 @@ export default function TableOfContents({
               `}>
                 <div className="flex items-center gap-2 mb-1 justify-end">
                   <span className={`text-[8px] font-black font-mono tracking-widest ${isActive ? 'text-white' : 'text-white/20'}`}>LVL.0{idx + 1}</span>
-                  {isActive && <span className={`text-[8px] font-black animate-pulse font-mono ${themeAccent} drop-shadow-[0_0_8px_rgba(56,189,248,0.5)]`}>TRACKING</span>}
+                  {isActive && <span className={`text-[8px] font-black animate-pulse font-mono ${themeAccent} drop-shadow-[0_0_10px_rgba(255,255,255,0.8)]`}>TRACKING</span>}
                 </div>
-                <span className={`text-[10px] font-black tracking-[0.05em] uppercase leading-tight block break-words whitespace-normal px-1 ${isActive ? 'text-white' : 'text-white/20'}`}>
+                <span className={`text-[10px] font-black tracking-[0.05em] uppercase leading-tight block break-words whitespace-normal px-1 ${isActive ? 'text-white' : 'text-white/10'}`}>
                   {item.text}
                 </span>
               </div>
