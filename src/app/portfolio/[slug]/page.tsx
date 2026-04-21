@@ -75,10 +75,11 @@ export default async function ReportPage({ params }: { params: Promise<{ slug: s
       <TableOfContents content={report.content} />
 
       {/* Main Content Area - Aligned to Global Navbar (7xl) */}
-      <main className={report.layout === 'interactive' ? "w-full min-h-screen" : "max-w-7xl mx-auto px-8 py-12"}>
+      {/* Main Content Area - Aligned to Global Navbar (7xl) */}
+      <main className={report.layout === 'interactive' ? "w-full min-h-screen" : "max-w-[1300px] mx-auto py-12"}>
         <div className={report.layout === 'interactive' ? "" : "space-y-8"}>
           {report.layout !== 'interactive' && (
-            <>
+            <div className="px-8">
               <Link href="/portfolio" className="flex items-center gap-2 text-white/40 hover:text-brand-blue transition-colors text-[10px] font-bold tracking-[0.2em] group">
                 <ChevronLeft size={16} className="group-hover:-translate-x-1 transition-transform" /> BACK TO ARCHIVE
               </Link>
@@ -97,16 +98,20 @@ export default async function ReportPage({ params }: { params: Promise<{ slug: s
               </div>
 
               <div className="pt-16 border-t border-white/5" />
-            </>
+            </div>
           )}
 
-          <div className={isHtml ? "max-w-none mx-auto overflow-x-hidden" : "prose prose-invert prose-cyber max-w-4xl overflow-x-hidden"}>
+          <div className="max-w-none mx-auto overflow-x-hidden">
             {isHtml ? (
               <ReportRenderer html={report.content} layout={report.layout} />
             ) : (
-              <ReactMarkdown remarkPlugins={[remarkGfm, remarkMath]} rehypePlugins={[rehypeKatex]}>
-                {report.content}
-              </ReactMarkdown>
+              <div className="px-8 flex justify-center">
+                <div className="prose prose-invert prose-cyber max-w-4xl w-full">
+                  <ReactMarkdown remarkPlugins={[remarkGfm, remarkMath]} rehypePlugins={[rehypeKatex]}>
+                    {report.content}
+                  </ReactMarkdown>
+                </div>
+              </div>
             )}
           </div>
 
