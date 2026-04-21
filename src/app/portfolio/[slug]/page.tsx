@@ -75,35 +75,39 @@ export default async function ReportPage({ params }: { params: Promise<{ slug: s
       <TableOfContents content={report.content} />
 
       {/* Main Content Area - Aligned to Global Navbar (7xl) */}
-      <main className="max-w-7xl mx-auto px-8 py-12">
-        <div className="space-y-8">
-          <Link href="/portfolio" className="flex items-center gap-2 text-white/40 hover:text-brand-blue transition-colors text-[10px] font-bold tracking-[0.2em] group">
-            <ChevronLeft size={16} className="group-hover:-translate-x-1 transition-transform" /> BACK TO ARCHIVE
-          </Link>
-          
-          <div className="space-y-4">
-             <div className="inline-block px-3 py-1 bg-brand-blue/10 border border-brand-blue/20 text-brand-blue text-[10px] font-bold tracking-[0.2em] rounded uppercase">
-               {report.tag}
-             </div>
-             <h1 className="text-4xl md:text-6xl font-black tracking-tighter leading-[1.1] text-white">
-               {report.title}
-             </h1>
-             <div className="flex flex-wrap gap-4 text-xs font-mono text-white/30 pt-4 items-center">
-                <span className="flex items-center gap-1 bg-white/5 px-2 py-1 rounded"><Calendar size={14} /> {report.date}</span>
-                <span className="text-white/10 italic">#{report.id}</span>
-             </div>
-          </div>
+      <main className={report.layout === 'interactive' ? "w-full min-h-screen" : "max-w-7xl mx-auto px-8 py-12"}>
+        <div className={report.layout === 'interactive' ? "" : "space-y-8"}>
+          {report.layout !== 'interactive' && (
+            <>
+              <Link href="/portfolio" className="flex items-center gap-2 text-white/40 hover:text-brand-blue transition-colors text-[10px] font-bold tracking-[0.2em] group">
+                <ChevronLeft size={16} className="group-hover:-translate-x-1 transition-transform" /> BACK TO ARCHIVE
+              </Link>
+              
+              <div className="space-y-4">
+                 <div className="inline-block px-3 py-1 bg-brand-blue/10 border border-brand-blue/20 text-brand-blue text-[10px] font-bold tracking-[0.2em] rounded uppercase">
+                   {report.tag}
+                 </div>
+                 <h1 className="text-4xl md:text-6xl font-black tracking-tighter leading-[1.1] text-white">
+                   {report.title}
+                 </h1>
+                 <div className="flex flex-wrap gap-4 text-xs font-mono text-white/30 pt-4 items-center">
+                    <span className="flex items-center gap-1 bg-white/5 px-2 py-1 rounded"><Calendar size={14} /> {report.date}</span>
+                    <span className="text-white/10 italic">#{report.id}</span>
+                 </div>
+              </div>
 
-          <div className="pt-16 border-t border-white/5">
-            <div className={isHtml ? "max-w-none mx-auto overflow-x-hidden" : "prose prose-invert prose-cyber max-w-4xl overflow-x-hidden"}>
-              {isHtml ? (
-                <ReportRenderer html={report.content} />
-              ) : (
-                <ReactMarkdown remarkPlugins={[remarkGfm, remarkMath]} rehypePlugins={[rehypeKatex]}>
-                  {report.content}
-                </ReactMarkdown>
-              )}
-            </div>
+              <div className="pt-16 border-t border-white/5" />
+            </>
+          )}
+
+          <div className={isHtml ? "max-w-none mx-auto overflow-x-hidden" : "prose prose-invert prose-cyber max-w-4xl overflow-x-hidden"}>
+            {isHtml ? (
+              <ReportRenderer html={report.content} layout={report.layout} />
+            ) : (
+              <ReactMarkdown remarkPlugins={[remarkGfm, remarkMath]} rehypePlugins={[rehypeKatex]}>
+                {report.content}
+              </ReactMarkdown>
+            )}
           </div>
 
           {/* Minimal Copyright Line */}

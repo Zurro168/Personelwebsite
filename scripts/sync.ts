@@ -183,30 +183,41 @@ async function sync() {
 
         const isSystemFile = filePath.includes(SYSTEM_DIR);
         const outSlug = data.slug || 'about';
+        const layout = data.layout || 'paper'; // Default to paper
         
         // 防止重复采集
         if (processedSlugs.has(outSlug)) continue;
         processedSlugs.add(outSlug);
 
-        console.log(`📄 Processing: ${data.title || fileName}`);
+        console.log(`📄 Processing [${layout}]: ${data.title || fileName}`);
 
         // --- Industrial Rendering Logic ---
         let htmlContent = await marked.parse(content);
         
-        // 1. Table Optimization
-        htmlContent = htmlContent.replace(/<table>/g, '<div class="table-container"><table>').replace(/<\/table>/g, '</table></div>');
-        
-        // 2. Reference Zone Detection
-        if (htmlContent.includes('参考文献')) {
-            htmlContent = htmlContent.replace(/<h2>参考文献<\/h2>([\s\S]*)/i, '<div class="reference-zone"><h4>参考文献 REFERENCE</h4>$1</div>');
+        // 1. Table Optimization (Only for paper reports)
+        if (layout === 'paper') {
+            htmlContent = htmlContent.replace(/<table>/g, '<div class="table-container"><table>').replace(/<\/table>/g, '</table></div>');
+            
+            // 2. Reference Zone Detection
+            if (htmlContent.includes('参考文献')) {
+                htmlContent = htmlContent.replace(/<h2>参考文献<\/h2>([\s\S]*)/i, '<div class="reference-zone"><h4>参考文献 REFERENCE</h4>$1</div>');
+            }
         }
 
-        const fullHtml = `
-          <div class="report-body">
-            ${INDUSTRIAL_CSS}
-            ${htmlContent}
-          </div>
-        `;
+        // --- Layout Strategy ---
+        let fullHtml = '';
+        if (layout === 'interactive') {
+            // Raw HTML mode: No wrapping, no standard CSS
+            fullHtml = htmlContent;
+        } else {
+            // Standard Paper mode: Wrap with industrial visual system
+            fullHtml = `
+              <div class="report-body">
+                ${INDUSTRIAL_CSS}
+                ${htmlContent}
+              </div>
+            `;
+        }
 
         const outPath = isSystemFile ? path.join(PUBLIC_SYSTEM_DIR, `${outSlug}.html`) : path.join(PUBLIC_REPORTS_DIR, `${outSlug}.html`);
         fs.writeFileSync(outPath, fullHtml);
@@ -222,7 +233,8 @@ async function sync() {
             image: data.cover || data.image || 'https://images.unsplash.com/photo-1579546929518-9e396f3cc809?q=80&w=1200',
             slug: outSlug,
             hasContent: true,
-            isPinned: isSystemFile
+            isPinned: isSystemFile,
+            layout: layout // Store layout in registry
         });
     }
 
@@ -230,7 +242,7 @@ async function sync() {
 export interface Report {
   id: string; title: string; description: string; tag: string; date: string;
   readTime: string; image: string; slug: string; hasContent: boolean;
-  isHtml?: boolean; isPinned?: boolean;
+  isHtml?: boolean; isPinned?: boolean; layout?: string;
 }
 export const ALL_REPORTS: Report[] = ${JSON.stringify(allReports, null, 2)};
 `;

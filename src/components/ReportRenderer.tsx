@@ -3,13 +3,13 @@
 import { useEffect, useRef } from 'react';
 import katex from 'katex';
 import renderMathInElement from 'katex/dist/contrib/auto-render';
-import { AUTHOR_INFO } from '@/data/biography';
 
 interface ReportRendererProps {
   html: string;
+  layout?: string;
 }
 
-export default function ReportRenderer({ html }: ReportRendererProps) {
+export default function ReportRenderer({ html, layout = 'paper' }: ReportRendererProps) {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -32,10 +32,9 @@ export default function ReportRenderer({ html }: ReportRendererProps) {
     const scripts = containerRef.current.querySelectorAll('script');
     const hasCanvas = containerRef.current.querySelector('canvas');
     
-    // Create a sequential execution chain for scripts
     const executeScripts = async () => {
       // 2a. Pre-load Chart.js if canvas exists but no chart.js script is found
-      if (hasCanvas && !Array.from(scripts).some(s => s.src.includes('chart.js'))) {
+      if (hasCanvas && !Array.from(scripts).some(s => s.src?.includes('chart.js'))) {
         const chartLib = document.createElement('script');
         chartLib.src = 'https://cdn.jsdelivr.net/npm/chart.js';
         document.head.appendChild(chartLib);
@@ -45,36 +44,24 @@ export default function ReportRenderer({ html }: ReportRendererProps) {
       for (const oldScript of Array.from(scripts)) {
         const newScript = document.createElement('script');
         
-        // Copy attributes
         Array.from(oldScript.attributes).forEach((attr) => {
           newScript.setAttribute(attr.name, attr.value);
         });
 
-        // Use .text for inline scripts to ensure correct execution
         if (oldScript.innerHTML) {
           newScript.text = oldScript.innerHTML;
         }
 
-        // Wait for external scripts to load before proceeding
         const scriptPromise = new Promise((resolve) => {
           if (newScript.src) {
             newScript.onload = () => resolve(true);
             newScript.onerror = () => resolve(false);
           } else {
-            // Inline scripts execute immediately upon insertion
             resolve(true);
           }
         });
 
-        // Append to head or the container to trigger execution
         document.head.appendChild(newScript);
-        
-        // Remove from head after execution (optional)
-        if (!newScript.src) {
-           // We might want to keep it or remove it, but for inline scripts 
-           // that do definitions, keeping them for a bit is safer.
-        }
-        
         await scriptPromise;
         oldScript.parentNode?.removeChild(oldScript);
       }
@@ -83,18 +70,21 @@ export default function ReportRenderer({ html }: ReportRendererProps) {
     executeScripts();
   }, [html]);
 
+  // Determine container classes based on layout
+  const containerClasses = layout === 'interactive' 
+    ? "report-html-content-wrapper w-full" // Zero styling for interactive
+    : "report-html-content-wrapper report-body mx-auto"; // Paper styles for standard
+
   return (
-    <div className="space-y-12">
+    <div className={layout === 'interactive' ? "w-full" : "space-y-12"}>
       {/* Article Content */}
       <div 
         ref={containerRef}
         dangerouslySetInnerHTML={{ __html: html }} 
-        className="report-html-content-wrapper report-body"
+        className={containerClasses}
       />
-
-      {/* Minimal Bottom Space or Separator if needed */}
-      <div className="pt-12" />
+      
+      {layout !== 'interactive' && <div className="pt-12" />}
     </div>
   );
 }
-
