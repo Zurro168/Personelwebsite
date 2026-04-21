@@ -242,7 +242,7 @@ async function sync() {
             // For interactive (HTML) reports, we must absolutely preserve their internal DOM structure
             // 1. Strip harmful external scripts that conflict with Next.js
             let safeHtml = htmlContent.replace(/<script[^>]*tailwindcss\.com[^>]*><\/script>/gi, '');
-            safeHtml = safeHtml.replace(/<nav[^>]*>.*?<\/nav>/gis, ''); // Remove hardcoded fixed navbars to avoid overlapping our site navbar
+            safeHtml = safeHtml.replace(/<nav[^>]*>[\s\S]*?<\/nav>/gi, ''); // Remove hardcoded fixed navbars to avoid overlapping our site navbar
             
             // 2. Extract only the body if it's a full document
             const bodyMatch = safeHtml.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
