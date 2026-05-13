@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import Link from 'next/link';
 import { Search, Filter, ChevronLeft, ChevronRight, Clock } from 'lucide-react';
 import { ALL_REPORTS } from '@/data/reports';
@@ -12,25 +12,23 @@ const TAGS = ['全部', ...Array.from(new Set(ALL_REPORTS.map(r => r.tag)))];
 export default function Portfolio() {
   const [activeTag, setActiveTag] = useState('全部');
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 6; // Increased density
+  const [searchQuery, setSearchQuery] = useState('');
+  const itemsPerPage = 6;
 
   // Smart Sorting: isPinned (boolean) first, then hasContent, then date descending
-  const sortedReports = [...ALL_REPORTS].sort((a, b) => {
-    // 1. Pinned articles always stay at the top
-    if (a.isPinned !== b.isPinned) {
-      return a.isPinned ? -1 : 1;
-    }
-    // 2. Functional articles before placeholders
-    if (a.hasContent !== b.hasContent) {
-      return a.hasContent ? -1 : 1;
-    }
-    // 3. Standard chronological order for the rest
+  const sortedReports = useMemo(() => [...ALL_REPORTS].sort((a, b) => {
+    if (a.isPinned !== b.isPinned) return a.isPinned ? -1 : 1;
+    if (a.hasContent !== b.hasContent) return a.hasContent ? -1 : 1;
     return new Date(b.date).getTime() - new Date(a.date).getTime();
-  });
+  }), []);
 
-  const filteredReports = sortedReports.filter(r => 
-    activeTag === '全部' || r.tag === activeTag
-  );
+  const filteredReports = sortedReports.filter(r => {
+    const matchesTag = activeTag === '全部' || r.tag === activeTag;
+    const matchesSearch = !searchQuery ||
+      r.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      r.description.toLowerCase().includes(searchQuery.toLowerCase());
+    return matchesTag && matchesSearch;
+  });
 
   const totalPages = Math.ceil(filteredReports.length / itemsPerPage);
   const currentReports = filteredReports.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
@@ -48,10 +46,12 @@ export default function Portfolio() {
             </p>
           </div>
           <div className="flex bg-slate-800/50 p-1.5 rounded-lg border border-white/5 backdrop-blur-md mb-2">
-            <input 
-              type="text" 
-              placeholder="搜索视角..." 
+            <input
+              type="text"
+              placeholder="搜索标题或关键词..."
               className="bg-transparent px-4 py-2 outline-none text-xs text-white placeholder:text-white/20 w-48"
+              onChange={(e) => { setSearchQuery(e.target.value); setCurrentPage(1); }}
+              value={searchQuery}
             />
             <button className="p-2 bg-brand-blue text-slate-900 rounded"><Search size={16} /></button>
           </div>
@@ -62,7 +62,7 @@ export default function Portfolio() {
         <div className="max-w-7xl mx-auto px-10 flex items-center justify-between">
           <div className="flex gap-8 overflow-x-auto no-scrollbar py-3">
             {TAGS.map(tag => (
-              <button 
+              <button
                 key={tag}
                 onClick={() => { setActiveTag(tag); setCurrentPage(1); }}
                 className={`text-[10px] font-bold tracking-[0.2em] uppercase transition-all whitespace-nowrap ${activeTag === tag ? 'text-brand-blue' : 'text-white/30 hover:text-white'}`}
@@ -86,31 +86,31 @@ export default function Portfolio() {
       <main id="reports" className="max-w-7xl mx-auto px-10 py-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
           {currentReports.map((report) => (
-            <article 
-              key={report.id} 
+            <article
+              key={report.id}
               className={`group flex flex-col transition-opacity ${report.hasContent ? 'opacity-100' : 'opacity-60'}`}
             >
               <div className="relative aspect-[16/10] overflow-hidden rounded mb-6 border border-white/5 bg-slate-900">
                 {report.hasContent ? (
                   <Link href={`/portfolio/${report.slug}`} className="block w-full h-full">
-                    <img 
-                      src={report.image} 
-                      alt={report.title} 
-                      className="w-full h-full object-cover opacity-60 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700" 
+                    <img
+                      src={report.image}
+                      alt={report.title}
+                      className="w-full h-full object-cover opacity-60 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700"
                     />
                   </Link>
                 ) : (
-                  <img 
-                    src={report.image} 
-                    alt={report.title} 
-                    className="w-full h-full object-cover opacity-30 grayscale group-hover:grayscale-0 transition-all duration-700" 
+                  <img
+                    src={report.image}
+                    alt={report.title}
+                    className="w-full h-full object-cover opacity-30 grayscale group-hover:grayscale-0 transition-all duration-700"
                   />
                 )}
                 <div className="absolute top-4 left-4">
                   <span className="text-brand-blue text-[9px] font-black uppercase tracking-[0.3em] font-mono">{report.tag}</span>
                 </div>
               </div>
-              
+
               <div className="space-y-4 flex-grow">
                 <div className="flex justify-between items-center text-[10px] text-white/20 font-mono">
                   <span className="flex items-center gap-2"><Clock size={12} /> {report.readTime}</span>
@@ -147,7 +147,7 @@ export default function Portfolio() {
         {/* Pagination */}
         {totalPages > 1 && (
           <div className="mt-24 pt-12 border-t border-white/5 flex items-center justify-center gap-10">
-            <button 
+            <button
               disabled={currentPage === 1}
               onClick={() => setCurrentPage(prev => prev - 1)}
               className="p-4 border border-white/5 rounded-full text-white/30 hover:text-brand-blue hover:border-brand-blue/30 disabled:opacity-0 transition-all"
@@ -159,7 +159,7 @@ export default function Portfolio() {
               <span className="text-white/10">/</span>
               <span className="text-white/40">{totalPages}</span>
             </div>
-            <button 
+            <button
               disabled={currentPage === totalPages}
               onClick={() => setCurrentPage(prev => prev + 1)}
               className="p-4 border border-white/5 rounded-full text-white/30 hover:text-brand-blue hover:border-brand-blue/30 disabled:opacity-0 transition-all"

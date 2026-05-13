@@ -68,8 +68,19 @@ export default async function ReportPage({ params }: { params: Promise<{ slug: s
     <div className="min-h-screen bg-background text-foreground font-sans selection:bg-brand-blue/30">
       {/* Scroll Progress Bar */}
       <div className="fixed top-0 left-0 w-full h-[2px] z-[60] bg-white/5">
-        <div id="reading-progress" className="h-full bg-brand-blue w-full scale-x-0" />
+        <div id="reading-progress" className="h-full bg-brand-blue origin-left" style={{ transform: 'scaleX(0)' }} />
       </div>
+      <script dangerouslySetInnerHTML={{
+        __html: `(function(){
+          var bar=document.getElementById('reading-progress');
+          if(!bar)return;
+          window.addEventListener('scroll',function(){
+            var h=document.documentElement;
+            var pct=Math.min(window.scrollY/(h.scrollHeight-h.clientHeight),1);
+            bar.style.transform='scaleX('+pct+')';
+          },{passive:true});
+        })();`
+      }} />
 
       {/* Dual-Column Industrial Layout */}
       {/* Dual-Column Industrial Layout */}

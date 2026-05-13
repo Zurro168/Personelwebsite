@@ -1,23 +1,26 @@
 'use client';
 
-import React from 'react';
+import { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { Menu, X } from 'lucide-react';
+
+const navLinks = [
+  { name: '首页', path: '/' },
+  { name: '金属周期地图', path: '/cycle-map' },
+  { name: '深度研报', path: '/portfolio' },
+  { name: '跨界实验', path: '/intersection' },
+  { name: '关于', path: '/about' },
+];
 
 export default function Navbar() {
   const pathname = usePathname();
-
-  const navLinks = [
-    { name: '首页', path: '/' },
-    { name: '金属周期地图', path: '/cycle-map' },
-    { name: '深度研报', path: '/portfolio' },
-    { name: '跨界实验', path: '/intersection' },
-    { name: '关于', path: '/about' },
-  ];
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
     <header className="border-b border-white/5 sticky top-0 bg-background/80 backdrop-blur-xl z-50">
       <div className="max-w-7xl mx-auto px-10 py-3 flex justify-between items-center">
+        {/* Logo */}
         <div className="flex items-center gap-4 group">
           <Link href="/" className="w-9 h-9 bg-cyan-500 rounded flex items-center justify-center text-slate-900 font-black cursor-pointer transition-transform group-hover:rotate-6 group-hover:scale-110 shrink-0 shadow-[0_0_15px_rgba(56,189,248,0.2)]">
             Si
@@ -33,13 +36,15 @@ export default function Navbar() {
             </Link>
           </div>
         </div>
-        <nav className="flex gap-10 text-[13px] font-bold tracking-[0.1em] text-slate-400">
+
+        {/* Desktop Nav */}
+        <nav className="hidden md:flex gap-10 text-[13px] font-bold tracking-[0.1em] text-slate-400">
           {navLinks.map((link) => {
             const isActive = pathname === link.path;
             return (
-              <Link 
-                key={link.path} 
-                href={link.path} 
+              <Link
+                key={link.path}
+                href={link.path}
                 className={`transition-all relative group ${isActive ? 'text-brand-blue' : 'hover:text-brand-blue'}`}
               >
                 {link.name}
@@ -48,7 +53,37 @@ export default function Navbar() {
             );
           })}
         </nav>
+
+        {/* Mobile Toggle */}
+        <button
+          className="md:hidden text-white/60 hover:text-white transition-colors"
+          onClick={() => setMobileOpen(!mobileOpen)}
+          aria-label="Toggle menu"
+        >
+          {mobileOpen ? <X size={24} /> : <Menu size={24} />}
+        </button>
       </div>
+
+      {/* Mobile Nav */}
+      {mobileOpen && (
+        <div className="md:hidden border-t border-white/5 bg-background/95 backdrop-blur-xl">
+          <nav className="flex flex-col px-10 py-6 gap-4">
+            {navLinks.map((link) => {
+              const isActive = pathname === link.path;
+              return (
+                <Link
+                  key={link.path}
+                  href={link.path}
+                  onClick={() => setMobileOpen(false)}
+                  className={`text-sm font-bold tracking-[0.1em] py-2 transition-colors ${isActive ? 'text-brand-blue' : 'text-white/60 hover:text-white'}`}
+                >
+                  {link.name}
+                </Link>
+              );
+            })}
+          </nav>
+        </div>
+      )}
     </header>
   );
 }

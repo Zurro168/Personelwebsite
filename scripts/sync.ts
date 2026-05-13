@@ -13,8 +13,7 @@ import { marked } from 'marked';
  * - Timeline History Preservation
  */
 
-const SC_BASE = 'D:/iCloudDrive/iCloud~md~obsidian/Obsidian Vault/SiliconCommand';
-const OBSIDIAN_PUBLISH_DIR = `${SC_BASE}/10_Content/01_Drafts`;      
+const SC_BASE = process.env.VAULT_PATH || 'D:/iCloudDrive/iCloud~md~obsidian/Obsidian Vault/SiliconCommand';
 const ARCHIVE_DIR          = `${SC_BASE}/10_Content/03_Published`;   
 const SYSTEM_DIR           = `${SC_BASE}/00_Brand`;                  
 const REPORTS_REGISTRY_FILE = path.join(process.cwd(), 'src/data/reports.ts');
