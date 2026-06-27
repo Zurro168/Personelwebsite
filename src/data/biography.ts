@@ -96,12 +96,12 @@ export const AUTHOR_INFO = {
     "wechat": {
       "label": "个人微信",
       "id": "zurro168",
-      "qrCode": "/brand/wechat-qr.png"
+      "qrCode": "/brand/wechat-personal.jpg"
     },
     "officialAccount": {
       "label": "硅基大宗",
       "name": "硅基大宗",
-      "qrCode": "/brand/official-account-qr.png"
+      "qrCode": "/brand/official-account.jpg"
     }
   },
   "systemLogs": [

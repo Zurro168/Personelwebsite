@@ -1,63 +1,85 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { Activity, Zap, TrendingUp, TrendingDown } from 'lucide-react';
-import TableOfContents from '@/components/TableOfContents';
+import { Activity, Zap, TrendingUp, TrendingDown, RefreshCw, Loader2 } from 'lucide-react';
+import { resolveCommodity } from '@/lib/price-adapter';
 
-// --- Commodity Overview Data (Sync with your data/cycle-maps.ts) ---
-const COMMODITIES = [
+// --- Commodity Metadata ---
+const COMMODITIES_META = [
   {
     name: '精炼铜 (Copper)',
     symbol: 'HG=F',
-    score: 82,
-    status: '库存低位 / 需求爆发',
     slug: 'copper',
-    trend: 'up',
     description: '核心观察点：LME/SHFE 库存历史低位与算力基建的结构性需求背离。',
     labels: ['库存紧缺', '能源转型', '算力溢价']
   },
   {
     name: '锆 (Zirconium)',
     symbol: 'ZR',
-    score: 64,
-    status: '供应受限 / 需求平稳',
     slug: 'zirconium',
-    trend: 'neutral',
     description: '核心观察点：澳洲精矿供应动态与全球陶瓷、核电涂层的订单反馈。',
     labels: ['精矿供应', '核电材料', '陶瓷基建']
   },
   {
     name: '钛 (Titanium)',
     symbol: 'TI',
-    score: 71,
-    status: '航空级需求强劲',
     slug: 'titanium',
-    trend: 'up',
     description: '核心观察点：民航大飞机复苏对高端钛合金零件的长期拉动效应。',
     labels: ['航空工业', '海工装备', '结构强韧']
   },
   {
     name: '锂 (Lithium)',
     symbol: 'LI',
-    score: 45,
-    status: '库存出清 / 成本支撑',
     slug: 'lithium',
-    trend: 'down',
     description: '核心观察点：锂矿提锂成本线与下游电池厂商补库周期的拟合度。',
     labels: ['电池金属', '库存周期', '减产预期']
   }
 ];
 
 export default function CycleMapPortal() {
+  const [commodities, setCommodities] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function loadData() {
+      try {
+        const data = await Promise.all(
+          COMMODITIES_META.map(async (meta) => {
+            const resolved = await resolveCommodity(meta.slug);
+            return {
+              ...meta,
+              name: resolved.name || meta.name,
+              score: resolved.score,
+              status: resolved.status,
+              trend: resolved.trend
+            };
+          })
+        );
+        setCommodities(data);
+      } catch (err) {
+        console.error("Failed to load commodities data:", err);
+      } finally {
+        setLoading(false);
+      }
+    }
+    loadData();
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-background text-white flex flex-col items-center justify-center">
+        <Loader2 className="w-10 h-10 text-brand-blue animate-spin mb-6" />
+        <div className="text-xs uppercase font-black tracking-[0.3em] text-brand-blue italic animate-pulse">Establishing Secure Neural Link...</div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-background">
-      {/* Node-based Progress Tracker */}
-      <TableOfContents content="" />
-
       <section id="header" className="max-w-7xl mx-auto px-8 py-12 space-y-4">
         <h1 className="text-5xl font-black text-white italic uppercase tracking-tighter">
-          金属周期地图 <span className="text-brand-blue">/</span> Circle Map
+          金属周期地图 <span className="text-brand-blue">/</span> Cycle Map
         </h1>
         <p className="max-w-2xl text-slate-500 font-light text-xs leading-relaxed">
           基于独有的“硅基定价模型”，通过高频数据拟合大宗商品的基本面状态、宏观溢价与情绪指数，实时监测各品类的周期拐点。
@@ -66,7 +88,7 @@ export default function CycleMapPortal() {
 
       {/* Grid List */}
       <main id="commodities" className="max-w-7xl mx-auto px-8 grid grid-cols-1 md:grid-cols-2 gap-10">
-        {COMMODITIES.map((item) => (
+        {commodities.map((item) => (
           <Link 
             key={item.slug} 
             href={`/cycle-map/${item.slug}`}
@@ -94,7 +116,7 @@ export default function CycleMapPortal() {
 
               <div className="space-y-4">
                 <div className="flex items-center gap-3">
-                  {item.trend === 'up' ? <TrendingUp size={16} className="text-emerald-400" /> : <TrendingDown size={16} className="text-rose-400" />}
+                  {item.trend === 'up' ? <TrendingUp size={16} className="text-emerald-400" /> : item.trend === 'down' ? <TrendingDown size={16} className="text-rose-400" /> : <RefreshCw size={16} className="text-brand-blue" />}
                   <span className="text-xs font-bold text-white tracking-widest uppercase">{item.status}</span>
                 </div>
                 <p className="text-slate-500 text-sm font-light leading-relaxed">
@@ -103,7 +125,7 @@ export default function CycleMapPortal() {
               </div>
 
               <div className="flex flex-wrap gap-2 pt-4">
-                {item.labels.map(label => (
+                {item.labels.map((label: string) => (
                   <span key={label} className="px-3 py-1 bg-white/5 border border-white/5 rounded text-[10px] text-white/40 font-bold uppercase tracking-wider">{label}</span>
                 ))}
               </div>

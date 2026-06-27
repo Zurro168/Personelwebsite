@@ -4,7 +4,8 @@
   "metadata": {
     "name": "海绵锆 (Zirconium)",
     "unit": "CNY/KG",
-    "fred_code": null
+    "fred_code": null,
+    "status": "供应受限 / 订单刚性"
   },
   "score_engine": {
     "total_score": 72,

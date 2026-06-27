@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { ArrowRight, Rss, MessageCircle, ShieldCheck } from 'lucide-react';
 import { AUTHOR_INFO } from '@/data/biography';
+import { ALL_REPORTS } from '@/data/reports';
 import PriceTicker from '@/components/layout/PriceTicker';
 
 export default function Home() {
@@ -19,7 +20,7 @@ export default function Home() {
       <main className="relative z-10">
         {/* 2. Hero Section — simplified terminal panel */}
         <section id="hero" className="relative">
-          <div className="max-w-7xl mx-auto px-10 pt-24 pb-32 grid lg:grid-cols-[1.1fr_0.9fr] items-center gap-20 relative z-10">
+          <div className="max-w-7xl mx-auto px-8 pt-24 pb-32 grid lg:grid-cols-[1.1fr_0.9fr] items-center gap-20 relative z-10">
             <div className="flex flex-col space-y-10">
               <div className="flex items-center gap-3">
                 <div className="w-1.5 h-1.5 bg-cyan-500 rounded-full animate-pulse shadow-[0_0_8px_#38bdf8]"></div>
@@ -63,7 +64,7 @@ export default function Home() {
                   <div className="grid grid-cols-2 gap-4 py-4 border-y border-white/5">
                     <div className="space-y-1">
                       <span className="text-white/40 block uppercase tracking-tighter">Reports</span>
-                      <span className="text-emerald-400 font-bold">{AUTHOR_INFO.systemLogs.length} Active</span>
+                      <span className="text-emerald-400 font-bold">{ALL_REPORTS.length} Active</span>
                     </div>
                     <div className="space-y-1">
                       <span className="text-white/40 block uppercase tracking-tighter">Focus</span>
@@ -85,48 +86,11 @@ export default function Home() {
           </div>
         </section>
 
-        {/* 3. WeChat / 公众号 CTA — new section */}
-        <section id="wechat-cta" className="py-24 relative overflow-hidden bg-[#0a0f1a] border-y border-white/5">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-cyan-500/[0.03] blur-[150px] pointer-events-none"></div>
-
-          <div className="max-w-7xl mx-auto px-10 relative">
-            <div className="flex flex-col md:flex-row items-center gap-16">
-              <div className="flex-1 space-y-6">
-                <div className="inline-flex items-center gap-2 px-3 py-1 bg-cyan-500/10 border border-cyan-500/20 rounded-full">
-                  <span className="w-1.5 h-1.5 bg-cyan-500 rounded-full animate-pulse"></span>
-                  <span className="text-[10px] font-black text-cyan-400 tracking-widest uppercase">WeChat Official Account</span>
-                </div>
-                <h2 className="text-4xl md:text-5xl font-black text-white tracking-tighter leading-tight">
-                  更多深度内容 <br />
-                  <span className="text-cyan-500 italic">请关注公众号</span>
-                </h2>
-                <p className="text-lg text-slate-400 font-light max-w-lg leading-relaxed">
-                  本网站为公众号「硅基大宗」的互补平台，承载公众号无法呈现的交互式图表、深度数据和原始资料。关注公众号，获取第一时间推送。
-                </p>
-                <div className="flex items-center gap-3 pt-4">
-                  <Rss size={18} className="text-cyan-500" />
-                  <span className="text-sm text-slate-300 font-bold">搜索公众号：<span className="text-cyan-400">硅基大宗</span></span>
-                </div>
-              </div>
-
-              <div className="flex-shrink-0">
-                <div className="p-3 bg-white rounded-2xl shadow-[0_0_60px_rgba(56,189,248,0.15)]">
-                  <img
-                    src={AUTHOR_INFO.social.officialAccount.qrCode}
-                    alt="关注公众号"
-                    className="w-48 h-48 object-cover rounded-xl"
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* 4. Connect / Social Matrix */}
+        {/* 3. Connect / Social Matrix */}
         <section id="connect" className="py-32 relative overflow-hidden bg-[#0a0f1a]">
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-cyan-500/[0.02] blur-[150px] pointer-events-none"></div>
 
-          <div className="max-w-7xl mx-auto px-10 relative">
+          <div className="max-w-7xl mx-auto px-8 relative">
             <div className="space-y-4 max-w-2xl mb-16">
               <div className="inline-flex items-center gap-2 px-3 py-1 bg-cyan-500/10 border border-cyan-500/20 rounded-full">
                 <span className="w-1.5 h-1.5 bg-cyan-500 rounded-full animate-pulse"></span>
@@ -136,8 +100,8 @@ export default function Home() {
                 硅基逻辑下的 <br />
                 <span className="text-cyan-500 italic">跨界共鸣</span>
               </h2>
-              <p className="text-lg text-slate-400 font-light max-w-lg">
-                寻求深度合作、研报授权或系统治理探讨，请通过以下矩阵联系我。
+              <p className="text-lg text-slate-400 font-light max-w-lg leading-relaxed">
+                本网站为公众号「硅基大宗」的互补平台，承载交互式图表与深度数据。若需深度合作、研报授权或系统治理探讨，请通过以下矩阵联系我。
               </p>
             </div>
 
@@ -250,17 +214,7 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Simple footer strip — no duplicate */}
-            <footer className="mt-40 pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-8 text-[10px] text-white/20 font-mono tracking-widest uppercase">
-              <div className="flex items-center gap-3">
-                <ShieldCheck size={12} className="text-cyan-500/40" />
-                <span>&copy; {AUTHOR_INFO.copyright.year} {AUTHOR_INFO.copyright.owner} | {AUTHOR_INFO.copyright.notice.split('。')[0]}</span>
-              </div>
-              <div className="flex gap-10">
-                <Link href="/portfolio" className="hover:text-cyan-500 transition-colors">ARCHIVE</Link>
-                <Link href="/about" className="hover:text-cyan-500 transition-colors">IP GUIDE</Link>
-              </div>
-            </footer>
+            <div className="mt-20" />
           </div>
         </section>
       </main>

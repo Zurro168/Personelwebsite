@@ -83,11 +83,10 @@ export default async function ReportPage({ params }: { params: Promise<{ slug: s
       }} />
 
       {/* Dual-Column Industrial Layout */}
-      {/* Dual-Column Industrial Layout */}
-      <div className={report.layout === 'interactive' ? "w-full report-layout-container" : "max-w-[1300px] mx-auto flex items-start gap-4 pl-8 pr-0 relative report-layout-container"}>
+      <div className={report.layout === 'interactive' ? "w-full report-layout-container" : "max-w-7xl mx-auto flex flex-col lg:flex-row items-start gap-8 px-4 md:px-8 relative report-layout-container"}>
         
-        {/* Left Column: Authoritative Content (1000px fixed in paper mode) */}
-        <div className={report.layout === 'interactive' ? "w-full" : "w-[980px] shrink-0"}>
+        {/* Left Column: Authoritative Content */}
+        <div className={report.layout === 'interactive' ? "w-full" : "w-full lg:w-[980px] lg:shrink-0"}>
           <main className="py-12">
             <div className={report.layout === 'interactive' && !report.title ? "" : "space-y-8"}>
               {(report.layout !== 'interactive' || (report.layout === 'interactive' && report.title)) && (

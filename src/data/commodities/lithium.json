@@ -4,7 +4,8 @@
   "metadata": {
     "name": "电池级碳酸锂 (Lithium)",
     "unit": "10k CNY/MT",
-    "fred_code": null
+    "fred_code": null,
+    "status": "社会库存去化 / 探底出清"
   },
   "score_engine": {
     "total_score": 38,

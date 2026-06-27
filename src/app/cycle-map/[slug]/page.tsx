@@ -105,7 +105,7 @@ export default function CycleMapDetail({ params }: { params: Promise<{ slug: str
                 </div>
                 <span className="text-xs font-black text-brand-blue uppercase tracking-[0.2em] italic">Industrial Data Node 0x7A // SILICON INSIGHT</span>
               </div>
-              <h1 className="text-8xl font-black tracking-tighter italic uppercase text-white mb-8 leading-none drop-shadow-2xl">{data.name}</h1>
+              <h1 className="text-5xl md:text-8xl font-black tracking-tighter italic uppercase text-white mb-8 leading-none drop-shadow-2xl">{data.name}</h1>
               <p className="max-w-2xl text-lg leading-relaxed text-white/70 italic font-medium border-l-2 border-brand-blue/30 pl-8">{data.context}</p>
             </div>
             

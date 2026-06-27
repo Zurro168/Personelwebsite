@@ -32,6 +32,8 @@ export interface UnifiedCommodityData {
   chartLabels: string[];
   chartValues: number[];
   inventoryValues: number[];
+  status: string;
+  trend: 'up' | 'down' | 'neutral';
 }
 
 export async function resolveCommodity(slug: string): Promise<UnifiedCommodityData> {
@@ -64,7 +66,9 @@ export async function resolveCommodity(slug: string): Promise<UnifiedCommodityDa
         context: "Data packet not found. Please sync Obsidian Queue.",
         chartLabels: ["N/A"],
         chartValues: [0],
-        inventoryValues: [0]
+        inventoryValues: [0],
+        status: "N/A",
+        trend: "neutral"
       };
   }
 
@@ -77,6 +81,11 @@ export async function resolveCommodity(slug: string): Promise<UnifiedCommodityDa
   const chartLabels = history.length > 0 ? history.map((h: any) => h.date) : ["NODATA"];
   const chartValues = history.length > 0 ? history.map((h: any) => h.price) : [0];
   const inventoryValues = history.length > 0 ? history.map((h: any) => h.inventory) : [0];
+
+  const outlook = packet.score_engine?.outlook;
+  const trend: 'up' | 'down' | 'neutral' = 
+    outlook === 'bearish' ? 'down' : 
+    (outlook === 'bullish' || outlook === 'strongly-bullish' ? 'up' : 'neutral');
 
   return {
     slug,
@@ -92,6 +101,8 @@ export async function resolveCommodity(slug: string): Promise<UnifiedCommodityDa
     context: packet.manual_override?.context || "Loading logic...",
     chartLabels,
     chartValues,
-    inventoryValues
+    inventoryValues,
+    status: packet.metadata?.status || "未知周期阶段",
+    trend
   };
 }

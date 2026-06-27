@@ -4,7 +4,8 @@
   "metadata": {
     "name": "海绵钛 (Titanium)",
     "unit": "USD/KG",
-    "fred_code": null
+    "fred_code": null,
+    "status": "防务扩张 / 航空级强劲"
   },
   "score_engine": {
     "total_score": 88,

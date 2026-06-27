@@ -57,7 +57,7 @@ export default async function AboutPage() {
 
       {/* SUMMARY STRIP — dark theme */}
       <section className="bg-[#0b1120] text-white py-20 border-b border-white/5">
-        <div className="max-w-6xl mx-auto px-12 grid md:grid-cols-[1fr_2fr_1fr] gap-12 items-start">
+        <div className="max-w-7xl mx-auto px-8 grid md:grid-cols-[1fr_2fr_1fr] gap-12 items-start">
           <h2 className="text-xs font-black tracking-[0.5em] uppercase text-slate-500 mt-2">About</h2>
           <div className="space-y-6">
             <p className="text-xl font-light leading-relaxed text-slate-300">
@@ -80,7 +80,7 @@ export default async function AboutPage() {
       </section>
 
       {/* MAIN CONTENT — dark themed resume body */}
-      <main className="max-w-6xl mx-auto px-12 py-32 space-y-40 text-slate-200">
+      <main className="max-w-7xl mx-auto px-8 py-32 space-y-40 text-slate-200">
 
         {/* EDUCATION */}
         <section className="grid md:grid-cols-[1fr_3fr] gap-12 md:gap-24 relative">
@@ -177,7 +177,7 @@ export default async function AboutPage() {
 
       {/* SKILLS SECTION — dark theme */}
       <section className="bg-[#0a0f1a] py-32 border-t border-white/5">
-        <div className="max-w-6xl mx-auto px-12 grid md:grid-cols-[1fr_3fr] gap-24">
+        <div className="max-w-7xl mx-auto px-8 grid md:grid-cols-[1fr_3fr] gap-24">
           <h2 className="text-xs font-bold tracking-[0.5em] uppercase text-slate-500 mt-4 flex items-center gap-3">
              <Zap size={16} /> Skills
           </h2>

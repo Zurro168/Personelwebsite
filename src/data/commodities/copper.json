@@ -4,7 +4,8 @@
   "metadata": {
     "name": "精炼铜 (Copper)",
     "unit": "USD/MT",
-    "fred_code": "WPU10220101"
+    "fred_code": "WPU10220101",
+    "status": "过热期向修正期过渡"
   },
   "score_engine": {
     "total_score": 58,
