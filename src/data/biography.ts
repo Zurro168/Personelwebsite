@@ -95,7 +95,7 @@ export const AUTHOR_INFO = {
     "x": "https://x.com/Gordon800619",
     "wechat": {
       "label": "个人微信",
-      "id": "zurro168",
+      "id": "zurro_w",
       "qrCode": "/brand/wechat-personal.jpg"
     },
     "officialAccount": {
