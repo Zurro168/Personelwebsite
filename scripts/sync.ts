@@ -291,6 +291,55 @@ async function sync() {
         const outPath = isSystemFile ? path.join(PUBLIC_SYSTEM_DIR, `${outSlug}.html`) : path.join(PUBLIC_REPORTS_DIR, `${outSlug}.html`);
         fs.writeFileSync(outPath, fullHtml);
 
+        // --- Cover Image Copy & Path Rewrite Logic ---
+        let coverVal = data.cover || data.image;
+        let finalImage = '/covers/default-report.png';
+
+        if (coverVal) {
+            coverVal = decodeURIComponent(coverVal.trim());
+            
+            if (coverVal.startsWith('http://') || coverVal.startsWith('https://')) {
+                finalImage = coverVal;
+            } else {
+                let srcImagePath = '';
+                // 1. Check if coverVal is an absolute path
+                if (path.isAbsolute(coverVal) || /^[A-Za-z]:[/\\]/.test(coverVal)) {
+                    srcImagePath = coverVal;
+                } else {
+                    // 2. Search in standard Obsidian asset locations
+                    const possiblePaths = [
+                        path.join(SC_BASE, '10_Content/04_Assets/Images', coverVal),
+                        path.join(SC_BASE, coverVal),
+                        path.join(path.dirname(filePath), coverVal)
+                    ];
+                    for (const p of possiblePaths) {
+                        if (fs.existsSync(p)) {
+                            srcImagePath = p;
+                            break;
+                        }
+                    }
+                }
+
+                if (srcImagePath && fs.existsSync(srcImagePath)) {
+                    const imgFileName = path.basename(srcImagePath);
+                    const destDir = path.join(process.cwd(), 'public/images/reports');
+                    if (!fs.existsSync(destDir)) {
+                        fs.mkdirSync(destDir, { recursive: true });
+                    }
+                    const destPath = path.join(destDir, imgFileName);
+                    try {
+                        fs.copyFileSync(srcImagePath, destPath);
+                        // Standard URL relative path
+                        finalImage = `/images/reports/${imgFileName}`;
+                    } catch (e) {
+                        console.error(`Failed to copy cover image: ${srcImagePath} -> ${destPath}`, e);
+                    }
+                } else {
+                    console.warn(`Cover image not found in filesystem: ${coverVal}`);
+                }
+            }
+        }
+
         allReports.push({
             id: data.topic_id ? `SCC-2026-${data.topic_id}` : `SCC-2026-${Math.floor(Math.random()*900)+100}`,
             title: data.title || fileName.replace('.md', ''),
@@ -298,7 +347,7 @@ async function sync() {
             tag: isSystemFile ? '关于我们' : (data.tag ? data.tag.replace(/['#]/g, '') : '硬核商品'),
             date: new Date(data.publish_date || data.date || fs.statSync(filePath).mtime).toISOString().split('T')[0],
             readTime: data.readTime || '15 min',
-            image: data.cover || data.image || '/covers/default-report.png',
+            image: finalImage,
             slug: outSlug,
             hasContent: true,
             isPinned: isSystemFile,
