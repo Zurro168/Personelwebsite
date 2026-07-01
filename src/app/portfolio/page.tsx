@@ -34,7 +34,7 @@ export default function Portfolio() {
   const currentReports = filteredReports.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-[#0a0f1a]">
       {/* Page Header */}
       <section id="header" className="py-10 bg-slate-900/40 border-b border-industrial-border relative overflow-hidden">
         <div className="absolute top-0 right-0 w-1/2 h-full bg-brand-blue/5 blur-[100px] pointer-events-none"></div>
@@ -96,6 +96,7 @@ export default function Portfolio() {
                     <img
                       src={report.image}
                       alt={report.title}
+                      loading="lazy"
                       className="w-full h-full object-cover opacity-60 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700"
                     />
                   </Link>
@@ -103,6 +104,7 @@ export default function Portfolio() {
                   <img
                     src={report.image}
                     alt={report.title}
+                    loading="lazy"
                     className="w-full h-full object-cover opacity-30 grayscale group-hover:grayscale-0 transition-all duration-700"
                   />
                 )}

@@ -117,7 +117,7 @@ export default function Home() {
                   </div>
                   <div>
                     <h3 className="text-2xl font-black text-white leading-none mb-2">{AUTHOR_INFO.name}</h3>
-                    <p className="text-cyan-500/60 font-mono text-[10px] tracking-widest uppercase">{AUTHOR_INFO.title}</p>
+                    <p className="text-cyan-500/70 font-mono text-xs tracking-widest uppercase">{AUTHOR_INFO.title}</p>
                   </div>
                 </div>
 
@@ -133,15 +133,15 @@ export default function Home() {
                 </div>
 
                 <div className="mt-12 pt-8 border-t border-white/5 space-y-4 relative">
-                  <div className="flex items-center justify-between text-[9px] font-mono text-cyan-500/50 uppercase tracking-[0.2em]">
+                  <div className="flex items-center justify-between text-xs font-mono text-cyan-500/70 uppercase tracking-[0.2em]">
                     <span>SYSTEM_AUDIT_LOG</span>
                     <span className="flex items-center gap-1.5 animate-pulse"><span className="w-1 h-1 bg-emerald-500 rounded-full"></span> LIVE_FEED</span>
                   </div>
-                  <div className="space-y-3 opacity-60 text-[10px] font-mono lowercase tracking-tight">
+                  <div className="space-y-3 text-xs font-mono lowercase tracking-tight">
                     {AUTHOR_INFO.systemLogs.map((log) => (
                       <div key={log.id} className="flex justify-between gap-4">
-                        <span className="text-white/60">{`> ${log.text}`}</span>
-                        <span className="text-cyan-500 font-bold uppercase">{log.status}</span>
+                        <span className="text-white/50">{`> ${log.text}`}</span>
+                        <span className="text-cyan-500/80 font-bold uppercase">{log.status}</span>
                       </div>
                     ))}
                   </div>
@@ -187,13 +187,17 @@ export default function Home() {
                   <div className="absolute inset-y-0 left-0 w-[2px] bg-blue-500 transition-transform scale-y-0 group-hover:scale-y-100"></div>
                   <div className="flex items-center justify-between relative z-10">
                     <div className="flex items-center gap-4">
-                      <div className="w-10 h-10 rounded-lg bg-blue-500/10 flex items-center justify-center text-blue-500 group-hover:scale-110 transition-transform"><Rss size={18}/></div>
+                      <div className="w-10 h-10 rounded-lg bg-blue-500/10 flex items-center justify-center text-blue-500 group-hover:scale-110 transition-transform">
+                        <svg className="w-[18px] h-[18px] fill-current" viewBox="0 0 24 24">
+                          <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.779-1.75-1.75s.784-1.75 1.75-1.75 1.75.779 1.75 1.75-.784 1.75-1.75 1.75zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                        </svg>
+                      </div>
                       <div>
                         <span className="block text-xs font-black text-white uppercase tracking-widest leading-none mb-1">LinkedIn</span>
-                        <span className="text-[9px] text-slate-600 font-mono">PROFESSIONAL_GRAPH</span>
+                        <span className="text-[10px] text-slate-500 font-mono">PROFESSIONAL_GRAPH</span>
                       </div>
                     </div>
-                    <ArrowRight size={14} className="text-slate-700 group-hover:text-blue-500 group-hover:translate-x-1 transition-all" />
+                    <ArrowRight size={14} className="text-slate-500 group-hover:text-blue-500 group-hover:translate-x-1 transition-all" />
                   </div>
                 </a>
 
@@ -202,13 +206,17 @@ export default function Home() {
                   <div className="absolute inset-y-0 left-0 w-[2px] bg-white transition-transform scale-y-0 group-hover:scale-y-100"></div>
                   <div className="flex items-center justify-between relative z-10">
                     <div className="flex items-center gap-4">
-                      <div className="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center text-white group-hover:scale-110 transition-transform"><Rss size={18}/></div>
+                      <div className="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center text-white group-hover:scale-110 transition-transform">
+                        <svg className="w-[18px] h-[18px] fill-current" viewBox="0 0 24 24">
+                          <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                        </svg>
+                      </div>
                       <div>
                         <span className="block text-xs font-black text-white uppercase tracking-widest leading-none mb-1">Twitter / X</span>
-                        <span className="text-[9px] text-slate-600 font-mono">GLOBAL_SIGNALS</span>
+                        <span className="text-[10px] text-slate-500 font-mono">GLOBAL_SIGNALS</span>
                       </div>
                     </div>
-                    <ArrowRight size={14} className="text-white group-hover:translate-x-1 transition-transform" />
+                    <ArrowRight size={14} className="text-slate-400 group-hover:text-white group-hover:translate-x-1 transition-transform" />
                   </div>
                 </a>
               </div>

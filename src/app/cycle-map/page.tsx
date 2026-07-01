@@ -68,7 +68,7 @@ export default function CycleMapPortal() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-background text-white flex flex-col items-center justify-center">
+      <div className="min-h-screen bg-[#0a0f1a] text-white flex flex-col items-center justify-center">
         <Loader2 className="w-10 h-10 text-brand-blue animate-spin mb-6" />
         <div className="text-xs uppercase font-black tracking-[0.3em] text-brand-blue italic animate-pulse">Establishing Secure Neural Link...</div>
       </div>
@@ -76,7 +76,7 @@ export default function CycleMapPortal() {
   }
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-[#0a0f1a]">
       <section id="header" className="max-w-7xl mx-auto px-8 py-12 space-y-4">
         <h1 className="text-5xl font-black text-white italic uppercase tracking-tighter">
           金属周期地图 <span className="text-brand-blue">/</span> Cycle Map

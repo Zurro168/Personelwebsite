@@ -20,7 +20,7 @@ export default async function AboutPage() {
   const customContent = await getAboutContent();
 
   return (
-    <div className="min-h-screen bg-background font-sans selection:bg-brand-blue/30 selection:text-white">
+    <div className="min-h-screen bg-[#0a0f1a] font-sans selection:bg-brand-blue/30 selection:text-white">
 
       {/* SUB-NAV */}
       <div className="bg-slate-900/50 backdrop-blur-md border-b border-white/5 h-12 flex justify-center items-center gap-12 text-slate-500">
@@ -71,7 +71,7 @@ export default async function AboutPage() {
             )}
           </div>
           <div className="flex justify-end pt-2">
-            <a href="#" className="flex items-center gap-3 text-[10px] font-bold tracking-[0.3em] uppercase text-brand-blue hover:text-white transition-all group">
+            <a href="javascript:void(0)" title="在线生成PDF简历功能开发中" className="flex items-center gap-3 text-[10px] font-bold tracking-[0.3em] uppercase text-brand-blue hover:text-white transition-all group cursor-not-allowed">
                <Download size={14} className="group-hover:-translate-y-1 transition-transform" />
                Download PDF
             </a>

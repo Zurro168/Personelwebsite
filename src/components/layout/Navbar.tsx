@@ -56,7 +56,7 @@ export default function Navbar() {
 
         {/* Mobile Toggle */}
         <button
-          className="md:hidden text-white/60 hover:text-white transition-colors"
+          className="md:hidden p-2 text-white/60 hover:text-white transition-colors"
           onClick={() => setMobileOpen(!mobileOpen)}
           aria-label="Toggle menu"
         >
@@ -75,7 +75,7 @@ export default function Navbar() {
                   key={link.path}
                   href={link.path}
                   onClick={() => setMobileOpen(false)}
-                  className={`text-sm font-bold tracking-[0.1em] py-2 transition-colors ${isActive ? 'text-brand-blue' : 'text-white/60 hover:text-white'}`}
+                  className={`text-sm font-bold tracking-[0.1em] py-3.5 transition-colors ${isActive ? 'text-brand-blue' : 'text-white/60 hover:text-white'}`}
                 >
                   {link.name}
                 </Link>
