@@ -97,13 +97,6 @@ export default function GctsLabPage() {
               >
                 启动全屏 GCTS 控制台 <ExternalLink size={14} />
               </a>
-              <a 
-                href="/gcts/GCTS_Metals_Pricing_Engine_V1.xlsx" 
-                download 
-                className="px-6 py-3 border border-white/10 text-white text-xs font-black tracking-widest rounded-xl hover:bg-white/5 transition-all flex items-center gap-2"
-              >
-                下载 Excel 算账模板 <Download size={14} />
-              </a>
             </div>
           </div>
 
@@ -120,7 +113,7 @@ export default function GctsLabPage() {
             </div>
             
             <iframe 
-              src="/gcts/index.html?v=1.0.2" 
+              src="/gcts/index.html?v=1.0.3" 
               className="demo-iframe" 
               loading="lazy" 
               title="GCTS Live Dashboard Demo"
