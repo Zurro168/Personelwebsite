@@ -113,7 +113,7 @@ export default function GctsLabPage() {
             </div>
             
             <iframe 
-              src="/gcts/index.html?v=1.0.3" 
+              src="/gcts/index.html?v=1.0.5" 
               className="demo-iframe" 
               loading="lazy" 
               title="GCTS Live Dashboard Demo"

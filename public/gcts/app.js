@@ -364,10 +364,28 @@ function onSelectorChange() {
     const countryTxt = countrySel.options[countrySel.selectedIndex].text.split(" - ")[0];
     const commodityTxt = commoditySel.options[commoditySel.selectedIndex].text;
 
-    document.getElementById("page-title").innerText = "GCTS 决策驾驶舱";
+    // 动态决定大标题和 Badge 的显示，防止切换下拉框时强行将非 dashboard 页面的标题改回“决策驾驶舱”
+    const headerTitle = document.getElementById("page-title");
     const titleBadge = document.getElementById("page-title-badge");
-    titleBadge.innerText = `${countryTxt} - ${commodityTxt}`;
-    titleBadge.style.display = "inline-flex";
+    const activeTabEl = document.querySelector(".tab-content.active");
+    const activeTabId = activeTabEl ? activeTabEl.id.replace("tab-content-", "") : "dashboard";
+
+    if (activeTabId === "dashboard") {
+        headerTitle.innerText = "GCTS 决策驾驶舱";
+        titleBadge.innerText = `${countryTxt} - ${commodityTxt}`;
+        titleBadge.style.display = "inline-flex";
+    } else {
+        titleBadge.style.display = "none";
+        if (activeTabId === "pricing") {
+            headerTitle.innerText = "GCTS 智能报价与算费引擎";
+        } else if (activeTabId === "logistics") {
+            headerTitle.innerText = "GCTS 物流与多式联运走廊";
+        } else if (activeTabId === "kb") {
+            headerTitle.innerText = "GCTS 知识库主数据查询";
+        } else if (activeTabId === "assets") {
+            headerTitle.innerText = "GCTS 操作系统成果大地图";
+        }
+    }
     document.getElementById("decision-score-value").innerText = data.score;
     
     // 更新评分圆圈发光色
