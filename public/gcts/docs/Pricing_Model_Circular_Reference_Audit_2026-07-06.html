@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>报价模型循环引用与表格设计审计 - GCTS OS System Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-base: #060913;
+            --bg-card: rgba(22, 28, 49, 0.45);
+            --border-color: rgba(255, 255, 255, 0.08);
+            --border-color-glow: rgba(168, 85, 247, 0.25);
+            --text-primary: #e6ebf5;
+            --text-secondary: #8f9cae;
+            --text-muted: #5e6d82;
+            --color-primary: #a855f7;
+            --color-cyan: #00f2fe;
+            --color-gold: #f2a900;
+            --color-success: #00e676;
+            --color-danger: #ff1744;
+            --font-display: 'Outfit', 'Inter', -apple-system, sans-serif;
+            --font-body: 'Inter', -apple-system, sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+            --transition-smooth: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-base);
+            color: var(--text-primary);
+            font-family: var(--font-body);
+            line-height: 1.7;
+            padding: 3rem 1.5rem;
+            display: flex;
+            justify-content: center;
+        }
+
+        .doc-container {
+            width: 100%;
+            max-width: 900px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: 3rem;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(15px);
+            position: relative;
+        }
+
+        .btn-back {
+            position: fixed;
+            top: 30px;
+            left: 30px;
+            background: rgba(22, 28, 49, 0.8);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            padding: 0.75rem 1.25rem;
+            border-radius: 12px;
+            text-decoration: none;
+            font-family: var(--font-display);
+            font-size: 0.8rem;
+            font-weight: 600;
+            transition: var(--transition-smooth);
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-back:hover {
+            color: var(--text-primary);
+            border-color: var(--color-primary);
+            box-shadow: 0 0 15px rgba(168, 85, 247, 0.3);
+            transform: translateX(-3px);
+        }
+
+        h1 {
+            font-family: var(--font-display);
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 1.5rem;
+            letter-spacing: -0.5px;
+            line-height: 1.2;
+        }
+
+        h2 {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--color-cyan);
+            margin-top: 2.5rem;
+            margin-bottom: 1.25rem;
+            border-left: 3px solid var(--color-primary);
+            padding-left: 12px;
+        }
+
+        h3 {
+            font-family: var(--font-display);
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: #fff;
+            margin-top: 1.75rem;
+            margin-bottom: 0.75rem;
+        }
+
+        p {
+            margin-bottom: 1.25rem;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        strong {
+            color: #fff;
+            font-weight: 600;
+        }
+
+        ul, ol {
+            margin-bottom: 1.5rem;
+            padding-left: 1.5rem;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        code {
+            font-family: var(--font-mono);
+            background: rgba(255, 255, 255, 0.05);
+            padding: 0.2rem 0.4rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            color: var(--color-cyan);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+        }
+
+        pre {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.25rem;
+            overflow-x: auto;
+            margin-bottom: 1.5rem;
+        }
+
+        pre code {
+            background: transparent;
+            padding: 0;
+            border: none;
+            color: var(--text-primary);
+            font-size: 0.85rem;
+        }
+
+        /* 表格科技风样式表 */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 2rem;
+            margin-top: 1.5rem;
+            font-size: 0.85rem;
+        }
+
+        th {
+            background: rgba(168, 85, 247, 0.1);
+            color: var(--color-cyan);
+            font-family: var(--font-display);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-bottom: 2px solid var(--border-color-glow);
+            text-align: left;
+            padding: 12px 16px;
+        }
+
+        td {
+            border-bottom: 1px solid var(--border-color);
+            padding: 12px 16px;
+            color: var(--text-secondary);
+        }
+
+        tr:hover td {
+            background: rgba(255, 255, 255, 0.01);
+            color: #fff;
+        }
+
+        /* 警告通知框样式 */
+        .doc-alert-box {
+            background: rgba(168, 85, 247, 0.06);
+            border-left: 4px solid var(--color-primary);
+            padding: 1.25rem 1.5rem;
+            border-radius: 0 12px 12px 0;
+            margin-bottom: 2rem;
+        }
+
+        .doc-alert-box.warning {
+            background: rgba(255, 179, 0, 0.06);
+            border-left-color: var(--color-warning);
+        }
+
+        .doc-alert-box.danger {
+            background: rgba(255, 23, 68, 0.06);
+            border-left-color: var(--color-danger);
+        }
+
+        .doc-alert-box.success {
+            background: rgba(0, 230, 118, 0.06);
+            border-left-color: var(--color-success);
+        }
+
+        .doc-alert-box strong {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-family: var(--font-display);
+        }
+        
+        .doc-alert-box p {
+            margin-bottom: 0;
+            font-size: 0.85rem;
+        }
+
+        /* Mermaid 流程图包裹 */
+        .mermaid {
+            background: rgba(0, 0, 0, 0.2) !important;
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid var(--border-color);
+            margin: 2.5rem 0;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 1.5rem 1rem;
+            }
+            .doc-container {
+                padding: 1.5rem;
+            }
+            .btn-back {
+                position: absolute;
+                top: -60px;
+                left: 0;
+            }
+        }
+    </style>
+    <!-- 引入 Mermaid 渲染 -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'dark',
+            themeVariables: {
+                background: '#060913',
+                primaryColor: '#161c31',
+                lineColor: '#a855f7'
+            }
+        });
+    </script>
+</head>
+<body>
+    <!-- 返回大地图 -->
+    <a href="../index.html" class="btn-back">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        返回决策大地图
+    </a>
+
+    <article class="doc-container">
+        <h1>报价模型循环引用与表格设计审计</h1>
+<p>审计日期：2026-07-06</p>
+<p>审计对象：</p>
+<ol>
+<li><code>F:\Documents\Codex\大宗矿产品报价系统\乍得钨矿锑矿分金属计价_公共物流报价系统V2.xlsx</code></li>
+<li><code>F:\Documents\GitHub\Critical-Minerals-Trading-OS\GCTS_Metals_Pricing_Engine_V1.xlsx</code></li>
+</ul>
+<h2>1. 循环引用结论</h2>
+<p>使用公式依赖图检查后，两个文件当前版本都没有检测到真实循环引用。</p>
+<table>
+<thead><tr>
+<th>文件</th>
+<th>公式数量</th>
+<th>直接自引用</th>
+<th>依赖环路</th>
+<th>结论</th>
+</tr></thead><tbody>
+<tr>
+<td>原始V2报价系统</td>
+<td>158</td>
+<td>0</td>
+<td>0</td>
+<td>未发现循环引用</td>
+</tr>
+<tr>
+<td>GCTS V1报价引擎</td>
+<td>345</td>
+<td>0</td>
+<td>0</td>
+<td>未发现循环引用</td>
+</tr>
+</tbody></table>
+<p>同时检查了工作簿内部计算链：</p>
+<table>
+<thead><tr>
+<th>文件</th>
+<th><code>xl/calcChain.xml</code></th>
+<th>计算属性</th>
+</tr></thead><tbody>
+<tr>
+<td>原始V2报价系统</td>
+<td>不存在</td>
+<td>无 <code>calcPr</code></td>
+</tr>
+<tr>
+<td>GCTS V1报价引擎</td>
+<td>不存在</td>
+<td><code>fullCalcOnLoad=1</code></td>
+</tr>
+</tbody></table>
+<p>因此，如果Excel打开时仍提示循环引用，较大概率来自：</p>
+<ol>
+<li>打开的是修正前的旧版 <code>GCTS_Metals_Pricing_Engine_V1.xlsx</code>。</li>
+<li>Excel同时打开了另一个仍有循环引用的工作簿。</li>
+<li>Excel保留了上一次会话的循环引用提示。</li>
+<li>文件曾经打开过含自引用公式的版本，未完全关闭Excel进程后再次打开。</li>
+</ul>
+<h2>2. 已修正的问题</h2>
+<p>新版GCTS V1报价引擎早期版本中，模型表曾出现以下错误：</p>
+<pre><code>Margin / DMT = B28 / B8
+Gross Margin % = B28 / B21
+Recommended Market = IF(B29>D29,...)</code></pre>
+<p>其中 <code>B28 = B28 / B8</code> 是典型自引用，会触发循环引用。</p>
+<p>已修正为：</p>
+<pre><code>Net Margin = Sales Revenue - Total Cost
+Margin / DMT = Net Margin / DMT_Qty
+Gross Margin % = Net Margin / Sales Revenue
+Recommended Market = IF(International Margin/DMT > Domestic Margin/DMT USD, "International", "Domestic")</code></pre>
+<p>以 <code>WO3_Model</code> 为例，当前正确公式为：</p>
+<pre><code>B27 = B21 - B26
+B28 = B27 / B8
+B29 = B27 / B21
+B30 = IF(B28>D28,"International","Domestic")</code></pre>
+<h2>3. 原始V2文件的表格设计问题</h2>
+<p>原始V2文件公式没有形成循环，但有几类结构性问题。</p>
+<h3>3.1 输入、计算、敏感性分析混在同一张表</h3>
+<p><code>Tungsten_WO3</code> 和 <code>Antimony_Sb</code> 中，左侧是主模型，右侧又放了品位、Payability、收入、毛利敏感性表。这个设计可以快速查看情景，但容易让维护者误以为右侧表格也参与主模型。</p>
+<p>建议：未来把敏感性分析独立到 <code>Sensitivity</code> 或 <code>Scenario_Analysis</code> 工作表。</p>
+<h3>3.2 物流表存在费用项，但没有全部进入主模型</h3>
+<p><code>Logistics_Common</code> 中列出了：</p>
+<pre><code>Marine Insurance
+Banking / LC / Remittance
+Contingency</code></pre>
+<p>但原始V2金属模型主要读取：</p>
+<pre><code>Total USD/DMT
+Total Fixed USD/lot</code></pre>
+<p>也就是说，部分 <code>%货值</code> 或 <code>%成本</code> 类费用没有完整进入主模型。这不是循环引用问题，但会低估总成本。</p>
+<p>建议：新版模型已增加：</p>
+<pre><code>Value Based Fees = Sales Revenue × Total % Value
+Contingency = Cost Base × Total % Cost</code></pre>
+<h3>3.3 缺少湿吨、水分、干吨转换</h3>
+<p>原始V2直接以DMT作为数量输入。真实矿产品贸易中，WMT、Moisture和DMT必须分开：</p>
+<pre><code>DMT = WMT × (1 - Moisture)</code></pre>
+<p>建议：新版模型已把 WMT/Moisture/DMT 放入每个矿种模型。</p>
+<h3>3.4 国内销售和国际销售单位混杂</h3>
+<p>原始V2同时比较国际USD和国内RMB，逻辑方向正确，但需要始终保留一个统一USD口径用于推荐市场，否则很容易拿 RMB/DMT 和 USD/DMT 直接比较。</p>
+<p>建议：新版模型增加 Domestic USD 列，市场推荐只比较 USD口径的 Margin/DMT。</p>
+<h3>3.5 上游报价口径需要更清楚</h3>
+<p>原始V2使用 <code>Upstream_FOB_A_USD_DMT</code>，但不同项目中上游可能是：</p>
+<pre><code>Mine gate
+Warehouse
+FOB Douala
+CFR/CIF buyer port</code></pre>
+<p>如果上游报价口径变化，物流费用是否应加入或扣除也会变化。</p>
+<p>建议：未来在 <code>Commodity_Config</code> 或交易输入页增加：</p>
+<pre><code>Purchase Incoterms
+Sales Incoterms
+Logistics Scope</code></pre>
+<h2>4. GCTS V1文件的剩余设计风险</h2>
+<p>当前GCTS V1已经修正循环引用，但仍是V1级模型，不是最终版。</p>
+<p>后续建议继续优化：</p>
+<ol>
+<li>增加 <code>Scenario_Analysis</code>，把敏感性分析从主模型拆出去。</li>
+<li>增加 <code>Incoterms_Config</code>，避免FOB、CFR、CIF成本重复或遗漏。</li>
+<li>增加 <code>Byproduct_Credits</code>，尤其用于铜精矿、铅锌、锡钨伴生矿。</li>
+<li>增加 <code>TC_RC</code>，尤其用于铜精矿真实冶炼报价。</li>
+<li>增加 <code>Assay_Adjustment</code>，处理装船样与到港复检差异。</li>
+<p>6. 增加 <code>Data_Validation</code> 下拉框，限制Enabled、Commodity、Formula Type等字段。</p>
+</ul>
+<h2>5. 建议操作</h2>
+<ol>
+<li>关闭所有已打开的Excel窗口。</li>
+<li>重新打开最新文件：</li>
+</ul>
+<pre><code>F:\Documents\GitHub\Critical-Minerals-Trading-OS\GCTS_Metals_Pricing_Engine_V1.xlsx</code></pre>
+<ol>
+<li>如果仍提示循环引用，在Excel中查看：</li>
+</ul>
+<pre><code>Formulas -> Error Checking -> Circular References</code></pre>
+<ol>
+<li>记录Excel显示的具体单元格地址，再回填到本审计报告。</li>
+</ul>
+    </article>
+</body>
+</html>

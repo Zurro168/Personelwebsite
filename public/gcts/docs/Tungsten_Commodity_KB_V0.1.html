@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>钨矿知识库 V0.1 - GCTS OS System Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-base: #060913;
+            --bg-card: rgba(22, 28, 49, 0.45);
+            --border-color: rgba(255, 255, 255, 0.08);
+            --border-color-glow: rgba(168, 85, 247, 0.25);
+            --text-primary: #e6ebf5;
+            --text-secondary: #8f9cae;
+            --text-muted: #5e6d82;
+            --color-primary: #a855f7;
+            --color-cyan: #00f2fe;
+            --color-gold: #f2a900;
+            --color-success: #00e676;
+            --color-danger: #ff1744;
+            --font-display: 'Outfit', 'Inter', -apple-system, sans-serif;
+            --font-body: 'Inter', -apple-system, sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+            --transition-smooth: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-base);
+            color: var(--text-primary);
+            font-family: var(--font-body);
+            line-height: 1.7;
+            padding: 3rem 1.5rem;
+            display: flex;
+            justify-content: center;
+        }
+
+        .doc-container {
+            width: 100%;
+            max-width: 900px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: 3rem;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(15px);
+            position: relative;
+        }
+
+        .btn-back {
+            position: fixed;
+            top: 30px;
+            left: 30px;
+            background: rgba(22, 28, 49, 0.8);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            padding: 0.75rem 1.25rem;
+            border-radius: 12px;
+            text-decoration: none;
+            font-family: var(--font-display);
+            font-size: 0.8rem;
+            font-weight: 600;
+            transition: var(--transition-smooth);
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-back:hover {
+            color: var(--text-primary);
+            border-color: var(--color-primary);
+            box-shadow: 0 0 15px rgba(168, 85, 247, 0.3);
+            transform: translateX(-3px);
+        }
+
+        h1 {
+            font-family: var(--font-display);
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 1.5rem;
+            letter-spacing: -0.5px;
+            line-height: 1.2;
+        }
+
+        h2 {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--color-cyan);
+            margin-top: 2.5rem;
+            margin-bottom: 1.25rem;
+            border-left: 3px solid var(--color-primary);
+            padding-left: 12px;
+        }
+
+        h3 {
+            font-family: var(--font-display);
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: #fff;
+            margin-top: 1.75rem;
+            margin-bottom: 0.75rem;
+        }
+
+        p {
+            margin-bottom: 1.25rem;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        strong {
+            color: #fff;
+            font-weight: 600;
+        }
+
+        ul, ol {
+            margin-bottom: 1.5rem;
+            padding-left: 1.5rem;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        code {
+            font-family: var(--font-mono);
+            background: rgba(255, 255, 255, 0.05);
+            padding: 0.2rem 0.4rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            color: var(--color-cyan);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+        }
+
+        pre {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.25rem;
+            overflow-x: auto;
+            margin-bottom: 1.5rem;
+        }
+
+        pre code {
+            background: transparent;
+            padding: 0;
+            border: none;
+            color: var(--text-primary);
+            font-size: 0.85rem;
+        }
+
+        /* 表格科技风样式表 */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 2rem;
+            margin-top: 1.5rem;
+            font-size: 0.85rem;
+        }
+
+        th {
+            background: rgba(168, 85, 247, 0.1);
+            color: var(--color-cyan);
+            font-family: var(--font-display);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-bottom: 2px solid var(--border-color-glow);
+            text-align: left;
+            padding: 12px 16px;
+        }
+
+        td {
+            border-bottom: 1px solid var(--border-color);
+            padding: 12px 16px;
+            color: var(--text-secondary);
+        }
+
+        tr:hover td {
+            background: rgba(255, 255, 255, 0.01);
+            color: #fff;
+        }
+
+        /* 警告通知框样式 */
+        .doc-alert-box {
+            background: rgba(168, 85, 247, 0.06);
+            border-left: 4px solid var(--color-primary);
+            padding: 1.25rem 1.5rem;
+            border-radius: 0 12px 12px 0;
+            margin-bottom: 2rem;
+        }
+
+        .doc-alert-box.warning {
+            background: rgba(255, 179, 0, 0.06);
+            border-left-color: var(--color-warning);
+        }
+
+        .doc-alert-box.danger {
+            background: rgba(255, 23, 68, 0.06);
+            border-left-color: var(--color-danger);
+        }
+
+        .doc-alert-box.success {
+            background: rgba(0, 230, 118, 0.06);
+            border-left-color: var(--color-success);
+        }
+
+        .doc-alert-box strong {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-family: var(--font-display);
+        }
+        
+        .doc-alert-box p {
+            margin-bottom: 0;
+            font-size: 0.85rem;
+        }
+
+        /* Mermaid 流程图包裹 */
+        .mermaid {
+            background: rgba(0, 0, 0, 0.2) !important;
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid var(--border-color);
+            margin: 2.5rem 0;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 1.5rem 1rem;
+            }
+            .doc-container {
+                padding: 1.5rem;
+            }
+            .btn-back {
+                position: absolute;
+                top: -60px;
+                left: 0;
+            }
+        }
+    </style>
+    <!-- 引入 Mermaid 渲染 -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'dark',
+            themeVariables: {
+                background: '#060913',
+                primaryColor: '#161c31',
+                lineColor: '#a855f7'
+            }
+        });
+    </script>
+</head>
+<body>
+    <!-- 返回大地图 -->
+    <a href="../index.html" class="btn-back">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        返回决策大地图
+    </a>
+
+    <article class="doc-container">
+        <h1>钨矿知识库 V0.1</h1>
+<h2>1. 基本信息</h2>
+<table>
+<thead><tr>
+<th>项目</th>
+<th>内容</th>
+</tr></thead><tbody>
+<tr>
+<td>中文</td>
+<td>钨</td>
+</tr>
+<tr>
+<td>英文</td>
+<td>Tungsten / Wolfram</td>
+</tr>
+<tr>
+<td>化学符号</td>
+<td>W</td>
+</tr>
+<tr>
+<td>常见计价氧化物</td>
+<td>WO3</td>
+</tr>
+<tr>
+<td>主要矿物</td>
+<td>黑钨矿、白钨矿</td>
+</tr>
+<tr>
+<td>贸易核心产品</td>
+<td>钨精矿、APT、氧化钨、钨粉、碳化钨、钨铁</td>
+</tr>
+</tbody></table>
+<h2>2. 核心贸易单位</h2>
+<table>
+<thead><tr>
+<th>单位</th>
+<th>定义</th>
+</tr></thead><tbody>
+<tr>
+<td>WMT</td>
+<td>Wet Metric Ton，实物湿吨</td>
+</tr>
+<tr>
+<td>DMT</td>
+<td>Dry Metric Ton，干吨</td>
+</tr>
+<tr>
+<td>MTU / 吨度</td>
+<td>Metric Tonne Unit，1吨货中1%的WO3含量</td>
+</tr>
+<tr>
+<td>标吨</td>
+<td>国内钨精矿常用标准吨，通常按65% WO3，即65吨度</td>
+</tr>
+</tbody></table>
+<h2>3. 关键换算</h2>
+<pre><code>DMT = WMT x (1 - Moisture)
+WO3吨度 = DMT x WO3% x 100
+65%标吨 = WO3吨度 / 65
+吨度价 = 标吨价 / 65
+货值 = WO3吨度 x 吨度价 x 计价系数</code></pre>
+<h2>4. 计价注意事项</h2>
+<ol>
+<li>国内钨精矿报价“万元/吨”通常指“万元/标吨”，不是实物吨。</li>
+<li>低品位非标矿不能简单按65%标矿全额计价，需要计价系数或加工费折扣。</li>
+<li>国际APT价格是中游产品价格，不能直接等同于粗精矿价格。</li>
+<li>国际买方对粗矿的计价系数由品位、杂质、收率、加工成本、物流、合规和市场缺货程度决定。</li>
+</ul>
+<h2>5. 43% WO3非标矿关注点</h2>
+<table>
+<thead><tr>
+<th>维度</th>
+<th>关注点</th>
+</tr></thead><tbody>
+<tr>
+<td>品位</td>
+<td>低于65%标准精矿，需确认冶炼厂可接受</td>
+</tr>
+<tr>
+<td>杂质</td>
+<td>As、S、P、Mo、Sn、Cu、Pb、Bi等可能触发罚扣或拒收</td>
+</tr>
+<tr>
+<td>水分</td>
+<td>影响DMT和实际结算</td>
+</tr>
+<tr>
+<td>粒度</td>
+<td>影响取样、公允检验和冶炼处理</td>
+</tr>
+<tr>
+<td>来源</td>
+<td>钨属于3TG，需强化产地和供应链尽调</td>
+</tr>
+<tr>
+<td>文件</td>
+<td>矿权、货权、出口许可、产地证明、运输记录</td>
+</tr>
+</tbody></table>
+<h2>6. 主要风险</h2>
+<ol>
+<li>标吨和实物吨混淆导致货值严重偏差。</li>
+<li>用APT价格直接套粗精矿，导致高估销售收入。</li>
+<li>供应商提供的品位报告不可靠。</li>
+<li>低品位、杂质和水分导致买方大幅压价。</li>
+<li>非洲内陆物流成本和边境风险侵蚀利润。</li>
+<p>6. RMAP、CoC、冲突矿产尽调无法闭环导致海外买方拒收。</p>
+</ul>
+    </article>
+</body>
+</html>

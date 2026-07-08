@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>D01 乍得 43% 黑钨矿贸易逻辑与对账审计报告 (2026年7月版) - GCTS OS System Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-base: #060913;
+            --bg-card: rgba(22, 28, 49, 0.45);
+            --border-color: rgba(255, 255, 255, 0.08);
+            --border-color-glow: rgba(168, 85, 247, 0.25);
+            --text-primary: #e6ebf5;
+            --text-secondary: #8f9cae;
+            --text-muted: #5e6d82;
+            --color-primary: #a855f7;
+            --color-cyan: #00f2fe;
+            --color-gold: #f2a900;
+            --color-success: #00e676;
+            --color-danger: #ff1744;
+            --font-display: 'Outfit', 'Inter', -apple-system, sans-serif;
+            --font-body: 'Inter', -apple-system, sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+            --transition-smooth: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-base);
+            color: var(--text-primary);
+            font-family: var(--font-body);
+            line-height: 1.7;
+            padding: 3rem 1.5rem;
+            display: flex;
+            justify-content: center;
+        }
+
+        .doc-container {
+            width: 100%;
+            max-width: 900px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: 3rem;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(15px);
+            position: relative;
+        }
+
+        .btn-back {
+            position: fixed;
+            top: 30px;
+            left: 30px;
+            background: rgba(22, 28, 49, 0.8);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            padding: 0.75rem 1.25rem;
+            border-radius: 12px;
+            text-decoration: none;
+            font-family: var(--font-display);
+            font-size: 0.8rem;
+            font-weight: 600;
+            transition: var(--transition-smooth);
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-back:hover {
+            color: var(--text-primary);
+            border-color: var(--color-primary);
+            box-shadow: 0 0 15px rgba(168, 85, 247, 0.3);
+            transform: translateX(-3px);
+        }
+
+        h1 {
+            font-family: var(--font-display);
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 1.5rem;
+            letter-spacing: -0.5px;
+            line-height: 1.2;
+        }
+
+        h2 {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--color-cyan);
+            margin-top: 2.5rem;
+            margin-bottom: 1.25rem;
+            border-left: 3px solid var(--color-primary);
+            padding-left: 12px;
+        }
+
+        h3 {
+            font-family: var(--font-display);
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: #fff;
+            margin-top: 1.75rem;
+            margin-bottom: 0.75rem;
+        }
+
+        p {
+            margin-bottom: 1.25rem;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        strong {
+            color: #fff;
+            font-weight: 600;
+        }
+
+        ul, ol {
+            margin-bottom: 1.5rem;
+            padding-left: 1.5rem;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        code {
+            font-family: var(--font-mono);
+            background: rgba(255, 255, 255, 0.05);
+            padding: 0.2rem 0.4rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            color: var(--color-cyan);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+        }
+
+        pre {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.25rem;
+            overflow-x: auto;
+            margin-bottom: 1.5rem;
+        }
+
+        pre code {
+            background: transparent;
+            padding: 0;
+            border: none;
+            color: var(--text-primary);
+            font-size: 0.85rem;
+        }
+
+        /* 表格科技风样式表 */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 2rem;
+            margin-top: 1.5rem;
+            font-size: 0.85rem;
+        }
+
+        th {
+            background: rgba(168, 85, 247, 0.1);
+            color: var(--color-cyan);
+            font-family: var(--font-display);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-bottom: 2px solid var(--border-color-glow);
+            text-align: left;
+            padding: 12px 16px;
+        }
+
+        td {
+            border-bottom: 1px solid var(--border-color);
+            padding: 12px 16px;
+            color: var(--text-secondary);
+        }
+
+        tr:hover td {
+            background: rgba(255, 255, 255, 0.01);
+            color: #fff;
+        }
+
+        /* 警告通知框样式 */
+        .doc-alert-box {
+            background: rgba(168, 85, 247, 0.06);
+            border-left: 4px solid var(--color-primary);
+            padding: 1.25rem 1.5rem;
+            border-radius: 0 12px 12px 0;
+            margin-bottom: 2rem;
+        }
+
+        .doc-alert-box.warning {
+            background: rgba(255, 179, 0, 0.06);
+            border-left-color: var(--color-warning);
+        }
+
+        .doc-alert-box.danger {
+            background: rgba(255, 23, 68, 0.06);
+            border-left-color: var(--color-danger);
+        }
+
+        .doc-alert-box.success {
+            background: rgba(0, 230, 118, 0.06);
+            border-left-color: var(--color-success);
+        }
+
+        .doc-alert-box strong {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-family: var(--font-display);
+        }
+        
+        .doc-alert-box p {
+            margin-bottom: 0;
+            font-size: 0.85rem;
+        }
+
+        /* Mermaid 流程图包裹 */
+        .mermaid {
+            background: rgba(0, 0, 0, 0.2) !important;
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid var(--border-color);
+            margin: 2.5rem 0;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 1.5rem 1rem;
+            }
+            .doc-container {
+                padding: 1.5rem;
+            }
+            .btn-back {
+                position: absolute;
+                top: -60px;
+                left: 0;
+            }
+        }
+    </style>
+    <!-- 引入 Mermaid 渲染 -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'dark',
+            themeVariables: {
+                background: '#060913',
+                primaryColor: '#161c31',
+                lineColor: '#a855f7'
+            }
+        });
+    </script>
+</head>
+<body>
+    <!-- 返回大地图 -->
+    <a href="../index.html" class="btn-back">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        返回决策大地图
+    </a>
+
+    <article class="doc-container">
+        <h1>D01 乍得 43% 黑钨矿贸易逻辑与对账审计报告 (2026年7月版)</h1>
+<h2>1. 审计结论摘要 (Executive Audit Summary)</h2>
+<p>本审计报告对 <strong>乍得 43% 黑钨矿 30 吨（实物吨）</strong> 的双路线（中国国内销售 vs 境外香港-越南销售）货值换算逻辑进行系统性审计：</p>
+<ol>
+<li><strong>核心计算逻辑完全成立</strong>：国内采用“标吨/吨度”计价，海外采用“APT/粗矿折扣系数”计价。两套计价体系在数学上可实现完全的闭环倒推。</li>
+<li><strong>2026年7月行情基准对账</strong>：</li>
+<li><strong>国内销售货值</strong>：公开行情基准为 <strong>794.54 万元人民币</strong>（按 2026-07-06 SMM 47.1 万元/标吨、85%系数）；用户锚点情景为 <strong>843.46 万元人民币</strong>（按 50.0 万元/标吨、85%系数）。</li>
+<li><strong>海外销售货值</strong>：<strong>1,253.88 万元人民币</strong>（折合 174.15 万美元，以 APT 3,000 美元/吨度、45% 折扣系数、1:7.2 汇率为基准）。</li>
+<li><strong>账面毛差额</strong>：<strong>+410.42 万元人民币</strong>（境外货值比国内高出 48.66%）。</li>
+<li><strong>关键实务漏洞与修正要点</strong>（作为操作系统防错红线）：</li>
+<li><strong>干基水分敏感性</strong>：原核算未扣除水分。若引入 2% 贸易水分，干吨（DMT）降至 29.40 吨，国内货值降至 826.59 万元，海外降至 1,228.80 万元。必须在操作系统中将 <strong>DMT = WMT x (1 - Moisture)</strong> 设为强制第一步。</li>
+<li><strong>杂质扣减条款</strong>：粗精矿通常伴生杂质，若超标将产生罚扣。</li>
+<li><strong>3TG 冲突矿产合规成本</strong>：境外销售必须拥有 RMAP（责任矿产项目）及 CoC（产销监管链）闭环文件。该合规建链的执行成本及时间利息（周转期约 75 天）将削减海外路线的实际净收益。</li>
+</ul>
+<hr>
+<h2>2. 基础物理量核算对账</h2>
+<table>
+<thead><tr>
+<th>指标</th>
+<th>物理定义与公式</th>
+<th>审计值 (无水分假定)</th>
+<th>审计值 (2%水分假定)</th>
+</tr></thead><tbody>
+<tr>
+<td><strong>实物吨 (WMT)</strong></td>
+<td>现场地磅湿重</td>
+<td>30.00 吨</td>
+<td>30.00 吨</td>
+</tr>
+<tr>
+<td><strong>水分 (Moisture)</strong></td>
+<td>烘干取样损耗比例</td>
+<td>0.00%</td>
+<td>2.00%</td>
+</tr>
+<tr>
+<td><strong>干吨 (DMT)</strong></td>
+<td><code class="math">WMT \times (1 - Moisture)</code></td>
+<td><strong>30.00 吨</strong></td>
+<td><strong>29.40 吨</strong></td>
+</tr>
+<tr>
+<td><strong><code class="math">WO_3</code> 品位 (Grade)</strong></td>
+<td>SGS 检验报告 WO3 含量</td>
+<td>43.00%</td>
+<td>43.00%</td>
+</tr>
+<tr>
+<td><strong>总金属吨度数 (MTU)</strong></td>
+<td><code class="math">DMT \times Grade \times 100</code></td>
+<td><strong>1,290.00 吨度</strong></td>
+<td><strong>1,264.20 吨度</strong></td>
+</tr>
+<tr>
+<td><strong>折合国内标吨量</strong></td>
+<td><code class="math">MTU \div 65</code> (65% 基准吨)</td>
+<td><strong>19.846 标吨</strong></td>
+<td><strong>19.449 标吨</strong></td>
+</tr>
+</tbody></table>
+<p>*审计注：一吨度（MTU）代表 10 公斤的金属三氧化钨（<code class="math">WO_3</code>）。国内黑钨精矿报价以 65% <code class="math">WO_3</code> 含量为 1 标吨，即 1 标吨固定包含 65 个吨度。*</p>
+<hr>
+<h2>3. 双销售流向经济模型对账</h2>
+<h3>3.1 路线一：中国国内冶炼厂变现 (吨度计价 + 低品位贴水)</h3>
+<ul>
+<li><strong>公开行情基准</strong>：2026-07-06 SMM 公开65%黑钨精矿均价约 <strong>47.1 万元/标吨</strong>。</li>
+<li>*用户锚点情景*：若按 <strong>50.0 万元/标吨</strong> 跑数，国内货值上升至843.46万元。</li>
+<li><strong>结算公式</strong>：</li>
+<p>  \[\text{标准吨度单价} = \frac{\text{标吨价格}}{65} = \frac{500,000}{65} \approx 7,692.31\text{ 元/吨度}\]</p>
+<p>  \[\text{实际结算吨度单价} = 7,692.31 \times 85\% (\text{计价系数}) \approx 6,538.46\text{ 元/吨度}\]</p>
+<li><strong>总货值计算</strong>：</li>
+<p>  \[\text{总货值} = 1,290\text{ 吨度} \times 6,538.46\text{ 元/吨度} \approx \mathbf{8,434,615.38\text{ 元人民币}}\]</p>
+<li><strong>实物吨单价倒推校验</strong>：</li>
+<p>  \[\text{实物吨价格} = 500,000 \times \frac{43}{65} \times 85\% \approx 281,107.69\text{ 元/实物吨}\]</p>
+<p>  \[\text{总货值 (实物吨法)} = 30\text{ 实物吨} \times 28.1108\text{ 万元/实物吨} \approx \mathbf{8,433,230.77\text{ 元人民币}}\]</p>
+<p>  *(对账结论：吨度法与实物吨单价倒推在四舍五入后完全闭环一致。)*</p>
+</ul>
+<h3>3.2 路线二：海外销售给越南马山 (APT 锚定 + 粗精矿系数)</h3>
+<ul>
+<li><strong>基准行情</strong>：海外 APT 价格稳定在 <strong>3,000 美元/吨度</strong>。</li>
+<li><strong>结算公式</strong>：</li>
+<p>  \[\text{国际结算吨度单价} = 3,000\text{ 美元} \times 45\% (\text{折扣系数}) = 1,350\text{ 美元/吨度}\]</p>
+<li><strong>总货值计算</strong>：</li>
+<p>  \[\text{总货值 (USD)} = 1,290\text{ 吨度} \times 1,350\text{ 美元/吨度} = \mathbf{1,741,500\text{ 美元}}\]</p>
+<p>  \[\text{总货值 (CNY)} = 1,741,500\text{ 美元} \times 7.2 (\text{汇率}) = \mathbf{12,538,800.00\text{ 元人民币}}\]</p>
+</ul>
+<hr>
+<h2>4. 多情景报价引擎运算 (Model Engine Scenarios)</h2>
+<p>通过运行 GCTS L6 报价引擎，对 2026 年 7 月不同行情波动的敏感性进行了核算分析（假设水分均为 0%）：</p>
+<table>
+<thead><tr>
+<th>情景</th>
+<th>国内标吨价</th>
+<th>国内系数</th>
+<th>国际 APT (USD)</th>
+<th>国际系数</th>
+<th>国内总货值</th>
+<th>国际总货值 (CNY)</th>
+<th>毛价差 (CNY)</th>
+<th>盈亏平衡国际系数</th>
+</tr></thead><tbody>
+<tr>
+<td><strong>保守情景</strong></td>
+<td>47.1 万元</td>
+<td>80%</td>
+<td>$2,500</td>
+<td>35%</td>
+<td>747.80 万元</td>
+<td>975.24 万元</td>
+<td><strong>+227.44 万元</strong></td>
+<td><strong>26.84%</strong></td>
+</tr>
+<tr>
+<td><strong>市场实际均价</strong></td>
+<td>47.1 万元</td>
+<td>85%</td>
+<td>$3,000</td>
+<td>45%</td>
+<td>794.54 万元</td>
+<td>1,253.88 万元</td>
+<td><strong>+459.34 万元</strong></td>
+<td><strong>28.51%</strong></td>
+</tr>
+<tr>
+<td><strong>用户基准情景</strong></td>
+<td>50.0 万元</td>
+<td>85%</td>
+<td>$3,000</td>
+<td>45%</td>
+<td>843.46 万元</td>
+<td>1,253.88 万元</td>
+<td><strong>+410.42 万元</strong></td>
+<td><strong>30.27%</strong></td>
+</tr>
+<tr>
+<td><strong>乐观极端情景</strong></td>
+<td>52.0 万元</td>
+<td>88%</td>
+<td>$3,200</td>
+<td>48%</td>
+<td>908.16 万元</td>
+<td>1,337.47 万元</td>
+<td><strong>+429.31 万元</strong></td>
+<td><strong>32.59%</strong></td>
+</tr>
+</tbody></table>
+<p>*对账决策分析：只要海外真实可执行的折扣系数高于 <strong>30.27%</strong>（按国内50万基准）或 <strong>28.51%</strong>（按国内47.1万实际行情），海外销售路线在货值上就始终具有优势。*</p>
+<hr>
+<h2>5. 核心合规与实务审计意见</h2>
+<p>虽然海外路线账面多出约 <strong>410 万元人民币</strong>（高出约 48.6%）的利润，但在业务实操中，该利润空间受以下三个关键要素的刚性约束：</p>
+<ol>
+<li><strong>RMAP 与 3TG 溯源壁垒</strong>：</li>
+<li>钨属于 3TG（金、钽、锡、钨）冲突矿产。海外大型冶炼厂（如越南马山）的产品直接销往美、日、欧高端工业链，必须满足 OECD 责任矿产供应链尽调标准。</li>
+<li>乍得虽然不属于刚果金等核心冲突区，但紧邻中非和苏丹。买方必须看到从乍得 Mongo 矿山开采、当地矿业部授权、UNTT 卡车运输出境、喀麦隆过境清关、杜阿拉港装船的<strong>完整产销监管链 (CoC) 纸质单据包</strong>。若无法提供或单据有瑕疵，买方将 100% 拒收。</li>
+<li><strong>高货值防盗物流成本</strong>：</li>
+<li>锑矿由于单吨货值低（约 3.5 万元/吨），内陆公路防盗要求适中。</li>
+<li>43% 钨粗矿的实物吨价值高达 <strong>28 - 41 万元/吨</strong>（30 吨货物仅需两辆卡车即可装载，总货值超千万人民币），在非洲内陆长途卡运极易成为地方武装、路卡劫匪或卡车司机的盗窃目标。必须额外追加保镖跟车、集装箱高保铅封、RFID 实时追踪和一切险（TPND）保费，这将侵蚀约 15 - 25 万元的实际利润。</li>
+<li><strong>资金周转与开证成本</strong>：</li>
+<li>国内变现可在货物运抵国内港口/冶炼厂后通过现款迅速结汇，周转期在 30-40 天。</li>
+<li>销往海外则需采用信用证（L/C）背靠背结算，从非洲当地备货、内陆转运、RMAP 建链到目的港 SGS 检验合格解付，周转周期拉长至 75-90 天。以年化 8% 融资利率计算，千万人民币资金的占用利息增加约 15-20 万元。</li>
+</ul>
+<p><strong>最终审计建议：</strong></p>
+<p>在系统执行中，<strong>将 RMAP/CoC 合规文件完整性设为系统的一级阀门</strong>。文件齐备时，坚定走香港-越南外销路线，最大化获取 410 万溢价；一旦合规链条存在断裂风险，应果断退守国内变现路线，以保障资金安全。</p>
+    </article>
+</body>
+</html>

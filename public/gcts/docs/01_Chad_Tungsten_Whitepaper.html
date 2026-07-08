@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>乍得黑钨矿全球贸易与供应链战略白皮书 (01_Chad_Tungsten_Whitepaper) - GCTS OS System Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-base: #060913;
+            --bg-card: rgba(22, 28, 49, 0.45);
+            --border-color: rgba(255, 255, 255, 0.08);
+            --border-color-glow: rgba(168, 85, 247, 0.25);
+            --text-primary: #e6ebf5;
+            --text-secondary: #8f9cae;
+            --text-muted: #5e6d82;
+            --color-primary: #a855f7;
+            --color-cyan: #00f2fe;
+            --color-gold: #f2a900;
+            --color-success: #00e676;
+            --color-danger: #ff1744;
+            --font-display: 'Outfit', 'Inter', -apple-system, sans-serif;
+            --font-body: 'Inter', -apple-system, sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+            --transition-smooth: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-base);
+            color: var(--text-primary);
+            font-family: var(--font-body);
+            line-height: 1.7;
+            padding: 3rem 1.5rem;
+            display: flex;
+            justify-content: center;
+        }
+
+        .doc-container {
+            width: 100%;
+            max-width: 900px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: 3rem;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(15px);
+            position: relative;
+        }
+
+        .btn-back {
+            position: fixed;
+            top: 30px;
+            left: 30px;
+            background: rgba(22, 28, 49, 0.8);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            padding: 0.75rem 1.25rem;
+            border-radius: 12px;
+            text-decoration: none;
+            font-family: var(--font-display);
+            font-size: 0.8rem;
+            font-weight: 600;
+            transition: var(--transition-smooth);
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-back:hover {
+            color: var(--text-primary);
+            border-color: var(--color-primary);
+            box-shadow: 0 0 15px rgba(168, 85, 247, 0.3);
+            transform: translateX(-3px);
+        }
+
+        h1 {
+            font-family: var(--font-display);
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 1.5rem;
+            letter-spacing: -0.5px;
+            line-height: 1.2;
+        }
+
+        h2 {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--color-cyan);
+            margin-top: 2.5rem;
+            margin-bottom: 1.25rem;
+            border-left: 3px solid var(--color-primary);
+            padding-left: 12px;
+        }
+
+        h3 {
+            font-family: var(--font-display);
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: #fff;
+            margin-top: 1.75rem;
+            margin-bottom: 0.75rem;
+        }
+
+        p {
+            margin-bottom: 1.25rem;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        strong {
+            color: #fff;
+            font-weight: 600;
+        }
+
+        ul, ol {
+            margin-bottom: 1.5rem;
+            padding-left: 1.5rem;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        code {
+            font-family: var(--font-mono);
+            background: rgba(255, 255, 255, 0.05);
+            padding: 0.2rem 0.4rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            color: var(--color-cyan);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+        }
+
+        pre {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.25rem;
+            overflow-x: auto;
+            margin-bottom: 1.5rem;
+        }
+
+        pre code {
+            background: transparent;
+            padding: 0;
+            border: none;
+            color: var(--text-primary);
+            font-size: 0.85rem;
+        }
+
+        /* 表格科技风样式表 */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 2rem;
+            margin-top: 1.5rem;
+            font-size: 0.85rem;
+        }
+
+        th {
+            background: rgba(168, 85, 247, 0.1);
+            color: var(--color-cyan);
+            font-family: var(--font-display);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-bottom: 2px solid var(--border-color-glow);
+            text-align: left;
+            padding: 12px 16px;
+        }
+
+        td {
+            border-bottom: 1px solid var(--border-color);
+            padding: 12px 16px;
+            color: var(--text-secondary);
+        }
+
+        tr:hover td {
+            background: rgba(255, 255, 255, 0.01);
+            color: #fff;
+        }
+
+        /* 警告通知框样式 */
+        .doc-alert-box {
+            background: rgba(168, 85, 247, 0.06);
+            border-left: 4px solid var(--color-primary);
+            padding: 1.25rem 1.5rem;
+            border-radius: 0 12px 12px 0;
+            margin-bottom: 2rem;
+        }
+
+        .doc-alert-box.warning {
+            background: rgba(255, 179, 0, 0.06);
+            border-left-color: var(--color-warning);
+        }
+
+        .doc-alert-box.danger {
+            background: rgba(255, 23, 68, 0.06);
+            border-left-color: var(--color-danger);
+        }
+
+        .doc-alert-box.success {
+            background: rgba(0, 230, 118, 0.06);
+            border-left-color: var(--color-success);
+        }
+
+        .doc-alert-box strong {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-family: var(--font-display);
+        }
+        
+        .doc-alert-box p {
+            margin-bottom: 0;
+            font-size: 0.85rem;
+        }
+
+        /* Mermaid 流程图包裹 */
+        .mermaid {
+            background: rgba(0, 0, 0, 0.2) !important;
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid var(--border-color);
+            margin: 2.5rem 0;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 1.5rem 1rem;
+            }
+            .doc-container {
+                padding: 1.5rem;
+            }
+            .btn-back {
+                position: absolute;
+                top: -60px;
+                left: 0;
+            }
+        }
+    </style>
+    <!-- 引入 Mermaid 渲染 -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'dark',
+            themeVariables: {
+                background: '#060913',
+                primaryColor: '#161c31',
+                lineColor: '#a855f7'
+            }
+        });
+    </script>
+</head>
+<body>
+    <!-- 返回大地图 -->
+    <a href="../index.html" class="btn-back">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        返回决策大地图
+    </a>
+
+    <article class="doc-container">
+        <h1>乍得黑钨矿全球贸易与供应链战略白皮书 (01_Chad_Tungsten_Whitepaper)</h1>
+<h2>执行摘要 (Executive Summary)</h2>
+<p>钨（Tungsten, W）作为极其重要且不可替代的工业原料，被中、美、欧、日等全球主要工业体列为<strong>最核心的战略性关键矿产</strong>之一。钨广泛应用于硬质合金（切削工具、耐磨零件）、特种钢、半导体电镀及国防军工（穿甲弹芯、火箭喷管）。</p>
+<p>本白皮书基于 <strong>GCTS (Global Commodity Trading System) V0.1</strong> 智能知识操作系统，针对 <strong>Case No.002：乍得格拉省黑钨精矿开发与全球贸易项目</strong> 进行系统性可行性论证。本次核算严格区分公开行情基准与情景价：国内以 <strong>2026-07-06 SMM公开均价47.1万元/标吨</strong> 作为基准，以 <strong>50.0万元/标吨</strong> 作为用户锚点/乐观情景；海外以 <strong>3,000 USD/MTU、汇率7.2</strong> 作为情景测算，对一门 30 WMT（实物吨）品位 43% 的非标黑钨精矿进行双路径核算。</p>
+<p>论证表明，该项目在经济上可行：</p>
+<ol>
+<li><strong>海外外销路线（销往越南马山）</strong>：折合人民币总货值 <strong>1,253.88 万元</strong>，但必须通过极其严苛的 RMAP（责任矿产项目）及 CoC（产销监管链）合规审计。</li>
+<li><strong>运回国内变现路线</strong>：总货值 <strong>843.46 万元</strong>，无 3TG 国际供应链合规审计障碍，但账面货值较海外低 <strong>410.42 万元</strong>。</li>
+<p> GCTS 决策中心建议：在确保乍得出口商能够提供完整闭环 CoC 链条以通过海外买方合规审核的条件下，<strong>首选香港保税公司-越南马山外销路线</strong>；若合规文件出现无法弥补的缺失，则立即退守国内销售，以确保项目本金安全落袋为安。</p>
+</ul>
+<hr>
+<h2>1. 全球钨矿与 APT 市场格局分析 (Global Market Dynamics)</h2>
+<pre><code>【全球钨消费结构占比图】
+硬质合金 (汽车、矿山、机床用切削耐磨工具) ───> 60%
+钨特种钢及合金 (航空航天、军工) ─────────────> 20%
+电子与半导体 (气相沉积、电极) ───────────────> 10%
+化工与照明 (催化剂、颜料) ───────────────────> 10%</code></pre>
+<h3>1.1 资源集中度与供应赤字</h3>
+<p>全球钨资源储量高度集中。中国是全球最大的钨储备国和生产国，占全球产量的 80% 以上。随着国内核心钨矿山进入开采后期，面临品位下滑、开采深度增加以及国家环保督察和开采配额刚性控制，国内钨精矿产量稳步收缩。非中国、非俄的境外优质钨矿资源极其稀缺。</p>
+<h3>1.2 2026年最新价格走势分析</h3>
+<p>进入 <strong>2026 年年中（6月、7月）</strong>，国内钨市场已经度过了阶段性的极端行情。在 2026 年 3 月份，由于国内部分省份环保停产整顿及资本炒作，国内 65% 黑钨精矿均价曾冲破 <strong>100 万元/标吨</strong> 的极端高位，给下游冶炼厂带来严重亏损。</p>
+<p>目前，随着现货供应紧张局势缓解，价格已震荡回调并步入理性区间：</p>
+<ul>
+<li><strong>2026年7月国内黑钨精矿 (65% WO3)</strong> 均价稳定在 <strong>47.0 万 ~ 52.0 万元/标吨</strong>（本次核算取中间值 <strong>50 万元/标吨</strong>）。</li>
+<li><strong>海外中游仲钨酸铵 (APT)</strong> 价格因海外资源极度贫瘠，依然坚挺在 <strong>3,000 美元/吨度 (MTU)</strong> 左右的高位震荡。</li>
+</ul>
+<hr>
+<h2>2. 乍得原矿资源情况 (Resource & Geology)</h2>
+<h3>2.1 地质背景</h3>
+<p>乍得中南部格拉省（Guéra）属于花岗质结晶基底，发育低温热液石英脉型钨矿。该项目标的物源于格拉省 Mongo 地区地表的黑钨矿粗精矿。</p>
+<h3>2.2 物理与技术参数</h3>
+<ul>
+<li><strong>实物量</strong>: 30 湿吨 (WMT)。为了对账一致，暂时设定水分（Moisture）为 0%，即 30 干吨 (DMT)。</li>
+<li><strong>化学品位</strong>: <code class="math">WO_3</code> 平均含量为 <strong>43.00%</strong>。这属于低于 65% 标准精矿的“非标低品位粗精矿”。</li>
+<li><strong>伴生杂质</strong>: 伴生有少量的砷 (As)、锡 (Sn)、硫 (S) 和水分。在销售合同中必须明确约定有害元素限值，防范冶炼厂因为超标进行罚扣。</li>
+</ul>
+<hr>
+<h2>3. 双销售流向经济对比模型 (Economic Evaluation)</h2>
+<p>本批次 30 吨（43% 品位，折合 <strong>1,290 吨度</strong>）粗精矿的双路线核算对比：</p>
+<h3>3.1 路线一：中国国内销售 (中钨高新或章源钨业)</h3>
+<p>由于 43% 品位粗精矿碱耗大、收率低，国内冶炼厂通常在 65% 标准品位价格基础上给予 <strong>85%</strong> 的低品位计价系数：</p>
+<ul>
+<li><strong>吨度基准价</strong>:</li>
+<p>  \[500,000\text{ 元/标吨} \div 65\text{ 吨度} \approx 7,692.31\text{ 元/吨度}\]</p>
+<li><strong>实际结算吨度单价</strong>:</li>
+<p>  \[7,692.31 \times 85\% \approx 6,538.46\text{ 元/吨度}\]</p>
+<li><strong>国内销售总货值</strong>:</li>
+<p>  \[1,290\text{ 吨度} \times 6,538.46\text{ 元/吨度} \approx \mathbf{843.46\text{ 万元人民币}}\]</p>
+<li><strong>实物吨单价倒推校验</strong>:</li>
+<p>  这批矿石折合每实物吨价格为：<code class="math">500,000 \times \frac{43}{65} \times 85\% \approx 28.115\text{ 万元/实物吨}</code>。</p>
+<p>  <code class="math">30\text{ 实物吨} \times 28.115\text{ 万元/实物吨} \approx \mathbf{843.46\text{ 万元人民币}}</code> (两者完全一致，实现数学闭环)。</p>
+</ul>
+<h3>3.2 路线二：境外香港保税公司-越南马山 (MHT) 销售</h3>
+<p>海外大型冶炼厂对于 40% 左右品位的粗矿，其冶炼流程折损严重，通常给出的折价系数在 <strong>45%</strong> 左右：</p>
+<ul>
+<li><strong>海外结算吨度单价</strong>:</li>
+<p>  \[3,000\text{ 美元/吨度} \times 45\% = 1,350\text{ 美元/吨度}\]</p>
+<li><strong>海外销售总货值</strong>:</li>
+<p>  \[\text{总货值 (USD)} = 1,290\text{ 吨度} \times 1,350\text{ 美元/吨度} = 1,741,500\text{ 美元}\]</p>
+<p>  \[\text{折合人民币 (汇率 7.2)} = 1,741,500 \times 7.2 = \mathbf{1,253.88\text{ 万元人民币}}\]</p>
+</ul>
+<h3>3.3 路线决策对比表</h3>
+<table>
+<thead><tr>
+<th>销售流向</th>
+<th>核算基准与关键系数</th>
+<th>30吨总货值 (折人民币)</th>
+<th>核心优势</th>
+<th>核心劣势与挑战</th>
+</tr></thead><tbody>
+<tr>
+<td><strong>运回中国国内销售</strong></td>
+<td>47.1万元/标吨公开基准；50.0万元/标吨情景价<br>计价系数 85%</td>
+<td><strong>~ 794.54 万元（公开基准）</strong>；<strong>~843.46 万元（50万情景）</strong></td>
+<td>1. 享受冶炼技术红利，折扣系数高 (85%)<br>2. 无需穿透性的 RMAP 冲突矿产严苛审计，变现阻力小</td>
+<td>总货值低于境外销售，经济回报偏低；价差需按实际物流、融资和合规成本重算。</td>
+</tr>
+<tr>
+<td><strong>走香港外销 (越南马山)</strong></td>
+<td>国际 APT $3000/吨度<br>计价系数 45%</td>
+<td><strong>~ 1,253.88 万元</strong></td>
+<td>1. 享受海外本土资源极缺带来的极高“安全溢价”<br>2. 货值高出 48.66%</td>
+<td>1. 必须出具乍得矿山到港口完整的产销监管链 (CoC) 文件<br>2. 3TG 冲突矿产审计极其严苛，存在退货红线风险</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>4. 供应链物流与合规战略决策</h2>
+<p>为了锁定海外销售多出的 <strong>410.42 万元人民币</strong> 的毛利润，GCTS 运作团队必须落实以下两大实务支柱：</p>
+<h3>4.1 RMAP 供应链合规建链 (RMAP Compliance)</h3>
+<p>钨是全球法定的 <strong>3TG 冲突矿产</strong>。越南马山等海外买方采购必须穿透审查来源。</p>
+<p>我们必须联合乍得当地合作伙伴，在货物离港前备齐 <strong>Mine Origin Statement (矿山来源声明)</strong>、<strong>Export Permit (出口许可)</strong> 及 <strong>Chain of Custody Record (运输链监管日志)</strong>，消除任何非法洗矿或邻国冲突矿走私嫌疑。如果无法备齐，海外买方将行使合同拒收红线。</p>
+<h3>4.2 高货值物理防盗与运保控制 (High-value Logistics & Theft Prevention)</h3>
+<p>该批 43% 黑钨精矿实物单吨价值超过 28 万元人民币，两车即可拉运千万人民币资产。在乍得 Mongo 到喀麦隆杜阿拉港的 1,800 公里内陆公路运输中，防盗与防调包极其关键：</p>
+<ol>
+<li>卡车货箱加装特制 RFID 门锁与 GPS 实时跟踪。</li>
+<li>卸货点与装箱点必须进行联合公证取样化验，品位差额超过 0.5% 立即触发应急处理。</li>
+<li>投保 110% 货值的 ICC(A) 一切险，并特约加保盗窃、提货不着险（TPND）。</li>
+</ul>
+    </article>
+</body>
+</html>

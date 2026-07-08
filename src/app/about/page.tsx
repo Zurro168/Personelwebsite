@@ -1,224 +1,297 @@
-import fs from 'fs';
-import path from 'path';
-import { User, FileText, Briefcase, Mail, Download, GraduationCap, Award, Zap } from 'lucide-react';
-import ReportRenderer from '@/components/ReportRenderer';
+'use client';
+
+import React from 'react';
+import Link from 'next/link';
+import { 
+  User, Mail, Phone, Briefcase, GraduationCap, 
+  Printer, ArrowLeft, ShieldCheck, MapPin, Globe, Sparkles
+} from 'lucide-react';
 import { AUTHOR_INFO } from '@/data/biography';
 
-async function getAboutContent() {
-  const contentPath = path.join(process.cwd(), 'public/content/system/about.html');
-  try {
-    if (fs.existsSync(contentPath)) {
-      return fs.readFileSync(contentPath, 'utf8');
-    }
-  } catch (err) {
-    console.error("Failed to read about content:", err);
-  }
-  return null;
-}
-
-export default async function AboutPage() {
-  const customContent = await getAboutContent();
+/**
+ * Premium Bento Style Resume & About Me Page
+ * 极致高阶极客暗色Bento排版，剔除臃肿大图，开门见山展示核心大宗专家履历
+ */
+export default function AboutPage() {
+  const handlePrint = () => {
+    window.print();
+  };
 
   return (
-    <div className="min-h-screen bg-[#0a0f1a] font-sans selection:bg-brand-blue/30 selection:text-white">
+    <div className="min-h-screen bg-[#0a0f1a] text-slate-200 font-sans selection:bg-purple-500/30 selection:text-white pb-32 relative overflow-hidden">
+      
+      {/* 打印专属全局样式注入 */}
+      <style jsx global>{`
+        @media print {
+          body {
+            background: #ffffff !important;
+            color: #000000 !important;
+          }
+          .no-print {
+            display: none !important;
+          }
+          .print-full-width {
+            width: 100% !important;
+            max-width: 100% !important;
+            padding: 0 !important;
+          }
+          .print-card {
+            border: none !important;
+            background: transparent !important;
+            box-shadow: none !important;
+            color: #000000 !important;
+            padding: 10px 0 !important;
+          }
+          .print-text-dark {
+            color: #000000 !important;
+          }
+          .print-text-muted {
+            color: #555555 !important;
+          }
+          .timeline-line {
+            border-left-color: #cccccc !important;
+          }
+          .timeline-dot {
+            background-color: #000000 !important;
+          }
+        }
+      `}</style>
 
-      {/* SUB-NAV */}
-      <div className="bg-slate-900/50 backdrop-blur-md border-b border-white/5 h-12 flex justify-center items-center gap-12 text-slate-500">
-        <User size={16} className="text-brand-blue cursor-pointer" />
-        <FileText size={16} className="hover:text-white transition-colors cursor-pointer" />
-        <Briefcase size={16} className="hover:text-white transition-colors cursor-pointer" />
-        <Mail size={16} className="hover:text-white transition-colors cursor-pointer" />
+      {/* Background radial gradients for tech mood */}
+      <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-purple-500/[0.02] blur-[150px] pointer-events-none no-print"></div>
+      <div className="absolute bottom-20 right-1/4 w-[600px] h-[600px] bg-cyan-500/[0.02] blur-[150px] pointer-events-none no-print"></div>
+
+      {/* TOP NAVIGATION HEADER (no-print) */}
+      <div className="bg-[#0b1120]/60 backdrop-blur-md border-b border-white/5 h-14 flex justify-between items-center px-8 sticky top-0 z-50 no-print">
+        <Link 
+          href="/" 
+          className="flex items-center gap-2 text-xs font-bold text-slate-500 hover:text-purple-400 transition-colors uppercase tracking-widest font-mono"
+        >
+          <ArrowLeft size={14} /> Back to Terminal
+        </Link>
+        
+        <div className="flex items-center gap-3">
+          <span className="text-[10px] font-mono text-purple-400/80 tracking-widest uppercase">GORDON WANG // BIO</span>
+          <button 
+            onClick={handlePrint}
+            className="flex items-center gap-2 px-4 py-1.5 bg-purple-500/10 border border-purple-500/30 hover:border-purple-400 text-purple-300 text-xs font-bold tracking-wider rounded-lg transition-all"
+          >
+            <Printer size={12} /> 打印/保存 PDF
+          </button>
+        </div>
       </div>
 
-      {/* HERO HEADER — dark themed */}
-      <section className="relative h-[650px] overflow-hidden group">
-        <div
-          className="absolute inset-0 bg-cover bg-center transition-transform duration-[3s] group-hover:scale-110"
-          style={{ backgroundImage: 'url("/brand/hero-me.jpg")' }}
-        >
-          <div className="absolute inset-0 bg-[#0b1120]/70 backdrop-blur-[2px]"></div>
-        </div>
-
-        <div className="relative z-10 h-full flex flex-col justify-center items-center text-center px-6">
-          <h1 className="text-7xl md:text-[100px] font-extralight tracking-tight text-white mb-6">
-            {AUTHOR_INFO.name}
-          </h1>
-          <div className="flex flex-col items-center gap-4">
-             <p className="text-xl md:text-2xl text-white/80 font-light tracking-[0.2em] uppercase">
-               {AUTHOR_INFO.title}
-             </p>
-             <div className="h-px w-24 bg-white/30"></div>
-             <p className="text-slate-400 font-mono text-sm tracking-widest uppercase">
-               {AUTHOR_INFO.social.email}
-             </p>
-          </div>
-        </div>
-      </section>
-
-      {/* SUMMARY STRIP — dark theme */}
-      <section className="bg-[#0b1120] text-white py-20 border-b border-white/5">
-        <div className="max-w-7xl mx-auto px-8 grid md:grid-cols-[1fr_2fr_1fr] gap-12 items-start">
-          <h2 className="text-xs font-black tracking-[0.5em] uppercase text-slate-500 mt-2">About</h2>
-          <div className="space-y-6">
-            <p className="text-xl font-light leading-relaxed text-slate-300">
-              {AUTHOR_INFO.motto}
-              主理人深耕国际大宗商品领域，致力于将碳基行业的实战经验通过算法逻辑在硅基数字世界重构。
-            </p>
-            {customContent && (
-              <div className="prose prose-invert prose-slate max-w-none pt-8 border-t border-white/10 opacity-70">
-                <ReportRenderer html={customContent} />
-              </div>
-            )}
-          </div>
-          <div className="flex justify-end pt-2">
-            <a href="javascript:void(0)" title="在线生成PDF简历功能开发中" className="flex items-center gap-3 text-[10px] font-bold tracking-[0.3em] uppercase text-brand-blue hover:text-white transition-all group cursor-not-allowed">
-               <Download size={14} className="group-hover:-translate-y-1 transition-transform" />
-               Download PDF
-            </a>
-          </div>
-        </div>
-      </section>
-
-      {/* MAIN CONTENT — dark themed resume body */}
-      <main className="max-w-7xl mx-auto px-8 py-32 space-y-40 text-slate-200">
-
-        {/* EDUCATION */}
-        <section className="grid md:grid-cols-[1fr_3fr] gap-12 md:gap-24 relative">
-          <div className="sticky top-24 h-fit">
-            <h2 className="text-xs font-bold tracking-[0.5em] uppercase text-slate-400 flex items-center gap-3">
-               <GraduationCap size={16} /> Education
-            </h2>
-          </div>
-          <div className="space-y-16">
-            {AUTHOR_INFO.education.map((edu, idx) => (
-              <div key={idx} className="group grid md:grid-cols-[auto_1fr_auto] gap-8 items-center">
-                {/* School Logo */}
-                <div className="w-20 h-20 rounded-2xl bg-slate-800/50 border border-white/10 p-3 flex items-center justify-center overflow-hidden shrink-0 group-hover:border-brand-blue/30 transition-all duration-500 relative">
-                   <div className="absolute inset-0 bg-gradient-to-br from-brand-blue/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
-                   {/* @ts-ignore */}
-                   {edu.logo ? (
-                     <img
-                       /* @ts-ignore */
-                       src={edu.logo}
-                       alt={edu.school}
-                       className="w-full h-full object-contain filter grayscale group-hover:grayscale-0 transition-all duration-700 relative z-10"
-                     />
-                   ) : (
-                     <GraduationCap className="text-slate-500 relative z-10" size={32} />
-                   )}
+      <main className="max-w-7xl mx-auto px-8 py-16 print-full-width">
+        <div className="grid lg:grid-cols-[1.1fr_2.2fr] gap-12 items-start print-full-width">
+          
+          {/* ======================================================== */}
+          {/* 左侧栏：个人数字名片舱 (Bento Sidebar) */}
+          {/* ======================================================== */}
+          <div className="space-y-8 sticky top-24 no-print print-full-width">
+            
+            {/* 核心个人卡 */}
+            <div className="bg-[#101726]/40 border border-white/5 p-8 rounded-3xl backdrop-blur-md relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-purple-500/10 to-transparent blur-xl pointer-events-none"></div>
+              
+              <div className="space-y-6">
+                <div className="flex items-center gap-3">
+                  <span className="px-2.5 py-1 bg-purple-500/10 border border-purple-500/20 text-purple-400 text-[10px] font-bold tracking-widest rounded-lg font-mono uppercase">ABOUT Gordon</span>
+                  <div className="w-1.5 h-1.5 bg-purple-500 rounded-full animate-ping"></div>
                 </div>
 
-                <div className="space-y-1">
-                  <h3 className="text-2xl font-bold text-white group-hover:text-brand-blue transition-all duration-300">{edu.degree}</h3>
-                  <p className="text-slate-400 text-lg font-light tracking-wide">{edu.school}</p>
+                <div className="space-y-2">
+                  <h1 className="text-4xl font-black tracking-tight text-white">{AUTHOR_INFO.name}</h1>
+                  <p className="text-sm font-mono text-purple-400 font-bold uppercase tracking-wider">{AUTHOR_INFO.job_title}</p>
                 </div>
 
-                <div className="text-right space-y-2">
-                  <span className="text-sm font-mono font-bold tracking-widest text-slate-400 uppercase block">{edu.duration}</span>
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
+                <p className="text-sm text-slate-400 font-light leading-relaxed border-l-2 border-purple-500/20 pl-4 italic">
+                  &ldquo;{AUTHOR_INFO.motto}&rdquo;
+                </p>
 
-        <div className="h-px w-full bg-white/5"></div>
-
-        {/* WORK EXPERIENCE */}
-        <section className="grid md:grid-cols-[1fr_3fr] gap-12 md:gap-24 relative">
-          <div className="sticky top-24 h-fit">
-            <h2 className="text-xs font-bold tracking-[0.5em] uppercase text-slate-400 flex items-center gap-3">
-               <Briefcase size={16} /> Work
-            </h2>
-          </div>
-          <div className="space-y-24">
-            {AUTHOR_INFO.experience.map((exp, idx) => (
-              <div key={idx} className="group grid md:grid-cols-[1fr_auto] gap-8">
-                <div className="space-y-6">
-                  <div className="space-y-2">
-                    <h3 className="text-2xl font-bold text-white group-hover:text-brand-blue transition-colors">{exp.role}</h3>
-                    <p className="text-slate-400 text-lg font-light tracking-wide">{exp.company}</p>
+                {/* 社交/物理属性网格 */}
+                <div className="grid grid-cols-2 gap-4 pt-4 border-t border-white/5 text-xs font-mono text-slate-400">
+                  <div className="flex items-center gap-2">
+                    <MapPin size={12} className="text-purple-400" />
+                    <span>广东广州</span>
                   </div>
-                  <p className="text-slate-300 leading-relaxed font-light text-lg max-w-2xl">
-                    {exp.description}
-                  </p>
-                </div>
-                <div className="text-right">
-                  <span className="text-xs font-mono font-bold tracking-widest text-slate-400 uppercase whitespace-nowrap">{exp.duration}</span>
+                  <div className="flex items-center gap-2">
+                    <Globe size={12} className="text-purple-400" />
+                    <span>籍贯山东</span>
+                  </div>
                 </div>
               </div>
-            ))}
-          </div>
-        </section>
+            </div>
 
-        <div className="h-px w-full bg-white/5"></div>
-
-        {/* AWARDS */}
-        <section className="grid md:grid-cols-[1fr_3fr] gap-12 md:gap-24 relative">
-          <div className="sticky top-24 h-fit">
-            <h2 className="text-xs font-bold tracking-[0.5em] uppercase text-slate-400 flex items-center gap-3">
-               <Award size={16} /> Awards
-            </h2>
-          </div>
-          <div className="space-y-16">
-            {AUTHOR_INFO.awards.map((award, idx) => (
-              <div key={idx} className="group grid md:grid-cols-[1fr_auto] gap-8">
-                <div className="space-y-1">
-                  <h3 className="text-2xl font-bold text-white group-hover:text-brand-blue transition-colors">{award.title}</h3>
-                  <p className="text-slate-400 text-lg font-light tracking-wide">{award.source}</p>
+            {/* 微信与联络 Bento */}
+            <div className="bg-[#101726]/20 border border-white/5 p-8 rounded-3xl space-y-6">
+              <h3 className="text-xs font-mono font-bold tracking-[0.2em] uppercase text-purple-400/80">联络与数字网络</h3>
+              
+              <div className="space-y-4 text-xs font-mono">
+                <div className="flex items-center justify-between p-3 bg-black/20 rounded-xl border border-white/5">
+                  <div className="flex items-center gap-2.5 text-slate-400">
+                    <Mail size={14} className="text-purple-400" />
+                    <span>电子邮箱</span>
+                  </div>
+                  <a href={`mailto:${AUTHOR_INFO.email}`} className="text-white hover:text-purple-400 transition-colors font-bold">{AUTHOR_INFO.email}</a>
                 </div>
-                <div className="text-right">
-                   <span className="text-xs font-mono font-bold tracking-widest text-slate-400 uppercase">{award.year}</span>
+
+                <div className="flex items-center justify-between p-3 bg-black/20 rounded-xl border border-white/5">
+                  <div className="flex items-center gap-2.5 text-slate-400">
+                    <User size={14} className="text-purple-400" />
+                    <span>微信号码</span>
+                  </div>
+                  <span className="text-white font-bold">{AUTHOR_INFO.social.wechat.id}</span>
                 </div>
               </div>
-            ))}
+
+              {/* 二维码展示区 */}
+              <div className="grid grid-cols-2 gap-4 pt-2">
+                <div className="bg-black/40 border border-white/5 p-4 rounded-2xl flex flex-col items-center gap-2">
+                  <div className="w-full aspect-square rounded-lg bg-white/5 flex items-center justify-center relative overflow-hidden">
+                    <img 
+                      src="/brand/wechat-personal.jpg" 
+                      alt="个人微信" 
+                      className="w-full h-full object-cover opacity-80 hover:opacity-100 transition-opacity"
+                      onError={(e) => {
+                        // 兜底替代文本
+                        e.currentTarget.style.display = 'none';
+                        const parent = e.currentTarget.parentElement;
+                        if (parent) parent.innerHTML = '<span class="text-[10px] text-slate-600">微信二维码</span>';
+                      }}
+                    />
+                  </div>
+                  <span className="text-[10px] font-mono text-slate-500">个人微信</span>
+                </div>
+
+                <div className="bg-black/40 border border-white/5 p-4 rounded-2xl flex flex-col items-center gap-2">
+                  <div className="w-full aspect-square rounded-lg bg-white/5 flex items-center justify-center relative overflow-hidden">
+                    <img 
+                      src="/brand/gzh.jpg" 
+                      alt="公众号二维码" 
+                      className="w-full h-full object-cover opacity-80 hover:opacity-100 transition-opacity"
+                      onError={(e) => {
+                        e.currentTarget.style.display = 'none';
+                        const parent = e.currentTarget.parentElement;
+                        if (parent) parent.innerHTML = '<span class="text-[10px] text-slate-600">公众号二维码</span>';
+                      }}
+                    />
+                  </div>
+                  <span className="text-[10px] font-mono text-slate-500">公众号二维码</span>
+                </div>
+              </div>
+            </div>
+
+            {/* 专业背书 */}
+            <div className="bg-[#101726]/10 border border-white/5 p-6 rounded-3xl flex items-center gap-3 text-[10px] font-mono text-slate-500 uppercase tracking-widest">
+              <ShieldCheck size={14} className="text-purple-500/60" />
+              <span>Verified Commodity Professional</span>
+            </div>
+
           </div>
-        </section>
+
+          {/* ======================================================== */}
+          {/* 右侧栏：履历时间轴 & 教育背景 (Bento Content) */}
+          {/* ======================================================== */}
+          <div className="space-y-12 print-full-width">
+            
+            {/* 打印版专属头部 (在屏幕上隐藏) */}
+            <div className="hidden print:block mb-8">
+              <h1 className="text-3xl font-black text-black mb-2">{AUTHOR_INFO.name}</h1>
+              <p className="text-sm font-bold text-slate-700">{AUTHOR_INFO.job_title} | {AUTHOR_INFO.email}</p>
+              <p className="text-xs text-slate-500 mt-2 font-light">{AUTHOR_INFO.motto}</p>
+              <hr className="my-4 border-slate-300" />
+            </div>
+
+            {/* 1. 核心工作经历 (Work Experience) */}
+            <section className="bg-[#101726]/20 border border-white/5 p-10 rounded-[2rem] space-y-10 print-card">
+              <div className="flex items-center gap-3 pb-4 border-b border-white/5 print:border-slate-200">
+                <Briefcase size={18} className="text-purple-400 print:text-black" />
+                <h2 className="text-xl font-black text-white italic uppercase tracking-wider print-text-dark">核心业务履历 (Experience)</h2>
+              </div>
+
+              {/* 垂直时间轴容器 */}
+              <div className="relative pl-6 space-y-12">
+                {/* 渐变竖线 */}
+                <div className="absolute left-[7px] top-2 bottom-2 w-0.5 bg-gradient-to-b from-purple-500 via-cyan-500/40 to-slate-800/10 timeline-line"></div>
+
+                {AUTHOR_INFO.experience.map((exp, idx) => (
+                  <div key={idx} className="relative group space-y-3">
+                    {/* 时间轴圆点 */}
+                    <div className="absolute -left-[24px] top-1.5 w-3.5 h-3.5 rounded-full bg-[#0a0f1a] border-2 border-purple-500 group-hover:bg-purple-500 transition-colors duration-300 timeline-dot"></div>
+
+                    {/* 头部信息 */}
+                    <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-2">
+                      <div className="space-y-1">
+                        <h3 className="text-lg font-bold text-white group-hover:text-purple-300 transition-colors leading-tight print-text-dark">
+                          {exp.role}
+                        </h3>
+                        <p className="text-xs font-mono font-bold text-purple-400/80 uppercase print-text-muted">
+                          {exp.company}
+                        </p>
+                      </div>
+                      <span className="text-[10px] font-mono font-bold text-slate-500 bg-slate-900/40 px-2.5 py-1 rounded-md border border-white/5 uppercase tracking-wider print:border-none print:bg-transparent print-text-muted">
+                        {exp.duration}
+                      </span>
+                    </div>
+
+                    {/* 详细描述 */}
+                    <p className="text-xs leading-relaxed text-slate-400 font-light print-text-muted">
+                      {exp.description}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </section>
+
+            {/* 2. 教育背景 (Education) */}
+            <section className="bg-[#101726]/20 border border-white/5 p-10 rounded-[2rem] space-y-8 print-card">
+              <div className="flex items-center gap-3 pb-4 border-b border-white/5 print:border-slate-200">
+                <GraduationCap size={18} className="text-purple-400 print:text-black" />
+                <h2 className="text-xl font-black text-white italic uppercase tracking-wider print-text-dark">教育背景 (Education)</h2>
+              </div>
+
+              <div className="grid md:grid-cols-2 gap-8">
+                {AUTHOR_INFO.education.map((edu, idx) => (
+                  <div key={idx} className="p-6 bg-slate-900/30 rounded-2xl border border-white/5 space-y-3 print:bg-transparent print:border-none print:p-0">
+                    <div className="space-y-1">
+                      <h4 className="text-sm font-bold text-white print-text-dark">{edu.degree}</h4>
+                      <p className="text-xs font-mono text-purple-400/80 print-text-muted">{edu.school}</p>
+                    </div>
+                    <span className="text-[10px] font-mono text-slate-500 block">{edu.duration}</span>
+                  </div>
+                ))}
+              </div>
+            </section>
+
+            {/* 3. 核心数智技能 (Expertise) */}
+            <section className="bg-[#101726]/20 border border-white/5 p-10 rounded-[2rem] space-y-8 print-card">
+              <div className="flex items-center gap-3 pb-4 border-b border-white/5 print:border-slate-200">
+                <Sparkles size={16} className="text-purple-400 print:text-black" />
+                <h2 className="text-xl font-black text-white italic uppercase tracking-wider print-text-dark">商业与数智技能 (Expertise)</h2>
+              </div>
+
+              <div className="grid md:grid-cols-2 gap-6">
+                {AUTHOR_INFO.skills.map((skill, idx) => (
+                  <div key={idx} className="space-y-2">
+                    <div className="flex justify-between text-xs font-mono">
+                      <span className="text-slate-300 print-text-dark">{skill.name}</span>
+                      <span className="text-purple-400 font-bold print-text-muted">{skill.level}%</span>
+                    </div>
+                    {/* 进度条 */}
+                    <div className="h-1.5 w-full bg-slate-900/60 rounded-full overflow-hidden border border-white/5 no-print">
+                      <div 
+                        className="h-full bg-gradient-to-r from-purple-500 to-cyan-500 rounded-full" 
+                        style={{ width: `${skill.level}%` }}
+                      ></div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </section>
+
+          </div>
+        </div>
       </main>
-
-      {/* SKILLS SECTION — dark theme */}
-      <section className="bg-[#0a0f1a] py-32 border-t border-white/5">
-        <div className="max-w-7xl mx-auto px-8 grid md:grid-cols-[1fr_3fr] gap-24">
-          <h2 className="text-xs font-bold tracking-[0.5em] uppercase text-slate-500 mt-4 flex items-center gap-3">
-             <Zap size={16} /> Skills
-          </h2>
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-16 md:gap-32">
-            {AUTHOR_INFO.skills.map((skill, idx) => (
-              <div key={idx} className="flex flex-col items-center gap-8 group">
-                <div className="relative w-28 h-28">
-                  <svg className="w-full h-full transform -rotate-90">
-                    <circle
-                      cx="56" cy="56" r="50"
-                      fill="transparent"
-                      stroke="#1e293b"
-                      strokeWidth="6"
-                    />
-                    <circle
-                      cx="56" cy="56" r="50"
-                      fill="transparent"
-                      stroke="#0ea5e9"
-                      strokeWidth="6"
-                      strokeDasharray={314}
-                      strokeDashoffset={314 - (314 * skill.level) / 100}
-                      className="transition-all duration-1000 group-hover:stroke-cyan-300"
-                    />
-                  </svg>
-                  <div className="absolute inset-0 flex items-center justify-center font-mono text-sm text-slate-400">
-                     {skill.level}%
-                  </div>
-                </div>
-                <span className="text-[10px] font-black tracking-[0.4em] uppercase text-slate-300 group-hover:text-white transition-colors">
-                  {skill.name}
-                </span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Footer — dark theme */}
-      <footer className="py-12 border-t border-white/5 flex justify-center text-[10px] text-white/30 font-mono tracking-widest uppercase">
-        © {AUTHOR_INFO.copyright.year} {AUTHOR_INFO.copyright.owner} | Identity Verified
-      </footer>
     </div>
   );
 }

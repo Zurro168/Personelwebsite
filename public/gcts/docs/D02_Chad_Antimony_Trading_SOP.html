@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GCTS 乍得锑矿贸易执行手册 (02_Chad_Antimony_SOP) - GCTS OS System Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-base: #060913;
+            --bg-card: rgba(22, 28, 49, 0.45);
+            --border-color: rgba(255, 255, 255, 0.08);
+            --border-color-glow: rgba(168, 85, 247, 0.25);
+            --text-primary: #e6ebf5;
+            --text-secondary: #8f9cae;
+            --text-muted: #5e6d82;
+            --color-primary: #a855f7;
+            --color-cyan: #00f2fe;
+            --color-gold: #f2a900;
+            --color-success: #00e676;
+            --color-danger: #ff1744;
+            --font-display: 'Outfit', 'Inter', -apple-system, sans-serif;
+            --font-body: 'Inter', -apple-system, sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+            --transition-smooth: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-base);
+            color: var(--text-primary);
+            font-family: var(--font-body);
+            line-height: 1.7;
+            padding: 3rem 1.5rem;
+            display: flex;
+            justify-content: center;
+        }
+
+        .doc-container {
+            width: 100%;
+            max-width: 900px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: 3rem;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(15px);
+            position: relative;
+        }
+
+        .btn-back {
+            position: fixed;
+            top: 30px;
+            left: 30px;
+            background: rgba(22, 28, 49, 0.8);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            padding: 0.75rem 1.25rem;
+            border-radius: 12px;
+            text-decoration: none;
+            font-family: var(--font-display);
+            font-size: 0.8rem;
+            font-weight: 600;
+            transition: var(--transition-smooth);
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-back:hover {
+            color: var(--text-primary);
+            border-color: var(--color-primary);
+            box-shadow: 0 0 15px rgba(168, 85, 247, 0.3);
+            transform: translateX(-3px);
+        }
+
+        h1 {
+            font-family: var(--font-display);
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 1.5rem;
+            letter-spacing: -0.5px;
+            line-height: 1.2;
+        }
+
+        h2 {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--color-cyan);
+            margin-top: 2.5rem;
+            margin-bottom: 1.25rem;
+            border-left: 3px solid var(--color-primary);
+            padding-left: 12px;
+        }
+
+        h3 {
+            font-family: var(--font-display);
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: #fff;
+            margin-top: 1.75rem;
+            margin-bottom: 0.75rem;
+        }
+
+        p {
+            margin-bottom: 1.25rem;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        strong {
+            color: #fff;
+            font-weight: 600;
+        }
+
+        ul, ol {
+            margin-bottom: 1.5rem;
+            padding-left: 1.5rem;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        code {
+            font-family: var(--font-mono);
+            background: rgba(255, 255, 255, 0.05);
+            padding: 0.2rem 0.4rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            color: var(--color-cyan);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+        }
+
+        pre {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.25rem;
+            overflow-x: auto;
+            margin-bottom: 1.5rem;
+        }
+
+        pre code {
+            background: transparent;
+            padding: 0;
+            border: none;
+            color: var(--text-primary);
+            font-size: 0.85rem;
+        }
+
+        /* 表格科技风样式表 */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 2rem;
+            margin-top: 1.5rem;
+            font-size: 0.85rem;
+        }
+
+        th {
+            background: rgba(168, 85, 247, 0.1);
+            color: var(--color-cyan);
+            font-family: var(--font-display);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-bottom: 2px solid var(--border-color-glow);
+            text-align: left;
+            padding: 12px 16px;
+        }
+
+        td {
+            border-bottom: 1px solid var(--border-color);
+            padding: 12px 16px;
+            color: var(--text-secondary);
+        }
+
+        tr:hover td {
+            background: rgba(255, 255, 255, 0.01);
+            color: #fff;
+        }
+
+        /* 警告通知框样式 */
+        .doc-alert-box {
+            background: rgba(168, 85, 247, 0.06);
+            border-left: 4px solid var(--color-primary);
+            padding: 1.25rem 1.5rem;
+            border-radius: 0 12px 12px 0;
+            margin-bottom: 2rem;
+        }
+
+        .doc-alert-box.warning {
+            background: rgba(255, 179, 0, 0.06);
+            border-left-color: var(--color-warning);
+        }
+
+        .doc-alert-box.danger {
+            background: rgba(255, 23, 68, 0.06);
+            border-left-color: var(--color-danger);
+        }
+
+        .doc-alert-box.success {
+            background: rgba(0, 230, 118, 0.06);
+            border-left-color: var(--color-success);
+        }
+
+        .doc-alert-box strong {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-family: var(--font-display);
+        }
+        
+        .doc-alert-box p {
+            margin-bottom: 0;
+            font-size: 0.85rem;
+        }
+
+        /* Mermaid 流程图包裹 */
+        .mermaid {
+            background: rgba(0, 0, 0, 0.2) !important;
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid var(--border-color);
+            margin: 2.5rem 0;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 1.5rem 1rem;
+            }
+            .doc-container {
+                padding: 1.5rem;
+            }
+            .btn-back {
+                position: absolute;
+                top: -60px;
+                left: 0;
+            }
+        }
+    </style>
+    <!-- 引入 Mermaid 渲染 -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'dark',
+            themeVariables: {
+                background: '#060913',
+                primaryColor: '#161c31',
+                lineColor: '#a855f7'
+            }
+        });
+    </script>
+</head>
+<body>
+    <!-- 返回大地图 -->
+    <a href="../index.html" class="btn-back">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        返回决策大地图
+    </a>
+
+    <article class="doc-container">
+        <h1>GCTS 乍得锑矿贸易执行手册 (02_Chad_Antimony_SOP)</h1>
+<p>本标准操作程序 (SOP) 规定了 <strong>Case No.001：乍得锑矿项目</strong> 从矿区采办、现场化验、内陆汽运、跨国边境转关、喀麦隆铁路换装，到杜阿拉装船及信用证结算的全流程操作规范，供贸易执行团队和 GCTS 执行代理（Logistics/Document Agent）参照执行。</p>
+<hr>
+<h2>乍得锑矿贸易执行全流程 SOP</h2>
+<pre><code>  ┌────────────────────────────────────────────────────────┐
+  │ STAGE 1: 矿区采购与初步理货 (Mongo/Guéra Mine)           │
+  └───────────────────────────┬────────────────────────────┘
+                              │
+  ┌───────────────────────────▼────────────────────────────┐
+  │ STAGE 2: 现场抽样、包装与铅封 (SGS 监装)                  │
+  └───────────────────────────┬────────────────────────────┘
+                              │
+  ┌───────────────────────────▼────────────────────────────┐
+  │ STAGE 3: 卡车陆运与乍喀边境通关 (Koutéré Border)          │
+  └───────────────────────────┬────────────────────────────┘
+                              │
+  ┌───────────────────────────▼────────────────────────────┐
+  │ STAGE 4: 恩冈代雷铁路换装与 CAMRAIL 铁运                │
+  └───────────────────────────┬────────────────────────────┘
+                              │
+  ┌───────────────────────────▼────────────────────────────┐
+  │ STAGE 5: 杜阿拉港口保税堆存与预配舱                    │
+  └───────────────────────────┬────────────────────────────┘
+                              │
+  ┌───────────────────────────▼────────────────────────────┐
+  │ STAGE 6: 海运装船、提单核销与信用证交单结汇 (L/C)       │
+  └────────────────────────────────────────────────────────┘</code></pre>
+<hr>
+<h2>STAGE 1: 矿区采购与初步理货 (Procurement & Consolidation)</h2>
+<ul>
+<li>  <strong>责任主体</strong>: 现场采购经理、仓储管理员。</li>
+<li>  <strong>操作要点</strong>:</li>
+<li> <strong>原矿接收</strong>: 在格拉省 Mongo 镇的合作堆场，原矿按堆（Batch）存放，每堆重量约为 50-100吨。</li>
+<li> <strong>人工粗选</strong>: 指导当地矿工对原矿进行手工敲击分选，去除明显石英脉石，使 Sb 品位粗选富集至 <strong>35% - 45%</strong> 以上。</li>
+<li> <strong>称重测水</strong>: 使用堆场皮带秤或地磅测定毛重（WMT），使用手持快速红外测水仪测定天然水分，水分超标（>8%）的矿石需在烈日下露天晒干 2-3 天。</li>
+<li> <strong>批次打标</strong>: 每批精矿贴上唯一的数字化条形码（GCTS-Batch-ID），记录原产地、开采矿井及初测品位。</li>
+</ul>
+<hr>
+<h2>STAGE 2: 现场抽样、包装与铅封 (Sampling, Packaging & Sealing)</h2>
+<ul>
+<li>  <strong>责任主体</strong>: 第三方检验机构（SGS 乍得分包代表）、现场品控员。</li>
+<li>  <strong>操作要点</strong>:</li>
+<li> <strong>公证抽样</strong>: SGS 取样员到 Mongo 堆场，按照 ISO 12743 标准进行多点穿透式取样，样品混匀后分为三份：一份送实验室化验，一份留存堆场备查，一份交买方代表封存。</li>
+<li> <strong>灌包包装</strong>: 锑精矿装入 1.5 吨双层防潮吨袋。灌包后使用缝包机将吨袋口缝死。</li>
+<li> <strong>加锁铅封</strong>: 每一个吨袋的起吊带及缝口处悬挂 SGS 钢丝铅封，记录铅封号（Seal Number）。</li>
+<li> <strong>箱柜监装</strong>: 卡车装运时，SGS 代表在现场核实铅封无破损，监督吊装上卡车，卡车货箱加盖双层防水雨篷，防雨水渗透。</li>
+</ul>
+<hr>
+<h2>STAGE 3: 卡车陆运与乍喀边境通关 (Trucking & Border Crossing)</h2>
+<ul>
+<li>  <strong>责任主体</strong>: UNTT 工会车队调度、跨国清关货代。</li>
+<li>  <strong>操作要点</strong>:</li>
+<li> <strong>起运单据链</strong>: 卡车起运前，必须随车携带：乍得海关出境单（D15）、乍得出口许可证复印件、原产地证复印件、SGS 铅封清单及货运保单。</li>
+<li> <strong>路线合规行进</strong>: 车队必须按指定南线（RN6/RN2）行进，禁止擅自改道经过北部高风险涉恐区域。车队每天上午 9:00 和下午 5:00 向 GCTS 物流引擎报送 GPS 定位数据。</li>
+<li> <strong>边境转关申报</strong>: 车队抵达 Koutéré 边境关口，喀麦隆转关代理（Transit Broker）出具 T1 转关单，核对箱体与 SGS 封条无误后，喀海关在重卡货箱门加挂海关电子锁，予以放行。</li>
+</ul>
+<hr>
+<h2>STAGE 4: 恩冈代雷铁路换装与铁运 (Rail Transshipment & Transit)</h2>
+<ul>
+<li>  <strong>责任主体</strong>: 恩冈代雷陆港联络员、CAMRAIL 铁路局协调人。</li>
+<li>  <strong>操作要点</strong>:</li>
+<li> <strong>卡车卸货磅单</strong>: 重卡抵达喀麦隆恩冈代雷（Ngaoundéré）铁路货运站堆场，车辆通过地磅，核对湿重（WMT）与乍得Mongo离境重量，运耗差必须控制在 <strong>0.3%</strong> 以内。</li>
+<li> <strong>火车车皮换装</strong>: 卡车吨袋卸下，吊装至 CAMRAIL 敞口或棚式铁路货车车皮内，每个车皮限重 50 吨（装运 33-34 袋精矿）。</li>
+<li> <strong>铁运追踪</strong>: 铁路发运后，物流代理每天监控班列调度日志，确保车皮在 Belabo 和雅温得中转期间未被抛荒或滞留，全程铁运耗时通常为 4-6 天。</li>
+</ul>
+<hr>
+<h2>STAGE 5: 杜阿拉港口保税堆存 (Port Warehousing & Logistics)</h2>
+<ul>
+<li>  <strong>责任主体</strong>: 杜阿拉港口货代、保税仓库管理员。</li>
+<li>  <strong>操作要点</strong>:</li>
+<li> <strong>进仓理货</strong>: 火车运抵杜阿拉港区专用线，货物卸入我方指定的保税防雨仓库。</li>
+<li> <strong>装运前复检</strong>: SGS 杜阿拉分部取样员对吨袋铅封进行核对，有封条破损的袋子必须单独隔离，并进行二次取样化验，防范途中掉包风险。</li>
+<li> <strong>集装箱装箱 (Stuffing)</strong>:</li>
+<li>  使用叉车将吨袋装入 20英尺小箱（20GP）。</li>
+<li>  每个集装箱限装 <strong>18 袋（折合 27.0 公吨湿重）</strong>，吨袋在集装箱内必须两排对称平铺，重心居中，用枕木和钢带进行箱内加固。</li>
+<li>  装箱后，集装箱箱门挂上集装箱航运公司高保封锁（Bolt Seal）。</li>
+</ul>
+<hr>
+<h2>STAGE 6: 海运装船与信用证交单结汇 (Shipping & L/C Settlement)</h2>
+<ul>
+<li>  <strong>责任主体</strong>: 单证经理、外汇结算主管。</li>
+<li>  <strong>操作要点</strong>:</li>
+<li> <strong>海运转关核销</strong>: 货代向喀麦隆海关提交全套集装箱封条清单及 T1 保证金核销单，喀海关放行货物，允许重箱进入港口码头待装船区。</li>
+<li> <strong>装船及提单获取</strong>: 集装箱吊装上海运大船（例如马士基轮），大船离港后 48 小时内，船公司签发三正三副清洁已装船提单 (Bill of Lading)，提单收货人指定为买方开证银行。</li>
+<li> <strong>L/C 单据汇装</strong>: 单证经理严格按照信用证条款要求，在交单有效期内，拼装交单包：</li>
+<li>  清洁海运提单 (3/3 正本)。</li>
+<li>  商业发票正本。</li>
+<li>  装运港 SGS 出具的品质及重量化验单。</li>
+<li>  原产地证书正本。</li>
+<li>  出口商签发的“非冲突矿产自我声明”及合规保证书。</li>
+<li> <strong>解付结汇</strong>: 单据提交给保兑行（如法巴银行巴黎分行），保兑行核对“单单一致”后，在 5 个工作日内向我方汇出第一笔 <strong>90% 信用证首款</strong>，贸易周期闭环。</li>
+</ul>
+    </article>
+</body>
+</html>

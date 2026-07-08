@@ -1,36 +1,87 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Silicon Commodity Portal
 
-## Getting Started
+This repository powers the personal website and research portal for **Silicon Commodity / 硅基大宗**.
 
-First, run the development server:
+It is both a Next.js website and a publishing bridge for research content maintained from the Obsidian-based SiliconCommand workspace.
+
+## What This Repo Does
+
+- Hosts the public website, personal profile, research archive, cycle map, and cross-domain lab.
+- Stores generated report HTML under `public/content/`.
+- Registers report metadata in `src/data/reports.ts`.
+- Syncs published Obsidian content into the website through `scripts/sync.ts`.
+- Deploys through Vercel from the Git repository.
+
+## Current Stack
+
+- Next.js `16.2.2`
+- React `19.2.4`
+- Tailwind CSS `4`
+- TypeScript
+- Vercel deployment
+
+Important: this project uses a newer Next.js version. Before changing Next.js APIs, routing behavior, build configuration, or server components, read the relevant local guide under `node_modules/next/dist/docs/`.
+
+## Repository Map
+
+| Path | Purpose |
+| --- | --- |
+| `src/app/` | App Router pages and API routes |
+| `src/components/` | Shared UI and rendering components |
+| `src/data/` | Site configuration, biography, report registry, commodity data |
+| `src/lib/` | Data adapters and service helpers |
+| `public/content/reports/` | Generated report HTML used by `/portfolio/[slug]` |
+| `public/content/system/` | Generated system pages such as `about.html` |
+| `public/images/reports/` | Report cover images |
+| `public/brand/` | Brand, QR, and identity assets |
+| `scripts/sync.ts` | Obsidian-to-site sync pipeline |
+| `docs/` | Maintenance, architecture, and workflow documentation |
+| `scratch/` | Temporary audit and cleanup scripts; do not treat as production entrypoints |
+
+## Common Commands
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm run lint
+npm run build
+npm run sync
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Vercel CLI is not currently installed on this machine. Installing it with `npm i -g vercel` will make environment pulls, deployment checks, and log inspection easier.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Git Maintenance Flow
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. Start from a clean working tree when possible: `git status --short --branch`.
+2. Create a focused branch for meaningful changes, usually with the `codex/` prefix when an assistant is driving the work.
+3. Keep content sync changes separate from UI/refactor changes when practical.
+4. Run the smallest useful verification before committing:
+   - docs-only: inspect changed Markdown and links
+   - code or config: `npm run lint`
+   - runtime or rendering changes: `npm run build`
+   - content sync changes: `npm run sync`, then inspect generated files
+5. Commit with a clear message and push for Vercel/GitHub review.
 
-## Learn More
+See [CONTRIBUTING.md](./CONTRIBUTING.md) and [docs/GIT_MAINTENANCE.md](./docs/GIT_MAINTENANCE.md) for the shared maintenance rules.
 
-To learn more about Next.js, take a look at the following resources:
+## Content Publishing Summary
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+The preferred publishing path is:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```text
+Obsidian SiliconCommand source
+  -> scripts/sync.ts
+  -> public/content/*
+  -> src/data/reports.ts
+  -> Next.js portfolio pages
+  -> Vercel deployment
+```
 
-## Deploy on Vercel
+Do not manually edit generated report HTML unless the change is an emergency patch. Prefer fixing the Obsidian source or sync script, then regenerate.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Safety Notes
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Do not commit real `.env*` files.
+- Do not move Obsidian-linked folders or generated content paths without first checking sync dependencies.
+- Treat `public/content/` and `src/data/reports.ts` as generated website-facing artifacts.
+- Keep API keys in environment variables, not source files.

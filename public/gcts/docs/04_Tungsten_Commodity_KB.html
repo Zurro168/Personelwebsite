@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>钨矿大宗商品知识库 - 物理换算与计价专题 (04_Tungsten_Commodity_KB) - GCTS OS System Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-base: #060913;
+            --bg-card: rgba(22, 28, 49, 0.45);
+            --border-color: rgba(255, 255, 255, 0.08);
+            --border-color-glow: rgba(168, 85, 247, 0.25);
+            --text-primary: #e6ebf5;
+            --text-secondary: #8f9cae;
+            --text-muted: #5e6d82;
+            --color-primary: #a855f7;
+            --color-cyan: #00f2fe;
+            --color-gold: #f2a900;
+            --color-success: #00e676;
+            --color-danger: #ff1744;
+            --font-display: 'Outfit', 'Inter', -apple-system, sans-serif;
+            --font-body: 'Inter', -apple-system, sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+            --transition-smooth: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-base);
+            color: var(--text-primary);
+            font-family: var(--font-body);
+            line-height: 1.7;
+            padding: 3rem 1.5rem;
+            display: flex;
+            justify-content: center;
+        }
+
+        .doc-container {
+            width: 100%;
+            max-width: 900px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: 3rem;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(15px);
+            position: relative;
+        }
+
+        .btn-back {
+            position: fixed;
+            top: 30px;
+            left: 30px;
+            background: rgba(22, 28, 49, 0.8);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            padding: 0.75rem 1.25rem;
+            border-radius: 12px;
+            text-decoration: none;
+            font-family: var(--font-display);
+            font-size: 0.8rem;
+            font-weight: 600;
+            transition: var(--transition-smooth);
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-back:hover {
+            color: var(--text-primary);
+            border-color: var(--color-primary);
+            box-shadow: 0 0 15px rgba(168, 85, 247, 0.3);
+            transform: translateX(-3px);
+        }
+
+        h1 {
+            font-family: var(--font-display);
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 1.5rem;
+            letter-spacing: -0.5px;
+            line-height: 1.2;
+        }
+
+        h2 {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--color-cyan);
+            margin-top: 2.5rem;
+            margin-bottom: 1.25rem;
+            border-left: 3px solid var(--color-primary);
+            padding-left: 12px;
+        }
+
+        h3 {
+            font-family: var(--font-display);
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: #fff;
+            margin-top: 1.75rem;
+            margin-bottom: 0.75rem;
+        }
+
+        p {
+            margin-bottom: 1.25rem;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        strong {
+            color: #fff;
+            font-weight: 600;
+        }
+
+        ul, ol {
+            margin-bottom: 1.5rem;
+            padding-left: 1.5rem;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        code {
+            font-family: var(--font-mono);
+            background: rgba(255, 255, 255, 0.05);
+            padding: 0.2rem 0.4rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            color: var(--color-cyan);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+        }
+
+        pre {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.25rem;
+            overflow-x: auto;
+            margin-bottom: 1.5rem;
+        }
+
+        pre code {
+            background: transparent;
+            padding: 0;
+            border: none;
+            color: var(--text-primary);
+            font-size: 0.85rem;
+        }
+
+        /* 表格科技风样式表 */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 2rem;
+            margin-top: 1.5rem;
+            font-size: 0.85rem;
+        }
+
+        th {
+            background: rgba(168, 85, 247, 0.1);
+            color: var(--color-cyan);
+            font-family: var(--font-display);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-bottom: 2px solid var(--border-color-glow);
+            text-align: left;
+            padding: 12px 16px;
+        }
+
+        td {
+            border-bottom: 1px solid var(--border-color);
+            padding: 12px 16px;
+            color: var(--text-secondary);
+        }
+
+        tr:hover td {
+            background: rgba(255, 255, 255, 0.01);
+            color: #fff;
+        }
+
+        /* 警告通知框样式 */
+        .doc-alert-box {
+            background: rgba(168, 85, 247, 0.06);
+            border-left: 4px solid var(--color-primary);
+            padding: 1.25rem 1.5rem;
+            border-radius: 0 12px 12px 0;
+            margin-bottom: 2rem;
+        }
+
+        .doc-alert-box.warning {
+            background: rgba(255, 179, 0, 0.06);
+            border-left-color: var(--color-warning);
+        }
+
+        .doc-alert-box.danger {
+            background: rgba(255, 23, 68, 0.06);
+            border-left-color: var(--color-danger);
+        }
+
+        .doc-alert-box.success {
+            background: rgba(0, 230, 118, 0.06);
+            border-left-color: var(--color-success);
+        }
+
+        .doc-alert-box strong {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-family: var(--font-display);
+        }
+        
+        .doc-alert-box p {
+            margin-bottom: 0;
+            font-size: 0.85rem;
+        }
+
+        /* Mermaid 流程图包裹 */
+        .mermaid {
+            background: rgba(0, 0, 0, 0.2) !important;
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid var(--border-color);
+            margin: 2.5rem 0;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 1.5rem 1rem;
+            }
+            .doc-container {
+                padding: 1.5rem;
+            }
+            .btn-back {
+                position: absolute;
+                top: -60px;
+                left: 0;
+            }
+        }
+    </style>
+    <!-- 引入 Mermaid 渲染 -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'dark',
+            themeVariables: {
+                background: '#060913',
+                primaryColor: '#161c31',
+                lineColor: '#a855f7'
+            }
+        });
+    </script>
+</head>
+<body>
+    <!-- 返回大地图 -->
+    <a href="../index.html" class="btn-back">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        返回决策大地图
+    </a>
+
+    <article class="doc-container">
+        <h1>钨矿大宗商品知识库 - 物理换算与计价专题 (04_Tungsten_Commodity_KB)</h1>
+<p>本商品知识库专为 <strong>Case No.002：乍得黑钨矿项目</strong> 编写，重点解决黑钨精矿大宗贸易中极易混淆的“标吨与实物吨”、吨度换算、冶炼物理约束以及 2026 年最新价格行情指标。</p>
+<hr>
+<h2>1. 物理与化学性质 (Physical & Chemical Profile)</h2>
+<ul>
+<li><strong>主金属名称</strong>：钨 (Tungsten / Wolfram, 化学符号 W)。</li>
+<li><strong>贸易计价形态</strong>：三氧化钨 (<code class="math">WO_3</code>，白色/淡黄色粉末形态，硬质合金与冶炼的直接原料)。</li>
+<li><strong>主要矿石物种</strong>：</li>
+<li><strong>黑钨矿 (Wolframite)</strong>：化学成分为 <code class="math">(Fe, Mn)WO_4</code>，比重 7.1 - 7.5，具有弱磁性，呈黑色或褐黑色，多产于高温热液石英脉中。乍得本案矿种即为黑钨矿粗精矿。</li>
+<li><strong>白钨矿 (Scheelite)</strong>：化学成分为 <code class="math">CaWO_4</code>，比重 5.9 - 6.1，在紫外线照射下发出浅蓝色荧光，呈白色、黄色或浅褐色。</li>
+<li><strong>标准精矿品位</strong>：全球及中国大宗精矿交易的基准品位通常为 <strong>65.00% <code class="math">WO_3</code></strong> 含量。</li>
+</ul>
+<hr>
+<h2>2. 标吨、实物吨与吨度换算标准 (Physical Conversions)</h2>
+<p>大宗钨矿贸易报价极具行业特殊性，核算时必须强制遵守以下物理公式，以防范货值计算产生上百万元的重大偏差：</p>
+<pre><code>【换算公式流向图】
+实物湿吨 (WMT) ──(水分扣减)──> 干吨 (DMT) ──(品位换算)──> 吨度 (MTU) ──(除以65)──> 标吨</code></pre>
+<h3>2.1 核心度量单位定义</h3>
+<ol>
+<li><strong>实物湿吨 (WMT - Wet Metric Ton)</strong>：直接从矿区装运、含有天然水分的矿石毛重。</li>
+<li><strong>干吨 (DMT - Dry Metric Ton)</strong>：扣除取样烘干水分（Moisture）后的矿石重量。</li>
+<p>   \[DMT = WMT \times (1 - Moisture)\]</p>
+<li><strong>吨度 (MTU - Metric Tonne Unit)</strong>：钨矿的核心结算单位。<strong>1 吨度等于 1 吨货石中含有 1% 的三氧化钨 (<code class="math">WO_3</code>)，即 10 公斤三氧化钨</strong>。</li>
+<p>   \[MTU\text{ 总数} = DMT \times WO_3\text{ 品位} \times 100\]</p>
+<li><strong>标准标吨 (Standard Ton)</strong>：中国国内大宗交易默认的结算吨。<strong>1 标吨是指 <code class="math">WO_3</code> 含量固定为 65.00% 的标准吨，即 1 标吨刚好等于 65 吨度</strong>。</li>
+<p>   \[\text{标准标吨量} = \frac{MTU\text{ 总数}}{65}\]</p>
+</ul>
+<h3>2.2 价格单位转换与结算公式</h3>
+<ul>
+<li><strong>吨度价格与标吨价格的转换</strong>：</li>
+<p>  国内标吨报价若为 <code class="math">P_{\text{std}}</code> 万元/标吨，则折合标准吨度单价 <code class="math">P_{\text{mtu}}</code> 为：</p>
+<p>  \[P_{\text{mtu}}\text{ (元/吨度)} = \frac{P_{\text{std}}\text{ (元/标吨)}}{65}\]</p>
+<li><strong>低品位贴水结算公式 (国内路线)</strong>：</li>
+<p>  \[\text{实际结算总货值} = MTU\text{ 总数} \times P_{\text{mtu}} \times \text{计价系数 (Payability)}\]</p>
+<li><strong>实物吨单价倒推公式 (国内路线验证)</strong>：</li>
+<p>  若已知标吨价 <code class="math">P_{\text{std}}</code>，品位为 <code class="math">G</code>，折扣系数为 <code class="math">Y</code>，水分比例为 <code class="math">M</code>，则折合的实物吨（WMT）单价 <code class="math">P_{\text{wmt}}</code> 为：</p>
+<p>  \[P_{\text{wmt}} = P_{\text{std}} \times \frac{G \times 100}{65} \times Y \times (1 - M)\]</p>
+<p>  *(本案对账验证：<code class="math">P_{\text{std}} = 50</code>万元，<code class="math">G = 43\%</code>，<code class="math">Y = 85\%</code>，<code class="math">M = 0\%</code>。则 <code class="math">P_{\text{wmt}} = 50 \times \frac{43}{65} \times 0.85 \approx 28.1154</code> 万元/实物吨，30实物吨总货值为 843.46 万元，与吨度法完全一致)*</p>
+</ul>
+<hr>
+<h2>3. 2026 年年中最新行情走势 (2026 Price Trend)</h2>
+<ul>
+<li><strong>3月份极端泡沫期</strong>：2026 年 3 月，由于中国长江流域和南方主产区环保整顿力度空前，且钨被作为高科技关键金属遭到投机炒作，国内黑钨精矿 65% 价格暴涨，单吨最高成交价一度<strong>突破 100 万元人民币/标吨</strong>。这导致下游冶炼厂普遍封单倒闭，市场流动性阶段性枯竭。</li>
+<li><strong>7月份理性整理期</strong>：进入 2026 年年中，随着环保整顿常态化和国家收储落地，囤积资金离场。截至 2026-07-06，国内 65% 黑钨精矿价格稳中偏弱运行在 <strong>47.0 万元/标吨</strong> 左右作为基准；<strong>50.0 万元/标吨</strong> 保留为用户锚点/乐观情景，用于敏感性测算。</li>
+<li><strong>境外海外行情</strong>：因全球硬质合金巨头在非中国供应链上的强劲补库，境外 APT 维持在 <strong>3,000 美元/吨度</strong>，折合国内零级仲钨酸铵 (APT) 主流报价约为 <strong>66 - 70 万元/吨</strong>（如章源钨业 7月上半月长单采购价 66万元/吨），呈现“海外价格强于国内”的剪刀差结构。</li>
+</ul>
+<hr>
+<h2>4. 下游冶炼物理约束与贴水机制 (Metallurgical Constraints)</h2>
+<p>乍得黑钨矿品位为 <strong>43.00%</strong>，属于典型的低品位非标粗精矿。为何国内仅给予 85% 系数，海外仅给予 45% 系数？其背后是刚性的物理冶炼约束：</p>
+<ol>
+<li><strong>强碱消耗剧增 (NaOH Consumption)</strong>：</li>
+<p>   黑钨矿冶炼主流采用“碱压煮法”提取钨。品位低于 50% 时，脉石杂质（主要是二氧化硅和铁锰）会消耗成倍的烧碱（NaOH），产生大量不可逆的副产物，导致原材料化学成本飙升。</p>
+<li><strong>残渣带走流失与收率下滑 (Recovery Loss)</strong>：</li>
+<p>   低品位矿石在压煮后会产生大量的废渣。因为废渣具有物理吸附性，每吨残渣会强制带走一定比例的钨。这导致 43% 品位粗精矿的总回收率（Yield）可能比 65% 标准精矿低出 <strong>5% - 8%</strong>。</p>
+<li><strong>杂质罚扣机制 (Impurity Penalty)</strong>：</li>
+<p>   低品位矿常伴随高砷 (As) 或高锡 (Sn)。国内和国际冶炼厂对 As > 0.2% 或 Sn > 0.2% 的货物均会根据超标比例在吨度价上额外扣除 50-100 元/吨度的杂质加工费，在最坏情况下，如果 As > 0.5% 会直接触发环保退货。</p>
+</ul>
+    </article>
+</body>
+</html>

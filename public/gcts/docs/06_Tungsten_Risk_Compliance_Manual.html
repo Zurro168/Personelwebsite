@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>钨矿贸易风险合规与 CoC 监管手册 (06_Tungsten_Risk_Compliance_Manual) - GCTS OS System Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-base: #060913;
+            --bg-card: rgba(22, 28, 49, 0.45);
+            --border-color: rgba(255, 255, 255, 0.08);
+            --border-color-glow: rgba(168, 85, 247, 0.25);
+            --text-primary: #e6ebf5;
+            --text-secondary: #8f9cae;
+            --text-muted: #5e6d82;
+            --color-primary: #a855f7;
+            --color-cyan: #00f2fe;
+            --color-gold: #f2a900;
+            --color-success: #00e676;
+            --color-danger: #ff1744;
+            --font-display: 'Outfit', 'Inter', -apple-system, sans-serif;
+            --font-body: 'Inter', -apple-system, sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+            --transition-smooth: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-base);
+            color: var(--text-primary);
+            font-family: var(--font-body);
+            line-height: 1.7;
+            padding: 3rem 1.5rem;
+            display: flex;
+            justify-content: center;
+        }
+
+        .doc-container {
+            width: 100%;
+            max-width: 900px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: 3rem;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(15px);
+            position: relative;
+        }
+
+        .btn-back {
+            position: fixed;
+            top: 30px;
+            left: 30px;
+            background: rgba(22, 28, 49, 0.8);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            padding: 0.75rem 1.25rem;
+            border-radius: 12px;
+            text-decoration: none;
+            font-family: var(--font-display);
+            font-size: 0.8rem;
+            font-weight: 600;
+            transition: var(--transition-smooth);
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-back:hover {
+            color: var(--text-primary);
+            border-color: var(--color-primary);
+            box-shadow: 0 0 15px rgba(168, 85, 247, 0.3);
+            transform: translateX(-3px);
+        }
+
+        h1 {
+            font-family: var(--font-display);
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 1.5rem;
+            letter-spacing: -0.5px;
+            line-height: 1.2;
+        }
+
+        h2 {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--color-cyan);
+            margin-top: 2.5rem;
+            margin-bottom: 1.25rem;
+            border-left: 3px solid var(--color-primary);
+            padding-left: 12px;
+        }
+
+        h3 {
+            font-family: var(--font-display);
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: #fff;
+            margin-top: 1.75rem;
+            margin-bottom: 0.75rem;
+        }
+
+        p {
+            margin-bottom: 1.25rem;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        strong {
+            color: #fff;
+            font-weight: 600;
+        }
+
+        ul, ol {
+            margin-bottom: 1.5rem;
+            padding-left: 1.5rem;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        code {
+            font-family: var(--font-mono);
+            background: rgba(255, 255, 255, 0.05);
+            padding: 0.2rem 0.4rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            color: var(--color-cyan);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+        }
+
+        pre {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.25rem;
+            overflow-x: auto;
+            margin-bottom: 1.5rem;
+        }
+
+        pre code {
+            background: transparent;
+            padding: 0;
+            border: none;
+            color: var(--text-primary);
+            font-size: 0.85rem;
+        }
+
+        /* 表格科技风样式表 */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 2rem;
+            margin-top: 1.5rem;
+            font-size: 0.85rem;
+        }
+
+        th {
+            background: rgba(168, 85, 247, 0.1);
+            color: var(--color-cyan);
+            font-family: var(--font-display);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-bottom: 2px solid var(--border-color-glow);
+            text-align: left;
+            padding: 12px 16px;
+        }
+
+        td {
+            border-bottom: 1px solid var(--border-color);
+            padding: 12px 16px;
+            color: var(--text-secondary);
+        }
+
+        tr:hover td {
+            background: rgba(255, 255, 255, 0.01);
+            color: #fff;
+        }
+
+        /* 警告通知框样式 */
+        .doc-alert-box {
+            background: rgba(168, 85, 247, 0.06);
+            border-left: 4px solid var(--color-primary);
+            padding: 1.25rem 1.5rem;
+            border-radius: 0 12px 12px 0;
+            margin-bottom: 2rem;
+        }
+
+        .doc-alert-box.warning {
+            background: rgba(255, 179, 0, 0.06);
+            border-left-color: var(--color-warning);
+        }
+
+        .doc-alert-box.danger {
+            background: rgba(255, 23, 68, 0.06);
+            border-left-color: var(--color-danger);
+        }
+
+        .doc-alert-box.success {
+            background: rgba(0, 230, 118, 0.06);
+            border-left-color: var(--color-success);
+        }
+
+        .doc-alert-box strong {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-family: var(--font-display);
+        }
+        
+        .doc-alert-box p {
+            margin-bottom: 0;
+            font-size: 0.85rem;
+        }
+
+        /* Mermaid 流程图包裹 */
+        .mermaid {
+            background: rgba(0, 0, 0, 0.2) !important;
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid var(--border-color);
+            margin: 2.5rem 0;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 1.5rem 1rem;
+            }
+            .doc-container {
+                padding: 1.5rem;
+            }
+            .btn-back {
+                position: absolute;
+                top: -60px;
+                left: 0;
+            }
+        }
+    </style>
+    <!-- 引入 Mermaid 渲染 -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'dark',
+            themeVariables: {
+                background: '#060913',
+                primaryColor: '#161c31',
+                lineColor: '#a855f7'
+            }
+        });
+    </script>
+</head>
+<body>
+    <!-- 返回大地图 -->
+    <a href="../index.html" class="btn-back">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        返回决策大地图
+    </a>
+
+    <article class="doc-container">
+        <h1>钨矿贸易风险合规与 CoC 监管手册 (06_Tungsten_Risk_Compliance_Manual)</h1>
+<p>本手册专为 <strong>Case No.002：乍得黑钨矿项目</strong> 编写，重点确立钨作为 3TG 冲突矿产的国际合规追溯标准、产销监管链 (CoC) 单证构建规范，以及防范地缘制裁和反洗钱 (AML) 违规的控制指南。</p>
+<hr>
+<h2>1. 3TG RMAP 供应链合规体系 (OECD Due Diligence Framework)</h2>
+<p>钨 (Tungsten) 属于全球公认的 3TG 冲突金属。海外大型冶炼厂（如越南马山）必须严格执行 <strong>RMI (责任矿产倡议) RMAP (责任矿产项目) 审计规范</strong>：</p>
+<ul>
+<li><strong>五步法尽职调查 (OECD 5-Step Guidelines)</strong>：</li>
+<li><strong>建立强有力的公司管理系统</strong>：制定供应链政策，任命合规官，建立物料追溯与记录保存系统。</li>
+<li><strong>识别并评估供应链中的风险</strong>：评估矿山来源、运输中转站是否涉及非法的武装组织控制或冲突走私。</li>
+<li><strong>设计并实施应对已识别风险的策略</strong>：一旦发现混矿嫌疑，立即暂停采购并对供应商实施限期整改。</li>
+<li><strong>开展独立第三方供应链审计</strong>：由 RMI 授权的机构对采购链进行穿透式的物理与单证审计。</li>
+<li><strong>公开披露供应链尽职调查报告</strong>：向公众及下游客户发布合规白皮书。</li>
+</ul>
+<hr>
+<h2>2. 产销监管链 (CoC - Chain of Custody) 全套文件规范</h2>
+<p>走香港保税公司外销越南的路线，必须在发船后 7 天内备妥以下 <strong>10 大核心 CoC 文件包</strong>，任何一项缺失或笔误都将触发买方的拒收红线：</p>
+<table>
+<thead><tr>
+<th>文件名称</th>
+<th>英文名称</th>
+<th>签发/出具单位</th>
+<th>审计关注重点与防伪要求</th>
+</tr></thead><tbody>
+<tr>
+<td><strong>矿山开采许可证</strong></td>
+<td>Mining License</td>
+<td>乍得矿业与地质部 (MMG)</td>
+<td>证明开采权属，核对该矿山登记的年产量配额，杜绝超配额洗矿。</td>
+</tr>
+<tr>
+<td><strong>矿山来源声明书</strong></td>
+<td>Mine Origin Statement</td>
+<td>矿山业主 (Mine Owner)</td>
+<td>声明开采矿脉位置，附特许区经纬度坐标。</td>
+</tr>
+<tr>
+<td><strong>乍得官方原产地证</strong></td>
+<td>Certificat d'Origine</td>
+<td>乍得海关与商会</td>
+<td>正本印章，列明 <code class="math">WO_3</code> 矿石品名及毛重。</td>
+</tr>
+<tr>
+<td><strong>商业出口许可证</strong></td>
+<td>Export Permit</td>
+<td>乍得矿业与地质部 (MMG)</td>
+<td>证明此批货物已获得合法的国家出口配额授权。</td>
+</tr>
+<tr>
+<td><strong>公路陆运日志</strong></td>
+<td>Road Waybill</td>
+<td>UNTT 注册运输重卡司机</td>
+<td>记录装车点（Mongo）、沿途停靠站及边界关口，随车司机签字。</td>
+</tr>
+<tr>
+<td><strong>转关D15海关申报单</strong></td>
+<td>Transit Declaration (D15)</td>
+<td>喀麦隆/乍得海关口岸办</td>
+<td>证明货物在 Koutéré 通关并挂电子锁，未在当地境内转销。</td>
+</tr>
+<tr>
+<td><strong>CAMRAIL 铁路运单</strong></td>
+<td>Rail Consignment Note</td>
+<td>喀麦隆国家铁路公司</td>
+<td>证明火车换装起卸及到达杜阿拉港专用线的物理轨迹。</td>
+</tr>
+<tr>
+<td><strong>装船港 SGS 检测报告</strong></td>
+<td>Assay & Weight Report</td>
+<td>SGS 杜阿拉分部</td>
+<td>证明装箱时的实际湿重、品位及有害元素（As, Sn, S）指标。</td>
+</tr>
+<tr>
+<td><strong>集装箱装箱单与封条志</strong></td>
+<td>Packing List & Seal Registry</td>
+<td>我方驻杜阿拉港口货代</td>
+<td>记录 20GP 集装箱号及航运大卡高保锁封号 (Bolt Seal)。</td>
+</tr>
+<tr>
+<td><strong>无冲突尽职调查声明</strong></td>
+<td>Conflict-Free Declaration</td>
+<td>我方合规部 / 出口商</td>
+<td>声明本批货物完全符合 OECD 责任矿产指南，未资助任何非法武装。</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>3. 核心合规红线与防洗矿/混矿审计要点 (Anti-Laundering Audit)</h2>
+<h3>3.1 识别“苏丹/中非洗矿”嫌疑</h3>
+<p>由于苏丹（Sudan）境内武装派系割据，中非共和国（CAR）多处小矿山处于武装控制下，这两国的钨粗矿在国际上属于完全被封禁的冲突物料。走私分子常通过乍得东部或南部边境，用骡马或小卡车将高品位粗矿运抵乍得格拉省的 Mongo，混入乍得本地矿堆中进行伪装出口。</p>
+<ul>
+<li><strong>审计红线</strong>：若供应商提交的采矿执照上矿区面积极小，但其出货量异常庞大，或者矿区经纬度对应的卫星图像上无开采迹象，立即判定为<strong>洗矿欺诈</strong>，项目挂起 (No Go)。</li>
+<li><strong>物理校验</strong>：对 Mongo 现场钨精矿的微量元素（如铁、锰比值，或者钇、镧等稀土元素特征光谱）进行指纹分析（Fingerprint Analysis Analysis），核对是否符合格拉省典型低温热液脉的地球化学特征。</li>
+</ul>
+<h3>3.2 地缘制裁与反洗钱 (OFAC & AML Check)</h3>
+<ol>
+<li><strong>实控人穿透</strong>：乍得本地供应商的董事及实控股东，必须在 OFAC（美国海外资产控制办公室）、欧盟制裁名单和联合国制裁数据库中进行 100% 筛查，确保不涉及敏感军事人员或地方叛军代言人。</li>
+<li><strong>银行收付款红线</strong>：所有贸易收付款必须通过正规的国际电汇，严禁使用现金收款，严禁向第三方无关账户或高风险离岸账户汇款。</li>
+<li><strong>船舶与承运人筛查</strong>：海运承运大船和集装箱，不得列入 OFAC 受限制裁船舶名单。</li>
+</ul>
+<hr>
+<h2>4. 货权风险控制与信用证防跳水条款</h2>
+<ol>
+<li><strong>货权物权控制</strong>：</li>
+<li>在卡车和火车运输期间，货权凭证（Road Waybill / Rail Consignment Note）的收货人必须指定为我方指定的清关代理或香港保税公司。</li>
+<li>海运提单发货人必须为我方香港保税公司，收货人指定为买方开证行（To Order of Issuing Bank），牢牢将物权锁死在单据交单阶段。</li>
+<li><strong>付款防跳水设计</strong>：</li>
+<li>绝不接受“先货后款”或 D/P（付款交单）等托收方式。</li>
+<li>必须采用<strong>不可撤销、即期信用证 (Irrevocable Sight L/C)</strong> 结构。</li>
+<li>信用证条款中，90% 货款必须在提交提单、SGS 杜阿拉报告及 CoC 合规文件后，由保兑行在 5 天内强制解付；仅留 10% 尾款用于目的港品位复检差额的多退少补，以最大化防范买方因为价格下跌或单证微瑕恶意挑刺拒付。</li>
+</ul>
+    </article>
+</body>
+</html>

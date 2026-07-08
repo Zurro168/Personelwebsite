@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GCTS 锑矿精矿知识库 (04_Antimony_Commodity_KB) - GCTS OS System Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-base: #060913;
+            --bg-card: rgba(22, 28, 49, 0.45);
+            --border-color: rgba(255, 255, 255, 0.08);
+            --border-color-glow: rgba(168, 85, 247, 0.25);
+            --text-primary: #e6ebf5;
+            --text-secondary: #8f9cae;
+            --text-muted: #5e6d82;
+            --color-primary: #a855f7;
+            --color-cyan: #00f2fe;
+            --color-gold: #f2a900;
+            --color-success: #00e676;
+            --color-danger: #ff1744;
+            --font-display: 'Outfit', 'Inter', -apple-system, sans-serif;
+            --font-body: 'Inter', -apple-system, sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+            --transition-smooth: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-base);
+            color: var(--text-primary);
+            font-family: var(--font-body);
+            line-height: 1.7;
+            padding: 3rem 1.5rem;
+            display: flex;
+            justify-content: center;
+        }
+
+        .doc-container {
+            width: 100%;
+            max-width: 900px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: 3rem;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(15px);
+            position: relative;
+        }
+
+        .btn-back {
+            position: fixed;
+            top: 30px;
+            left: 30px;
+            background: rgba(22, 28, 49, 0.8);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            padding: 0.75rem 1.25rem;
+            border-radius: 12px;
+            text-decoration: none;
+            font-family: var(--font-display);
+            font-size: 0.8rem;
+            font-weight: 600;
+            transition: var(--transition-smooth);
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-back:hover {
+            color: var(--text-primary);
+            border-color: var(--color-primary);
+            box-shadow: 0 0 15px rgba(168, 85, 247, 0.3);
+            transform: translateX(-3px);
+        }
+
+        h1 {
+            font-family: var(--font-display);
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 1.5rem;
+            letter-spacing: -0.5px;
+            line-height: 1.2;
+        }
+
+        h2 {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--color-cyan);
+            margin-top: 2.5rem;
+            margin-bottom: 1.25rem;
+            border-left: 3px solid var(--color-primary);
+            padding-left: 12px;
+        }
+
+        h3 {
+            font-family: var(--font-display);
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: #fff;
+            margin-top: 1.75rem;
+            margin-bottom: 0.75rem;
+        }
+
+        p {
+            margin-bottom: 1.25rem;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        strong {
+            color: #fff;
+            font-weight: 600;
+        }
+
+        ul, ol {
+            margin-bottom: 1.5rem;
+            padding-left: 1.5rem;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        code {
+            font-family: var(--font-mono);
+            background: rgba(255, 255, 255, 0.05);
+            padding: 0.2rem 0.4rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            color: var(--color-cyan);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+        }
+
+        pre {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.25rem;
+            overflow-x: auto;
+            margin-bottom: 1.5rem;
+        }
+
+        pre code {
+            background: transparent;
+            padding: 0;
+            border: none;
+            color: var(--text-primary);
+            font-size: 0.85rem;
+        }
+
+        /* 表格科技风样式表 */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 2rem;
+            margin-top: 1.5rem;
+            font-size: 0.85rem;
+        }
+
+        th {
+            background: rgba(168, 85, 247, 0.1);
+            color: var(--color-cyan);
+            font-family: var(--font-display);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-bottom: 2px solid var(--border-color-glow);
+            text-align: left;
+            padding: 12px 16px;
+        }
+
+        td {
+            border-bottom: 1px solid var(--border-color);
+            padding: 12px 16px;
+            color: var(--text-secondary);
+        }
+
+        tr:hover td {
+            background: rgba(255, 255, 255, 0.01);
+            color: #fff;
+        }
+
+        /* 警告通知框样式 */
+        .doc-alert-box {
+            background: rgba(168, 85, 247, 0.06);
+            border-left: 4px solid var(--color-primary);
+            padding: 1.25rem 1.5rem;
+            border-radius: 0 12px 12px 0;
+            margin-bottom: 2rem;
+        }
+
+        .doc-alert-box.warning {
+            background: rgba(255, 179, 0, 0.06);
+            border-left-color: var(--color-warning);
+        }
+
+        .doc-alert-box.danger {
+            background: rgba(255, 23, 68, 0.06);
+            border-left-color: var(--color-danger);
+        }
+
+        .doc-alert-box.success {
+            background: rgba(0, 230, 118, 0.06);
+            border-left-color: var(--color-success);
+        }
+
+        .doc-alert-box strong {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-family: var(--font-display);
+        }
+        
+        .doc-alert-box p {
+            margin-bottom: 0;
+            font-size: 0.85rem;
+        }
+
+        /* Mermaid 流程图包裹 */
+        .mermaid {
+            background: rgba(0, 0, 0, 0.2) !important;
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid var(--border-color);
+            margin: 2.5rem 0;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 1.5rem 1rem;
+            }
+            .doc-container {
+                padding: 1.5rem;
+            }
+            .btn-back {
+                position: absolute;
+                top: -60px;
+                left: 0;
+            }
+        }
+    </style>
+    <!-- 引入 Mermaid 渲染 -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'dark',
+            themeVariables: {
+                background: '#060913',
+                primaryColor: '#161c31',
+                lineColor: '#a855f7'
+            }
+        });
+    </script>
+</head>
+<body>
+    <!-- 返回大地图 -->
+    <a href="../index.html" class="btn-back">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        返回决策大地图
+    </a>
+
+    <article class="doc-container">
+        <h1>GCTS 锑矿精矿知识库 (04_Antimony_Commodity_KB)</h1>
+<p>本数据库档案根据 <strong>GCTS DB002 矿种分析标准</strong> 进行编写，完整覆盖 10 个知识大类、150 项标准化指标。针对有色金属<strong>锑 (Sb - Antimony)</strong> 的行业特性与交易规则进行定制化编写，作为报价与风控模型的基本参数。</p>
+<hr>
+<h2>1. 物理与化学性质 (Physical & Chemical Properties)</h2>
+<ol>
+<li> <strong>英文名称/符号</strong>: Antimony / <strong>Sb</strong> (源自拉丁语 Stibium)。</li>
+<li> <strong>化学式/分子量</strong>: 单质 Sb (分子量 121.76)。主要交易形态为辉锑矿精矿 (Sb2S3，分子量 339.72)。</li>
+<li> <strong>常见矿物形态</strong>: 辉锑矿 (Stibnite)，占商业开采量 90% 以上；次要为方锑矿 (Senarmontite) 及锑华 (Valentinite)。</li>
+<li> <strong>密度与比重</strong>: 辉锑矿比重 <strong>4.56 - 4.66 g/cm³</strong>；金属锑单质比重 6.68 g/cm³。</li>
+<li> <strong>莫氏硬度</strong>: 辉锑矿硬度极低，仅为 <strong>2.0 - 2.5</strong>，易粉碎。</li>
+<p>6.  <strong>熔点/沸点</strong>: 辉锑矿熔点 550℃；金属锑熔点 630.63℃，沸点 1587℃。</p>
+<p>7.  <strong>晶体结构</strong>: 斜方晶系，呈柱状、针状晶体，解理极完全。</p>
+<p>8.  <strong>颜色与光泽</strong>: 铅灰色，金属光泽，条痕为黑色。</p>
+<p>9.  <strong>电磁特征</strong>: 半导体，不具磁性，电阻率随温度升高而减小。</p>
+<p>10. <strong>溶解性</strong>: 不溶于水，易溶于王水、热浓硫酸。</p>
+<p>11. <strong>水分保持率</strong>: 辉锑矿物理结构易吸水，露天堆存天然水分通常在 <strong>3.0% - 8.0%</strong> 之间。</p>
+<p>12. <strong>毒性级数</strong>: 锑及其化合物具有中等毒性，吸入锑尘会导致慢性气管炎，被列为高风险环保监管元素。</p>
+<p>13. <strong>燃烧爆炸风险</strong>: 精矿粉尘悬浮在空气中时，遇高温/明火有弱爆炸风险。</p>
+<p>14. <strong>放射性限值</strong>: 天然辉锑矿通常无放射性，但需检测放射性核素 Ra-226, Th-232, K-40，其比活度须低于国家进口清关限制（一般 \(\le 1.0\text{ Bq/g}\)）。</p>
+<p>15. <strong>物理溯源标记</strong>: 通过微量杂质元素（如铋 Bi、硒 Se、碲 Te）的特征比例，可建立乍得产区锑矿的“化学指纹”图谱。</p>
+</ul>
+<h2>2. 地质赋存与矿床类型 (Geology & Mine Types)</h2>
+<p>16. <strong>典型矿床类型</strong>: 锑矿主要赋存于低温热液充填交代矿床（如石英脉型辉锑矿）。</p>
+<p>17. <strong>伴生金属种类</strong>: 常伴生<strong>金 (Au)</strong>、银 (Ag)、钨 (W)、铜 (Cu)、汞 (Hg)。在乍得格拉省，锑矿脉中金和钨的伴生价值突出。</p>
+<p>18. <strong>矿岩坚固性</strong>: 脉石主要为石英，普氏坚固性系数 \(f = 8 - 12\)，硬度适中，易开采。</p>
+<p>19. <strong>剥采比基准</strong>: 乍得项目多为地表露头延伸矿体，初期露天开采剥采比极低，约为 <strong>1:1 至 3:1</strong> 吨/吨。</p>
+<p>20. <strong>围岩安全性</strong>: 矿体围岩为片岩及花岗闪长岩，稳定性好，露天开采边坡塌方风险中等。</p>
+<p>21. <strong>矿体厚度与倾角</strong>: 典型矿脉厚度 0.5 - 3.5米，倾角 45° - 80°，呈脉状不均匀分布。</p>
+<p>22. <strong>水文地质条件</strong>: 中部非洲旱区地下水位深，矿山排水压力小，但旱季开采扬尘严重。</p>
+<p>23. <strong>典型原矿品位</strong>: 乍得原矿（Run of Mine - ROM）品位波动大，地表手选矿可直接达到 <strong>25% - 45% Sb</strong>。</p>
+<p>24. <strong>氧化程度</strong>: 地表手选矿多为硫化矿，深部为纯硫化辉锑矿，局部表层有少量锑华氧化矿。</p>
+<p>25. <strong>脉石成分</strong>: 主要脉石为二氧化硅 (SiO2)，含量在 40% - 60% 之间，碳酸盐含量极低。</p>
+<p>26. <strong>人工开采可行性</strong>: 由于品位高且矿体出露地表，非常适合当地人工/半机械化（手选）粗选。</p>
+<p>27. <strong>品位漂移指数</strong>: 高。脉状矿床的特征是“鸡窝矿”，品位变化极不规则，开采中必须每天化验。</p>
+<p>28. <strong>资源测算标准</strong>: 采用中国 JORC 标准测算，乍得 Guéra 省首期勘探区预估控制+推断资源量为 15,000 吨金属量。</p>
+<p>29. <strong>采矿贫化率</strong>: 露天手工开采贫化率控制在 <strong>10% - 15%</strong>。</p>
+<p>30. <strong>采矿损失率</strong>: 控制在 <strong>8% - 12%</strong> 以内。</p>
+<h2>3. 选矿与富集工艺 (Processing)</h2>
+<p>31. <strong>重力选矿</strong>: 辉锑矿比重大，可通过摇床、跳汰机进行重选，原矿品位从 10% 可提升至 <strong>30% - 35%</strong>，回收率 75%。</p>
+<p>32. <strong>浮选工艺</strong>: 适用黄药类（如丁基黄药）作为捕收剂，硝酸铅作为活化剂，起泡剂使用二号油。选矿回收率可达 <strong>85% - 92%</strong>。</p>
+<p>33. <strong>磁选工艺</strong>: 用于去除伴生强磁性铁矿物，提高精矿纯度。</p>
+<p>34. <strong>化学选矿</strong>: 暂不推荐在乍得本地建复杂酸浸厂，酸液采购及危废处理成本过高。</p>
+<p>35. <strong>可磨性指数</strong>: 辉锑矿脆硬，磨矿功耗指数约为 <strong>9.5 - 11.0 kWh/t</strong>，较易磨碎。</p>
+<p>36. <strong>精矿目标品位</strong>: 经过重选+浮选后，锑精矿品位目标设定在 <strong>50% - 55% Sb</strong>。</p>
+<p>37. <strong>富集比</strong>: 原矿品位 15% 提纯至 50%，富集比为 <strong>3.33</strong>。</p>
+<p>38. <strong>综合回收率</strong>: 选矿综合回收率底线设定为 <strong>82.0%</strong>。</p>
+<p>39. <strong>精矿耗水量</strong>: 闭路循环水选工艺下，生产一吨锑精矿消耗新鲜水约 <strong>3 - 5 m³</strong>。</p>
+<p>40. <strong>精矿耗电量</strong>: 生产一吨锑精矿耗电约 <strong>45 - 65 kWh</strong>。</p>
+<p>41. <strong>选矿药剂消耗</strong>: 浮选药剂在非洲本地采购困难，需由中国整箱进口，每吨原矿药剂成本约 3.50 美元。</p>
+<p>42. <strong>尾矿产出量</strong>: 生产一吨 50% 精矿，产生约 2.3吨 尾矿，需就地建设尾矿坝，防雨季冲刷。</p>
+<p>43. <strong>设备磨损</strong>: 石英脉脉石对磨机衬板和钢球磨损大，每吨矿石钢球消耗约 0.8kg。</p>
+<p>44. <strong>分选段数</strong>: 推荐使用“一段粗选 - 两段扫选 - 三段精选”浮选流程。</p>
+<p>45. <strong>块粉比例</strong>: 手选矿块矿比例高（80%），精选矿完全为粉矿（-200目占 75%）。</p>
+<h2>4. 关键质量指标与检验 (Inspection & Assaying)</h2>
+<p>46. <strong>交易计价元素</strong>: 纯锑 (<strong>Sb</strong>)。</p>
+<p>47. <strong>基准品位</strong>: 干基计价 <strong>50.00% Sb</strong>（DMT）。</p>
+<p>48. <strong>最大水分</strong>: 包装精矿水分上限 <strong>8.0%</strong>，散装矿上限 12.0%。</p>
+<p>49. <strong>粒度限制</strong>: 集装箱吨袋装精矿无硬性粒度要求；块原矿要求 \(10 - 100\text{mm}\) 占 90% 以上。</p>
+<p>50. <strong>SGS检测规程</strong>: 采用 ICP-AES 或滴定法进行主元素 Sb 测定，误差执行 ISO/DIS 10242 标准。</p>
+<p>51. <strong>AHK检验标准</strong>: 采用双平行样滴定分析，出具符合伦敦金属交易所 (LME) 认可的商业等级证书。</p>
+<p>52. <strong>ALS分析规程</strong>: 采用 ME-ICP81 熔融检测高品位矿石，超出 30% 范围启动硫酸铈滴定容量法。</p>
+<p>53. <strong>抽样标准</strong>: 必须执行 <strong>ISO 12743</strong> 散装矿抽样标准，堆场采用“网格交叉法多点深孔钻取”，每个集装箱打孔不少于 5 个。</p>
+<p>54. <strong>品位误差阀值</strong>: 装运港与目的港 Sb 品位绝对误差 \(\le 0.8\%\) 时，以装运港为结算依据；超过 0.8% 启动仲裁化验（Umpire）。</p>
+<p>55. <strong>化学指纹分析</strong>: 重点筛查微量有害杂质，防范环保拒收。</p>
+<p>56. <strong>出口自检化验</strong>: 乍得本地实验室自检精密度必须达到 +/-1.5% 以内，避免严重装运后货损或欺诈。</p>
+<p>57. <strong>化验方法标准</strong>: 锑主要使用碘量容量法（滴定法）或 ICP 测定。</p>
+<p>58. <strong>复验争议条款</strong>: 指定新加坡或伦敦的独立实验室（如 Inspection Services）为最终仲裁行。</p>
+<p>59. <strong>封条防篡改</strong>: 现场取样后，样品瓶必须由 SGS 和买方代表双重铅封，拍照归档，封条编号录入单据链。</p>
+<p>60. <strong>检测报告时限</strong>: 现场取样到出具正本 COA 证书，在喀麦隆杜阿拉港通常需 5-7 个工作日。</p>
+<h2>5. 有害杂质与扣减规则 (Impurities & Penalties)</h2>
+<p>61. <strong>砷 (As) 扣减</strong>: 基准 <strong>0.20%</strong>。在 0.20% - 0.50% 之间，每超 0.1%，单价扣减 <strong>20.00 美元/干公吨 (USD/DMT)</strong>。高于 <strong>0.50%</strong> 触发无条件拒收。</p>
+<p>62. <strong>铅 (Pb) 扣减</strong>: 基准 <strong>0.50%</strong>。在 0.50% - 1.00% 之间，每超 0.1%，单价扣减 <strong>15.00 美元/干公吨</strong>。高于 <strong>1.00%</strong> 拒收。</p>
+<p>63. <strong>汞 (Hg) 扣减</strong>: 基准 <strong>0.01%</strong>。大于 0.01% 每超 0.01% 扣减 5.00 美元/吨，最大限量 <strong>0.05%</strong>，超出拒收。</p>
+<p>64. <strong>铋 (Bi) 限制</strong>: 最大限量 0.15%，超出每 0.05% 扣减 10 美元。</p>
+<p>65. <strong>硫 (S) 影响</strong>: 硫在冶炼中产生二氧化硫烟气。精矿中硫含量通常在 15% - 25% 之间，一般不扣款，但超出 28% 会被征收环保废气处理附加费。</p>
+<p>66. <strong>氟 (F) 限制</strong>: 氟最大接受上限 0.10%，超出扣减 12 美元/吨。</p>
+<p>67. <strong>二氧化硅 (SiO2)</strong>: 最大接受上限 15.00%，超出每 1% 扣减 5.00 美元/吨。</p>
+<p>68. <strong>铁 (Fe) 限制</strong>: 铁最大限量 10.00%，超出每 1% 扣减 3.00 美元/吨。</p>
+<p>69. <strong>水分超标扣重</strong>: 水分每超 1%（以 5% 为基准），在总湿重中直接按 1:1 扣除干重外，另扣减 <strong>10.00 美元/吨</strong> 干燥附加费。</p>
+<p>70. <strong>碳 (C) 限制</strong>: 有机碳不得超过 1.0%，否则冶炼工艺降效。</p>
+<p>71. <strong>拒收线判定</strong>: 任何有害元素达到上述限值，买方有权在目的港拒绝接货，卖方承担无条件原路退运及因此产生的全额港杂、滞期费。</p>
+<p>72. <strong>扣减计费公式</strong>: \(\text{Penalty Total} = P_{\text{As}} + P_{\text{Pb}} + P_{\text{Hg}} + P_{\text{Moisture}}\)。</p>
+<p>73. <strong>环保入境准入</strong>: 中国海关规定：铅 \(\le 1.0\%\)，砷 \(\le 0.5\%\)，汞 \(\le 0.05\%\)，镉 \(\le 0.05\%\)。超出视为危险性固体废物，严禁进境。</p>
+<p>74. <strong>免赔额约定</strong>: 杂质含量在约定基本偏差（如 As 差 \(\le 0.05\%\)）内，不计惩罚扣款。</p>
+<p>75. <strong>环保固废处理政策</strong>: 锑冶炼产生的砷碱渣属于剧毒危废，冶炼厂处理成本极高，因此对高砷精矿采购趋于严苛。</p>
+<h2>6. 价格基准与定价公式 (Pricing Mechanisms)</h2>
+<p>76. <strong>基准价格指数</strong>: 选用 <strong>Fastmarkets MB (Metal Bulletin)</strong> 的“Rotimony 99.65% min free in warehouse Rotterdam duty unpaid”价格，该报价代表全球锑锭的主流交易基准。</p>
+<p>77. <strong>SMM中国价格</strong>: 作为进口销售对照，参考上海有色网“锑锭 99.85%”价格。根据2026年7月上旬数据，国内 1# 锑锭均价约在 <strong>110,000元/吨</strong> 左右，市场处于剧烈攀升后的弱势整理期。</p>
+<p>78. <strong>亚洲金属网价格</strong>: 补充参考 Asian Metal“锑精矿 (50% Sb)”均价。根据2026年7月初数据，50% 锑精矿均价约为 <strong>100,000元/金属吨</strong>。</p>
+<p>79. <strong>LME报价状态</strong>: 伦敦金属交易所暂无锑期货品种，交易完全依赖 Fastmarkets 等三方行业机构指数。</p>
+<p>80. <strong>价格更新频次</strong>: Fastmarkets 锑锭价格在<strong>每周三和周五</strong>更新。</p>
+<p>81. <strong>计价货币</strong>: 国际结算统一使用<strong>美元 (USD)</strong>；国内销售使用人民币 (RMB)。</p>
+<p>82. <strong>计价期 (QP)</strong>: 采用 <strong>QP = 提单日所在月份的月平均价 (M)</strong>。</p>
+<p>83. <strong>价格敏感性</strong>: 锑属于小金属，受供需错配及中国战略管制影响，价格敏感性极高，年波动率常超 40%。</p>
+<p>84. <strong>折扣系数曲线</strong>:</p>
+<ul>
+<li>  Sb 50% - 55%: 计价系数为 <strong>62.00%</strong>。</li>
+<li>  Sb 40% - 49.9%: 计价系数为 <strong>58.00%</strong>。</li>
+<li>  Sb 35% - 39.9%: 计价系数为 <strong>52.00%</strong>。</li>
+<p>85. <strong>溢折价算法</strong>: 品位每增减 1%，单价按 \(P_{\text{benchmark}} \times 1\% \times \text{对应计价系数}\) 递增或递减。</p>
+<p>86. <strong>加工费TC/RC</strong>: 锑贸易一般采用计价系数法，较少直接采用 TC/RC（Treatment Charges / Refining Charges）模式。</p>
+<p>87. <strong>含税价换算</strong>: 中国国内含税价 = 进口CIF（美元）\(\times\) 汇率 \(\times (1 + \text{关税率}) \times (1 + 13\%\text{增值税})\)。</p>
+<p>88. <strong>起降价触发</strong>: 若 Fastmarkets 价格在装运期内单日波动超过 1,500 美元/吨，触发价格重新锁定谈判机制。</p>
+<p>89. <strong>套期保值指南</strong>: 由于无官方期货，一般在贸易链中采用<strong>下游背靠背锁定（Back-to-Back Pricing）</strong>方式对冲价格风险，即采购价与销售价同一 QP 计价。</p>
+<p>90. <strong>最低保障价</strong>: 针对乍得矿山采购，可约定 Floor Price（如 10,000 美元/金属吨），保护矿山旱季基本开采现金流。</p>
+</ul>
+<h2>7. 商业计价系数与冶炼收率 (Commercial Payability)</h2>
+<p>91. <strong>系数调节因子</strong>: 当中国冶炼厂库存紧张时，精矿计价系数会上调 1% - 3%；当冶炼厂满产且环保限产时，系数会下调。</p>
+<p>92. <strong>总冶炼收率</strong>: 锑精矿直炼金属锑的总冶炼收率一般为 <strong>92.0% - 95.0%</strong>。</p>
+<p>93. <strong>渣中含锑</strong>: 冶炼弃渣中锑品位须控制在 1.5% 以下，超出需二次回炉。</p>
+<p>94. <strong>中间产品定价</strong>: 粗锑（Sb \(\ge 90\%\)）计价系数通常在 <strong>88% - 92%</strong> 之间。</p>
+<p>95. <strong>金银计价起计线</strong>: 锑精矿伴生金（Au）若 \(\ge 2.0\text{ g/t}\)，金元素开始计价，计价系数约为 50% - 70% 伦敦金价；伴生银（Ag）若 \(\ge 50\text{ g/t}\) 开始计价。</p>
+<p>96. <strong>二次废料利用</strong>: 废旧蓄电池中回收锑（再生锑）占全球供应 15% 左右，对原矿价格有弱压制作用。</p>
+<p>97. <strong>冶炼厂开工率</strong>: 冶炼厂开工率与精矿库存天数负相关，库存天数低于 15天时系数走高。</p>
+<p>98. <strong>本地粗炼效益</strong>: 在乍得本地直接用反射炉将 30% 原矿粗炼成 90% 粗锑，可节省 60% 跨国陆运费，商业溢价显著，是 GCTS 推荐演进方向。</p>
+<p>99. <strong>能耗能效差异</strong>: 50% 精矿冶炼吨能耗比 35% 低精矿低约 40%，故冶炼厂对高品位矿石有溢价偏好。</p>
+<p>100. <strong>联运价格系数</strong>: 锑与铅、锌、锡等大金属精矿在海运拼箱时，运价联动系数通常为 1.05。</p>
+<h2>8. 全球资源分布与储量 (Global Resource)</h2>
+<p>101. <strong>全球总储量</strong>: 全球探明锑储量约为 <strong>200 万公吨</strong>（金属量）。</p>
+<p>102. <strong>主要产区分布</strong>: 中国、俄罗斯、玻利维亚、吉尔吉斯斯坦、塔吉克斯坦。乍得等非洲产区储量未进入 USGS 官方统计，但属于极具潜力的新兴产区。</p>
+<p>103. <strong>供应集中度</strong>: 极高。中国和俄罗斯两国的锑矿产量占全球的 <strong>70%</strong> 以上。</p>
+<p>104. <strong>中国产能占比</strong>: 中国资源储量占全球 25%，但贡献了全球近 50% 的产量，面临资源过度消耗和枯竭危机。</p>
+<p>105. <strong>全球核心矿山</strong>: 俄罗斯 Polyus（伴生金锑）、中国闪星锑业（冷水江闪星锑矿）、塔吉克斯坦 Talco-Gold。</p>
+<p>106. <strong>未来五年产能</strong>: 全球新增锑矿产能稀缺，未来五年由于老矿山品位下滑，供应将面临 <strong>年均 2% - 3% 的刚性收缩</strong>。</p>
+<p>107. <strong>地缘敏感系数</strong>: 极高。俄罗斯及独联体国家的出口受制裁和政治局势影响大，供应链极其脆弱。</p>
+<p>108. <strong>储采比 (R/P)</strong>: 全球锑储采比不足 15年，属于极度稀缺的战略关键金属。</p>
+<p>109. <strong>循环回收率</strong>: 下游阻燃剂完全无法回收，铅酸电池循环回收率较高（>95%）。</p>
+<p>110. <strong>战略储备</strong>: 中美欧等国均将锑列为第一梯队战略储备矿产，严格限制其军工用途外的流向。</p>
+<h2>9. 下游需求与工业应用 (Downstream Demand)</h2>
+<p>111. <strong>终端消费结构</strong>:</p>
+<ul>
+<li>  <strong>阻燃剂 (Flame Retardants)</strong>: 占 55%（主要成分三氧化二锑 Sb2O3，用于塑料、橡胶、纺织品）。</li>
+<li>  <strong>光伏玻璃澄清剂</strong>: 占 15%（焦锑酸钠，用于去除光伏玻璃气泡，是近期核心增长点）。</li>
+<li>  <strong>铅酸蓄电池</strong>: 占 15%（锑铅合金，用于汽车起动电池板栅增加硬度）。</li>
+<li>  <strong>军工及其他</strong>: 占 15%（用于穿甲弹引信、红外制导、半导体）。</li>
+<p>112. <strong>传统用途前景</strong>: 阻燃剂受环保无卤化替代品（如氢氧化铝/镁）竞争，需求年均增速放缓至 1.0%。</p>
+<p>113. <strong>新兴用途爆发</strong>: 光伏装机量爆发直接拉动焦锑酸钠需求，预计未来三年光伏用锑年增速将超 <strong>15%</strong>。</p>
+<p>114. <strong>技术替代威胁</strong>: 液态金属电池和钙钛矿太阳能电池若规模化，将引入新的锑需求；但在电池板栅领域，钙、锂等合金正在逐步替代锑以实现“免维护”特征。</p>
+<p>115. <strong>冶炼厂开工周期</strong>: 中国有色冶炼厂开工高峰为每年的 3-6月 和 9-12月，采购需求旺盛。</p>
+<p>116. <strong>成品纯度标准</strong>: 交易成品锑锭标准为国标 Sb99.85 (符合 LME 注册牌号)。</p>
+<p>117. <strong>下游库存天数</strong>: 阻燃剂厂和光伏玻璃厂的合理原料库存通常为 <strong>30 - 45天</strong>，低于 20天会引发恐慌性补库。</p>
+<p>118. <strong>需求滞后周期</strong>: 终端房地产和光伏组件装机数据改善，传导至原矿采购需求通常滞后 <strong>3 个月</strong>。</p>
+<p>119. <strong>绿色环保趋势</strong>: 欧盟 RoHS 指令限制特定电子产品中锑的使用，促使下游企业开发超低锑环保塑料。</p>
+<p>120. <strong>客户准入壁垒</strong>: 国内大型锑冶炼厂（如闪星、黄金洞、华钰）对进口商资质审查严格，首次交易通常需要提供 SGS 原产地报告和长单供货能力证明。</p>
+</ul>
+<h2>10. 物流、包装与出口合规 (Logistics & Compliance)</h2>
+<p>121. <strong>危险品分类</strong>: 锑原矿和锑精矿在国际海运（IMDG Code）中通常<strong>不列为危险品</strong>，属于普通有色金属矿砂，可按普通集装箱货物申报。</p>
+<p>122. <strong>联合国编号</strong>: 无特殊 UN Number（仅对特定纯锑粉和化学锑剂有UN1549/UN2871限制）。</p>
+<p>123. <strong>海关HS Code</strong>:</p>
+<ul>
+<li>  锑矿砂及其精矿: <strong>2617.1000</strong></li>
+<li>  三氧化二锑: <strong>2825.8000</strong></li>
+<li>  未锻轧锑 (锑锭): <strong>8110.1000</strong></li>
+<p>124. <strong>包装规范</strong>: 必须使用防潮、防漏、防紫外线的双层拉带编织吨袋，标称承重 <strong>1.50 公吨/袋</strong>。</p>
+<p>125. <strong>吨袋质量标准</strong>: 吊带安全系数必须 \(\ge 5:1\)，防止集装箱码头装卸起吊时断裂断带。</p>
+<p>126. <strong>箱内限重</strong>: 20英尺小箱装柜，因矿砂密度高，每箱严格限重 <strong>25.0 - 27.0 公吨</strong>，要求货物在箱底平铺，重心居中。</p>
+<p>127. <strong>散装防流态化</strong>: 锑矿若以散货船运输（Bulk Ship），水分必须严格控制在 <strong>运输水分限额 (TML)</strong> 之下，通常要求 \(\le 10\%\)，否则易造成船舶倾覆。</p>
+<p>128. <strong>关税税率</strong>: 中国对锑精矿进口实施 <strong>0% 协定关税</strong>，增值税税率 13%。乍得出口税率为 2%。</p>
+<p>129. <strong>出口管制防范</strong>: 中国自2024年9月15日起对锑相关物项实施出口管制。自 <strong>2026年7月1日起</strong>，商务部实施《两用物项出口管制违法违规行为举报处理办法》，重点针对绕道第三国规避管制、伪报品名、虚构终端场景等 13 类走私行为进行全链条穿透式执法。虽然我方是从乍得<strong>进口</strong>，但必须确保合同和单据链条中具有极其详尽的非冲突矿区及最终用户（EUM）核销单据，规避“洗矿”和违规交易指控。</p>
+<p>130. <strong>非冲突矿产尽职调查</strong>: 依据 OECD 准则，需出具《最终用途与非冲突矿区声明》（EUM），并追溯开采链条，防止资金流入乍得或苏丹边境的非法武装集团。</p>
+<p>131. <strong>出境特种单证</strong>: 必须在乍得取得《放射性检验合格证》和矿业部《品质符合鉴定书》。</p>
+<p>132. <strong>陆海运耗</strong>: 跨国卡车颠簸及多次换装可能导致精矿撒漏，全程运耗标准控制在 <strong>0.50%</strong> 以内，超出部分由货代或保险赔偿。</p>
+<p>133. <strong>防潮结露</strong>: 海运集装箱内必须投放足量硅胶干燥包（Container Desiccant），防止海运中集装箱凝露导致精矿吨袋受潮严重结块，影响目的港卸货。</p>
+<p>134. <strong>粉化率限制</strong>: 手选块矿（Grade \(\ge 40\%\)）在 1,800 公里公路颠簸后，碎粉化率（\(<5\text{mm}\)）通常增加 5% - 8%，化验时需做粉块比例对照。</p>
+<p>135. <strong>反洗钱审查单证</strong>: 结汇银行强制核验 SPA 合同、SGS 化验单、喀麦隆出海提单、乍得商检证明四单一致性。</p>
+</ul>
+    </article>
+</body>
+</html>

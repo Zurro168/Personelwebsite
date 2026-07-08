@@ -1,6 +1,6 @@
 import { ALL_REPORTS } from '@/data/reports';
 import Link from 'next/link';
-import { Microscope, Bot, Heart, Coffee } from 'lucide-react';
+import { Microscope, Bot, Heart, Coffee, ArrowRight } from 'lucide-react';
 import TableOfContents from '@/components/TableOfContents';
 
 export default function IntersectionPage() {
@@ -47,6 +47,61 @@ export default function IntersectionPage() {
           {/* Featured Zone - Top 3 Specific Slots */}
           <section id="featured">
             <h2 className="text-[10px] font-black text-brand-experiment/40 uppercase tracking-[0.4em] mb-10 font-mono italic">Featured Experiments // 精选导引</h2>
+            
+            {/* GCTS Featured Lab Project Card */}
+            <div className="mb-12">
+              <Link 
+                href="/intersection/gcts"
+                className="group block relative p-10 md:p-12 rounded-3xl bg-slate-900/40 border border-white/5 hover:border-brand-experiment/30 transition-all duration-500 overflow-hidden shadow-2xl backdrop-blur-md"
+              >
+                {/* Purple gradient glow overlay */}
+                <div className="absolute top-0 right-0 w-80 h-80 bg-gradient-to-br from-brand-experiment/10 via-purple-500/5 to-transparent blur-3xl opacity-50 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"></div>
+                <div className="absolute -inset-px rounded-3xl border border-transparent bg-gradient-to-r from-brand-experiment/0 via-purple-500/0 to-brand-experiment/0 group-hover:from-brand-experiment/10 group-hover:via-purple-500/10 group-hover:to-brand-experiment/10 transition-all duration-700 pointer-events-none"></div>
+
+                <div className="relative z-10 flex flex-col lg:flex-row justify-between items-start lg:items-center gap-10">
+                  <div className="space-y-6 flex-1">
+                    <div className="flex flex-wrap items-center gap-3">
+                      <span className="px-2.5 py-1 bg-brand-experiment/10 border border-brand-experiment/20 text-brand-experiment text-[10px] font-bold tracking-widest rounded-lg font-mono uppercase">Key Asset</span>
+                      <span className="px-2.5 py-1 bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-[10px] font-bold tracking-widest rounded-lg font-mono uppercase">Fintech OS Live</span>
+                      <span className="text-[10px] text-slate-600 font-mono">LAB CODE: EXP-GCTS-01</span>
+                    </div>
+
+                    <div className="space-y-2">
+                      <h3 className="text-3xl font-black text-white italic group-hover:text-brand-experiment transition-colors leading-tight">
+                        GCTS: 关键矿产智能报价决策系统 (Global Critical Minerals Trading OS)
+                      </h3>
+                      <p className="text-sm text-slate-400 leading-relaxed font-light max-w-4xl">
+                        大宗商品多式联运在跨越物理运输、复杂海关清关与地缘政治红线时的核心商业实践。本系统打通 EXW/FOB 联动报价、100% 对账物理 Excel 下载、多式联运走廊运费自动拟合与雨季红线风控拦截。
+                      </p>
+                    </div>
+
+                    {/* Highlights */}
+                    <div className="flex flex-wrap gap-4 pt-1">
+                      <div className="flex items-center gap-2 bg-black/30 px-4 py-2 rounded-xl border border-white/5 font-mono text-[11px] text-emerald-400">
+                        <span className="w-1 h-1 bg-emerald-500 rounded-full animate-ping"></span>
+                        100% Math Reconciled
+                      </div>
+                      <div className="flex items-center gap-2 bg-black/30 px-4 py-2 rounded-xl border border-white/5 font-mono text-[11px] text-brand-experiment">
+                        <span className="w-1 h-1 bg-brand-experiment rounded-full"></span>
+                        Incoterm Simulator
+                      </div>
+                      <div className="flex items-center gap-2 bg-black/30 px-4 py-2 rounded-xl border border-white/5 font-mono text-[11px] text-purple-400">
+                        <span className="w-1 h-1 bg-purple-500 rounded-full"></span>
+                        Decisions & Assets Map
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-4 text-xs font-black tracking-widest text-slate-500 group-hover:text-brand-experiment transition-colors uppercase font-mono">
+                    Launch Experiment
+                    <div className="w-10 h-10 rounded-full border border-white/10 group-hover:border-brand-experiment/40 flex items-center justify-center group-hover:translate-x-2 transition-all duration-300">
+                      <ArrowRight size={16} />
+                    </div>
+                  </div>
+                </div>
+              </Link>
+            </div>
+
             <div id="essays" className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 flex-wrap">
               {slots.map((slot, index) => {
                 const article = slot.article;

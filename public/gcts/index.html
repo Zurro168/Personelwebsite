@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GCTS 决策中心 & 智能报价系统 V0.1</title>
+    <!-- 引入 Outfit 与 Inter 字体 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="dark-mode">
+    <div class="app-container">
+        <!-- 侧边导航栏 -->
+        <aside class="sidebar">
+            <div class="brand">
+                <div class="logo">GCTS</div>
+                <div class="subtitle">Commodity Intelligence OS</div>
+            </div>
+            <nav class="menu">
+                <a href="#" class="menu-item active" id="nav-dashboard" onclick="switchTab('dashboard')">
+                    <svg class="icon" viewBox="0 0 24 24"><path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/></svg>
+                    决策驾驶舱
+                </a>
+                <a href="#" class="menu-item" id="nav-pricing" onclick="switchTab('pricing')">
+                    <svg class="icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H7c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.04-.42 1.99-1.07 2.75z"/></svg>
+                    智能报价引擎
+                </a>
+                <a href="#" class="menu-item" id="nav-logistics" onclick="switchTab('logistics')">
+                    <svg class="icon" viewBox="0 0 24 24"><path d="M20 8h-3V4H3c-1.1 0-2 .9-2 2v11h2c0 1.66 1.34 3 3 3s3-1.34 3-3h6c0 1.66 1.34 3 3 3s3-1.34 3-3h2v-5l-3-4zM6 18.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm12 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm2-5.5H17V9h3v4z"/></svg>
+                    多式联运走廊
+                </a>
+                <a href="#" class="menu-item" id="nav-kb" onclick="switchTab('kb')">
+                    <svg class="icon" viewBox="0 0 24 24"><path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H8V4h12v12z"/></svg>
+                    系统知识库
+                </a>
+                <a href="#" class="menu-item" id="nav-assets" onclick="switchTab('assets')">
+                    <svg class="icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 14h-2v-2h2v2zm0-4h-2V7h2v5z"/></svg>
+                    OS 资产大地图
+                </a>
+            </nav>
+            <div class="user-profile">
+                <div class="avatar">CEO</div>
+                <div class="info">
+                    <div class="username">董事长决策端</div>
+                    <div class="role">超级管理员</div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- 主内容区域 -->
+        <main class="main-content">
+            <!-- 头部控制栏 -->
+            <header class="top-header">
+                <div class="title-area">
+                    <h1 id="page-title">GCTS 决策驾驶舱</h1>
+                    <p class="tagline">全球矿产贸易项目一键评估与分析中心</p>
+                </div>
+                <div class="header-right-area">
+                    <div class="header-actions">
+                        <button class="btn-action btn-reset" onclick="resetDefaults()" title="恢复当前国家与矿种的默认测算参数">🔄 重置参数</button>
+                        <div class="dropdown-excel">
+                            <button class="btn-action btn-download">📥 下载 Excel 模板</button>
+                            <div class="dropdown-content">
+                                <a href="GCTS_Metals_Pricing_Engine_V1.xlsx" download>GCTS 定价计算器 V1.xlsx</a>
+                                <a href="GCTS_Multimodal_Logistics_Template.xlsx" download>多式联运物流模板.xlsx</a>
+                                <a href="GCTS_Metals_Pricing_Calculator.xlsx" download>简易定价计算器.xlsx</a>
+                                <a href="GCTS_Metals_Pricing_Engine_V0.3_Compact.xlsx" download>精简定价引擎 V0.3.xlsx</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="quick-selectors">
+                        <div class="select-group">
+                            <label for="select-country">国家 (Country)</label>
+                            <select id="select-country" onchange="onSelectorChange()">
+                                <option value="chad" selected>乍得 (Chad) - Case 001</option>
+                                <option value="nigeria">尼日利亚 (Nigeria)</option>
+                                <option value="drc">刚果金 (DRC)</option>
+                            </select>
+                        </div>
+                        <div class="select-group">
+                            <label for="select-commodity">矿种 (Commodity)</label>
+                            <select id="select-commodity" onchange="onSelectorChange()">
+                                <option value="antimony" selected>锑矿 (Antimony - Sb)</option>
+                                <option value="tungsten">钨矿 (Tungsten - WO3)</option>
+                                <option value="lithium">锂矿 (Lithium - Li)</option>
+                                <option value="copper">铜矿 (Copper - Cu)</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- 选项卡 1: 决策驾驶舱 -->
+            <section id="tab-content-dashboard" class="tab-content active">
+                <div class="dashboard-grid">
+                    <!-- 项目准入状态卡片 -->
+                    <div class="card decision-status-card">
+                        <div class="card-header">
+                            <h3>L8 投资准入评估报告</h3>
+                            <span class="badge" id="evaluation-date">2026-07-06</span>
+                        </div>
+                        <div class="decision-box">
+                            <div class="score-circle" id="decision-score-circle">
+                                <span class="score-num" id="decision-score-value">83</span>
+                                <span class="score-lbl">综合评分</span>
+                            </div>
+                            <div class="decision-verdict">
+                                <div class="verdict-title">一键决策 verdict：</div>
+                                <div class="verdict-badge go" id="verdict-badge-value">GO (建议签约推进)</div>
+                                <p class="verdict-desc" id="verdict-description">项目财务回报极高，原矿品位表现优异，符合环保及非冲突矿产准入，虽面临物流季节性阻断风险，但整体可控，建议在干季抓紧签署包销SPA并开立信用证。</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 维度雷达图/评分列表 -->
+                    <div class="card scores-card">
+                        <div class="card-header">
+                            <h3>L6 模型引擎维度评分</h3>
+                        </div>
+                        <div class="score-list">
+                            <div class="score-item">
+                                <span class="score-name">国家主权风险 (Country Score)</span>
+                                <div class="progress-bar-container">
+                                    <div class="progress-bar warning" style="width: 45%" id="score-bar-country"></div>
+                                </div>
+                                <span class="score-val" id="score-val-country">45/100</span>
+                            </div>
+                            <div class="score-item">
+                                <span class="score-name">矿种匹配度 (Commodity Score)</span>
+                                <div class="progress-bar-container">
+                                    <div class="progress-bar success" style="width: 85%" id="score-bar-commodity"></div>
+                                </div>
+                                <span class="score-val" id="score-val-commodity">85/100</span>
+                            </div>
+                            <div class="score-item">
+                                <span class="score-name">物流网络可行性 (Logistics Score)</span>
+                                <div class="progress-bar-container">
+                                    <div class="progress-bar warning" style="width: 50%" id="score-bar-logistics"></div>
+                                </div>
+                                <span class="score-val" id="score-val-logistics">50/100</span>
+                            </div>
+                            <div class="score-item">
+                                <span class="score-name">综合合规与风控 (Risk Score)</span>
+                                <div class="progress-bar-container">
+                                    <div class="progress-bar success" style="width: 80%" id="score-bar-risk"></div>
+                                </div>
+                                <span class="score-val" id="score-val-risk">80/100</span>
+                            </div>
+                            <div class="score-item">
+                                <span class="score-name">财务与回报率 (Finance Score)</span>
+                                <div class="progress-bar-container">
+                                    <div class="progress-bar success" style="width: 88%" id="score-bar-finance"></div>
+                                </div>
+                                <span class="score-val" id="score-val-finance">88/100</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 核心指标摘要卡片组 -->
+                    <div class="metrics-row">
+                        <div class="metric-card card">
+                            <span class="label">项目预估毛利率</span>
+                            <span class="value success-text" id="summary-profit-margin">47.06%</span>
+                        </div>
+                        <div class="metric-card card">
+                            <span class="label">年化 IRR (内部收益率)</span>
+                            <span class="value success-text" id="summary-irr">45.20%</span>
+                        </div>
+                        <div class="metric-card card">
+                            <span class="label">资金占用周转周期</span>
+                            <span class="value" id="summary-cycle">75 天</span>
+                        </div>
+                        <div class="metric-card card">
+                            <span class="label">单干吨物流费用 (DMT)</span>
+                            <span class="value danger-text" id="summary-logistics-cost">$368.00</span>
+                        </div>
+                    </div>
+
+                    <!-- 实时风险报警器 -->
+                    <div class="card alarm-card">
+                        <div class="card-header">
+                            <h3>实时风控红线预警 (Risk Alarms)</h3>
+                        </div>
+                        <div class="alarm-list" id="alarm-list-container">
+                            <div class="alarm-item orange">
+                                <span class="alarm-icon">⚠️</span>
+                                <div class="alarm-info">
+                                    <div class="alarm-title">乍得北部及湖区存在“博科圣地”地缘冲突溢出风险</div>
+                                    <div class="alarm-time">2小时前发布 | 来源: Risk Agent</div>
+                                </div>
+                            </div>
+                            <div class="alarm-item red">
+                                <span class="alarm-icon">🚫</span>
+                                <div class="alarm-info">
+                                    <div class="alarm-title">雨季物理阻断警报：7月-10月 Mongo 土路无法通行重卡</div>
+                                    <div class="alarm-time">5小时前更新 | 来源: Logistics Agent</div>
+                                </div>
+                            </div>
+                            <div class="alarm-item green">
+                                <span class="alarm-icon">✓</span>
+                                <div class="alarm-info">
+                                    <div class="alarm-title">合规通过：供应商 (Chad Minerals Corp) 100% 通过 OFAC 制裁名单筛查</div>
+                                    <div class="alarm-time">昨日审查 | 来源: Compliance Agent</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 选项卡 2: 智能报价引擎 -->
+            <section id="tab-content-pricing" class="tab-content">
+                <div class="pricing-layout-full">
+                    <!-- 共同测算参数卡片 -->
+                    <div class="card common-params-card">
+                        <div class="common-header-flex">
+                            <h3>第一步：输入共同物理与开采采购参数 (Common Parameters)</h3>
+                            <div class="benchmark-ref-box" id="benchmark-ref-box">
+                                <span class="ref-title">📊 今日行情基准参考 (2026-07-06):</span>
+                                <span class="ref-badge intl-badge" id="ref-intl-val">Fastmarkets 国际: $55,000/吨</span>
+                                <span class="ref-badge dom-badge" id="ref-dom-val">SMM 国内: ¥395,000/吨</span>
+                            </div>
+                        </div>
+                        <div class="common-params-grid">
+                            <div class="input-group">
+                                <label for="in-incoterm">采购交货条款 (Incoterm)</label>
+                                <select id="in-incoterm" onchange="onIncotermChange()">
+                                    <option value="EXW" selected>EXW (矿区现场交货)</option>
+                                    <option value="FOB">FOB (起运港船上交货)</option>
+                                </select>
+                            </div>
+                            <div class="input-group">
+                                <label for="in-quantity">合同总量 (WMT吨)</label>
+                                <input type="number" id="in-quantity" value="526.3" step="0.1" oninput="recalculatePricing()">
+                            </div>
+                            <div class="input-group">
+                                <label for="in-grade" id="lbl-grade">原矿干基品位 Sb (%)</label>
+                                <input type="number" id="in-grade" value="50" step="0.1" oninput="recalculatePricing()">
+                            </div>
+                            <div class="input-group">
+                                <label for="in-moisture">水分 H2O (%)</label>
+                                <input type="number" id="in-moisture" value="5" step="0.1" oninput="recalculatePricing()">
+                            </div>
+                            <div class="input-group">
+                                <label for="in-purchase-cost" id="lbl-purchase-cost">本地开采采购价 (USD/干吨)</label>
+                                <input type="number" id="in-purchase-cost" value="3000" oninput="recalculatePricing()">
+                            </div>
+                            <div class="input-group">
+                                <label for="in-trucking">内陆公路汽运费 (USD/吨)</label>
+                                <input type="number" id="in-trucking" value="200" oninput="recalculatePricing()">
+                            </div>
+                            <div class="input-group">
+                                <label for="in-rail">内陆铁路运费 (USD/吨)</label>
+                                <input type="number" id="in-rail" value="120" oninput="recalculatePricing()">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 差异化参数与对比测算结果卡片 -->
+                    <div class="card comparison-card">
+                        <div class="result-header">
+                            <h3>第二步：双流向财务模型对比 (国际外销 vs. 国内运回)</h3>
+                            <button class="btn btn-export" onclick="exportPricingCSV()">导出对比 Excel</button>
+                        </div>
+                        
+                        <div class="comparison-grid-layout">
+                            <!-- 差异化输入参数表 -->
+                            <div class="dest-inputs-section">
+                                <div class="dest-column intl-col">
+                                    <h4 class="dest-title intl-title">🌍 国际外销路线 (International)</h4>
+                                    <div class="input-group">
+                                        <label for="intl-base-price" id="lbl-intl-base-price">国际基准价 (USD/吨)</label>
+                                        <input type="number" id="intl-base-price" value="55000" oninput="recalculatePricing()">
+                                    </div>
+                                    <div class="input-group">
+                                        <label for="intl-payability">计价系数 Payability (%)</label>
+                                        <input type="number" id="intl-payability" value="80" oninput="recalculatePricing()">
+                                    </div>
+                                    <div class="input-group">
+                                        <label for="intl-tc" id="lbl-intl-tc">处理费/扣减 TC (USD/DMT)</label>
+                                        <input type="number" id="intl-tc" value="1200" oninput="recalculatePricing()">
+                                    </div>
+                                    <div class="input-group">
+                                        <label for="intl-sea-freight">海运及港杂费 (USD/吨)</label>
+                                        <input type="number" id="intl-sea-freight" value="65" oninput="recalculatePricing()">
+                                    </div>
+                                    <div class="input-group">
+                                        <label for="intl-customs">清关变动费 (USD/干吨)</label>
+                                        <input type="number" id="intl-customs" value="35" oninput="recalculatePricing()">
+                                    </div>
+                                    <div class="input-group">
+                                        <label for="intl-duty-rate">出口资源税率 (%)</label>
+                                        <input type="number" id="intl-duty-rate" value="2" step="0.1" oninput="recalculatePricing()">
+                                    </div>
+                                </div>
+
+                                <div class="dest-column dom-col">
+                                    <h4 class="dest-title dom-title">🇨🇳 国内运回路线 (Domestic China)</h4>
+                                    <div class="input-group">
+                                        <label for="dom-base-price" id="lbl-dom-base-price">国内基准价 (RMB/吨)</label>
+                                        <input type="number" id="dom-base-price" value="395000" oninput="recalculatePricing()">
+                                    </div>
+                                    <div class="input-group">
+                                        <label for="dom-payability">国内计价系数 Payability (%)</label>
+                                        <input type="number" id="dom-payability" value="72" oninput="recalculatePricing()">
+                                    </div>
+                                    <div class="input-group">
+                                        <label for="dom-tc" id="lbl-dom-tc">处理费/扣减 TC (RMB/DMT)</label>
+                                        <input type="number" id="dom-tc" value="8500" oninput="recalculatePricing()">
+                                    </div>
+                                    <div class="input-group">
+                                        <label for="dom-sea-freight">国内段海运及港杂 (USD/吨)</label>
+                                        <input type="number" id="dom-sea-freight" value="65" oninput="recalculatePricing()">
+                                    </div>
+                                    <div class="input-group">
+                                        <label for="dom-customs">港口清关费 (USD/干吨)</label>
+                                        <input type="number" id="dom-customs" value="35" oninput="recalculatePricing()">
+                                    </div>
+                                    <div class="input-group">
+                                        <label for="dom-duty-rate">出口资源税率 (%)</label>
+                                        <input type="number" id="dom-duty-rate" value="2" step="0.1" oninput="recalculatePricing()">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- P&L 对比数据表 -->
+                            <div class="comparison-table-section">
+                                <table class="result-table comparison-table">
+                                    <thead>
+                                        <tr>
+                                            <th>财务科目 (Financial Items)</th>
+                                            <th class="text-right">国际外销 (USD)</th>
+                                            <th class="text-right">国内运回 (RMB)</th>
+                                            <th class="text-right">国内折合 (USD)</th>
+                                            <th class="text-right font-bold gold-text">方向差额 (Arbitrage USD)</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>结算干吨总量 (DMT)</td>
+                                            <td class="text-right" id="res-intl-dmt">500.00 DMT</td>
+                                            <td class="text-right" id="res-dom-dmt-rmb">500.00 DMT</td>
+                                            <td class="text-right" id="res-dom-dmt-usd">500.00 DMT</td>
+                                            <td class="text-right font-bold" id="res-diff-dmt">-</td>
+                                        </tr>
+                                        <tr class="highlight-row">
+                                            <td>销售结算单价 (FOB / DDP)</td>
+                                            <td class="text-right font-bold success-text" id="res-intl-fob-price">$20,800.00</td>
+                                            <td class="text-right font-bold success-text" id="res-dom-fob-price-rmb">¥133,700.00</td>
+                                            <td class="text-right font-bold success-text" id="res-dom-fob-price-usd">$18,569.44</td>
+                                            <td class="text-right font-bold gold-text" id="res-diff-fob-price">$2,230.56</td>
+                                        </tr>
+                                        <tr class="divider-row">
+                                            <td>项目总销售收入</td>
+                                            <td class="text-right success-text" id="res-intl-revenue">$10,399,688.00</td>
+                                            <td class="text-right success-text" id="res-dom-revenue-rmb">¥66,847,994.50</td>
+                                            <td class="text-right success-text" id="res-dom-revenue-usd">$9,284,443.68</td>
+                                            <td class="text-right font-bold gold-text" id="res-diff-revenue">$1,115,244.32</td>
+                                        </tr>
+                                        <tr>
+                                            <td>1. 采购矿产支出</td>
+                                            <td class="text-right danger-text" id="res-intl-purchase">($1,499,955.00)</td>
+                                            <td class="text-right danger-text" id="res-dom-purchase-rmb">(¥10,799,676.00)</td>
+                                            <td class="text-right danger-text" id="res-dom-purchase-usd">($1,499,955.00)</td>
+                                            <td class="text-right font-bold" id="res-diff-purchase">$0.00</td>
+                                        </tr>
+                                        <tr>
+                                            <td>2. 内陆公路运费</td>
+                                            <td class="text-right danger-text" id="res-intl-trucking">($105,260.00)</td>
+                                            <td class="text-right danger-text" id="res-dom-trucking-rmb">(¥757,872.00)</td>
+                                            <td class="text-right danger-text" id="res-dom-trucking-usd">($105,260.00)</td>
+                                            <td class="text-right font-bold" id="res-diff-trucking">$0.00</td>
+                                        </tr>
+                                        <tr>
+                                            <td>3. 铁路货运及过境运费</td>
+                                            <td class="text-right danger-text" id="res-intl-rail">($63,156.00)</td>
+                                            <td class="text-right danger-text" id="res-dom-rail-rmb">(¥454,723.20)</td>
+                                            <td class="text-right danger-text" id="res-dom-rail-usd">($63,156.00)</td>
+                                            <td class="text-right font-bold" id="res-diff-rail">$0.00</td>
+                                        </tr>
+                                        <tr>
+                                            <td>4. 通关清关固定与变动费</td>
+                                            <td class="text-right danger-text" id="res-intl-customs">($23,499.48)</td>
+                                            <td class="text-right danger-text" id="res-dom-customs-rmb">(¥169,196.22)</td>
+                                            <td class="text-right danger-text" id="res-dom-customs-usd">($23,499.48)</td>
+                                            <td class="text-right font-bold" id="res-diff-customs">$0.00</td>
+                                        </tr>
+                                        <tr>
+                                            <td>5. 出口资源关税</td>
+                                            <td class="text-right danger-text" id="res-intl-duty">($207,993.76)</td>
+                                            <td class="text-right danger-text" id="res-dom-duty-rmb">(¥1,336,959.89)</td>
+                                            <td class="text-right danger-text" id="res-dom-duty-usd">($185,688.87)</td>
+                                            <td class="text-right font-bold gold-text" id="res-diff-duty">($22,304.89)</td>
+                                        </tr>
+                                        <tr>
+                                            <td>6. 海运及目的港港杂费</td>
+                                            <td class="text-right danger-text" id="res-intl-sea">($34,209.50)</td>
+                                            <td class="text-right danger-text" id="res-dom-sea-rmb">(¥246,308.40)</td>
+                                            <td class="text-right danger-text" id="res-dom-sea-usd">($34,209.50)</td>
+                                            <td class="text-right font-bold" id="res-diff-sea">$0.00</td>
+                                        </tr>
+                                        <tr>
+                                            <td>7. 杂费(利息险费与应急费)</td>
+                                            <td class="text-right danger-text" id="res-intl-other">($184,581.05)</td>
+                                            <td class="text-right danger-text" id="res-dom-other-rmb">(¥1,257,597.51)</td>
+                                            <td class="text-right danger-text" id="res-dom-other-usd">($174,666.32)</td>
+                                            <td class="text-right font-bold gold-text" id="res-diff-other">($9,914.73)</td>
+                                        </tr>
+                                        <tr class="highlight-row-gold divider-row">
+                                            <td>项目预测净利润 (Net Profit)</td>
+                                            <td class="text-right font-bold success-text" id="res-intl-net-profit">$8,281,033.21</td>
+                                            <td class="text-right font-bold success-text" id="res-dom-net-profit-rmb">¥52,026,177.27</td>
+                                            <td class="text-right font-bold success-text" id="res-dom-net-profit-usd">$7,225,857.95</td>
+                                            <td class="text-right font-bold gold-text" id="res-diff-net-profit" style="font-size: 1.1rem;">$1,055,175.26</td>
+                                        </tr>
+                                        <tr class="highlight-row">
+                                            <td>预估营运毛利率 (Margin %)</td>
+                                            <td class="text-right font-bold success-text" id="res-intl-margin-percent">79.63%</td>
+                                            <td class="text-right font-bold success-text" id="res-dom-margin-percent-rmb">-</td>
+                                            <td class="text-right font-bold success-text" id="res-dom-margin-percent-usd">77.83%</td>
+                                            <td class="text-right font-bold gold-text" id="res-diff-margin-percent">+1.80%</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 选项卡 3: 多式联运走廊 -->
+            <section id="tab-content-logistics" class="tab-content">
+                <div class="logistics-layout">
+                    <!-- 地图可视化区（文本模拟） -->
+                    <div class="card route-visualizer-card">
+                        <h3>L5 跨国供应链物流链路追踪 (Mongo - Douala Corridor)</h3>
+                        <div class="route-timeline" id="logistics-timeline-container">
+                            <div class="route-node done">
+                                <div class="node-badge">1</div>
+                                <div class="node-content">
+                                    <h4>Mongo 镇矿区中转堆场 (起始点)</h4>
+                                    <p class="node-meta">公路起点 | 距离口岸 630km | 品质粗选与初检批次贴标</p>
+                                    <span class="node-status">正常运行</span>
+                                </div>
+                            </div>
+                            <div class="route-node done">
+                                <div class="node-badge">2</div>
+                                <div class="node-content">
+                                    <h4>蒙杜海关监管区 (Moundou Clearance)</h4>
+                                    <p class="node-meta">乍得封关口 | 乍得海关出境D15申报、矿业出口许可核销</p>
+                                    <span class="node-status">正常通关</span>
+                                </div>
+                            </div>
+                            <div class="route-node active">
+                                <div class="node-badge">3</div>
+                                <div class="node-content">
+                                    <h4>Koutéré / Touboro 边境口岸</h4>
+                                    <p class="node-meta">跨国边界 | 乍得-喀麦隆转关交接 | T1 单证过境保函核验</p>
+                                    <span class="node-status text-warning">卡车排队 (拥堵度中等，过关天数约1.5天)</span>
+                                </div>
+                            </div>
+                            <div class="route-node next">
+                                <div class="node-badge">4</div>
+                                <div class="node-content">
+                                    <h4>恩冈代雷铁路货运站 (Ngaoundéré)</h4>
+                                    <p class="node-meta">铁水换装点 | 公路重卡换装 CAMRAIL 火车车皮 (约需1-2天)</p>
+                                    <span class="node-status text-muted">等待车皮调配</span>
+                                </div>
+                            </div>
+                            <div class="route-node next">
+                                <div class="node-badge">5</div>
+                                <div class="node-content">
+                                    <h4>喀麦隆杜阿拉港 (卸运码头)</h4>
+                                    <p class="node-meta">海运装货港 | 港口保税仓理箱装集装箱，达飞大船周班靠泊</p>
+                                    <span class="node-status text-muted">水深 8.8m | 免租期 21天已申请</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 物流参数与费用指标 -->
+                    <div class="card route-details-card">
+                        <h3>物流引擎性能与预警指标</h3>
+                        <div class="logistics-params">
+                            <div class="param-box">
+                                <span class="lbl">内陆公路沥青率</span>
+                                <span class="val" id="log-param-paved">82%</span>
+                            </div>
+                            <div class="param-box">
+                                <span class="lbl">内陆公路限重</span>
+                                <span class="val" id="log-param-weight">重卡限重 50吨</span>
+                            </div>
+                            <div class="param-box">
+                                <span class="lbl">雨季停开窗口</span>
+                                <span class="val danger-text" id="log-param-rain">每年 7.15 - 10.15</span>
+                            </div>
+                            <div class="param-box">
+                                <span class="lbl">海运转关保证金率</span>
+                                <span class="val" id="log-param-bond">货值额度的 120%</span>
+                            </div>
+                        </div>
+                        <div class="alert-box-info" id="logistics-alert-box">
+                            <strong>⚠️ 提示：</strong> 7月份即将进入雨季阶段，砂石土路段路况恶化。GCTS 物流引擎建议在 7月10日 前将矿区精矿全数起运至恩冈代雷保税堆场，以防后期公路断交。
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 选项卡 4: 系统知识库 -->
+            <section id="tab-content-kb" class="tab-content">
+                <div class="kb-layout">
+                    <!-- 左侧数据库导航 -->
+                    <div class="card kb-nav-card">
+                        <h3>主数据模型清单</h3>
+                        <ul class="kb-nav-list">
+                            <li class="active" onclick="switchKBData('country')">DB001 国家主数据档案</li>
+                            <li onclick="switchKBData('commodity')">DB002 矿物属性主数据</li>
+                            <li onclick="switchKBData('port')">DB004 转运港口主数据</li>
+                            <li onclick="switchKBData('logistics')">DB005 物流走廊主数据</li>
+                        </ul>
+                    </div>
+
+                    <!-- 右侧数据库详细展示 -->
+                    <div class="card kb-detail-card" id="kb-detail-display">
+                        <div class="kb-display-header">
+                            <h3 id="kb-data-title">DB001 国家主数据档案：乍得 (Chad)</h3>
+                        </div>
+                        <div class="kb-display-content" id="kb-data-body">
+                            <!-- 这里由JS动态渲染渲染数据 -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 选项卡 5: GCTS OS 资产大地图 -->
+            <section id="tab-content-assets" class="tab-content">
+                <div class="assets-layout" style="display: flex; flex-direction: column; gap: 2.5rem;">
+                    
+                    <!-- 第一板块：操作系统四大核心目标 -->
+                    <div class="card objectives-card">
+                        <div class="card-header">
+                            <h3>L2/L8 GCTS 操作系统四大核心达成目标</h3>
+                            <span class="badge">Core Missions</span>
+                        </div>
+                        <div class="objectives-grid" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; margin-top: 1rem;">
+                            <div class="objective-box" style="background: rgba(255, 255, 255, 0.02); border: 1px solid var(--border-color); padding: 1.5rem; border-radius: 16px; display: flex; flex-direction: column; gap: 0.5rem;">
+                                <div style="font-size: 1.8rem; color: var(--color-primary);">🧮</div>
+                                <h4 style="font-family: var(--font-display); font-size: 1rem; color: var(--text-primary);">目标一：物理换算与计价对账</h4>
+                                <p style="font-size: 0.75rem; color: var(--text-secondary); line-height: 1.5;">打破“标吨与实物湿吨”混淆痛点，通过 DMT=WMT*(1-M) 及 65% 折标公式，在 L6 报价引擎中实现国内吨度与海外系数的对账闭环。</p>
+                            </div>
+                            <div class="objective-box" style="background: rgba(255, 255, 255, 0.02); border: 1px solid var(--border-color); padding: 1.5rem; border-radius: 16px; display: flex; flex-direction: column; gap: 0.5rem;">
+                                <div style="font-size: 1.8rem; color: var(--color-success);">🛡️</div>
+                                <h4 style="font-family: var(--font-display); font-size: 1rem; color: var(--text-primary);">目标二：突破 3TG RMAP 合规</h4>
+                                <p style="font-size: 0.75rem; color: var(--text-secondary); line-height: 1.5;">针对敏感冲突金属，制定符合 OECD 指南的 RMAP CoC 十大证明单证包，在海关申报和边境转关层面杜绝洗矿与混矿嫌疑。</p>
+                            </div>
+                            <div class="objective-box" style="background: rgba(255, 255, 255, 0.02); border: 1px solid var(--border-color); padding: 1.5rem; border-radius: 16px; display: flex; flex-direction: column; gap: 0.5rem;">
+                                <div style="font-size: 1.8rem; color: var(--color-warning);">🚛</div>
+                                <h4 style="font-family: var(--font-display); font-size: 1rem; color: var(--text-primary);">目标三：多式联运走廊物理安全</h4>
+                                <p style="font-size: 0.75rem; color: var(--text-secondary); line-height: 1.5;">针对 1250 万高货值钨矿，采用“防割吨袋+物理 RFID 锁扣+高保螺栓厢锁+GPS+TPND一切险”设计，确保超长非洲公路段的物理安全。</p>
+                            </div>
+                            <div class="objective-box" style="background: rgba(255, 255, 255, 0.02); border: 1px solid var(--border-color); padding: 1.5rem; border-radius: 16px; display: flex; flex-direction: column; gap: 0.5rem;">
+                                <div style="font-size: 1.8rem; color: var(--color-gold);">📊</div>
+                                <h4 style="font-family: var(--font-display); font-size: 1rem; color: var(--text-primary);">目标四：高管决策与团队执行</h4>
+                                <p style="font-size: 0.75rem; color: var(--text-secondary); line-height: 1.5;">上接包含 P&L 和决策树的 CEO 决策卡以控制 Go/No-Go 投资红线，下接六阶段标准操作 SOP 以指导团队合规安全发运。</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 第二板块：双维扩展性矩阵 -->
+                    <div class="card scalability-card">
+                        <div class="card-header">
+                            <h3>GCTS 操作系统双维可扩展性规划矩阵 (Scalability Matrix)</h3>
+                            <span class="badge">Horizontal Expansion</span>
+                        </div>
+                        <div class="result-table-container">
+                            <table class="result-table">
+                                <thead>
+                                    <tr>
+                                        <th>国家 / 矿区走廊</th>
+                                        <th>锑矿 (Sb) <sub>(高品位原矿样板)</sub></th>
+                                        <th>钨矿 ($WO_3$) <sub>(3TG标吨合规样板)</sub></th>
+                                        <th>锂矿 (Li) <sub>(新能源矿石)</sub></th>
+                                        <th>铜矿 (Cu) <sub>(大宗期货金属)</sub></th>
+                                        <th>锆钛砂 (Zr-Ti) <sub>(重砂走廊)</sub></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="font-bold">乍得 (Chad) <sub>(内陆出产)</sub></td>
+                                        <td><span class="badge" style="background: rgba(0, 230, 118, 0.15); color: var(--color-success); border-color: rgba(0, 230, 118, 0.3);">🟢 Case 001 已落地</span></td>
+                                        <td><span class="badge" style="background: rgba(0, 230, 118, 0.15); color: var(--color-success); border-color: rgba(0, 230, 118, 0.3);">🟢 Case 002 已落地</span></td>
+                                        <td><span class="badge" style="background: rgba(255, 179, 0, 0.15); color: var(--color-warning); border-color: rgba(255, 179, 0, 0.3);">🟡 规划中</span></td>
+                                        <td><span style="color: var(--text-muted);">❌ 不涉及</span></td>
+                                        <td><span style="color: var(--text-muted);">❌ 不涉及</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="font-bold">喀麦隆 (Cameroon) <sub>(多式联运)</sub></td>
+                                        <td><span class="badge" style="background: rgba(0, 230, 118, 0.15); color: var(--color-success); border-color: rgba(0, 230, 118, 0.3);">🟢 通路已打通</span></td>
+                                        <td><span class="badge" style="background: rgba(0, 230, 118, 0.15); color: var(--color-success); border-color: rgba(0, 230, 118, 0.3);">🟢 通路已打通</span></td>
+                                        <td><span class="badge" style="background: rgba(255, 179, 0, 0.15); color: var(--color-warning); border-color: rgba(255, 179, 0, 0.3);">🟡 规划中</span></td>
+                                        <td><span style="color: var(--text-muted);">❌ 不涉及</span></td>
+                                        <td><span style="color: var(--text-muted);">❌ 不涉及</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="font-bold">刚果金 (DRC) <sub>(3TG重灾区)</sub></td>
+                                        <td><span style="color: var(--text-muted);">❌ 不涉及</span></td>
+                                        <td><span class="badge" style="background: rgba(255, 23, 68, 0.15); color: var(--color-danger); border-color: rgba(255, 23, 68, 0.3);">🔴 待拓展 (高壁垒)</span></td>
+                                        <td><span class="badge" style="background: rgba(255, 23, 68, 0.15); color: var(--color-danger); border-color: rgba(255, 23, 68, 0.3);">🔴 待拓展</span></td>
+                                        <td><span class="badge" style="background: rgba(255, 23, 68, 0.15); color: var(--color-danger); border-color: rgba(255, 23, 68, 0.3);">🔴 待拓展</span></td>
+                                        <td><span style="color: var(--text-muted);">❌ 不涉及</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="font-bold">莫桑比克 <sub>(东非出海口)</sub></td>
+                                        <td><span style="color: var(--text-muted);">❌ 不涉及</span></td>
+                                        <td><span style="color: var(--text-muted);">❌ 不涉及</span></td>
+                                        <td><span style="color: var(--text-muted);">❌ 不涉及</span></td>
+                                        <td><span style="color: var(--text-muted);">❌ 不涉及</span></td>
+                                        <td><span class="badge" style="background: rgba(255, 23, 68, 0.15); color: var(--color-danger); border-color: rgba(255, 23, 68, 0.3);">🔴 待拓展 (重砂砂石)</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- 第三板块：按业务类目成果大地图 -->
+                    <div class="card deliverables-map-card">
+                        <div class="card-header">
+                            <h3>按业务功能类目横向分类的系统成果与资产导航</h3>
+                            <span class="badge">Master Deliverables Map</span>
+                        </div>
+                        <div class="result-table-container">
+                            <table class="result-table">
+                                <thead>
+                                    <tr>
+                                        <th>资产分类</th>
+                                        <th>通用模块 / Excel 数学引擎</th>
+                                        <th>Case No.001 锑矿交付物 (Sb)</th>
+                                        <th>Case No.002 钨矿交付物 ($WO_3$)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- 类目一 -->
+                                    <tr>
+                                        <td class="font-bold" style="color: var(--color-primary);">1. 基础标准与折算物理库<br><small style="color: var(--text-muted); font-weight: normal;">对应目标一：防错对账</small></td>
+                                        <td><a href="docs/Tungsten_Commodity_KB_V0.1.html" target="_blank" class="gold-text">Tungsten_Commodity_KB_V0.1.md</a></td>
+                                        <td><a href="docs/D05_Antimony_Commodity_KB.html" target="_blank">D05_Antimony_Commodity_KB.md</a></td>
+                                        <td><a href="docs/04_Tungsten_Commodity_KB.html" target="_blank">04_Tungsten_Commodity_KB.md</a></td>
+                                    </tr>
+                                    <!-- 类目二 -->
+                                    <tr>
+                                        <td class="font-bold" style="color: var(--color-primary);">2. 报价与多情景财务引擎<br><small style="color: var(--text-muted); font-weight: normal;">对应目标一及目标四：决策辅助</small></td>
+                                        <td>
+                                            <div style="display: flex; flex-direction: column; gap: 0.25rem;">
+                                                <a href="GCTS_Metals_Pricing_Calculator.xlsx" target="_blank" class="success-text" style="font-weight: 600;">GCTS_Metals_Pricing_Calculator.xlsx</a>
+                                                <a href="GCTS_Metals_Pricing_Engine_V0.3_Compact.xlsx" target="_blank" class="success-text" style="font-weight: 600;">GCTS_Pricing_Engine_V0.3_Compact.xlsx</a>
+                                                <a href="GCTS_Metals_Pricing_Engine_V1.xlsx" target="_blank" class="success-text" style="font-weight: 600;">GCTS_Pricing_Engine_V1.xlsx</a>
+                                                <a href="docs/Model_Engine_Register_V0.1.html" target="_blank">Model_Engine_Register_V0.1.md</a>
+                                            </div>
+                                        </td>
+                                        <td><a href="docs/D03_Sb_Pricing_Engine_Fields.html" target="_blank">D03_Sb_Pricing_Engine_Fields.md</a></td>
+                                        <td>
+                                            <div style="display: flex; flex-direction: column; gap: 0.25rem;">
+                                                <a href="docs/D01_Tungsten_Logic_Audit.html" target="_blank" class="gold-text">D01_Tungsten_Logic_Audit.md</a>
+                                                <a href="docs/WO3_Pricing_Engine_V0.1.html" target="_blank">WO3_Pricing_Engine_V0.1.md</a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <!-- 类目三 -->
+                                    <tr>
+                                        <td class="font-bold" style="color: var(--color-primary);">3. 跨国多式联运物流走廊<br><small style="color: var(--text-muted); font-weight: normal;">对应目标三：物理防盗与费率</small></td>
+                                        <td><a href="GCTS_Multimodal_Logistics_Template.xlsx" target="_blank" class="success-text" style="font-weight: 600;">GCTS_Multimodal_Logistics_Template.xlsx</a></td>
+                                        <td><a href="docs/D06_Logistics_Chad_Douala.html" target="_blank">D06_Logistics_Chad_Douala.md</a></td>
+                                        <td><a href="docs/05_Logistics_Chad_Douala_Tungsten.html" target="_blank">05_Logistics_Chad_Douala_Tungsten.md</a></td>
+                                    </tr>
+                                    <!-- 类目四 -->
+                                    <tr>
+                                        <td class="font-bold" style="color: var(--color-primary);">4. 风控合规与3TG溯源<br><small style="color: var(--text-muted); font-weight: normal;">对应目标二：突破合规壁垒</small></td>
+                                        <td><a href="docs/Pricing_Model_Circular_Reference_Audit_2026-07-06.html" target="_blank">Pricing_Model_Circular_Reference_Audit_2026-07-06.md</a></td>
+                                        <td><a href="docs/D07_Risk_Compliance_Manual.html" target="_blank">D07_Risk_Compliance_Manual.md</a></td>
+                                        <td><a href="docs/06_Tungsten_Risk_Compliance_Manual.html" target="_blank">06_Tungsten_Risk_Compliance_Manual.md</a></td>
+                                    </tr>
+                                    <!-- 类目五 -->
+                                    <tr>
+                                        <td class="font-bold" style="color: var(--color-primary);">5. 业务 SOP 与高管决策卡<br><small style="color: var(--text-muted); font-weight: normal;">对应目标四：高管决策与团队执行</small></td>
+                                        <td>-</td>
+                                        <td>
+                                            <div style="display: flex; flex-direction: column; gap: 0.25rem;">
+                                                <a href="docs/D01_Chad_Antimony_Whitepaper.html" target="_blank" class="gold-text">D01_Chad_Antimony_Whitepaper.md</a>
+                                                <a href="docs/D02_Chad_Antimony_Trading_SOP.html" target="_blank">D02_Chad_Antimony_Trading_SOP.md</a>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div style="display: flex; flex-direction: column; gap: 0.25rem;">
+                                                <a href="docs/07_CEO_Decision_Card.html" target="_blank" class="gold-text" style="font-weight: 600;">07_CEO_Decision_Card.md</a>
+                                                <a href="docs/01_Chad_Tungsten_Whitepaper.html" target="_blank">01_Chad_Tungsten_Whitepaper.md</a>
+                                                <a href="docs/02_Chad_Tungsten_SOP.html" target="_blank">02_Chad_Tungsten_SOP.md</a>
+                                                <a href="docs/Conflict_Resolution_Notes.html" target="_blank">Conflict_Resolution_Notes.md</a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- 新增第四板块：GCTS 贸易实务与计价指南 -->
+                    <div class="card pricing-guide-card" style="margin-top: 2.5rem;">
+                        <div class="card-header">
+                            <h3>GCTS 贸易实务与物理计价指南 (Pricing Metrics & Trade Guide)</h3>
+                            <span class="badge">Trade Practice</span>
+                        </div>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 1rem;">
+                            <div style="background: rgba(255, 255, 255, 0.01); border: 1px solid var(--border-color); padding: 1.5rem; border-radius: 16px;">
+                                <h4 style="font-family: var(--font-display); font-size: 1rem; color: var(--color-gold); margin-bottom: 1rem;">贸易术语简析 (Trade Terms)</h4>
+                                <div style="font-size: 0.8rem; color: var(--text-secondary); line-height: 1.6; display: flex; flex-direction: column; gap: 0.75rem;">
+                                    <p><strong>1. EXW (Ex Works - 矿区现场交货)</strong><br>买方直接在乍得 Mongo 矿区堆场提货。买方负责后续所有运输：重卡公路运输、恩冈代雷转装铁路、喀麦隆海关报关、杜阿拉港装船以及沿途所有地缘和物理偷盗风险。采购出厂价通常较低，但极其考验买方的非洲实操物流能力。</p>
+                                    <p><strong>2. FOB (Free on Board - 船上交货 / 离岸价)</strong><br>卖方负责把精矿安全运抵喀麦隆杜阿拉港并装载上国际班轮。在集装箱越过船舷之前的所有公路/铁路运输、跨境转关（乍得-喀麦隆）和清关税费均由卖方承担。风险在船舷处交接。</p>
+                                </div>
+                            </div>
+                            <div style="background: rgba(255, 255, 255, 0.01); border: 1px solid var(--border-color); padding: 1.5rem; border-radius: 16px;">
+                                <h4 style="font-family: var(--font-display); font-size: 1rem; color: var(--color-cyan); margin-bottom: 1rem;">物理与计价基准 (Pricing Metrics)</h4>
+                                <div style="font-size: 0.8rem; color: var(--text-secondary); line-height: 1.6; display: flex; flex-direction: column; gap: 0.75rem;">
+                                    <p><strong>1. DMT (Dry Metric Ton - 干公吨)</strong><br>原矿开采时带有物理水分（如 5% H2O）。大宗贸易以扣除水分后的“干重”计算。计价结算公式为：<br><code style="display: block; margin-top: 0.25rem; background: rgba(0,0,0,0.3); padding: 0.5rem; border-radius: 6px; color: var(--color-cyan); font-family: monospace;">干重 (DMT) = 湿重 (WMT) × (1 - 水分 H2O%)</code></p>
+                                    <p><strong>2. MTU (Metric Ton Unit - 吨度)</strong><br>指 1 吨干重矿石中含有 1% 的有用金属量。例如 1 DMT 品位为 50% 的锑精矿，等于 50 个吨度。贸易以 <strong>美元/吨度 (USD/MTU)</strong> 为基准报价，结算公式为：<br><code style="display: block; margin-top: 0.25rem; background: rgba(0,0,0,0.3); padding: 0.5rem; border-radius: 6px; color: var(--color-cyan); font-family: monospace;">结算货值 = 干重 (DMT) × 品位 (%) × 单价 (USD/MTU)</code></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 新增第五板块：系统解决逻辑与架构 -->
+                    <div class="card logic-architecture-card" style="margin-top: 2.5rem;">
+                        <div class="card-header">
+                            <h3>系统解决逻辑与架构 (System Logic)</h3>
+                            <span class="badge">Architecture</span>
+                        </div>
+                        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 1rem;">
+                            <div style="background: rgba(255, 255, 255, 0.01); border: 1px solid var(--border-color); padding: 1.5rem; border-radius: 16px;">
+                                <h4 style="font-family: var(--font-display); font-size: 0.95rem; color: var(--color-primary); margin-bottom: 0.5rem;">#01 公路/铁路分段转运算法</h4>
+                                <p style="font-size: 0.75rem; color: var(--text-secondary); line-height: 1.5;">针对乍得 Mongo 至喀麦隆杜阿拉 1800 公里的超长出海长廊，精密解构了公路重卡运费、跨国过关海关 T1 保函费、恩冈代雷火车站换装 CAMRAIL 仓储耗损以及杜阿拉港免箱期滞港费，以高精度拟合动态总成本。</p>
+                            </div>
+                            <div style="background: rgba(255, 255, 255, 0.01); border: 1px solid var(--border-color); padding: 1.5rem; border-radius: 16px;">
+                                <h4 style="font-family: var(--font-display); font-size: 0.95rem; color: var(--color-success); margin-bottom: 0.5rem;">#02 100% 财务公式双向稽核</h4>
+                                <p style="font-size: 0.75rem; color: var(--text-secondary); line-height: 1.5;">前端 Web 与后台 openpyxl 的底层公式保持绝对镜像对齐。任何关于品位变动、国际/国内单价、水分罚扣、TC 处理费增减的改动均可两端无缝比对，杜绝任何对账分歧。</p>
+                            </div>
+                            <div style="background: rgba(255, 255, 255, 0.01); border: 1px solid var(--border-color); padding: 1.5rem; border-radius: 16px;">
+                                <h4 style="font-family: var(--font-display); font-size: 0.95rem; color: var(--color-danger); margin-bottom: 0.5rem;">#03 地缘及气候风控红线拦截</h4>
+                                <p style="font-size: 0.75rem; color: var(--text-secondary); line-height: 1.5;">实时收集乍得北部冲突动态，同时根据 7.15 - 10.15 乍得雨季对土路的物理阻断特性，在决策卡片上主动提示并阻断违规付款，对不合格发运实施一票否决。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- JS 代码 -->
+    <script src="app.js"></script>
+</body>
+</html>

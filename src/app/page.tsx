@@ -28,9 +28,9 @@ export default function Home() {
               </div>
 
               <div className="space-y-8">
-                <h1 className="text-5xl md:text-7xl font-black leading-[0.95] tracking-[0.05em] text-white mb-2">
+                <h1 className="text-5xl md:text-7xl font-black leading-[1.15] tracking-tighter text-white mb-2">
                   贸易的终局 <br />
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-white to-cyan-400 bg-[length:200%_auto] animate-gradient italic font-serif">算法的起点</span>
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-white to-cyan-400 bg-[length:200%_auto] animate-gradient italic">算法的起点</span>
                 </h1>
                 <div className="h-0.5 w-32 bg-gradient-to-r from-cyan-500/80 via-cyan-500/20 to-transparent"></div>
               </div>

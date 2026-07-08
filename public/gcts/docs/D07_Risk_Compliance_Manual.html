@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GCTS 乍得锑矿风险与合规手册 (06_Risk_Compliance_Manual) - GCTS OS System Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-base: #060913;
+            --bg-card: rgba(22, 28, 49, 0.45);
+            --border-color: rgba(255, 255, 255, 0.08);
+            --border-color-glow: rgba(168, 85, 247, 0.25);
+            --text-primary: #e6ebf5;
+            --text-secondary: #8f9cae;
+            --text-muted: #5e6d82;
+            --color-primary: #a855f7;
+            --color-cyan: #00f2fe;
+            --color-gold: #f2a900;
+            --color-success: #00e676;
+            --color-danger: #ff1744;
+            --font-display: 'Outfit', 'Inter', -apple-system, sans-serif;
+            --font-body: 'Inter', -apple-system, sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+            --transition-smooth: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-base);
+            color: var(--text-primary);
+            font-family: var(--font-body);
+            line-height: 1.7;
+            padding: 3rem 1.5rem;
+            display: flex;
+            justify-content: center;
+        }
+
+        .doc-container {
+            width: 100%;
+            max-width: 900px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: 3rem;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(15px);
+            position: relative;
+        }
+
+        .btn-back {
+            position: fixed;
+            top: 30px;
+            left: 30px;
+            background: rgba(22, 28, 49, 0.8);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            padding: 0.75rem 1.25rem;
+            border-radius: 12px;
+            text-decoration: none;
+            font-family: var(--font-display);
+            font-size: 0.8rem;
+            font-weight: 600;
+            transition: var(--transition-smooth);
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-back:hover {
+            color: var(--text-primary);
+            border-color: var(--color-primary);
+            box-shadow: 0 0 15px rgba(168, 85, 247, 0.3);
+            transform: translateX(-3px);
+        }
+
+        h1 {
+            font-family: var(--font-display);
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 1.5rem;
+            letter-spacing: -0.5px;
+            line-height: 1.2;
+        }
+
+        h2 {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--color-cyan);
+            margin-top: 2.5rem;
+            margin-bottom: 1.25rem;
+            border-left: 3px solid var(--color-primary);
+            padding-left: 12px;
+        }
+
+        h3 {
+            font-family: var(--font-display);
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: #fff;
+            margin-top: 1.75rem;
+            margin-bottom: 0.75rem;
+        }
+
+        p {
+            margin-bottom: 1.25rem;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        strong {
+            color: #fff;
+            font-weight: 600;
+        }
+
+        ul, ol {
+            margin-bottom: 1.5rem;
+            padding-left: 1.5rem;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        code {
+            font-family: var(--font-mono);
+            background: rgba(255, 255, 255, 0.05);
+            padding: 0.2rem 0.4rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            color: var(--color-cyan);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+        }
+
+        pre {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.25rem;
+            overflow-x: auto;
+            margin-bottom: 1.5rem;
+        }
+
+        pre code {
+            background: transparent;
+            padding: 0;
+            border: none;
+            color: var(--text-primary);
+            font-size: 0.85rem;
+        }
+
+        /* 表格科技风样式表 */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 2rem;
+            margin-top: 1.5rem;
+            font-size: 0.85rem;
+        }
+
+        th {
+            background: rgba(168, 85, 247, 0.1);
+            color: var(--color-cyan);
+            font-family: var(--font-display);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-bottom: 2px solid var(--border-color-glow);
+            text-align: left;
+            padding: 12px 16px;
+        }
+
+        td {
+            border-bottom: 1px solid var(--border-color);
+            padding: 12px 16px;
+            color: var(--text-secondary);
+        }
+
+        tr:hover td {
+            background: rgba(255, 255, 255, 0.01);
+            color: #fff;
+        }
+
+        /* 警告通知框样式 */
+        .doc-alert-box {
+            background: rgba(168, 85, 247, 0.06);
+            border-left: 4px solid var(--color-primary);
+            padding: 1.25rem 1.5rem;
+            border-radius: 0 12px 12px 0;
+            margin-bottom: 2rem;
+        }
+
+        .doc-alert-box.warning {
+            background: rgba(255, 179, 0, 0.06);
+            border-left-color: var(--color-warning);
+        }
+
+        .doc-alert-box.danger {
+            background: rgba(255, 23, 68, 0.06);
+            border-left-color: var(--color-danger);
+        }
+
+        .doc-alert-box.success {
+            background: rgba(0, 230, 118, 0.06);
+            border-left-color: var(--color-success);
+        }
+
+        .doc-alert-box strong {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-family: var(--font-display);
+        }
+        
+        .doc-alert-box p {
+            margin-bottom: 0;
+            font-size: 0.85rem;
+        }
+
+        /* Mermaid 流程图包裹 */
+        .mermaid {
+            background: rgba(0, 0, 0, 0.2) !important;
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid var(--border-color);
+            margin: 2.5rem 0;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 1.5rem 1rem;
+            }
+            .doc-container {
+                padding: 1.5rem;
+            }
+            .btn-back {
+                position: absolute;
+                top: -60px;
+                left: 0;
+            }
+        }
+    </style>
+    <!-- 引入 Mermaid 渲染 -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'dark',
+            themeVariables: {
+                background: '#060913',
+                primaryColor: '#161c31',
+                lineColor: '#a855f7'
+            }
+        });
+    </script>
+</head>
+<body>
+    <!-- 返回大地图 -->
+    <a href="../index.html" class="btn-back">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        返回决策大地图
+    </a>
+
+    <article class="doc-container">
+        <h1>GCTS 乍得锑矿风险与合规手册 (06_Risk_Compliance_Manual)</h1>
+<p>本手册是 GCTS 风险引擎（L6 Risk Engine）在 <strong>Case No.001：乍得锑矿项目</strong> 中的具体应用。手册确立了项目风控评估矩阵，并规定了必须执行的合规筛查清单（KYC/AML）。</p>
+<hr>
+<h2>1. 乍得锑矿项目风险评估矩阵 (Risk Matrix)</h2>
+<p>依据 GCTS L3 风险标准，将项目风险划分为 6 个维度，并按发生概率（1-5）和影响程度（1-5）进行量化评估（风险值 = 概率 \(\times\) 影响，最高 25 分）。</p>
+<table>
+<thead><tr>
+<th>风险类别</th>
+<th>风险描述</th>
+<th>概率 (1-5)</th>
+<th>影响 (1-5)</th>
+<th>风险值 (1-25)</th>
+<th>预警等级</th>
+<th>GCTS 防控应对措施</th>
+</tr></thead><tbody>
+<tr>
+<td><strong>主权政治</strong></td>
+<td>乍得过渡军政府更迭，资源国有化政策突变，导致采矿执照失效。</td>
+<td>3</td>
+<td>5</td>
+<td><strong>15</strong></td>
+<td>🟠 <strong>中高</strong></td>
+<td>1. 避免在乍得直接投资重资产矿山，采用<strong>采购包销 (Off-take Agreement)</strong> 模式。<br>2. 合同管辖权指定英国法律及新加坡仲裁。</td>
+</tr>
+<tr>
+<td><strong>外汇管制</strong></td>
+<td>乍得中非国家银行（BEAC）结汇审批极其缓慢，导致本地开采及物流付汇延迟。</td>
+<td>4</td>
+<td>3</td>
+<td><strong>12</strong></td>
+<td>🟡 <strong>中等</strong></td>
+<td>1. 在乍得境外（如法国巴黎或新加坡）设立贸易结算壳公司。<br>2. 预备 2 个月营运资金在本地银行作为流动性储备。</td>
+</tr>
+<tr>
+<td><strong>物流阻断</strong></td>
+<td>雨季（7-10月）格拉省公路塌方、旱溪暴涨，重卡断交，导致船期延误和违约。</td>
+<td>5</td>
+<td>3</td>
+<td><strong>15</strong></td>
+<td>🟠 <strong>中高</strong></td>
+<td>1. 每年 6 月前，必须将精矿强制性运抵喀麦隆恩冈代雷铁路局堆场存放。<br>2. 合同中约定雨季导致的物流延误免除滞港罚款。</td>
+</tr>
+<tr>
+<td><strong>品质欺诈</strong></td>
+<td>供应商以铁矿石、碎石掉包锑精矿；或者抽样样品与集装箱内货物不一致。</td>
+<td>2</td>
+<td>5</td>
+<td><strong>10</strong></td>
+<td>🟡 <strong>中等</strong></td>
+<td>1. 强制执行<strong>装运港 SGS 监装封箱</strong>，封条编号录入提单。<br>2. 采用阶梯付款（90% + 10%），保留 10% 尾款以中国目的港 CCIC 复检为准。</td>
+</tr>
+<tr>
+<td><strong>杂质超标</strong></td>
+<td>锑原矿伴生有害杂质砷 (As) 或铅 (Pb) 超标，导致中国商检扣押或退运。</td>
+<td>3</td>
+<td>5</td>
+<td><strong>15</strong></td>
+<td>🟠 <strong>中高</strong></td>
+<td>1. 订立严格拒收线（As > 0.5%, Pb > 1.0%），超标由卖方无条件退运。<br>2. 发货前堆场取样必须进行多点深度螺旋钻取。</td>
+</tr>
+<tr>
+<td><strong>合规制裁</strong></td>
+<td>供应商实际控制人被美国 OFAC 或欧盟列入受制裁名单，银行拒绝结汇。</td>
+<td>2</td>
+<td>5</td>
+<td><strong>10</strong></td>
+<td>🟡 <strong>中等</strong></td>
+<td>1. 开展前置 KYC 筛查，追溯最终受益人 (UBO)。<br>2. 在 SPA 协议中加入防制裁与反洗钱承诺条款。</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>2. 供应商合规筛查清单 (KYC & AML Checklist)</h2>
+<p>在签署任何协议或安排付款前，GCTS 合规代理（Compliance Agent）必须对乍得本地合作供应商进行穿透式 KYC（Know Your Customer - 尽职调查）与 AML（Anti-Money Laundering - 反洗钱）筛查。</p>
+<h3>STEP 1: 主体资信核验 (Identity & Corporate Status)</h3>
+<ul>
+<li>  [ ] <strong>公司营业执照 (Register of Commerce - RCCM)</strong>: 获取正本复印件，并在乍得工商会（CCIAMA）核实真实性。</li>
+<li>  [ ] <strong>税务登记证 (NIF - Numéro d'Identification Fiscale)</strong>: 核实其是否具备合法纳税人身份，有无未决税务官司。</li>
+<li>  [ ] <strong>矿业执照 (Mining License/Authorization)</strong>: 审查其是否拥有格拉省目标矿区的探矿权或采矿权证书，证书是否在有效期内，是否经由总统令或矿业部部长令签署。</li>
+</ul>
+<h3>STEP 2: 实际控制人穿透 (UBO Identification)</h3>
+<ul>
+<li>  [ ] <strong>最终受益人 (UBO - Ultimate Beneficial Owner)</strong>: 追溯持股 10% 以上的所有股东身份证/护照。</li>
+<li>  [ ] <strong>政治敏感人物 (PEP - Politically Exposed Persons)</strong>: 筛查股东和高管是否包含乍得军政府成员、矿业部官员及其近亲属。若存在，项目自动升级为“高风险”，需报董事长特批。</li>
+</ul>
+<h3>STEP 3: 国际制裁数据库筛查 (Sanctions Screening)</h3>
+<ul>
+<li>  [ ] <strong>OFAC/SDN 名单比对</strong>: 将公司名称、股东姓名录入 GCTS 制裁过滤器，确认未出现在美国海外资产控制办公室（OFAC）、欧盟（EU）、联合国（UN）的制裁名单中。</li>
+<li>  [ ] <strong>受制裁银行筛查</strong>: 确认卖方指定的收款账户银行未被切断 SWIFT 系统，未列入制裁清单。</li>
+</ul>
+<hr>
+<h2>3. 非冲突矿产声明与 ESG 合规 (Conflict-Free & ESG Compliance)</h2>
+<p>为了防范最终产品被欧美买方（如知名汽车、半导体厂）拒收，我方采购的锑精矿必须符合《OECD 冲突矿产尽职调查指南》规范。</p>
+<h3>3.1 非冲突矿产审查要点 (Conflict-Free Checklist)</h3>
+<ul>
+<li>  [ ] <strong>矿区军事控制情况</strong>: 确认格拉省矿区无乍得叛军、达尔富尔武装组织控制，无武装割据势力强行征税。</li>
+<li>  [ ] <strong>资金流向追溯</strong>: 审查支付的采购款是否完全汇入供应商官方开户银行，严禁通过哈瓦拉（Hawala - 非正式资金汇兑网络）或现金结算，防止资金流入恐怖组织。</li>
+<li>  [ ] <strong>童工使用零容忍</strong>: 供应商必须出具书面承诺书，保证其开采、手选、包装流程中绝无雇用 18岁以下童工的行为，我方团队在现场拥有随时无预警审计矿区的权利。</li>
+</ul>
+<h3>3.2 最终用途声明条款 (End-User Declaration)</h3>
+<p>鉴于锑作为关键军事原材料的敏感性，我方在贸易合同及出口申报单中需明确声明：</p>
+<blockquote style="border-left: 3px solid var(--color-primary); padding-left: 1rem; margin-bottom: 1.5rem; color: var(--text-secondary); font-style: italic;">“本批锑精矿的最终用途为：**工业级三氧化二锑阻燃剂制造或光伏玻璃焦锑酸钠澄清剂制造**，绝不用作任何非常规军事武器、化学武器、大规模杀伤性武器的研发或生产，亦不向任何受国际制裁实体转售。”</blockquote>
+    </article>
+</body>
+</html>

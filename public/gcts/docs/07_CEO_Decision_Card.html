@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GCTS CEO 决策卡 - 乍得黑钨矿项目战略路线决策 (07_CEO_Decision_Card) - GCTS OS System Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-base: #060913;
+            --bg-card: rgba(22, 28, 49, 0.45);
+            --border-color: rgba(255, 255, 255, 0.08);
+            --border-color-glow: rgba(168, 85, 247, 0.25);
+            --text-primary: #e6ebf5;
+            --text-secondary: #8f9cae;
+            --text-muted: #5e6d82;
+            --color-primary: #a855f7;
+            --color-cyan: #00f2fe;
+            --color-gold: #f2a900;
+            --color-success: #00e676;
+            --color-danger: #ff1744;
+            --font-display: 'Outfit', 'Inter', -apple-system, sans-serif;
+            --font-body: 'Inter', -apple-system, sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+            --transition-smooth: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-base);
+            color: var(--text-primary);
+            font-family: var(--font-body);
+            line-height: 1.7;
+            padding: 3rem 1.5rem;
+            display: flex;
+            justify-content: center;
+        }
+
+        .doc-container {
+            width: 100%;
+            max-width: 900px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: 3rem;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(15px);
+            position: relative;
+        }
+
+        .btn-back {
+            position: fixed;
+            top: 30px;
+            left: 30px;
+            background: rgba(22, 28, 49, 0.8);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            padding: 0.75rem 1.25rem;
+            border-radius: 12px;
+            text-decoration: none;
+            font-family: var(--font-display);
+            font-size: 0.8rem;
+            font-weight: 600;
+            transition: var(--transition-smooth);
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-back:hover {
+            color: var(--text-primary);
+            border-color: var(--color-primary);
+            box-shadow: 0 0 15px rgba(168, 85, 247, 0.3);
+            transform: translateX(-3px);
+        }
+
+        h1 {
+            font-family: var(--font-display);
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 1.5rem;
+            letter-spacing: -0.5px;
+            line-height: 1.2;
+        }
+
+        h2 {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--color-cyan);
+            margin-top: 2.5rem;
+            margin-bottom: 1.25rem;
+            border-left: 3px solid var(--color-primary);
+            padding-left: 12px;
+        }
+
+        h3 {
+            font-family: var(--font-display);
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: #fff;
+            margin-top: 1.75rem;
+            margin-bottom: 0.75rem;
+        }
+
+        p {
+            margin-bottom: 1.25rem;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        strong {
+            color: #fff;
+            font-weight: 600;
+        }
+
+        ul, ol {
+            margin-bottom: 1.5rem;
+            padding-left: 1.5rem;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        code {
+            font-family: var(--font-mono);
+            background: rgba(255, 255, 255, 0.05);
+            padding: 0.2rem 0.4rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            color: var(--color-cyan);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+        }
+
+        pre {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.25rem;
+            overflow-x: auto;
+            margin-bottom: 1.5rem;
+        }
+
+        pre code {
+            background: transparent;
+            padding: 0;
+            border: none;
+            color: var(--text-primary);
+            font-size: 0.85rem;
+        }
+
+        /* 表格科技风样式表 */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 2rem;
+            margin-top: 1.5rem;
+            font-size: 0.85rem;
+        }
+
+        th {
+            background: rgba(168, 85, 247, 0.1);
+            color: var(--color-cyan);
+            font-family: var(--font-display);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-bottom: 2px solid var(--border-color-glow);
+            text-align: left;
+            padding: 12px 16px;
+        }
+
+        td {
+            border-bottom: 1px solid var(--border-color);
+            padding: 12px 16px;
+            color: var(--text-secondary);
+        }
+
+        tr:hover td {
+            background: rgba(255, 255, 255, 0.01);
+            color: #fff;
+        }
+
+        /* 警告通知框样式 */
+        .doc-alert-box {
+            background: rgba(168, 85, 247, 0.06);
+            border-left: 4px solid var(--color-primary);
+            padding: 1.25rem 1.5rem;
+            border-radius: 0 12px 12px 0;
+            margin-bottom: 2rem;
+        }
+
+        .doc-alert-box.warning {
+            background: rgba(255, 179, 0, 0.06);
+            border-left-color: var(--color-warning);
+        }
+
+        .doc-alert-box.danger {
+            background: rgba(255, 23, 68, 0.06);
+            border-left-color: var(--color-danger);
+        }
+
+        .doc-alert-box.success {
+            background: rgba(0, 230, 118, 0.06);
+            border-left-color: var(--color-success);
+        }
+
+        .doc-alert-box strong {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-family: var(--font-display);
+        }
+        
+        .doc-alert-box p {
+            margin-bottom: 0;
+            font-size: 0.85rem;
+        }
+
+        /* Mermaid 流程图包裹 */
+        .mermaid {
+            background: rgba(0, 0, 0, 0.2) !important;
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid var(--border-color);
+            margin: 2.5rem 0;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 1.5rem 1rem;
+            }
+            .doc-container {
+                padding: 1.5rem;
+            }
+            .btn-back {
+                position: absolute;
+                top: -60px;
+                left: 0;
+            }
+        }
+    </style>
+    <!-- 引入 Mermaid 渲染 -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'dark',
+            themeVariables: {
+                background: '#060913',
+                primaryColor: '#161c31',
+                lineColor: '#a855f7'
+            }
+        });
+    </script>
+</head>
+<body>
+    <!-- 返回大地图 -->
+    <a href="../index.html" class="btn-back">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        返回决策大地图
+    </a>
+
+    <article class="doc-container">
+        <h1>GCTS CEO 决策卡 - 乍得黑钨矿项目战略路线决策 (07_CEO_Decision_Card)</h1>
+<p><strong>项目编号</strong>：Case No.002  </p>
+<p><strong>标的资产</strong>：乍得格拉省 30 吨 <code class="math">WO_3</code> 黑钨精矿 (品位 43%，实物吨，假定水分 0%)  </p>
+<p><strong>决策人</strong>：公司董事长/CEO  </p>
+<p><strong>数据基准</strong>：2026 年 7 月行情框架（国内公开基准 47.1万元/标吨；50万元/标吨为情景价；海外 3,000 美元/吨度，1:7.2 汇率）  </p>
+<hr>
+<h2>1. 核心经济指标对比 (Economic Dashboards)</h2>
+<p>针对本批 30 吨（共计 <strong>1,290 吨度</strong>）粗精矿，GCTS 模型运行得出的双路线净利润测算如下：</p>
+<table>
+<thead><tr>
+<th>指标</th>
+<th>路线一：走香港境外销售 (销往越南马山，FOB 杜阿拉)</th>
+<th>路线二：运回中国国内销售 (DDP 中国港口，含海运)</th>
+<th>路线差额 (路线一 - 路线二)</th>
+</tr></thead><tbody>
+<tr>
+<td><strong>贸易结算单价</strong></td>
+<td><strong>1,350 美元/吨度</strong> (按 APT <code class="math">3,000 \times 45\%</code>)</td>
+<td><strong>6,159.23 元/吨度</strong> (按47.1万公开基准)；<strong>6,538.46 元/吨度</strong> (按50万情景价)</td>
+<td><strong>-</strong></td>
+</tr>
+<tr>
+<td><strong>总货值 (CNY)</strong></td>
+<td><strong>12,538,800.00 元</strong> (约 1,253.9 万元)</td>
+<td><strong>8,434,615.38 元</strong> (约 843.5 万元)</td>
+<td><strong>+4,104,184.62 元</strong> (高出 48.66%)</td>
+</tr>
+<tr>
+<td><strong>采购付汇成本</strong></td>
+<td>6,966,000.00 元 (750 USD/MTU, 乍得矿区离岸价)</td>
+<td>6,966,000.00 元 (750 USD/MTU, 同左)</td>
+<td>0.00 元</td>
+</tr>
+<tr>
+<td><strong>物流运保成本</strong></td>
+<td>228,000.00 元 (FOB 杜阿拉，不含海运费)</td>
+<td>292,000.00 元 (DDP 中国，包含海运费)</td>
+<td>-64,000.00 元 (运费转嫁)</td>
+</tr>
+<tr>
+<td><strong>财务及合规成本</strong></td>
+<td>50,000.00 元 (含 3TG RMAP 建链及 L/C 75天利息)</td>
+<td>25,000.00 元 (无 RMAP 成本，仅 40天资金利息)</td>
+<td>+25,000.00 元</td>
+</tr>
+<tr>
+<td><strong>预估净利润</strong></td>
+<td><strong>5,294,800.00 元人民币</strong></td>
+<td><strong>1,151,615.38 元人民币</strong></td>
+<td><strong>+4,143,184.62 元人民币</strong></td>
+</tr>
+<tr>
+<td><strong>项目毛利率</strong></td>
+<td><strong>42.23%</strong></td>
+<td><strong>13.65%</strong></td>
+<td><strong>+28.58%</strong></td>
+</tr>
+</tbody></table>
+<div class="doc-alert-box info"><strong>提示</strong><p>**敏感性对账警示**：<br>1. **海外折价系数平衡点**：只要境外买方给出的折扣系数高于 **30.27%**，海外销售路线在货值上就始终具有优势。<br>2. **水分损耗**：本表假定 0% 水分。若实际检验水分达到 2%，总货值将刚性萎缩 2.0%（海外路线货值损失 25.08 万元，国内损失 16.87 万元）。</p></div>
+<hr>
+<h2>2. 核心博弈对比与风险评估 (Spread & Risks)</h2>
+<h3>📈 路线一 (境外销售) 核心价值：</h3>
+<ul>
+<li><strong>最大化创收</strong>：多获取约 <strong>414 万元</strong> 的净利润。</li>
+<li><strong>美元结汇</strong>：获取 174 万美元外汇头寸。</li>
+<li><strong>物流转嫁</strong>：海运运费由越南买方承担，且货柜在杜阿拉港口交货即完成货权交接。</li>
+</ul>
+<h3>⚠️ 路线一 (境外销售) 致命短板：</h3>
+<ul>
+<li><strong>3TG 合规一票否决</strong>：必须无瑕疵备妥矿山采矿证、原产地证等 10 大 RMAP/CoC 产销监管链证明。一旦文件被评定为“洗矿走私”嫌疑，面临目的港退货拒收或货物扣留的毁灭性打击。</li>
+<li><strong>资金占用周期长</strong>：背靠背 L/C 结算周期长达 75-90 天，比国内长近一倍。</li>
+<li><strong>物理防盗风险</strong>：矿石单吨价值超 28 万元，非洲公路段易发生盗窃掉包。</li>
+</ul>
+<hr>
+<h2>3. 董事长战略决策树与行动指令 (Strategic Decision Tree)</h2>
+<p>根据 GCTS V0.1 操作系统逻辑，特向现场和结算团队下达以下分步决策树行动指令：</p>
+<pre><code>graph TD
+    Start["评估 30 吨 43% 黑钨精矿"] --> TraceVerify{"乍得出口商能否提供矿特许权证与矿山原产地证明?"}
+    TraceVerify -- 不能 (有洗矿嫌疑) --> RouteDomestic["退守路线二: 运回中国国内销售 <br> (净利润约115万, 本金安全落袋)"]
+    TraceVerify -- 能 (单证初步成立) --> TestSample{"Mongo 堆场联合取样: <br> 水分是否 <= 2.0% 且有害杂质 As <= 0.2%?"}
+    TestSample -- 否 (水超标/有害超标) --> Reduct["现场烈日摊晒, 或在合同中锁定杂质罚扣系数"]
+    TestSample -- 是 (品质达标) --> VerifyCoC{"喀麦隆口岸通关, 能否取得 T1 保函与海关电子铅封记录?"}
+    VerifyCoC -- 不能 (中途建链断裂) --> RouteDomestic
+    VerifyCoC -- 能 (CoC 链条闭环成立) --> PayVerify{"越南马山确认 45% 系数 <br> 并开立 90%+10% Irrevocable L/C?"}
+    PayVerify -- 否/只给35%以下 --> RouteDomestic
+    PayVerify -- 是 (付款信用锁定) --> RouteOverseas["执行路线一: 香港外销越南马山 <br> (锁定 529 万净利润, 经济回报最大化)"]
+
+    style RouteOverseas fill:#d4edda,stroke:#28a745,stroke-width:2px;
+    style RouteDomestic fill:#fff3cd,stroke:#ffc107,stroke-width:2px;</code></pre>
+<hr>
+<h2>4. CEO 特别指令 (Executive Mandate)</h2>
+<ol>
+<li><strong>一票否决</strong>：现场项目经理若发现乍得发货方提供虚假经纬度或无权开采，<strong>拥有项目一票否决权</strong>，禁止付款。</li>
+<li><strong>锁死物理铅封</strong>：Mongo 装车与 Ngaoundéré 卸车，必须有 SGS 代表在场进行封条拍照确认。凡发现封条破损的卡车，扣留该车运费，对该批次矿石实施 100% 隔离复检。</li>
+<li><strong>合同前置审核</strong>：境外合同必须由香港法务部进行 3TG RMAP 标准条款审查后，方可签署盖章。</li>
+<li><strong>水分检测复核</strong>：以离境干吨重量 (DMT) 作为货款的结算基准，拒绝以湿重进行全额结算。</li>
+</ul>
+    </article>
+</body>
+</html>

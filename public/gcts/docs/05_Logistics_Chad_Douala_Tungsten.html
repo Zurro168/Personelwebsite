@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>乍得-杜阿拉高货值钨矿多式联运走廊手册 (05_Logistics_Chad_Douala_Tungsten) - GCTS OS System Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-base: #060913;
+            --bg-card: rgba(22, 28, 49, 0.45);
+            --border-color: rgba(255, 255, 255, 0.08);
+            --border-color-glow: rgba(168, 85, 247, 0.25);
+            --text-primary: #e6ebf5;
+            --text-secondary: #8f9cae;
+            --text-muted: #5e6d82;
+            --color-primary: #a855f7;
+            --color-cyan: #00f2fe;
+            --color-gold: #f2a900;
+            --color-success: #00e676;
+            --color-danger: #ff1744;
+            --font-display: 'Outfit', 'Inter', -apple-system, sans-serif;
+            --font-body: 'Inter', -apple-system, sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+            --transition-smooth: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-base);
+            color: var(--text-primary);
+            font-family: var(--font-body);
+            line-height: 1.7;
+            padding: 3rem 1.5rem;
+            display: flex;
+            justify-content: center;
+        }
+
+        .doc-container {
+            width: 100%;
+            max-width: 900px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: 3rem;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(15px);
+            position: relative;
+        }
+
+        .btn-back {
+            position: fixed;
+            top: 30px;
+            left: 30px;
+            background: rgba(22, 28, 49, 0.8);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            padding: 0.75rem 1.25rem;
+            border-radius: 12px;
+            text-decoration: none;
+            font-family: var(--font-display);
+            font-size: 0.8rem;
+            font-weight: 600;
+            transition: var(--transition-smooth);
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-back:hover {
+            color: var(--text-primary);
+            border-color: var(--color-primary);
+            box-shadow: 0 0 15px rgba(168, 85, 247, 0.3);
+            transform: translateX(-3px);
+        }
+
+        h1 {
+            font-family: var(--font-display);
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 1.5rem;
+            letter-spacing: -0.5px;
+            line-height: 1.2;
+        }
+
+        h2 {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--color-cyan);
+            margin-top: 2.5rem;
+            margin-bottom: 1.25rem;
+            border-left: 3px solid var(--color-primary);
+            padding-left: 12px;
+        }
+
+        h3 {
+            font-family: var(--font-display);
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: #fff;
+            margin-top: 1.75rem;
+            margin-bottom: 0.75rem;
+        }
+
+        p {
+            margin-bottom: 1.25rem;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        strong {
+            color: #fff;
+            font-weight: 600;
+        }
+
+        ul, ol {
+            margin-bottom: 1.5rem;
+            padding-left: 1.5rem;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        code {
+            font-family: var(--font-mono);
+            background: rgba(255, 255, 255, 0.05);
+            padding: 0.2rem 0.4rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            color: var(--color-cyan);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+        }
+
+        pre {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.25rem;
+            overflow-x: auto;
+            margin-bottom: 1.5rem;
+        }
+
+        pre code {
+            background: transparent;
+            padding: 0;
+            border: none;
+            color: var(--text-primary);
+            font-size: 0.85rem;
+        }
+
+        /* 表格科技风样式表 */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 2rem;
+            margin-top: 1.5rem;
+            font-size: 0.85rem;
+        }
+
+        th {
+            background: rgba(168, 85, 247, 0.1);
+            color: var(--color-cyan);
+            font-family: var(--font-display);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-bottom: 2px solid var(--border-color-glow);
+            text-align: left;
+            padding: 12px 16px;
+        }
+
+        td {
+            border-bottom: 1px solid var(--border-color);
+            padding: 12px 16px;
+            color: var(--text-secondary);
+        }
+
+        tr:hover td {
+            background: rgba(255, 255, 255, 0.01);
+            color: #fff;
+        }
+
+        /* 警告通知框样式 */
+        .doc-alert-box {
+            background: rgba(168, 85, 247, 0.06);
+            border-left: 4px solid var(--color-primary);
+            padding: 1.25rem 1.5rem;
+            border-radius: 0 12px 12px 0;
+            margin-bottom: 2rem;
+        }
+
+        .doc-alert-box.warning {
+            background: rgba(255, 179, 0, 0.06);
+            border-left-color: var(--color-warning);
+        }
+
+        .doc-alert-box.danger {
+            background: rgba(255, 23, 68, 0.06);
+            border-left-color: var(--color-danger);
+        }
+
+        .doc-alert-box.success {
+            background: rgba(0, 230, 118, 0.06);
+            border-left-color: var(--color-success);
+        }
+
+        .doc-alert-box strong {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-family: var(--font-display);
+        }
+        
+        .doc-alert-box p {
+            margin-bottom: 0;
+            font-size: 0.85rem;
+        }
+
+        /* Mermaid 流程图包裹 */
+        .mermaid {
+            background: rgba(0, 0, 0, 0.2) !important;
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid var(--border-color);
+            margin: 2.5rem 0;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 1.5rem 1rem;
+            }
+            .doc-container {
+                padding: 1.5rem;
+            }
+            .btn-back {
+                position: absolute;
+                top: -60px;
+                left: 0;
+            }
+        }
+    </style>
+    <!-- 引入 Mermaid 渲染 -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'dark',
+            themeVariables: {
+                background: '#060913',
+                primaryColor: '#161c31',
+                lineColor: '#a855f7'
+            }
+        });
+    </script>
+</head>
+<body>
+    <!-- 返回大地图 -->
+    <a href="../index.html" class="btn-back">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        返回决策大地图
+    </a>
+
+    <article class="doc-container">
+        <h1>乍得-杜阿拉高货值钨矿多式联运走廊手册 (05_Logistics_Chad_Douala_Tungsten)</h1>
+<p>本物流走廊手册专为 <strong>Case No.002：乍得黑钨矿项目</strong> 编写，重点解决高货值粗矿在超长非洲陆运通道上的物理防盗、运输防掉包、CAMRAIL 铁路换装以及海运配舱等具体实操事务。</p>
+<hr>
+<h2>1. 供应链走廊路线概览 (Logistics Route Overview)</h2>
+<p>黑钨矿从乍得 Mongo 矿区堆场运至喀麦隆杜阿拉港出海，全长约 1,850 公里，采用<strong>“公路汽运（前段）+ 铁路铁运（后段）”</strong>的多式联运走廊：</p>
+<pre><code> Mongo 堆场 ──(920km 重卡公路)──> Ngaoundéré 铁运站 ──(930km CAMRAIL 铁路)──> 杜阿拉港 ──(海运)──> 目的港</code></pre>
+<h3>1.1 公路汽运段：Mongo $\rightarrow$ Koutéré/Touboro $\rightarrow$ Ngaoundéré (约 920 公里)</h3>
+<ul>
+<li><strong>运输主体</strong>：优选加入 UNTT（乍得运输工会）的密封钢制箱式卡车。</li>
+<li><strong>沿途路线</strong>：Mongo <code class="math">\rightarrow</code> Salh <code class="math">\rightarrow</code> Moundou <code class="math">\rightarrow</code> Koutéré（边境口岸）<code class="math">\rightarrow</code> Touboro（喀麦隆侧）<code class="math">\rightarrow</code> Ngaoundéré。</li>
+<li><strong>行车时效</strong>：正常情况下 3 - 5 天，过境清关额外占用 2 - 3 天。</li>
+</ul>
+<h3>1.2 铁路铁运段：Ngaoundéré $\rightarrow$ Yaoundé $\rightarrow$ Douala Port (约 930 公里)</h3>
+<ul>
+<li><strong>运输主体</strong>：喀麦隆国家铁路公司 (CAMRAIL) 车皮。</li>
+<li><strong>换装形式</strong>：在 Ngaoundéré 陆港将卡车货物卸下，检查铅封后平铺吊入铁路敞车车皮内，并在车顶加盖特制防篡改防雨厚橡胶蓬布。</li>
+<li><strong>行车时效</strong>：通常为 4 - 6 天。</li>
+</ul>
+<hr>
+<h2>2. 高货值物理防盗与防掉包专项设计 (Anti-theft & Chain of Custody)</h2>
+<div class="doc-alert-box danger"><strong>重要</strong><p>**货值敏感性警示**：<br>同等重量下，锑矿（35%品位）单吨货值约 3.5 万元人民币，30吨货物总价值约 105 万元，安全风险处于中等可控水平。<br>而 43% 黑钨精矿实物吨单价高达 **28 万元人民币**，30吨货物总货值高达 **843 万 ~ 1,250 万元人民币**。这批高价值资产仅需两辆大卡车即可全部拉走。在非洲局势动荡的内陆运输中，这属于**极易诱发武装抢劫、路卡索贿、司机监守自盗和中途掉包的“特高风险资产”**。</p></div>
+<p>为了确保这 30 吨黑钨精矿安全运抵目的港，必须实施以下四重物理防御与监控：</p>
+<h3>2.1 一袋一锁：SGS 钢丝铅封与特制锁扣</h3>
+<ol>
+<li><strong>吨袋结构</strong>：采用 1.5 吨双层防翘吨袋，外袋涂装防酸碱橡胶防割层。</li>
+<li><strong>吊挂铅封</strong>：吨袋封口采用工业封口机机缝，在缝口线结与起吊带结合部加挂 <strong>SGS 独立编号的高保钢丝封条</strong>。</li>
+<li><strong>RFID 锁扣</strong>：在袋口加装带有无源 RFID 芯片的物理卡扣。任何中途试图割开或拉开吨袋口的行为，都会导致 RFID 芯片内应力断裂，在目的港读取时会立即报废报警。</li>
+</ul>
+<h3>2.2 重卡密封箱加高保 Bolt Seal</h3>
+<ol>
+<li><strong>禁止敞篷车</strong>：公路公路段严禁使用普通的敞篷板车搭盖雨棚，<strong>必须全部强制使用全钢制的密封集装箱车箱</strong>。</li>
+<li><strong>箱门封条</strong>：装货完毕后，使用航运级重型高保螺栓封（Bolt Seal）对厢门加锁，铅封号记录于运单并拍照传送 GCTS 系统。</li>
+</ul>
+<h3>2.3 铁路换装防盗检查与 GPS</h3>
+<ol>
+<li><strong>Ngaoundéré 二次理货</strong>：卡车抵达铁路货运站后，我方驻站代表必须与 CAMRAIL 监装员、商检员三方到场，逐袋检查厢门封条与吨袋封条。</li>
+<li><strong>全生命周期 GPS 跟踪</strong>：在车皮和重卡底盘隐藏加装两组独立供电的军工级 GPS 定位器（电池寿命需支持 30 天以上），每日自动在 GCTS 调度舱中更新运行状态。</li>
+</ul>
+<h3>2.4 保险足额投保</h3>
+<ul>
+<li><strong>保险险种</strong>：投保国际公认的 <strong>ICC (A) 协会货物一切险</strong>。</li>
+<li><strong>特约条款</strong>：必须加保 <strong>TPND (Theft, Pilferage and Non-Delivery) 盗窃、提货不着险</strong>，以及罢工暴动民变险。保额设定为发票货值的 <strong>110%</strong>（即按 1,370 万元人民币投保），彻底锁死极端丢失风险。</li>
+</ul>
+<hr>
+<h2>3. 物流运保费率与成本预算</h2>
+<p>基于 2026 年年中最新运价，该 30 吨黑钨精矿多式联运走廊的物流成本预算明细如下：</p>
+<table>
+<thead><tr>
+<th>段落与费用项</th>
+<th>计价单位</th>
+<th>30吨总成本 (CNY)</th>
+<th>作用与缓释控制</th>
+</tr></thead><tbody>
+<tr>
+<td><strong>Mongo 堆场理货与缝袋</strong></td>
+<td>1,200 元/吨</td>
+<td>36,000 元</td>
+<td>包含吨袋、RFID 封条与人工手选费</td>
+</tr>
+<tr>
+<td><strong>乍得内陆公路重卡运费</strong></td>
+<td>14,000 元/车 (2车)</td>
+<td>28,000 元</td>
+<td>UNTT 注册车辆，含司机津贴</td>
+</tr>
+<tr>
+<td><strong>Koutéré 口岸通关与保函</strong></td>
+<td>8,000 元/批次</td>
+<td>8,000 元</td>
+<td>转关保函（T1）和货代代理费</td>
+</tr>
+<tr>
+<td><strong>Ngaoundéré 换装与站台费</strong></td>
+<td>1,500 元/吨</td>
+<td>45,000 元</td>
+<td>吊装费、地磅地磅费和临时堆存费</td>
+</tr>
+<tr>
+<td><strong>CAMRAIL 铁路运费</strong></td>
+<td>4,200 元/车皮 (1车皮)</td>
+<td>4,200 元</td>
+<td>铁运段，含防雨蓬布附加费</td>
+</tr>
+<tr>
+<td><strong>杜阿拉港保税仓与装箱</strong></td>
+<td>3,500 元/集装箱 (2箱)</td>
+<td>7,000 元</td>
+<td>20GP 集装箱理货、加固和港建费</td>
+</tr>
+<tr>
+<td><strong>杜阿拉-越南海运费</strong></td>
+<td>32,000 元/集装箱 (2箱)</td>
+<td>64,000 元</td>
+<td>海运费（含燃油附加费）</td>
+</tr>
+<tr>
+<td><strong>全程 ICC(A) + TPND 保险</strong></td>
+<td>0.4% 保额 (保额1370万)</td>
+<td>54,800 元</td>
+<td>锁定偷盗、抢劫与沿途扣货风险</td>
+</tr>
+<tr>
+<td><strong>沿途卡哨防刁难预留费</strong></td>
+<td>5,000 元/卡车 (2车)</td>
+<td>10,000 元</td>
+<td>缓释地方民兵与交警无端扣车</td>
+</tr>
+<tr>
+<td><strong>SGS 两点公证检验费</strong></td>
+<td>15,000 元/批次</td>
+<td>15,000 元</td>
+<td>起运地和目的港两次抽样化验费</td>
+</tr>
+<tr>
+<td><strong>GCTS 合规溯源包文件费</strong></td>
+<td>20,000 元/批次</td>
+<td>20,000 元</td>
+<td>RMAP 建链及出口地证明认证成本</td>
+</tr>
+<tr>
+<td><strong>总物流与运保成本</strong></td>
+<td><strong>-</strong></td>
+<td><strong>292,000 元</strong></td>
+<td><strong>单干吨物流运保成本约 9,733 元</strong></td>
+</tr>
+</tbody></table>
+    </article>
+</body>
+</html>
