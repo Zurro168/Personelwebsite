@@ -144,39 +144,44 @@ export default function AboutPage() {
                 </div>
               </div>
 
-              {/* 二维码展示区 */}
-              <div className="grid grid-cols-2 gap-4 pt-2">
-                <div className="bg-black/40 border border-white/5 p-4 rounded-2xl flex flex-col items-center gap-2">
-                  <div className="w-full aspect-square rounded-lg bg-white/5 flex items-center justify-center relative overflow-hidden">
+              {/* 二维码展示区 - 纵向高档列表，彻底防挤压 */}
+              <div className="space-y-4 pt-2">
+                <div className="bg-black/30 border border-white/5 p-4 rounded-2xl flex items-center gap-4 hover:border-purple-500/20 transition-all duration-300">
+                  <div className="w-16 h-16 rounded-xl bg-white p-1 flex items-center justify-center shrink-0 shadow-lg relative overflow-hidden">
                     <img 
-                      src="/brand/wechat-personal.jpg" 
+                      src={AUTHOR_INFO.social.wechat.qrCode} 
                       alt="个人微信" 
-                      className="w-full h-full object-cover opacity-80 hover:opacity-100 transition-opacity"
+                      className="w-full h-full object-contain"
                       onError={(e) => {
-                        // 兜底替代文本
                         e.currentTarget.style.display = 'none';
                         const parent = e.currentTarget.parentElement;
-                        if (parent) parent.innerHTML = '<span class="text-[10px] text-slate-600">微信二维码</span>';
+                        if (parent) parent.innerHTML = '<span class="text-[9px] text-slate-500 text-center">微信</span>';
                       }}
                     />
                   </div>
-                  <span className="text-[10px] font-mono text-slate-500">个人微信</span>
+                  <div className="space-y-1">
+                    <h4 className="text-xs font-bold text-white font-mono">{AUTHOR_INFO.social.wechat.id}</h4>
+                    <p className="text-[10px] text-slate-500 font-light leading-none">扫码添加个人微信</p>
+                  </div>
                 </div>
 
-                <div className="bg-black/40 border border-white/5 p-4 rounded-2xl flex flex-col items-center gap-2">
-                  <div className="w-full aspect-square rounded-lg bg-white/5 flex items-center justify-center relative overflow-hidden">
+                <div className="bg-black/30 border border-white/5 p-4 rounded-2xl flex items-center gap-4 hover:border-purple-500/20 transition-all duration-300">
+                  <div className="w-16 h-16 rounded-xl bg-white p-1 flex items-center justify-center shrink-0 shadow-lg relative overflow-hidden">
                     <img 
-                      src="/brand/gzh.jpg" 
-                      alt="公众号二维码" 
-                      className="w-full h-full object-cover opacity-80 hover:opacity-100 transition-opacity"
+                      src={AUTHOR_INFO.social.officialAccount.qrCode} 
+                      alt="公众号" 
+                      className="w-full h-full object-contain"
                       onError={(e) => {
                         e.currentTarget.style.display = 'none';
                         const parent = e.currentTarget.parentElement;
-                        if (parent) parent.innerHTML = '<span class="text-[10px] text-slate-600">公众号二维码</span>';
+                        if (parent) parent.innerHTML = '<span class="text-[9px] text-slate-500 text-center">公众号</span>';
                       }}
                     />
                   </div>
-                  <span className="text-[10px] font-mono text-slate-500">公众号二维码</span>
+                  <div className="space-y-1">
+                    <h4 className="text-xs font-bold text-white">硅基大宗</h4>
+                    <p className="text-[10px] text-slate-500 font-light leading-none">扫码关注公众号</p>
+                  </div>
                 </div>
               </div>
             </div>

@@ -87,12 +87,12 @@ export const AUTHOR_INFO = {
     "wechat": {
       "label": "微信",
       "id": "zurro_w",
-      "qrCode": "/brand/wechat-personal.jpg"
+      "qrCode": "/brand/wechat-personal.png"
     },
     "officialAccount": {
       "label": "公众号",
       "name": "硅基大宗",
-      "qrCode": "/brand/official-account.jpg"
+      "qrCode": "/brand/official-account.png"
     }
   },
   "systemLogs": [

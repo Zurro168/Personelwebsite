@@ -1129,6 +1129,25 @@ body.dark-mode {
     gap: 0.5rem;
     text-decoration: none;
     backdrop-filter: blur(10px);
+    white-space: nowrap;
+}
+
+/* 决策中心头部发光胶囊 Badge 样式 */
+.project-badge {
+    font-size: 1rem;
+    font-weight: 600;
+    background: rgba(168, 85, 247, 0.08);
+    border: 1px solid rgba(168, 85, 247, 0.2);
+    color: #c084fc;
+    padding: 0.35rem 0.85rem;
+    border-radius: 10px;
+    margin-left: 1rem;
+    display: inline-flex;
+    align-items: center;
+    vertical-align: middle;
+    letter-spacing: 0px;
+    box-shadow: 0 0 15px rgba(168, 85, 247, 0.1);
+    white-space: nowrap;
 }
 
 .btn-action:hover {

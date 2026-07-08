@@ -300,7 +300,15 @@ function onSelectorChange() {
     const data = gctsData[key] || gctsData["chad-antimony"];
 
     // A. 更新 L8 决策与评分卡
-    document.getElementById("page-title").innerText = `GCTS 决策驾驶舱：${data.countryName} - ${data.commodityName}`;
+    const countrySel = document.getElementById("select-country");
+    const commoditySel = document.getElementById("select-commodity");
+    const countryTxt = countrySel.options[countrySel.selectedIndex].text.split(" - ")[0];
+    const commodityTxt = commoditySel.options[commoditySel.selectedIndex].text;
+
+    document.getElementById("page-title").innerText = "GCTS 决策驾驶舱";
+    const titleBadge = document.getElementById("page-title-badge");
+    titleBadge.innerText = `${countryTxt} - ${commodityTxt}`;
+    titleBadge.style.display = "inline-flex";
     document.getElementById("decision-score-value").innerText = data.score;
     
     // 更新评分圆圈发光色
@@ -852,19 +860,27 @@ function switchTab(tabId) {
 
     // 更新页面头部二级副标题说明
     const headerTitle = document.getElementById("page-title");
-    const country = document.getElementById("select-country").options[document.getElementById("select-country").selectedIndex].text;
-    const commodity = document.getElementById("select-commodity").options[document.getElementById("select-commodity").selectedIndex].text;
+    const titleBadge = document.getElementById("page-title-badge");
+    const countrySel = document.getElementById("select-country");
+    const commoditySel = document.getElementById("select-commodity");
+    const country = countrySel.options[countrySel.selectedIndex].text.split(" - ")[0];
+    const commodity = commoditySel.options[commoditySel.selectedIndex].text;
 
     if (tabId === "dashboard") {
-        headerTitle.innerText = `GCTS 决策驾驶舱：${country} - ${commodity}`;
-    } else if (tabId === "pricing") {
-        headerTitle.innerText = `GCTS 智能报价与算费引擎`;
-    } else if (tabId === "logistics") {
-        headerTitle.innerText = `GCTS 物流与多式联运走廊`;
-    } else if (tabId === "kb") {
-        headerTitle.innerText = `GCTS 知识库主数据查询`;
-    } else if (tabId === "assets") {
-        headerTitle.innerText = `GCTS 操作系统成果大地图`;
+        headerTitle.innerText = "GCTS 决策驾驶舱";
+        titleBadge.innerText = `${country} - ${commodity}`;
+        titleBadge.style.display = "inline-flex";
+    } else {
+        titleBadge.style.display = "none";
+        if (tabId === "pricing") {
+            headerTitle.innerText = `GCTS 智能报价与算费引擎`;
+        } else if (tabId === "logistics") {
+            headerTitle.innerText = `GCTS 物流与多式联运走廊`;
+        } else if (tabId === "kb") {
+            headerTitle.innerText = `GCTS 知识库主数据查询`;
+        } else if (tabId === "assets") {
+            headerTitle.innerText = `GCTS 操作系统成果大地图`;
+        }
     }
 }
 
