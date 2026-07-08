@@ -75,6 +75,11 @@ export const AUTHOR_INFO = {
     { "name": "资源项目尽调测算", "level": 90 },
     { "name": "团队OKRs/高绩效管理", "level": 88 }
   ],
+  "focus": [
+    "锆钛/钽铌/锑/钨/锂矿直采",
+    "跨境多式联运大宗物流风控",
+    "开证L/C与仓单供应链金融"
+  ],
   "social": {
     "email": "zurro_w@foxmail.com",
     "linkedin": "https://www.linkedin.com/in/gordon-wang-63622821",
@@ -83,6 +88,23 @@ export const AUTHOR_INFO = {
       "label": "微信",
       "id": "zurro_w",
       "qrCode": "/brand/wechat-personal.jpg"
+    },
+    "officialAccount": {
+      "label": "公众号",
+      "name": "硅基大宗",
+      "qrCode": "/brand/official-account.jpg"
     }
+  },
+  "systemLogs": [
+    { "id": "log-1", "text": "GLOBAL_COMMODITY_SCAN_INITIATED", "status": "COMPLETED" },
+    { "id": "log-2", "text": "SUPPLY_CHAIN_RISK_PROTOCOL_v4.1", "status": "ACTIVE" },
+    { "id": "log-3", "text": "AI_INTELLIGENCE_LAYER_SYNCHRONIZED", "status": "STABLE" },
+    { "id": "log-4", "text": "METADATA_ASSET_CLEANUP_SUCCESS", "status": "DONE" }
+  ],
+  "location": "中国 · 广东 · 广州 (GBA)",
+  "copyright": {
+    "owner": "硅基大宗",
+    "year": 2026,
+    "notice": "著作权所有"
   }
 };
