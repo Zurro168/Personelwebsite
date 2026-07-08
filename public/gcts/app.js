@@ -197,88 +197,147 @@ const gctsData = {
 // 知识库数据库静态主数据
 const kbDatabase = {
     country: {
-        title: "DB001 国家主数据档案：乍得 (Chad)",
+        title: "DB001 国家主数据档案：内陆乍得 (Chad) 与口岸喀麦隆 (Cameroon)",
         body: `
-            <h4>1. 基本面概述</h4>
-            <p><strong>首都:</strong> 恩贾梅纳 (N'Djamena) | <strong>官方货币:</strong> 中非金融法郎 (XAF) | <strong>汇率机制:</strong> 挂钩欧元 (固定汇率 1 EUR = 655.957 XAF)</p>
-            <p>乍得是典型的中部非洲内陆国家，矿产资源丰富但开采极度落后。主权信用评级处于违约边缘（Fitch CCC），面临较高的地缘政治冲突和恐怖主义溢出风险。</p>
+            <h4>1. 地缘政治与主权风险分析 (Country Risk v2.1)</h4>
+            <p><strong>乍得评级:</strong> Fitch CCC / Moody's Caa1 (极高主权违约风险) | <strong>喀麦隆评级:</strong> B- (温和主权违约风险)</p>
+            <p>乍得地处撒哈拉以南中部非洲，属于典型地缘政治热点内陆国，面临苏丹边境冲突及南部湖区“博科圣地 (Boko Haram)”极端势力的安全渗入压力。项目评估中，人身与资产安全系数权重大于财务回报。</p>
             
-            <h4>2. 矿业法与税制要点</h4>
+            <h4>2. 跨国海关协定与过境单证流 (Transit Documentation)</h4>
             <ul>
-                <li><strong>特许使用费 (Royalty):</strong> 锑、钨等金属按 FOB 销售额的 5.0% 征收。</li>
-                <li><strong>国家免费持股:</strong> 外资项目必须无偿给予乍得国家 10% 股份。</li>
-                <li><strong>所得税:</strong> 矿业企业所得税率高达 35%。</li>
+                <li><strong>CEMAC 过境保函:</strong> 乍得作为内陆国，进出口需通过喀麦隆海运，两国遵循中非经济与货币共同体 (CEMAC) 协定。</li>
+                <li><strong>T1 跨境过境单证:</strong> 货物从乍得 Mongo 起运跨越口岸（Koutéré / Touboro）前，必须向船代或担保银行缴存货值额度 120% 的“未清关过境担保金”，待货物进入喀麦隆杜阿拉港核销装船后方可解冻。</li>
+                <li><strong>乍得海关 D15 申报:</strong> 必须备齐 SGS 检验证书、出口商资质登记卡、并核销由乍得矿业部签发的矿物出口特许批文。</li>
             </ul>
 
-            <h4>3. 物流与出口管理</h4>
-            <p>乍得无任何本国铁路，所有出口物资必须通过公路拉运 1,800 公里，越过边境运往喀麦隆杜阿拉港装船。海关出口征税 2%，大额出境需办理严格的外汇汇回登记核销手续。</p>
+            <h4>3. 特许使用费与外汇核销壁垒 (Royalty & Forex)</h4>
+            <p>乍得政府对金属矿产品征收 5.0% 的特许使用费 (Royalty)，以出口清关时的 FOB 申报价为税基。企业需办理严格的外汇汇回核销登记手续，所有外币贸易回款必须在 120 天内至少汇回 80% 到中非区域国家银行，否则面临严重的洗钱及外汇指控控诉。</p>
         `
     },
     commodity: {
-        title: "DB002 矿物主数据属性：锑矿石/精矿 (Sb)",
+        title: "DB002 矿物属性主数据：关键矿产 (Sb/WO3/Li/Cu) 品级特征",
         body: `
-            <h4>1. 化学物理特征</h4>
-            <p><strong>元素符号:</strong> Sb | <strong>主矿物形态:</strong> 辉锑矿 (Sb2S3) | <strong>莫氏硬度:</strong> 2.0 - 2.5 | <strong>基准干重品位:</strong> 50% Sb</p>
-            <p>锑属于小金属，具有极高阻燃和半导体特性。精矿粉尘在空气中遇明火有弱燃爆风险，开采与包装要求除尘与通风。</p>
-            
-            <h4>2. 有害杂质拒收线 (中国商检及环保准入)</h4>
+            <h4>1. 关键矿产品级特征与计价模型</h4>
             <table class="kb-table">
                 <thead>
                     <tr>
-                        <th>杂质元素</th>
-                        <th>基准限值</th>
-                        <th>惩罚扣款</th>
-                        <th>拒收红线 (中国禁进线)</th>
+                        <th>矿种 (Commodity)</th>
+                        <th>主物理特征</th>
+                        <th>基准品位 (Base Grade)</th>
+                        <th>贸易基准单位 (Unit)</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>砷 (As)</td>
-                        <td>0.20%</td>
-                        <td>每超0.1%扣 $20/吨</td>
-                        <td>> 0.50% (按固废退运)</td>
+                        <td>锑精矿 (Sb)</td>
+                        <td>辉锑矿 Sb2S3 块/粉状</td>
+                        <td>50.0% Sb</td>
+                        <td>干吨 (DMT) / 实物量</td>
                     </tr>
                     <tr>
-                        <td>铅 (Pb)</td>
-                        <td>0.50%</td>
-                        <td>每超0.1%扣 $15/吨</td>
-                        <td>> 1.00% (按固废退运)</td>
+                        <td>黑钨矿 (WO3)</td>
+                        <td>钨锰铁矿 (Fe,Mn)WO4 砂状</td>
+                        <td>65.0% WO3</td>
+                        <td>吨度 (MTU) = 1% 吨金属氧化物</td>
                     </tr>
                     <tr>
-                        <td>汞 (Hg)</td>
-                        <td>0.01%</td>
-                        <td>每超0.01%扣 $5/吨</td>
-                        <td>> 0.05%</td>
+                        <td>锂精矿 (Li)</td>
+                        <td>锂辉石 (Spodumene) 粗精矿</td>
+                        <td>6.0% Li2O</td>
+                        <td>干吨 (DMT)</td>
+                    </tr>
+                    <tr>
+                        <td>铜精矿 (Cu)</td>
+                        <td>黄铜矿 CuFeS2 浮选精矿</td>
+                        <td>25.0% Cu</td>
+                        <td>干吨 (DMT) / 扣减金属量</td>
                     </tr>
                 </tbody>
             </table>
 
-            <h4>3. 下游终端用途</h4>
-            <p>主要用作塑料阻燃剂（三氧化二锑，占 55%）以及光伏玻璃除气澄清剂（焦锑酸钠，占 15% 且高速增长）。</p>
+            <h4>2. 有害杂质拒收线与商检扣罚红线 (Rejection Line)</h4>
+            <p>进口大宗有色金属在国内口岸面临严格的环保检测，超出红线会被海关直接判定为“洋垃圾”强制原货退运并课以高额罚款：</p>
+            <ul>
+                <li><strong>砷 (Arsenic - As):</strong> 基准 0.20%。超 0.20% 按每 0.1% 扣罚 $20/吨；<strong>红线 > 0.50% 强制拒收</strong>。</li>
+                <li><strong>铅 (Lead - Pb):</strong> 锑矿中铅基准 0.50%，超标扣罚；<strong>红线 > 1.00% 强制拒收</strong>。</li>
+                <li><strong>汞 (Mercury - Hg):</strong> 基准 0.01%；<strong>红线 > 0.05% 强制拒收</strong>。</li>
+                <li><strong>氟氯 (F/Cl):</strong> 铜矿中氟 > 0.10% 或氯 > 0.30% 视超标情况面临严重的国内冶炼厂额外扣罚或拒绝接单。</li>
+            </ul>
+        `
+    },
+    pricing_metric: {
+        title: "DB003 贸易计价与基准主数据：EXW/FOB/DMT/MTU 换算标准",
+        body: `
+            <h4>1. 大宗商品基本计价单位定义</h4>
+            <ul>
+                <li><strong>干吨 (Dry Metric Ton - DMT):</strong> 扣除物理水分后的矿石吨重。DMT = WMT × (1 - 水分%)。</li>
+                <li><strong>湿吨 (Wet Metric Ton - WMT):</strong> 包含天然物理水分的物料实物吨重。物流运输与船费计算皆按 WMT 计费。</li>
+                <li><strong>吨度 (Metric Ton Unit - MTU):</strong> 每公吨实物中含有 1%（即 10公斤）的纯金属量。MTU 单价 = 金属吨价 × 1%。</li>
+            </ul>
+
+            <h4>2. 计价方式换算核心公式 (Valuation Logic)</h4>
+            <p><strong>国内运回销售计价 (到岸 RMB) 倒算公式:</strong></p>
+            <div class="code-box" style="background: rgba(0,0,0,0.3); padding: 1rem; border-radius: 8px; font-family: monospace; font-size: 0.8rem; border: 1px solid var(--border-color); color: #38bdf8; margin: 1rem 0;">
+                结算净价 (RMB/DMT) = [国内含税基准价 × 折扣系数% - 扣减处理费 TC] × 实物干基品位%
+            </div>
+            
+            <p><strong>国际销售计价 (离岸 FOB USD) 计算公式:</strong></p>
+            <div class="code-box" style="background: rgba(0,0,0,0.3); padding: 1rem; border-radius: 8px; font-family: monospace; font-size: 0.8rem; border: 1px solid var(--border-color); color: #c084fc; margin: 1rem 0;">
+                FOB 结算净价 (USD/DMT) = [国际金属指数价 × 折扣系数% - 国际扣减 TC] × 品位% - 喀麦隆港口费 - 跨境物流费
+            </div>
+
+            <h4>3. 折扣系数 (Payability) 的商定原则</h4>
+            <p>折扣系数直接受原矿品位、有害杂质含量、以及市场现货供应紧俏度影响。低品位原矿（如 Sb < 30% 或 WO3 < 20%）折扣系数通常断崖式下跌，且冶炼厂要求的 TC（处理费）会成倍递增。</p>
         `
     },
     port: {
-        title: "DB004 转运港口主数据：喀麦隆杜阿拉港 (Douala)",
+        title: "DB004 转运港口主数据：喀麦隆杜阿拉港 (Douala Port)",
         body: `
-            <h4>1. 基本通航条件</h4>
-            <p><strong>吃水深度:</strong> 8.5m - 9.2m (大船无法直靠，须中转支线小船) | <strong>港区水域:</strong> 河口港，泥沙淤积严重，常年需要挖泥船疏浚。</p>
+            <h4>1. 港区通航条件与吃水瓶颈</h4>
+            <p>杜阿拉港是西非典型的河口潮汐港，港口航道淤积严重。吃水限制常年维持在 <strong>8.5m - 9.2m</strong>，导致 2 万吨级以上的大型散货船无法直接靠泊装货。出口精矿通常必须使用 20 尺集装箱（单箱装载 25-28 吨）装运，通过驳船支线转运至深水区或转运母船，这增加了装货损耗及中转吊装成本。</p>
             
-            <h4>2. 仓储堆场与效率</h4>
+            <h4>2. 仓储监管、免箱期与防盗管理 (Loss Control)</h4>
             <ul>
-                <li><strong>集装箱免租期:</strong> 默认 14 天。大宗矿石出海建议提前向船代（CMA/Maersk）申请 21 天以上超长免箱租。</li>
-                <li><strong>装船效率:</strong> 80 - 120 箱/天，效率较低。</li>
-                <li><strong>工会罢工风险:</strong> 较高，码头工会平均每两年爆发一次薪酬争议罢工。</li>
+                <li><strong>滞港与仓储免箱期:</strong> 默认免租期为 14 天。大宗国际物流因转关、报关时效不确定，必须在起运前向集装箱船公司（CMA CGM, MSC, Maersk）申请 21-28 天的超长目的港免箱租（Demurrage & Detention）。</li>
+                <li><strong>物理铅封与防盗监装:</strong> 关键金属（如 锑精矿、黑钨矿）由于附加值极高，在中转堆场容易发生“掺沙调包”。必须强制在集装箱门挂锁高强度防伪钢丝铅封（SGS High-security Seal），且在卸运与箱体移库段安排 24小时第三方探头或现场监控。</li>
             </ul>
         `
     },
     logistics: {
-        title: "DB005 物流走廊主数据：乍得Mongo - 喀麦隆Douala",
+        title: "DB005 物流走廊主数据：乍得北部 Mongo ─ 喀麦隆 Douala 跨境走廊",
         body: `
-            <h4>1. 核心物流走廊路由</h4>
-            <p>Mongo矿区 ── RN6公路(630km) ──> 蒙杜海关 ── RN2公路(120km) ──> Touboro边界 ── 公路(250km) ──> Ngaoundéré陆港 ── CAMRAIL铁路(900km) ──> 杜阿拉港。</p>
+            <h4>1. 1,800公里跨国多式联运路径解析</h4>
+            <p><strong>物流走廊主干线:</strong> Mongo 矿区 ──> RN6 公路 ──> 蒙杜 (Moundou) 边境关 ──> 喀麦隆 Touboro 口岸 ──> Ngaoundéré 陆港 (铁水换装) ──> CAMRAIL 铁路 (900公里) ──> 杜阿拉港。</p>
             
-            <h4>2. 沿途关键风险与过路费</h4>
-            <p>全线公路铺装率约 82%。在乍得境内 RN6/RN2 沿线，平均每 100公里分布有多个非正式军警卡哨，单车单次过境灰色小费约计 16-25 美元。7-10月雨季山洪频发，土路段彻底阻断时间长达 45-60 天。</p>
+            <h4>2. 公路铁路联运转运节点与铁路运费机制 (CAMRAIL)</h4>
+            <p>在 Ngaoundéré 换装火车的难度高于公路拉运。喀麦隆国营铁路 (CAMRAIL) 火车车皮极度匮乏，大宗商品出口商必须向其提前 30 天申报“发运计划”。</p>
+            <ul>
+                <li><strong>铁路车皮费:</strong> 包含固定车底使用费（USD $45/吨）及铁轨过路费。</li>
+                <li><strong>公路重卡限重:</strong> 喀麦隆公路段对重卡轴重实行极严苛的 50 吨惩罚限重，单车净载装矿一般限制在 28-32 吨以内，否则在沿途公路超载地磅面临扣车与数十万中非法郎的巨额罚金。</li>
+            </ul>
+
+            <h4>3. 雨季公路阻断动态指标 (Seasonality)</h4>
+            <p>每年 <strong>7.15 - 10.15</strong> 属于中非热带雨季，公路 RN6 沿线有多处未铺装的红土土路段。降雨会导致道路泥泞坍塌、桥梁冲毁，重卡断交阻断天数平均可达 45 - 60 天。在此期间，项目现场堆存及发货必须强制下调，否则可能引发严重的违约索赔。</p>
+        `
+    },
+    finance: {
+        title: "DB006 外汇结算与信用证风控：L/C开立、期现套保与汇率避险",
+        body: `
+            <h4>1. 国际贸易信用证 (L/C) 核心控制程序</h4>
+            <p>大宗金属国际买卖合同中，为防止买方拒付和卖方欺诈，推荐采用跟单信用证 (Documentary Letter of Credit) 结算：</p>
+            <ul>
+                <li><strong>L/C 开立条件:</strong> 必须是全球排名前 50 的国际一级银行开立、且必须为不可撤销跟单信用证 (Irrevocable L/C at Sight)。</li>
+                <li><strong>交单单证核心红线:</strong> 包括：提单 (B/L)、产地证 (C/O)、商检品位与水分双重检验证书 (SGS Certificate of Quality and Weight) 以及 CEMAC 海关出口清关放行单核销联。</li>
+            </ul>
+
+            <h4>2. 期现套期保值与价格风控 (Hedging Strategy)</h4>
+            <p>对于铜矿、锂矿等已在 LME（伦敦金属交易所）或国内期市上市的大宗产品，为防止在长达 75-110 天的漫长海运周期内国际金属价格断崖式下跌，必须强制执行<strong>套期保值 (Hedging)</strong>：</p>
+            <div class="code-box" style="background: rgba(0,0,0,0.3); padding: 1rem; border-radius: 8px; font-family: monospace; font-size: 0.8rem; border: 1px solid var(--border-color); color: #fbbf24; margin: 1rem 0;">
+                套期保值公式: 锁定采购日 LME 远期期货空单，与现货进口到港点同步平仓对冲，规避波动风险。
+            </div>
+
+            <h4>3. 汇率避险与跨国结算工具 (FX Hedging)</h4>
+            <p>中非金融法郎 (XAF) 虽与欧元固定挂钩，但国际采购以美元 (USD) 结算，国内销售以人民币 (RMB) 计价。针对 USD/RMB 的中长期汇率风险，系统内嵌远期外汇合约 (FX Forward) 测算，锁定期限汇率，防范汇率波动直接侵蚀大宗贸易的微薄净利润率。</p>
         `
     }
 };

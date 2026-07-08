@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css?v=1.0.2">
 </head>
 <body class="dark-mode">
     <div class="app-container">
@@ -53,12 +53,12 @@
         <main class="main-content">
             <!-- 头部控制栏 -->
             <header class="top-header">
-                <div class="title-area">
-                    <div style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 0.5rem;">
-                        <h1 id="page-title" style="margin-bottom: 0;">GCTS 决策驾驶舱</h1>
-                        <span id="page-title-badge" class="project-badge">乍得 (Chad) - 锑矿 (Antimony - Sb)</span>
+                <div class="title-area" style="display: flex; flex-direction: column; gap: 0.6rem; align-items: flex-start;">
+                    <h1 id="page-title" style="margin: 0; font-size: 2rem; font-weight: 800; letter-spacing: -1px; line-height: 1.1;">GCTS 决策驾驶舱</h1>
+                    <div id="page-title-badge-container" style="display: flex; align-items: center; margin-top: 0.15rem;">
+                        <span id="page-title-badge" class="project-badge" style="margin-left: 0;">乍得 (Chad) - 锑矿 (Antimony - Sb)</span>
                     </div>
-                    <p class="tagline">全球矿产贸易项目一键评估与分析中心</p>
+                    <p class="tagline" style="margin: 0;">全球矿产贸易项目一键评估与分析中心</p>
                 </div>
                 <div class="header-right-area">
                     <div class="header-actions">
@@ -520,8 +520,10 @@
                         <ul class="kb-nav-list">
                             <li class="active" onclick="switchKBData('country')">DB001 国家主数据档案</li>
                             <li onclick="switchKBData('commodity')">DB002 矿物属性主数据</li>
+                            <li onclick="switchKBData('pricing_metric')">DB003 贸易计价与基准主数据</li>
                             <li onclick="switchKBData('port')">DB004 转运港口主数据</li>
                             <li onclick="switchKBData('logistics')">DB005 物流走廊主数据</li>
+                            <li onclick="switchKBData('finance')">DB006 外汇结算与信用证风控</li>
                         </ul>
                     </div>
 
@@ -759,6 +761,6 @@
     </div>
 
     <!-- JS 代码 -->
-    <script src="app.js"></script>
+    <script src="app.js?v=1.0.2"></script>
 </body>
 </html>
