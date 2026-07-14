@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { ArrowLeft, ExternalLink, Download, ShieldCheck } from 'lucide-react';
+import { ArrowLeft, ExternalLink, ShieldCheck } from 'lucide-react';
 import Breadcrumbs from '@/components/layout/Breadcrumbs';
 
 /**
@@ -60,13 +60,32 @@ export default function GctsLabPage() {
         }
         .demo-iframe {
           width: 100%;
-          height: 780px;
+          height: min(780px, calc(100vh - 160px));
+          min-height: 560px;
           border: none;
           background: #0a0d16;
         }
+        @media (max-width: 640px) {
+          .window-container {
+            border-radius: 12px;
+          }
+          .window-bar {
+            padding: 10px 12px;
+          }
+          .window-title {
+            max-width: 68%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+          }
+          .demo-iframe {
+            height: calc(100vh - 120px);
+            min-height: 520px;
+          }
+        }
       `}</style>
 
-      <main className="max-w-7xl mx-auto px-8 py-12">
+      <main className="max-w-7xl mx-auto px-4 sm:px-8 py-8 sm:py-12">
         {/* 面包屑导航 */}
         <div className="mb-12 opacity-60 hover:opacity-100 transition-opacity duration-300">
           <Breadcrumbs items={breadcrumbs} />
@@ -93,6 +112,7 @@ export default function GctsLabPage() {
               <a 
                 href="/gcts/index.html" 
                 target="_blank" 
+                rel="noopener noreferrer"
                 className="px-6 py-3 bg-purple-500 text-white text-xs font-black tracking-widest rounded-xl hover:shadow-[0_0_20px_rgba(168,85,247,0.3)] transition-all flex items-center gap-2"
               >
                 启动全屏 GCTS 控制台 <ExternalLink size={14} />
@@ -122,7 +142,7 @@ export default function GctsLabPage() {
         </section>
 
         {/* --- 2. 业务架构与解决逻辑 (System Logic - 放在最底部) --- */}
-        <section id="system-logic" className="bg-[#101726]/20 border border-white/5 p-12 rounded-3xl space-y-10">
+        <section id="system-logic" className="bg-[#101726]/20 border border-white/5 p-6 sm:p-12 rounded-3xl space-y-10">
           <div className="space-y-2">
             <h2 className="text-2xl font-black text-white uppercase italic">系统解决逻辑与架构 (System Logic)</h2>
             <p className="text-xs text-slate-500 font-light">大宗商品贸易的盈利核心是对物流、海关和汇率的细节把控。GCTS 通过三大引擎统一量化决策：</p>

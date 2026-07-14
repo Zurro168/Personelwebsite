@@ -10,7 +10,7 @@ function cleanFiles() {
     files.forEach(file => {
         const filePath = path.join(PUBLIC_REPORTS_DIR, file);
         let content = fs.readFileSync(filePath, 'utf8');
-        let originalContent = content;
+        const originalContent = content;
 
         // Clean Red/Rose/Amber/Orange variants
         content = content.replace(/bg-(red|rose|amber|orange)-[1-9]00/gi, 'bg-brand-blue/20');

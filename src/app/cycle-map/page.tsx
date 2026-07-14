@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Activity, Zap, TrendingUp, TrendingDown, RefreshCw, Loader2 } from 'lucide-react';
-import { resolveCommodity } from '@/lib/price-adapter';
+import { resolveCommodity, type UnifiedCommodityData } from '@/lib/price-adapter';
 
 // --- Commodity Metadata ---
 const COMMODITIES_META = [
@@ -37,8 +37,10 @@ const COMMODITIES_META = [
   }
 ];
 
+type CommodityCard = (typeof COMMODITIES_META)[number] & Pick<UnifiedCommodityData, 'score' | 'status' | 'trend'>;
+
 export default function CycleMapPortal() {
-  const [commodities, setCommodities] = useState<any[]>([]);
+  const [commodities, setCommodities] = useState<CommodityCard[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {

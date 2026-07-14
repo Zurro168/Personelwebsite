@@ -20,6 +20,20 @@ const REPORTS_REGISTRY_FILE = path.join(process.cwd(), 'src/data/reports.ts');
 const PUBLIC_REPORTS_DIR = path.join(process.cwd(), 'public/content/reports');
 const PUBLIC_SYSTEM_DIR = path.join(process.cwd(), 'public/content/system');
 
+interface ReportRegistryEntry {
+    id: string;
+    title: string;
+    description: string;
+    tag: string;
+    date: string;
+    readTime: string;
+    image: string;
+    slug: string;
+    hasContent: boolean;
+    isPinned: boolean;
+    layout: string;
+}
+
 // --- Industrial CSS Injection ---
 const INDUSTRIAL_CSS = `
 <style>
@@ -182,10 +196,10 @@ async function sync() {
         ...getAllFiles(SYSTEM_DIR)
     ];
 
-    const allReports: any[] = [];
+    const allReports: ReportRegistryEntry[] = [];
     const processedSlugs = new Set();
 
-    for (let filePath of files) {
+    for (const filePath of files) {
         const fileName = path.basename(filePath);
         const fileContent = fs.readFileSync(filePath, 'utf8');
         const { data, content } = matter(fileContent);

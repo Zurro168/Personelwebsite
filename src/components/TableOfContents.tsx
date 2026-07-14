@@ -21,7 +21,6 @@ export default function TableOfContents({
 
   const themeColor = variant === 'experiment' ? 'var(--brand-experiment)' : 'var(--brand-blue)';
   const themeAccent = variant === 'experiment' ? 'text-brand-experiment' : 'text-brand-blue';
-  const themeBorder = variant === 'experiment' ? 'border-brand-experiment' : 'border-brand-blue';
   const themeBg = variant === 'experiment' ? 'bg-brand-experiment' : 'bg-brand-blue';
 
   useEffect(() => {
@@ -32,7 +31,7 @@ export default function TableOfContents({
       const containerRect = containerEl.getBoundingClientRect();
       const hElements = document.querySelectorAll('.report-body h2, .report-body h3, .interactive-base h1, .interactive-base h2, .interactive-base h3, #reports, #intro, #market-structure');
       
-      let extracted: TOCItem[] = [];
+      const extracted: TOCItem[] = [];
       
       hElements.forEach(el => {
         const id = el.id || el.textContent?.trim().toLowerCase().replace(/\s+/g, '-');

@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
-import katex from 'katex';
 import renderMathInElement from 'katex/dist/contrib/auto-render';
 
 interface ReportRendererProps {
@@ -70,8 +69,7 @@ export default function ReportRenderer({ html, layout = 'paper' }: ReportRendere
       // because the natural window load event has already fired before React mounted this
       if (typeof window.onload === 'function') {
         const loadEvent = new Event('load');
-        // @ts-ignore
-        window.onload(loadEvent);
+        window.onload.call(window, loadEvent);
       }
     };
 

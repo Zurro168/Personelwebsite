@@ -4,15 +4,15 @@ export const AUTHOR_INFO = {
   "status": "published",
   "published_at": "2026-07-08T00:00:00.000Z",
   "name": "王国慧 (Gordon)",
-  "job_title": "总经理 / 大宗商品与跨境供应链专家",
+  "job_title": "关键矿产跨境供应链与矿冶运营负责人",
   "motto": "深耕大宗商品国际贸易、供应链金融及实体矿冶生产 20余载，以算法思维与风控重构物理工业价值链。",
   "email": "zurro_w@foxmail.com",
   "linkedin": "https://www.linkedin.com/in/gordon-wang-63622821",
   "twitter": "https://x.com/Gordon800619",
   "education": [
     {
-      "degree": "工商管理硕士 (MBA)",
-      "school": "香港大学 Space 学院",
+      "degree": "全球运营与管理研究生",
+      "school": "香港大学 SPACE 学院",
       "duration": "2014.06 - 2016.01",
       "logo": "/brand/hku.png"
     },
@@ -67,13 +67,19 @@ export const AUTHOR_INFO = {
       "description": "主导大宗钢材煤焦现货套保销售。2003年被派驻云南主导焦化企业 2700 万资产收并购及后期生产技术优化，带领年轻团队创造年净利 700 万元。"
     }
   ],
+  "highlights": [
+    { "value": "20+ 年", "label": "大宗商品与矿冶运营" },
+    { "value": "3 亿美元", "label": "海外铁合金直采供应链" },
+    { "value": "19000KVA×2", "label": "越南矿热炉二期建设" },
+    { "value": "3%", "label": "仓储成本优化成果" }
+  ],
   "skills": [
-    { "name": "国际矿产开发", "level": 98 },
-    { "name": "供应链金融架构", "level": 96 },
-    { "name": "大宗商品套利避险", "level": 95 },
-    { "name": "跨国建厂生产运营", "level": 92 },
-    { "name": "资源项目尽调测算", "level": 90 },
-    { "name": "团队OKRs/高绩效管理", "level": 88 }
+    { "name": "国际矿产开发", "evidence": "非洲、东南亚矿源与海外选址" },
+    { "name": "供应链金融架构", "evidence": "L/C、汇率避险与仓单质押" },
+    { "name": "大宗商品套保", "evidence": "铜、锌、钢材与煤焦现货" },
+    { "name": "跨国建厂运营", "evidence": "越南矿热炉筹建、试车与总包" },
+    { "name": "资源尽调测算", "evidence": "矿山储量与可行性经济模型" },
+    { "name": "组织绩效管理", "evidence": "OKR 推动仓储成本下降 3%" }
   ],
   "focus": [
     "锆钛/钽铌/锑/钨/锂矿直采",
@@ -84,11 +90,6 @@ export const AUTHOR_INFO = {
     "email": "zurro_w@foxmail.com",
     "linkedin": "https://www.linkedin.com/in/gordon-wang-63622821",
     "x": "https://x.com/Gordon800619",
-    "wechat": {
-      "label": "微信",
-      "id": "zurro_w",
-      "qrCode": "/brand/wechat-personal.png"
-    },
     "officialAccount": {
       "label": "公众号",
       "name": "硅基大宗",

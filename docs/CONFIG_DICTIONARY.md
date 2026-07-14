@@ -12,9 +12,8 @@ Use this dictionary to map database fields to UI components. Reference these fie
 | `location` | Identity Card Row | Current operational coordinates. |
 | `focus` | Identity Card Row | Focus[0] is displayed prominently. |
 | `tags` | Identity Card Tags | Keywords displayed in the card footer. |
-| `social.wechat.id` | Connect Card Footer | Displayed WeChat ID string. |
-| `social.wechat.qrCode`| Connect Card Image | Path: `/brand/wechat-personal.png`. |
-| `social.officalAccount.qrCode` | Connect Card Image | Path: `/brand/official-account.png`. |
+| `social.officialAccount.qrCode` | Connect Card Image | Public contact path: `/brand/official-account.png`. |
+| `social.linkedin` | Connect Card Link | Public professional profile URL. |
 | `auditLog` | Identity Card Log | **High-frequency updates**. {date, action}. |
 
 ## 2. Content Inventory (`src/data/reports.ts`)

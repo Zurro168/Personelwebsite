@@ -7,7 +7,7 @@ const SCRATCH_HTML = 'f:/Documents/Antigravity/个人网站/scratch/tcm_html.md'
 const PUBLIC_REPORTS_DIR = 'f:/Documents/Antigravity/个人网站/public/content/reports';
 
 function sanitize(content: string) {
-    let finalContent = content.trim();
+    const finalContent = content.trim();
     // 注入全局内容控制样式
     const globalStyleInject = `
 <style>

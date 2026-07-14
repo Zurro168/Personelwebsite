@@ -6,6 +6,12 @@ const SOURCE_DIR = 'F:\\Documents\\GitHub\\Critical-Minerals-Trading-OS';
 const OUTPUT_DIR = path.join(__dirname, '..', 'public', 'gcts', 'docs');
 const INDEX_FILE = path.join(__dirname, '..', 'public', 'gcts', 'index.html');
 
+function sanitizePublicContent(markdown) {
+  return markdown
+    .replace(/F:\\Documents\\Codex\\大宗矿产品报价系统\\乍得钨矿锑矿分金属计价_公共物流报价系统V2\.xlsx/g, '内部历史报价模型（文件名已隐藏）')
+    .replace(/F:\\Documents\\GitHub\\Critical-Minerals-Trading-OS\\GCTS_Metals_Pricing_Engine_V1\.xlsx/g, 'GCTS_Metals_Pricing_Engine_V1.xlsx');
+}
+
 // 1. 文档编译对应表
 const docMapping = [
   { src: "03_Knowledge_Domains/Commodity_Tungsten/Tungsten_Commodity_KB_V0.1.md", dest: "Tungsten_Commodity_KB_V0.1.html" },
@@ -522,7 +528,7 @@ function build() {
     }
 
     try {
-      const mdContent = fs.readFileSync(srcPath, 'utf8');
+      const mdContent = sanitizePublicContent(fs.readFileSync(srcPath, 'utf8'));
       
       // 提取标题作为 HTML title
       const firstLine = mdContent.split('\n')[0] || '';

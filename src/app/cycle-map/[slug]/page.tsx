@@ -1,11 +1,11 @@
 'use client';
 
 import React, { use, useEffect, useState } from 'react';
-import { ChevronRight, ShieldAlert, ShieldCheck, Activity, Loader2, Info, ArrowRight, Globe, Zap, Box, CircleDollarSign, Pickaxe } from 'lucide-react';
+import { ShieldAlert, ShieldCheck, Activity, Loader2, ArrowRight, Globe, Zap, Box, CircleDollarSign, Pickaxe } from 'lucide-react';
 import Link from 'next/link';
 import { AUTHOR_INFO } from '@/data/biography';
 import Breadcrumbs from '@/components/layout/Breadcrumbs';
-import { resolveCommodity, UnifiedCommodityData } from '@/lib/price-adapter';
+import { resolveCommodity, type UnifiedCommodityData } from '@/lib/price-adapter';
 import TableOfContents from '@/components/TableOfContents';
 import {
   Chart as ChartJS,
@@ -54,7 +54,7 @@ export default function CycleMapDetail({ params }: { params: Promise<{ slug: str
     }
     return <Activity className={className} size={32} />;
   };
-  const [data, setData] = useState<any>(null);
+  const [data, setData] = useState<UnifiedCommodityData | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -193,7 +193,7 @@ export default function CycleMapDetail({ params }: { params: Promise<{ slug: str
             <div className="absolute -left-2 top-1/2 -translate-y-1/2 w-4 h-32 bg-brand-blue/20 blur-2xl opacity-10 group-hover:opacity-100 transition-opacity"></div>
             <h2 className="text-xs font-black text-brand-blue uppercase tracking-[0.5em] mb-16 italic text-center drop-shadow-sm">End-to-End Market Cycle Logic Linkage</h2>
             <div className="flex flex-col lg:flex-row items-stretch justify-between gap-6 lg:gap-4 lg:px-10">
-                {data.cycleSteps?.map((pos: any, idx: number) => (
+                {data.cycleSteps.map((pos, idx) => (
                     <React.Fragment key={idx}>
                         <div className={`flex-1 p-8 border rounded-3xl text-center transition-all duration-700 relative flex flex-col justify-center items-center group/card cursor-pointer hover:bg-white/[0.05] ${idx === data.cyclePosition ? 'border-brand-blue/50 bg-brand-blue/5 shadow-[0_0_60px_rgba(56,189,248,0.1)] scale-110 z-20 border-2' : 'border-white/5 bg-white/[0.01] opacity-40 hover:opacity-100 grayscale hover:grayscale-0'}`}>
                             {idx === data.cyclePosition && (
@@ -314,7 +314,7 @@ export default function CycleMapDetail({ params }: { params: Promise<{ slug: str
                    </div>
                    
                    <div className="space-y-16">
-                      {data.narrative?.map((item: any, idx: number) => (
+                      {data.narrative.map((item, idx) => (
                         <div key={idx} className="group cursor-default relative pl-12">
                            <div className="absolute left-0 top-0 w-1 h-full bg-white/5 group-hover:bg-brand-blue transition-all duration-700"></div>
                            <h3 className="text-3xl font-black mb-8 italic uppercase text-white group-hover:tracking-wider transition-all duration-500">

@@ -36,15 +36,44 @@ export interface UnifiedCommodityData {
   trend: 'up' | 'down' | 'neutral';
 }
 
+interface CommodityHistoryPoint {
+  date: string;
+  price: number;
+  inventory: number;
+}
+
+interface CommodityPacket {
+  slug?: string;
+  metadata?: {
+    name?: string;
+    unit?: string;
+    status?: string;
+  };
+  manual_override?: {
+    price?: string;
+    change?: string;
+    context?: string;
+  };
+  history?: CommodityHistoryPoint[];
+  score_engine?: {
+    total_score?: number;
+    dimensions?: number[];
+    cycle_position?: number;
+    cycle_steps?: CycleStep[];
+    outlook?: string;
+  };
+  narrative_layer?: Narrative[];
+}
+
 export async function resolveCommodity(slug: string): Promise<UnifiedCommodityData> {
   // 1. Fetch Manual Override / Narrative Packet from API
-  let packet: any = null;
+  let packet: CommodityPacket | null = null;
   try {
     // Determine base URL for server-side or client-side fetch
     const baseUrl = typeof window !== 'undefined' ? window.location.origin : (process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000');
     const response = await fetch(`${baseUrl}/api/commodities/${slug}`, { cache: 'no-store' });
     if (response.ok) {
-        packet = await response.json();
+        packet = await response.json() as CommodityPacket;
     }
   } catch (e) {
     console.error("API Fetch failed for commodity packet:", e);
@@ -78,9 +107,9 @@ export async function resolveCommodity(slug: string): Promise<UnifiedCommodityDa
   
   // Historical Series Processing (for the dual-axis chart)
   const history = packet.history || [];
-  const chartLabels = history.length > 0 ? history.map((h: any) => h.date) : ["NODATA"];
-  const chartValues = history.length > 0 ? history.map((h: any) => h.price) : [0];
-  const inventoryValues = history.length > 0 ? history.map((h: any) => h.inventory) : [0];
+  const chartLabels = history.length > 0 ? history.map((point) => point.date) : ["NODATA"];
+  const chartValues = history.length > 0 ? history.map((point) => point.price) : [0];
+  const inventoryValues = history.length > 0 ? history.map((point) => point.inventory) : [0];
 
   const outlook = packet.score_engine?.outlook;
   const trend: 'up' | 'down' | 'neutral' = 
@@ -89,7 +118,7 @@ export async function resolveCommodity(slug: string): Promise<UnifiedCommodityDa
 
   return {
     slug,
-    name: packet.metadata?.name || packet.slug.toUpperCase(),
+    name: packet.metadata?.name || packet.slug?.toUpperCase() || slug.toUpperCase(),
     price: price,
     change: change,
     unit: packet.metadata?.unit || "N/A",

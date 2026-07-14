@@ -1,7 +1,8 @@
 'use client';
 
+import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowRight, Rss, MessageCircle, ShieldCheck } from 'lucide-react';
+import { ArrowRight, Rss } from 'lucide-react';
 import { AUTHOR_INFO } from '@/data/biography';
 import { ALL_REPORTS } from '@/data/reports';
 import PriceTicker from '@/components/layout/PriceTicker';
@@ -150,22 +151,6 @@ export default function Home() {
 
               {/* Right: Social Matrix */}
               <div className="grid sm:grid-cols-2 gap-6 items-start">
-                {/* WeChat Personal */}
-                <div className="p-8 rounded-3xl bg-slate-900 border border-white/10 hover:border-cyan-500/30 transition-all group relative overflow-hidden shadow-2xl">
-                  <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-cyan-500/30 to-transparent"></div>
-                  <div className="flex items-center gap-4 mb-8">
-                    <div className="p-2.5 bg-emerald-500/10 rounded-xl text-emerald-400 border border-emerald-500/20 group-hover:scale-110 transition-transform"><MessageCircle size={22}/></div>
-                    <div>
-                       <span className="text-xs font-black text-white block uppercase tracking-tighter">{AUTHOR_INFO.social.wechat.label}</span>
-                       <span className="text-[8px] text-slate-600 font-mono tracking-widest uppercase">ENCRYPTED_COMMS</span>
-                    </div>
-                  </div>
-                  <div className="aspect-square bg-white rounded-2xl overflow-hidden p-3 group-hover:scale-[1.02] transition-all duration-500">
-                    <img src={AUTHOR_INFO.social.wechat.qrCode} alt="WeChat" className="w-full h-full object-cover" />
-                  </div>
-                  <p className="mt-8 text-center text-[10px] text-slate-500 font-mono bg-white/5 py-2.5 rounded-xl border border-white/5 uppercase tracking-[0.3em]">ID: {AUTHOR_INFO.social.wechat.id}</p>
-                </div>
-
                 {/* Official Account */}
                 <div className="p-8 rounded-3xl bg-slate-900 border border-white/10 hover:border-cyan-500/30 transition-all group relative overflow-hidden shadow-2xl">
                   <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-cyan-500/30 to-transparent"></div>
@@ -177,13 +162,19 @@ export default function Home() {
                     </div>
                   </div>
                   <div className="aspect-square bg-white rounded-2xl overflow-hidden p-3 group-hover:scale-[1.02] transition-all duration-500">
-                    <img src={AUTHOR_INFO.social.officialAccount.qrCode} alt="Official Account" className="w-full h-full object-cover" />
+                    <Image
+                      src={AUTHOR_INFO.social.officialAccount.qrCode}
+                      alt="硅基大宗公众号二维码"
+                      width={320}
+                      height={320}
+                      className="h-full w-full object-contain"
+                    />
                   </div>
                   <p className="mt-8 text-center text-[10px] text-slate-500 font-mono bg-white/5 py-2.5 rounded-xl border border-white/5 uppercase tracking-[0.3em]">@{AUTHOR_INFO.social.officialAccount.name}</p>
                 </div>
 
                 {/* LinkedIn */}
-                <a href={AUTHOR_INFO.social.linkedin} target="_blank" className="relative group p-6 rounded-2xl bg-slate-900 border border-white/10 overflow-hidden transition-all hover:bg-slate-800">
+                <a href={AUTHOR_INFO.social.linkedin} target="_blank" rel="noopener noreferrer" className="relative group p-6 rounded-2xl bg-slate-900 border border-white/10 overflow-hidden transition-all hover:bg-slate-800">
                   <div className="absolute inset-y-0 left-0 w-[2px] bg-blue-500 transition-transform scale-y-0 group-hover:scale-y-100"></div>
                   <div className="flex items-center justify-between relative z-10">
                     <div className="flex items-center gap-4">
@@ -202,7 +193,7 @@ export default function Home() {
                 </a>
 
                 {/* Twitter / X */}
-                <a href={AUTHOR_INFO.social.x} target="_blank" className="relative group p-6 rounded-2xl bg-slate-900 border border-white/10 overflow-hidden transition-all hover:bg-slate-800">
+                <a href={AUTHOR_INFO.social.x} target="_blank" rel="noopener noreferrer" className="relative group p-6 rounded-2xl bg-slate-900 border border-white/10 overflow-hidden transition-all hover:bg-slate-800">
                   <div className="absolute inset-y-0 left-0 w-[2px] bg-white transition-transform scale-y-0 group-hover:scale-y-100"></div>
                   <div className="flex items-center justify-between relative z-10">
                     <div className="flex items-center gap-4">

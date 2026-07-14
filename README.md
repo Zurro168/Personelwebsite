@@ -82,6 +82,7 @@ Do not manually edit generated report HTML unless the change is an emergency pat
 ## Safety Notes
 
 - Do not commit real `.env*` files.
+- Copy `.env.example` to `.env.local` and set `FRED_API_KEY` before using the FRED-backed market data endpoint.
 - Do not move Obsidian-linked folders or generated content paths without first checking sync dependencies.
 - Treat `public/content/` and `src/data/reports.ts` as generated website-facing artifacts.
 - Keep API keys in environment variables, not source files.

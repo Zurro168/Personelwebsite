@@ -1,4 +1,12 @@
 import { NextResponse } from 'next/server';
+import { parseYahooChart } from './yahoo';
+
+interface PriceResponse {
+  name: string;
+  price: string;
+  delta: string;
+  isUp: boolean;
+}
 
 /**
  * 雅虎财经符号映射表
@@ -28,15 +36,17 @@ export async function GET() {
             `https://query1.finance.yahoo.com/v8/finance/chart/${symbol}?interval=1d&range=1d`,
             { next: { revalidate: 1800 } } // 缓存半小时
           );
-          const data = await res.json();
-          const quote = data.chart.result[0].meta;
-          const price = quote.regularMarketPrice;
-          const prevPrice = quote.chartPreviousClose;
-          const deltaRaw = ((price - prevPrice) / prevPrice) * 100;
+
+          if (!res.ok) return null;
+
+          const quote = parseYahooChart(await res.json() as unknown);
+          if (!quote) return null;
+
+          const deltaRaw = ((quote.price - quote.previousClose) / quote.previousClose) * 100;
 
           return {
             name: SYMBOL_NAMES[symbol],
-            price: price.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }),
+            price: quote.price.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }),
             delta: `${deltaRaw >= 0 ? '+' : ''}${deltaRaw.toFixed(2)}%`,
             isUp: deltaRaw >= 0
           };
@@ -47,8 +57,8 @@ export async function GET() {
       })
     );
 
-    return NextResponse.json(results.filter(Boolean));
-  } catch (error) {
+    return NextResponse.json(results.filter((result): result is PriceResponse => result !== null));
+  } catch {
     return NextResponse.json({ error: 'Failed to fetch' }, { status: 500 });
   }
 }

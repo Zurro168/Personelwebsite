@@ -1,26 +1,24 @@
 'use client';
 
-import React from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
-import { 
-  User, Mail, Phone, Briefcase, GraduationCap, 
-  Printer, ArrowLeft, ShieldCheck, MapPin, Globe, Sparkles
+import {
+  ArrowLeft,
+  Briefcase,
+  ExternalLink,
+  GraduationCap,
+  Globe2,
+  Mail,
+  MapPin,
+  Printer,
+  ShieldCheck,
+  Sparkles,
 } from 'lucide-react';
 import { AUTHOR_INFO } from '@/data/biography';
 
-/**
- * Premium Bento Style Resume & About Me Page
- * 极致高阶极客暗色Bento排版，剔除臃肿大图，开门见山展示核心大宗专家履历
- */
 export default function AboutPage() {
-  const handlePrint = () => {
-    window.print();
-  };
-
   return (
-    <div className="min-h-screen bg-[#0a0f1a] text-slate-200 font-sans selection:bg-purple-500/30 selection:text-white pb-32 relative overflow-hidden">
-      
-      {/* 打印专属全局样式注入 */}
+    <div className="min-h-screen bg-[#0a0f1a] text-slate-200 pb-24">
       <style jsx global>{`
         @media print {
           body {
@@ -30,13 +28,12 @@ export default function AboutPage() {
           .no-print {
             display: none !important;
           }
-          .print-full-width {
-            width: 100% !important;
-            max-width: 100% !important;
-            padding: 0 !important;
+          .resume-grid {
+            display: block !important;
           }
           .print-card {
-            border: none !important;
+            break-inside: avoid;
+            border: 0 !important;
             background: transparent !important;
             box-shadow: none !important;
             color: #000000 !important;
@@ -57,244 +54,155 @@ export default function AboutPage() {
         }
       `}</style>
 
-      {/* Background radial gradients for tech mood */}
-      <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-purple-500/[0.02] blur-[150px] pointer-events-none no-print"></div>
-      <div className="absolute bottom-20 right-1/4 w-[600px] h-[600px] bg-cyan-500/[0.02] blur-[150px] pointer-events-none no-print"></div>
-
-      {/* TOP NAVIGATION HEADER (no-print) */}
-      <div className="bg-[#0b1120]/60 backdrop-blur-md border-b border-white/5 h-14 flex justify-between items-center px-8 sticky top-0 z-50 no-print">
-        <Link 
-          href="/" 
-          className="flex items-center gap-2 text-xs font-bold text-slate-500 hover:text-purple-400 transition-colors uppercase tracking-widest font-mono"
-        >
-          <ArrowLeft size={14} /> Back to Terminal
-        </Link>
-        
-        <div className="flex items-center gap-3">
-          <span className="text-[10px] font-mono text-purple-400/80 tracking-widest uppercase">GORDON WANG // BIO</span>
-          <button 
-            onClick={handlePrint}
-            className="flex items-center gap-2 px-4 py-1.5 bg-purple-500/10 border border-purple-500/30 hover:border-purple-400 text-purple-300 text-xs font-bold tracking-wider rounded-lg transition-all"
+      <div className="no-print border-b border-white/5 bg-[#0b1120]">
+        <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-3 sm:px-8">
+          <Link
+            href="/"
+            className="inline-flex items-center gap-2 text-xs font-bold text-slate-400 transition-colors hover:text-cyan-300"
           >
-            <Printer size={12} /> 打印/保存 PDF
+            <ArrowLeft size={14} /> 返回首页
+          </Link>
+          <button
+            type="button"
+            onClick={() => window.print()}
+            className="inline-flex items-center gap-2 rounded-md border border-cyan-400/30 bg-cyan-400/10 px-3 py-2 text-xs font-bold text-cyan-200 transition-colors hover:border-cyan-300"
+          >
+            <Printer size={14} /> 打印 / 保存 PDF
           </button>
         </div>
       </div>
 
-      <main className="max-w-7xl mx-auto px-8 py-16 print-full-width">
-        <div className="grid lg:grid-cols-[1.1fr_2.2fr] gap-12 items-start print-full-width">
-          
-          {/* ======================================================== */}
-          {/* 左侧栏：个人数字名片舱 (Bento Sidebar) */}
-          {/* ======================================================== */}
-          <div className="space-y-8 sticky top-24 no-print print-full-width">
-            
-            {/* 核心个人卡 */}
-            <div className="bg-[#101726]/40 border border-white/5 p-8 rounded-3xl backdrop-blur-md relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-purple-500/10 to-transparent blur-xl pointer-events-none"></div>
-              
-              <div className="space-y-6">
-                <div className="flex items-center gap-3">
-                  <span className="px-2.5 py-1 bg-purple-500/10 border border-purple-500/20 text-purple-400 text-[10px] font-bold tracking-widest rounded-lg font-mono uppercase">ABOUT Gordon</span>
-                  <div className="w-1.5 h-1.5 bg-purple-500 rounded-full animate-ping"></div>
-                </div>
-
-                <div className="space-y-2">
-                  <h1 className="text-4xl font-black tracking-tight text-white">{AUTHOR_INFO.name}</h1>
-                  <p className="text-sm font-mono text-purple-400 font-bold uppercase tracking-wider">{AUTHOR_INFO.job_title}</p>
-                </div>
-
-                <p className="text-sm text-slate-400 font-light leading-relaxed border-l-2 border-purple-500/20 pl-4 italic">
-                  &ldquo;{AUTHOR_INFO.motto}&rdquo;
-                </p>
-
-                {/* 社交/物理属性网格 */}
-                <div className="grid grid-cols-2 gap-4 pt-4 border-t border-white/5 text-xs font-mono text-slate-400">
-                  <div className="flex items-center gap-2">
-                    <MapPin size={12} className="text-purple-400" />
-                    <span>广东广州</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Globe size={12} className="text-purple-400" />
-                    <span>籍贯山东</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* 微信与联络 Bento */}
-            <div className="bg-[#101726]/20 border border-white/5 p-8 rounded-3xl space-y-6">
-              <h3 className="text-xs font-mono font-bold tracking-[0.2em] uppercase text-purple-400/80">联络与数字网络</h3>
-              
-              <div className="space-y-4 text-xs font-mono">
-                <div className="flex items-center justify-between p-3 bg-black/20 rounded-xl border border-white/5">
-                  <div className="flex items-center gap-2.5 text-slate-400">
-                    <Mail size={14} className="text-purple-400" />
-                    <span>电子邮箱</span>
-                  </div>
-                  <a href={`mailto:${AUTHOR_INFO.email}`} className="text-white hover:text-purple-400 transition-colors font-bold">{AUTHOR_INFO.email}</a>
-                </div>
-
-                <div className="flex items-center justify-between p-3 bg-black/20 rounded-xl border border-white/5">
-                  <div className="flex items-center gap-2.5 text-slate-400">
-                    <User size={14} className="text-purple-400" />
-                    <span>微信号码</span>
-                  </div>
-                  <span className="text-white font-bold">{AUTHOR_INFO.social.wechat.id}</span>
-                </div>
+      <main className="mx-auto max-w-7xl px-4 py-8 sm:px-8 sm:py-12">
+        <div className="resume-grid grid items-start gap-8 lg:grid-cols-[minmax(280px,0.9fr)_minmax(0,2.1fr)] lg:grid-rows-[auto_1fr] lg:gap-10">
+          <aside className="no-print lg:col-start-1 lg:row-start-1">
+            <div className="rounded-lg border border-white/10 bg-[#101726] p-6 sm:p-8 lg:sticky lg:top-24">
+              <div className="mb-6 inline-flex items-center gap-2 rounded-md border border-cyan-400/20 bg-cyan-400/5 px-2.5 py-1 text-[11px] font-bold text-cyan-300">
+                <ShieldCheck size={13} /> 关键矿产实业履历
               </div>
 
-              {/* 二维码展示区 - 纵向高档列表，彻底防挤压 */}
-              <div className="space-y-4 pt-2">
-                <div className="bg-black/30 border border-white/5 p-4 rounded-2xl flex items-center gap-4 hover:border-purple-500/20 transition-all duration-300">
-                  <div className="w-16 h-16 rounded-xl bg-white p-1 flex items-center justify-center shrink-0 shadow-lg relative overflow-hidden">
-                    <img 
-                      src={AUTHOR_INFO.social.wechat.qrCode} 
-                      alt="个人微信" 
-                      className="w-full h-full object-contain"
-                      onError={(e) => {
-                        e.currentTarget.style.display = 'none';
-                        const parent = e.currentTarget.parentElement;
-                        if (parent) parent.innerHTML = '<span class="text-[9px] text-slate-500 text-center">微信</span>';
-                      }}
-                    />
-                  </div>
-                  <div className="space-y-1">
-                    <h4 className="text-xs font-bold text-white font-mono">{AUTHOR_INFO.social.wechat.id}</h4>
-                    <p className="text-[10px] text-slate-500 font-light leading-none">扫码添加个人微信</p>
-                  </div>
-                </div>
+              <h1 className="text-3xl font-black text-white sm:text-4xl">{AUTHOR_INFO.name}</h1>
+              <p className="mt-3 text-sm font-bold leading-6 text-cyan-300">{AUTHOR_INFO.job_title}</p>
+              <p className="mt-6 border-l-2 border-amber-300/50 pl-4 text-sm leading-7 text-slate-300">
+                {AUTHOR_INFO.motto}
+              </p>
 
-                <div className="bg-black/30 border border-white/5 p-4 rounded-2xl flex items-center gap-4 hover:border-purple-500/20 transition-all duration-300">
-                  <div className="w-16 h-16 rounded-xl bg-white p-1 flex items-center justify-center shrink-0 shadow-lg relative overflow-hidden">
-                    <img 
-                      src={AUTHOR_INFO.social.officialAccount.qrCode} 
-                      alt="公众号" 
-                      className="w-full h-full object-contain"
-                      onError={(e) => {
-                        e.currentTarget.style.display = 'none';
-                        const parent = e.currentTarget.parentElement;
-                        if (parent) parent.innerHTML = '<span class="text-[9px] text-slate-500 text-center">公众号</span>';
-                      }}
-                    />
-                  </div>
-                  <div className="space-y-1">
-                    <h4 className="text-xs font-bold text-white">硅基大宗</h4>
-                    <p className="text-[10px] text-slate-500 font-light leading-none">扫码关注公众号</p>
-                  </div>
-                </div>
+              <div className="mt-6 grid grid-cols-2 gap-3 border-t border-white/10 pt-5 text-xs text-slate-400">
+                <span className="inline-flex items-center gap-2"><MapPin size={13} className="text-cyan-300" /> 广东广州</span>
+                <span className="inline-flex items-center gap-2"><Globe2 size={13} className="text-cyan-300" /> 籍贯山东</span>
               </div>
             </div>
+          </aside>
 
-            {/* 专业背书 */}
-            <div className="bg-[#101726]/10 border border-white/5 p-6 rounded-3xl flex items-center gap-3 text-[10px] font-mono text-slate-500 uppercase tracking-widest">
-              <ShieldCheck size={14} className="text-purple-500/60" />
-              <span>Verified Commodity Professional</span>
-            </div>
-
-          </div>
-
-          {/* ======================================================== */}
-          {/* 右侧栏：履历时间轴 & 教育背景 (Bento Content) */}
-          {/* ======================================================== */}
-          <div className="space-y-12 print-full-width">
-            
-            {/* 打印版专属头部 (在屏幕上隐藏) */}
-            <div className="hidden print:block mb-8">
-              <h1 className="text-3xl font-black text-black mb-2">{AUTHOR_INFO.name}</h1>
-              <p className="text-sm font-bold text-slate-700">{AUTHOR_INFO.job_title} | {AUTHOR_INFO.email}</p>
-              <p className="text-xs text-slate-500 mt-2 font-light">{AUTHOR_INFO.motto}</p>
+          <div className="space-y-8 lg:col-start-2 lg:row-span-2 lg:row-start-1">
+            <div className="hidden print:block">
+              <h1 className="text-3xl font-black text-black">{AUTHOR_INFO.name}</h1>
+              <p className="mt-2 text-sm font-bold text-slate-700">{AUTHOR_INFO.job_title} | {AUTHOR_INFO.email}</p>
+              <p className="mt-2 text-xs text-slate-500">{AUTHOR_INFO.motto}</p>
               <hr className="my-4 border-slate-300" />
             </div>
 
-            {/* 1. 核心工作经历 (Work Experience) */}
-            <section className="bg-[#101726]/20 border border-white/5 p-10 rounded-[2rem] space-y-10 print-card">
-              <div className="flex items-center gap-3 pb-4 border-b border-white/5 print:border-slate-200">
-                <Briefcase size={18} className="text-purple-400 print:text-black" />
-                <h2 className="text-xl font-black text-white italic uppercase tracking-wider print-text-dark">核心业务履历 (Experience)</h2>
+            <section aria-labelledby="career-evidence" className="rounded-lg border border-white/10 bg-[#101726]/70 p-6 sm:p-8 print-card">
+              <div className="mb-6 flex items-center gap-3">
+                <Sparkles size={18} className="text-amber-300 print:text-black" />
+                <h2 id="career-evidence" className="text-lg font-black text-white print-text-dark">核心成果证据</h2>
+              </div>
+              <div className="grid grid-cols-2 gap-px overflow-hidden rounded-md border border-white/10 bg-white/10 lg:grid-cols-4">
+                {AUTHOR_INFO.highlights.map((item) => (
+                  <div key={item.label} className="bg-[#0d1422] p-4 sm:p-5 print:bg-white">
+                    <p className="text-lg font-black text-cyan-300 print-text-dark">{item.value}</p>
+                    <p className="mt-2 text-xs leading-5 text-slate-400 print-text-muted">{item.label}</p>
+                  </div>
+                ))}
+              </div>
+            </section>
+
+            <section aria-labelledby="experience" className="rounded-lg border border-white/10 bg-[#101726]/70 p-6 sm:p-8 print-card">
+              <div className="mb-8 flex items-center gap-3 border-b border-white/10 pb-4 print:border-slate-200">
+                <Briefcase size={18} className="text-cyan-300 print:text-black" />
+                <h2 id="experience" className="text-xl font-black text-white print-text-dark">核心业务履历</h2>
               </div>
 
-              {/* 垂直时间轴容器 */}
-              <div className="relative pl-6 space-y-12">
-                {/* 渐变竖线 */}
-                <div className="absolute left-[7px] top-2 bottom-2 w-0.5 bg-gradient-to-b from-purple-500 via-cyan-500/40 to-slate-800/10 timeline-line"></div>
-
-                {AUTHOR_INFO.experience.map((exp, idx) => (
-                  <div key={idx} className="relative group space-y-3">
-                    {/* 时间轴圆点 */}
-                    <div className="absolute -left-[24px] top-1.5 w-3.5 h-3.5 rounded-full bg-[#0a0f1a] border-2 border-purple-500 group-hover:bg-purple-500 transition-colors duration-300 timeline-dot"></div>
-
-                    {/* 头部信息 */}
-                    <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-2">
-                      <div className="space-y-1">
-                        <h3 className="text-lg font-bold text-white group-hover:text-purple-300 transition-colors leading-tight print-text-dark">
-                          {exp.role}
-                        </h3>
-                        <p className="text-xs font-mono font-bold text-purple-400/80 uppercase print-text-muted">
-                          {exp.company}
-                        </p>
+              <div className="relative space-y-9 pl-6">
+                <div className="timeline-line absolute bottom-2 left-[7px] top-2 w-px bg-cyan-400/30" />
+                {AUTHOR_INFO.experience.map((experience) => (
+                  <article key={`${experience.company}-${experience.duration}`} className="relative">
+                    <div className="timeline-dot absolute -left-[24px] top-1.5 h-3.5 w-3.5 rounded-full border-2 border-cyan-300 bg-[#0a0f1a]" />
+                    <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
+                      <div>
+                        <h3 className="text-base font-bold text-white print-text-dark">{experience.role}</h3>
+                        <p className="mt-1 text-xs font-bold text-cyan-300 print-text-muted">{experience.company}</p>
                       </div>
-                      <span className="text-[10px] font-mono font-bold text-slate-500 bg-slate-900/40 px-2.5 py-1 rounded-md border border-white/5 uppercase tracking-wider print:border-none print:bg-transparent print-text-muted">
-                        {exp.duration}
-                      </span>
+                      <time className="shrink-0 text-xs text-slate-500 print-text-muted">{experience.duration}</time>
                     </div>
+                    <p className="mt-3 text-sm leading-7 text-slate-400 print-text-muted">{experience.description}</p>
+                  </article>
+                ))}
+              </div>
+            </section>
 
-                    {/* 详细描述 */}
-                    <p className="text-xs leading-relaxed text-slate-400 font-light print-text-muted">
-                      {exp.description}
-                    </p>
+            <section aria-labelledby="expertise" className="rounded-lg border border-white/10 bg-[#101726]/70 p-6 sm:p-8 print-card">
+              <div className="mb-6 flex items-center gap-3 border-b border-white/10 pb-4 print:border-slate-200">
+                <Sparkles size={18} className="text-amber-300 print:text-black" />
+                <h2 id="expertise" className="text-xl font-black text-white print-text-dark">专业能力与项目证据</h2>
+              </div>
+              <div className="grid gap-3 sm:grid-cols-2">
+                {AUTHOR_INFO.skills.map((skill) => (
+                  <div key={skill.name} className="rounded-md border border-white/10 bg-black/15 p-4 print:border-slate-200 print:bg-white">
+                    <h3 className="text-sm font-bold text-white print-text-dark">{skill.name}</h3>
+                    <p className="mt-2 text-xs leading-5 text-slate-400 print-text-muted">{skill.evidence}</p>
                   </div>
                 ))}
               </div>
             </section>
 
-            {/* 2. 教育背景 (Education) */}
-            <section className="bg-[#101726]/20 border border-white/5 p-10 rounded-[2rem] space-y-8 print-card">
-              <div className="flex items-center gap-3 pb-4 border-b border-white/5 print:border-slate-200">
-                <GraduationCap size={18} className="text-purple-400 print:text-black" />
-                <h2 className="text-xl font-black text-white italic uppercase tracking-wider print-text-dark">教育背景 (Education)</h2>
+            <section aria-labelledby="education" className="rounded-lg border border-white/10 bg-[#101726]/70 p-6 sm:p-8 print-card">
+              <div className="mb-6 flex items-center gap-3 border-b border-white/10 pb-4 print:border-slate-200">
+                <GraduationCap size={18} className="text-cyan-300 print:text-black" />
+                <h2 id="education" className="text-xl font-black text-white print-text-dark">教育背景</h2>
               </div>
-
-              <div className="grid md:grid-cols-2 gap-8">
-                {AUTHOR_INFO.education.map((edu, idx) => (
-                  <div key={idx} className="p-6 bg-slate-900/30 rounded-2xl border border-white/5 space-y-3 print:bg-transparent print:border-none print:p-0">
-                    <div className="space-y-1">
-                      <h4 className="text-sm font-bold text-white print-text-dark">{edu.degree}</h4>
-                      <p className="text-xs font-mono text-purple-400/80 print-text-muted">{edu.school}</p>
-                    </div>
-                    <span className="text-[10px] font-mono text-slate-500 block">{edu.duration}</span>
+              <div className="grid gap-4 sm:grid-cols-2">
+                {AUTHOR_INFO.education.map((education) => (
+                  <div key={`${education.school}-${education.duration}`} className="rounded-md border border-white/10 p-4 print:border-slate-200">
+                    <h3 className="text-sm font-bold text-white print-text-dark">{education.degree}</h3>
+                    <p className="mt-2 text-xs text-cyan-300 print-text-muted">{education.school}</p>
+                    <p className="mt-2 text-xs text-slate-500 print-text-muted">{education.duration}</p>
                   </div>
                 ))}
               </div>
             </section>
-
-            {/* 3. 核心数智技能 (Expertise) */}
-            <section className="bg-[#101726]/20 border border-white/5 p-10 rounded-[2rem] space-y-8 print-card">
-              <div className="flex items-center gap-3 pb-4 border-b border-white/5 print:border-slate-200">
-                <Sparkles size={16} className="text-purple-400 print:text-black" />
-                <h2 className="text-xl font-black text-white italic uppercase tracking-wider print-text-dark">商业与数智技能 (Expertise)</h2>
-              </div>
-
-              <div className="grid md:grid-cols-2 gap-6">
-                {AUTHOR_INFO.skills.map((skill, idx) => (
-                  <div key={idx} className="space-y-2">
-                    <div className="flex justify-between text-xs font-mono">
-                      <span className="text-slate-300 print-text-dark">{skill.name}</span>
-                      <span className="text-purple-400 font-bold print-text-muted">{skill.level}%</span>
-                    </div>
-                    {/* 进度条 */}
-                    <div className="h-1.5 w-full bg-slate-900/60 rounded-full overflow-hidden border border-white/5 no-print">
-                      <div 
-                        className="h-full bg-gradient-to-r from-purple-500 to-cyan-500 rounded-full" 
-                        style={{ width: `${skill.level}%` }}
-                      ></div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </section>
-
           </div>
+
+          <section aria-labelledby="contact" className="no-print rounded-lg border border-white/10 bg-[#101726] p-6 lg:col-start-1 lg:row-start-2 lg:self-start">
+            <h2 id="contact" className="text-sm font-black text-white">公开联络方式</h2>
+            <p className="mt-2 text-xs leading-5 text-slate-500">商务合作请优先使用邮箱或 LinkedIn。</p>
+
+            <div className="mt-5 space-y-3 text-xs">
+              <a href={`mailto:${AUTHOR_INFO.email}`} className="flex items-center justify-between gap-3 rounded-md border border-white/10 p-3 text-slate-300 transition-colors hover:border-cyan-300/40 hover:text-white">
+                <span className="inline-flex items-center gap-2"><Mail size={14} className="text-cyan-300" /> 电子邮箱</span>
+                <span className="truncate font-bold">{AUTHOR_INFO.email}</span>
+              </a>
+              <a href={AUTHOR_INFO.linkedin} target="_blank" rel="noopener noreferrer" className="flex items-center justify-between gap-3 rounded-md border border-white/10 p-3 text-slate-300 transition-colors hover:border-cyan-300/40 hover:text-white">
+                <span className="inline-flex items-center gap-2"><Globe2 size={14} className="text-cyan-300" /> LinkedIn</span>
+                <ExternalLink size={13} />
+              </a>
+            </div>
+
+            <div className="mt-5 flex items-center gap-4 rounded-md border border-white/10 bg-black/20 p-3">
+              <div className="flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden rounded-md bg-white p-1">
+                <Image
+                  src={AUTHOR_INFO.social.officialAccount.qrCode}
+                  alt="硅基大宗公众号二维码"
+                  width={64}
+                  height={64}
+                  className="h-full w-full object-contain"
+                />
+              </div>
+              <div>
+                <p className="text-sm font-bold text-white">{AUTHOR_INFO.social.officialAccount.name}</p>
+                <p className="mt-1 text-xs text-slate-500">公众号研究更新</p>
+              </div>
+            </div>
+          </section>
         </div>
       </main>
     </div>
