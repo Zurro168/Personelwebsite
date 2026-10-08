@@ -16,7 +16,7 @@ interface Message {
 const QUICK_PROMPTS = [
   '铜产业链与AI采购决策',
   'GCTS 智能交易系统架构',
-  '王国慧主理人实业履历',
+  '王国东主理人实业履历',
   '2026战略金属供需断层'
 ];
 
@@ -45,9 +45,9 @@ export default function AIAssistant() {
     const q = query.toLowerCase().trim();
 
     // 1. 履历与主理人相关
-    if (q.includes('简历') || q.includes('履历') || q.includes('王国慧') || q.includes('主理人') || q.includes('经验') || q.includes('背景') || q.includes('gordon')) {
+    if (q.includes('简历') || q.includes('履历') || q.includes('王国东') || q.includes('王国慧') || q.includes('主理人') || q.includes('经验') || q.includes('背景') || q.includes('gordon')) {
       return {
-        text: `【主理人背景概览】：\n王国慧 (Gordon Wang)，关键矿产跨境供应链与矿冶运营专家。深耕大宗商品国际贸易、供应链金融及实体矿冶生产 20 余载。\n• 曾任越南海阳新源冶金常务副总（驻守 10 年，主导 19000KVA×2 矿热炉建设与 3 亿美元铁合金海外直采）；\n• 现任正矿供应链总经理，专注锆钛/钽铌/锑/钨/锂全链条运营与跨境 L/C 供应链金融。\n• 毕业于西安交大（电子商务学士）及香港大学 SPACE 学院（全球运营与管理研究生）。`,
+        text: `【主理人背景概览】：\n王国东 (Gordon Wang，证件名王国慧)，关键矿产跨境供应链与矿冶运营专家。深耕大宗商品国际贸易、供应链金融及实体矿冶生产 20 余载。\n• 曾任越南海阳新源冶金常务副总（驻守 10 年，主导 19000KVA×2 矿热炉建设与 3 亿美元铁合金海外直采）；\n• 现任正矿供应链总经理，专注锆钛/钽铌/锑/钨/锂全链条运营与跨境 L/C 供应链金融。\n• 毕业于西安交大（电子商务学士）及香港大学 SPACE 学院（全球运营与管理研究生）。`,
         links: [
           { title: '查看完整实业履历与业绩证据', href: '/about', tag: '关于我们' },
           { title: '大宗商品交易：从信息红利到认知非对称', href: '/portfolio/trader-core-competency-2026', tag: '交易能力' }

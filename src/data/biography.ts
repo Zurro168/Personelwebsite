@@ -3,7 +3,7 @@ export const AUTHOR_INFO = {
   "title": "主理人简历",
   "status": "published",
   "published_at": "2026-07-08T00:00:00.000Z",
-  "name": "王国慧 (Gordon)",
+  "name": "王国东 (Gordon)",
   "job_title": "关键矿产跨境供应链与矿冶运营负责人",
   "motto": "深耕大宗商品国际贸易、供应链金融及实体矿冶生产 20余载，以算法思维与风控重构物理工业价值链。",
   "email": "zurro_w@foxmail.com",

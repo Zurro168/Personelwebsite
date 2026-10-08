@@ -12,7 +12,8 @@ import {
   Compass,
   FileText,
   Boxes,
-  Workflow
+  Workflow,
+  ShieldCheck
 } from 'lucide-react';
 import { AUTHOR_INFO } from '@/data/biography';
 import { ALL_REPORTS } from '@/data/reports';
@@ -590,13 +591,13 @@ export default function Home() {
             {/* 左侧：主理人实业履历卡片 */}
             <div className="p-8 sm:p-10 rounded-3xl bg-slate-900/50 border border-white/10 relative overflow-hidden shadow-2xl backdrop-blur-md">
               <div className="flex items-center gap-6 mb-8 relative">
-                <div className="w-20 h-20 rounded-2xl bg-gradient-to-tr from-cyan-600 to-cyan-400 p-0.5 flex items-center justify-center shrink-0">
-                  <div className="w-full h-full bg-[#0a0f1a] rounded-[14px] flex items-center justify-center text-3xl font-black text-cyan-400">
-                    {AUTHOR_INFO.name.substring(0, 2)}
+                <div className="w-20 h-20 rounded-2xl bg-gradient-to-tr from-cyan-600 to-cyan-400 p-0.5 flex items-center justify-center shrink-0 shadow-[0_0_20px_rgba(56,189,248,0.2)]">
+                  <div className="w-full h-full bg-[#0a0f1a] rounded-[14px] flex items-center justify-center text-cyan-400">
+                    <ShieldCheck size={36} />
                   </div>
                 </div>
                 <div>
-                  <h3 className="text-2xl font-black text-white leading-none mb-2">{AUTHOR_INFO.name} (Gordon)</h3>
+                  <h3 className="text-2xl font-black text-white leading-none mb-2">{AUTHOR_INFO.name}</h3>
                   <p className="text-cyan-400/80 font-mono text-xs tracking-wider">{AUTHOR_INFO.job_title}</p>
                   <p className="text-[11px] text-slate-500 font-mono mt-1">{AUTHOR_INFO.location}</p>
                 </div>
