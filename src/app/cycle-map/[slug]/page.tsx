@@ -1,9 +1,10 @@
 'use client';
 
-import React, { use, useEffect, useState } from 'react';
-import { ShieldAlert, ShieldCheck, Activity, Loader2, ArrowRight, Globe, Zap, Box, CircleDollarSign, Pickaxe } from 'lucide-react';
+import React, { use, useEffect, useState, useMemo } from 'react';
+import { ShieldAlert, ShieldCheck, Activity, Loader2, ArrowRight, Globe, Zap, Box, CircleDollarSign, Pickaxe, Clock, BookOpen, ArrowUpRight } from 'lucide-react';
 import Link from 'next/link';
 import { AUTHOR_INFO } from '@/data/biography';
+import { ALL_REPORTS } from '@/data/reports';
 import Breadcrumbs from '@/components/layout/Breadcrumbs';
 import { resolveCommodity, type UnifiedCommodityData } from '@/lib/price-adapter';
 import TableOfContents from '@/components/TableOfContents';
@@ -56,6 +57,24 @@ export default function CycleMapDetail({ params }: { params: Promise<{ slug: str
   };
   const [data, setData] = useState<UnifiedCommodityData | null>(null);
   const [loading, setLoading] = useState(true);
+
+  // 动态检索与当前战略金属关联的深度智库研报 (提前至条件渲染前执行，符合 Hooks 纯净规范)
+  const relatedReports = useMemo(() => {
+    const keywords: Record<string, string[]> = {
+      copper: ['铜', 'copper', 'codelco', 'bhp'],
+      lithium: ['锂', 'lithium'],
+      zirconium: ['锆', 'zirconium', '战略金属'],
+      titanium: ['钛', 'titanium', '战略金属'],
+    };
+    const keys = keywords[slug] || [slug];
+    return ALL_REPORTS.filter(r =>
+      keys.some(k =>
+        r.title.toLowerCase().includes(k.toLowerCase()) ||
+        r.slug.toLowerCase().includes(k.toLowerCase()) ||
+        r.description.toLowerCase().includes(k.toLowerCase())
+      )
+    ).slice(0, 3);
+  }, [slug]);
 
   useEffect(() => {
     async function fetchData() {
@@ -357,6 +376,57 @@ export default function CycleMapDetail({ params }: { params: Promise<{ slug: str
                 </div>
             </div>
         </div>
+
+        {/* --- 关联智库深度研报 (Associated Research Archive) --- */}
+        {relatedReports.length > 0 && (
+          <div id="related-research" className="mt-20 pt-16 border-t border-white/10">
+            <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-10 gap-4">
+              <div>
+                <div className="text-[10px] font-mono text-brand-blue uppercase tracking-[0.3em] font-bold flex items-center gap-2 mb-2">
+                  <BookOpen size={14} /> Associated Deep Intelligence
+                </div>
+                <h2 className="text-3xl font-black text-white italic tracking-tight">
+                  针对 {data.name.split(' ')[0]} 的深度研报与沙盘推演
+                </h2>
+                <p className="text-xs text-white/50 mt-1 font-light">
+                  基于硅基大宗专有宏观模型与实地产业调研的一手研判。
+                </p>
+              </div>
+              <Link href="/portfolio" className="text-xs font-mono text-brand-blue hover:text-white transition-colors flex items-center gap-1.5 uppercase tracking-wider">
+                查看全量研报库 →
+              </Link>
+            </div>
+
+            <div className="grid md:grid-cols-3 gap-6">
+              {relatedReports.map((report) => (
+                <Link
+                  key={report.id}
+                  href={`/portfolio/${report.slug}`}
+                  className="group block p-6 rounded-2xl bg-slate-900/40 border border-white/10 hover:border-brand-blue/40 transition-all hover:bg-slate-900/80 shadow-xl flex flex-col justify-between"
+                >
+                  <div className="space-y-4">
+                    <div className="flex justify-between items-center text-[10px] font-mono text-white/40">
+                      <span className="px-2 py-0.5 rounded bg-brand-blue/10 border border-brand-blue/20 text-brand-blue font-bold uppercase">{report.tag}</span>
+                      <span className="flex items-center gap-1"><Clock size={11} /> {report.readTime}</span>
+                    </div>
+                    <h3 className="text-base font-bold text-white group-hover:text-brand-blue transition-colors leading-snug line-clamp-2">
+                      {report.title}
+                    </h3>
+                    <p className="text-xs text-white/60 font-light leading-relaxed line-clamp-3">
+                      {report.description}
+                    </p>
+                  </div>
+                  <div className="pt-6 mt-6 border-t border-white/5 flex justify-between items-center text-xs font-mono text-brand-blue">
+                    <span className="text-white/30">#{report.id}</span>
+                    <span className="group-hover:translate-x-1 transition-transform flex items-center gap-1">
+                      READ DISPATCH <ArrowUpRight size={13} />
+                    </span>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        )}
       </main>
 
       {/* Minimal Copyright Footer */}

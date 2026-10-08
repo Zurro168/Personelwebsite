@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import AIAssistant from "@/components/ai/AIAssistant";
 
 export const metadata: Metadata = {
   title: "硅基大宗 | 数字化大宗商品智库",
@@ -25,6 +26,7 @@ export default function RootLayout({
           {children}
         </main>
         <Footer />
+        <AIAssistant />
       </body>
     </html>
   );
