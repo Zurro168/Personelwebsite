@@ -13,9 +13,24 @@ import { marked } from 'marked';
  * - Timeline History Preservation
  */
 
-const SC_BASE = process.env.VAULT_PATH || 'D:/iCloudDrive/iCloud~md~obsidian/Obsidian Vault/SiliconCommand';
-const ARCHIVE_DIR          = `${SC_BASE}/10_Content/03_Published`;   
-const SYSTEM_DIR           = `${SC_BASE}/00_Brand`;                  
+function findVaultRoot(): string {
+    const candidates = [
+        process.env.VAULT_PATH,
+        'F:/Documents/Vault/020_Projects/SiliconCommand',
+        'F:/Documents/Antigravity/硅基大宗',
+        'D:/iCloudDrive/iCloud~md~obsidian/Obsidian Vault/SiliconCommand'
+    ];
+    for (const c of candidates) {
+        if (c && fs.existsSync(c)) {
+            return c;
+        }
+    }
+    return 'F:/Documents/Vault/020_Projects/SiliconCommand';
+}
+
+const SC_BASE = findVaultRoot();
+const ARCHIVE_DIR          = path.join(SC_BASE, '10_Content/03_Published').replace(/\\/g, '/');   
+const SYSTEM_DIR           = path.join(SC_BASE, '00_Brand').replace(/\\/g, '/');                  
 const REPORTS_REGISTRY_FILE = path.join(process.cwd(), 'src/data/reports.ts');
 const PUBLIC_REPORTS_DIR = path.join(process.cwd(), 'public/content/reports');
 const PUBLIC_SYSTEM_DIR = path.join(process.cwd(), 'public/content/system');
@@ -210,6 +225,10 @@ async function sync() {
             continue; 
         }
 
+        if (fileName.includes('思考清单') || fileName.includes('Visual_Asset') || fileName.includes('Brand_Template')) {
+            continue;
+        }
+
         if (!data.slug && fileName.toLowerCase() !== 'about.md') {
             continue;
         }
@@ -334,8 +353,20 @@ async function sync() {
                     }
                 }
 
+                if (!srcImagePath) {
+                    const localCoversDir = path.join(path.dirname(filePath), 'assets/covers');
+                    if (fs.existsSync(localCoversDir)) {
+                        const candidates = fs.readdirSync(localCoversDir).filter(f => /\.(jpg|jpeg|png|webp)$/i.test(f));
+                        if (candidates.length > 0) {
+                            srcImagePath = path.join(localCoversDir, candidates[0]);
+                        }
+                    }
+                }
+
                 if (srcImagePath && fs.existsSync(srcImagePath)) {
-                    const imgFileName = path.basename(srcImagePath);
+                    const ext = path.extname(srcImagePath);
+                    const baseName = path.basename(srcImagePath, ext);
+                    const imgFileName = `${outSlug}_${baseName}${ext}`;
                     const destDir = path.join(process.cwd(), 'public/images/reports');
                     if (!fs.existsSync(destDir)) {
                         fs.mkdirSync(destDir, { recursive: true });
@@ -354,12 +385,21 @@ async function sync() {
             }
         }
 
+        let formattedDate = '';
+        if (data.publish_date) {
+            formattedDate = typeof data.publish_date === 'string' ? data.publish_date.split('T')[0] : new Date(data.publish_date).toISOString().split('T')[0];
+        } else if (data.date) {
+            formattedDate = typeof data.date === 'string' ? data.date.split('T')[0] : new Date(data.date).toISOString().split('T')[0];
+        } else {
+            formattedDate = new Date(fs.statSync(filePath).mtime).toISOString().split('T')[0];
+        }
+
         allReports.push({
             id: data.topic_id ? `SCC-2026-${data.topic_id}` : `SCC-2026-${Math.floor(Math.random()*900)+100}`,
             title: data.title || fileName.replace('.md', ''),
             description: data.description || '自动同步的研报',
             tag: isSystemFile ? '关于我们' : (data.tag ? data.tag.replace(/['#]/g, '') : '硬核商品'),
-            date: new Date(data.publish_date || data.date || fs.statSync(filePath).mtime).toISOString().split('T')[0],
+            date: formattedDate,
             readTime: data.readTime || '15 min',
             image: finalImage,
             slug: outSlug,
@@ -368,6 +408,12 @@ async function sync() {
             layout: layout
         });
     }
+
+    // Sort: pinned at bottom (or top if needed), others by date descending
+    allReports.sort((a, b) => {
+        if (a.isPinned !== b.isPinned) return a.isPinned ? 1 : -1;
+        return (b.date || '').localeCompare(a.date || '');
+    });
 
     const registryContent = `
 export interface Report {

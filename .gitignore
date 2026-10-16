@@ -44,3 +44,7 @@ next-env.d.ts
 # local reference repositories and disposable audit work
 /design-md-spec/
 /scratch/
+__pycache__/
+*.pyc
+.token_cache.json
+.wechat_sync_cache.json

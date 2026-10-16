@@ -8,7 +8,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "sync": "ts-node scripts/sync.ts"
+    "sync": "ts-node scripts/sync.ts",
+    "sync:wechat": "python scripts/wechat_monitor_sync.py --scan"
   },
   "dependencies": {
     "chart.js": "^4.5.1",
