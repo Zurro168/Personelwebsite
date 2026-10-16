@@ -1,0 +1,326 @@
+
+              <div class="report-body">
+                
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono&display=swap');
+  
+  .report-body {
+    width: 980px !important;
+    max-width: 980px !important;
+    margin: 0 auto !important;
+    background: #FFFFFF !important;
+    color: #1A1A2E !important;
+    font-family: 'Inter', -apple-system, 'Microsoft YaHei', sans-serif;
+    line-height: 1.8;
+    letter-spacing: 0.1px;
+    padding: 80px 60px !important; /* Industrial Standard V6.1 */
+    overflow-wrap: break-word !important;
+    word-wrap: break-word !important;
+    word-break: normal !important;
+    min-height: 100vh;
+    box-sizing: border-box !important;
+  }
+  
+  /* 🚀 Total Width Domination: No elements can escape the 1140px text zone */
+  .report-body * {
+    max-width: none !important;
+    box-sizing: border-box !important;
+  }
+
+  .report-body > div, 
+  .report-body section, 
+  .report-body .mx-auto,
+  .report-body [class*="max-w-"] {
+    max-width: 100% !important;
+    width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+  
+  /* 🛡️ Theme & Layout Protection */
+  .report-body p, 
+  .report-body li, 
+  .report-body h2, 
+  .report-body h3 {
+    max-width: none !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    text-align: justify;
+  }
+  .report-body p, 
+  .report-body li, 
+  .report-body span,
+  .report-body div:not(.reference-zone):not(.table-container) {
+    color: #1A1A2E !important;
+    max-width: 100% !important;
+  }
+
+  /* 📊 Scrollable Financial Tables */
+  .table-container {
+    width: 100% !important;
+    overflow-x: auto !important;
+    margin: 40px 0 !important;
+    background: #f8fafc !important;
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 8px !important;
+  }
+  
+  table {
+    min-width: 100% !important;
+    width: max-content !important; /* Allow tables to be wider than container but scrollable */
+  }
+
+  h2 {
+    background: #003366 !important;
+    color: #FFFFFF !important;
+    padding: 20px 35px !important;
+    border-radius: 4px !important;
+    font-size: 1.8rem !important;
+    font-weight: 900 !important;
+    margin: 60px 0 35px 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    line-height: 1.2 !important;
+    box-shadow: 0 4px 12px rgba(0,51,102,0.1) !important;
+  }
+  
+  h3 {
+    color: #003366 !important;
+    border-left: 6px solid #B87333 !important;
+    padding-left: 25px !important;
+    margin: 45px 0 25px 0 !important;
+    font-size: 1.4rem !important;
+    font-weight: 800 !important;
+  }
+  
+  p { margin-bottom: 28px !important; text-align: justify !important; width: 100% !important; }
+  
+  ul, ol {
+    margin-bottom: 28px !important;
+    padding-left: 25px !important;
+  }
+  
+  li {
+    margin-bottom: 12px !important;
+  }
+  
+  th {
+    background: #F8FAFC !important;
+    color: #003366 !important;
+    font-weight: 600 !important;
+    text-align: left !important;
+    padding: 12px 15px !important;
+    border-bottom: 2px solid #003366 !important;
+  }
+  
+  td {
+    padding: 12px 15px !important;
+    border-bottom: 1px solid #E2E8F0 !important;
+  }
+  
+  tr:nth-child(even) { background: #FBFDFF !important; }
+  
+  /* 📑 Reference / Terminal Zone */
+  .reference-zone {
+    background: #1E1E1E;
+    color: #E0E0E0;
+    padding: 25px;
+    border-radius: 8px;
+    font-family: 'JetBrains Mono', monospace;
+    margin-top: 60px;
+    font-size: 0.85rem;
+    border-left: 5px solid #B87333;
+  }
+  
+  .reference-zone h4 { color: #B87333; margin-top: 0; }
+  .reference-zone a { color: #64B5F6; text-decoration: none; }
+  .reference-zone a:hover { text-decoration: underline; }
+</style>
+
+                <blockquote>
+<p>[!NOTE]
+<strong>核心摘要 · INSIGHT</strong></p>
+<p>进口代理站在矿山和终端中间，赚的是价差，扛的是敞口。本篇把中间环节的四件事全部落到可复算的公式上：长协定价公式、到岸成本拆分、海关审价挤压、预付款资金占用。核心判断：<strong>代理的利润杀手排序变了——第一是审价，第二是长协锁量与提货脱节，第三才是海运与汇率</strong>。</p>
+</blockquote>
+<p>矿山卖的是组合收入，终端买的是确定性，中间的人两头都要接。本篇是锆钛系列的进口代理专题，不讲行情方向，只讲方法：四个公式，代入你自己的参数就能重算。公式公开，参数自填。</p>
+<hr>
+<h2>第一部分｜本篇的方法：四个公式，一张敞口表</h2>
+<p>本篇的四个公式：</p>
+<ul>
+<li><strong>长协开票价</strong> = $P_{Base} \pm 品位调整 - 杂质扣罚$</li>
+<li><strong>到岸成本</strong> = FOB + 海运 + 税费 + 港杂 + 选矿加工（分币种）</li>
+<li><strong>审价多缴税</strong> = 申报价 $\times$ 调增比例 $\times$ 13%</li>
+<li><strong>资金占用</strong> $\approx CIF \times 预付比例$；<strong>占用周期</strong> = 预付锁定 + 在途 + 滞留 + 加工 + 账期</li>
+</ul>
+<blockquote>
+<p>[!NOTE]
+<strong>发表口径声明</strong>：公式与结构公开；FOB/CIF 绝对区间、预付精确比例天数、审价精确调增区间与测算例、对手方与合同号不刊出；预付与审价用区间化表述并声明个案差异。</p>
+</blockquote>
+<hr>
+<h2>第二部分｜长协定价公式：溢价买的是确定性</h2>
+<p><img src="./assets/image1.png" alt="图1｜长协在山腰、现货在谷底：季度议价带来约一个季度时滞"></p>
+<p style="font-size:12px; color:#888; margin-top:-6px; margin-bottom:20px; text-align:left; line-height:1.6;">图1｜长协在山腰、现货在谷底：季度议价带来约一个季度时滞</p><h3>定价公式</h3>
+<p>$$Invoice\ Price = P_{Base} \pm 品位调整(ZrO_2+HfO_2、TiO_2) - 扣罚(Fe_2O_3、Al_2O_3、U+Th)$$</p>
+<h3>运作机制与溢价真相</h3>
+<ol>
+<li><strong>机制</strong>：国际头部矿山对亚洲以季度议价或半年度指引为主，极少纯现货指数日更联动。</li>
+<li><strong>溢价真相</strong>：长协锁定的是精品级（66% 级）：粒度均一、低放射性，省去国内洗矿除杂损耗与环保核查风险；现货低价多为小矿中矿或副产低品位，与长协标的不是同一标准品。<strong>所谓溢价，本质是品位错配，不是品牌溢价</strong>。</li>
+<li><strong>下行期裂口</strong>：矿山凭合同挺价，中小选厂抛货回笼，现货踩踏——“长协在山腰、现货在谷底”。</li>
+<li><strong>时滞效应</strong>：季度议价意味着价格下行有约一个季度的时滞——现货已跌、长协未调，代理库存重估先行。</li>
+</ol>
+<blockquote>
+<p>[!NOTE]
+<strong>代理实操动作</strong>：向下游转嫁时，必须把品位、粒度、放射性写进合同标的，否则下游按现货低品位价压价，溢价即成代理亏损；议价锚定品位升贴水表，设置量弹性条款。</p>
+</blockquote>
+<hr>
+<h2>第三部分｜到岸成本拆分：六个节点，分币种</h2>
+<p><img src="./assets/image2.png" alt="图2｜到岸成本：六个节点，分币种"></p>
+<p style="font-size:12px; color:#888; margin-top:-6px; margin-bottom:20px; text-align:left; line-height:1.6;">图2｜到岸成本：六个节点，分币种</p><p>以莫桑比克/西非标准锆英中矿（折 65% 标准品）为基准，成本节点与公式位置：</p>
+<div class="table-container"><table>
+<thead>
+<tr>
+<th align="left">节点</th>
+<th align="left">公式位置</th>
+<th align="left">币种</th>
+<th align="left">核心风险点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>FOB 离岸价</strong></td>
+<td align="left">成本起点</td>
+<td align="left">美元</td>
+<td align="left">预付三至五成、锁定一至两月（区间化）</td>
+</tr>
+<tr>
+<td align="left"><strong>海运至湛江</strong></td>
+<td align="left">CIF 组成</td>
+<td align="left">美元</td>
+<td align="left">船期、拼船配矿、滞期费</td>
+</tr>
+<tr>
+<td align="left"><strong>CIF 报关货价</strong></td>
+<td align="left">计税基数</td>
+<td align="left">美元→人民币折算</td>
+<td align="left">汇率敞口，锁汇决定佣金留存</td>
+</tr>
+<tr>
+<td align="left"><strong>关税 + 增值税</strong></td>
+<td align="left">税负（HS 26151000：0% + 13%）</td>
+<td align="left">人民币</td>
+<td align="left">海关审价调增（见第四部分）</td>
+</tr>
+<tr>
+<td align="left"><strong>港杂与短驳</strong></td>
+<td align="left">落地费用</td>
+<td align="left">人民币（120—180 元/吨区间结构）</td>
+<td align="left">装卸、仓储堆存、放射性检验</td>
+</tr>
+<tr>
+<td align="left"><strong>选矿精选加工</strong></td>
+<td align="left">加工费用</td>
+<td align="left">人民币（350—500 元/吨区间结构）</td>
+<td align="left">回收率损耗</td>
+</tr>
+</tbody></table></div>
+<blockquote>
+<p>[!NOTE]
+<strong>结构结论</strong>：美元段（FOB+海运）决定货值，人民币段（港杂+加工）决定落地弹性，税费段（审价）是第一大利润变量。三段分开算，不要混成一个“到岸价”。</p>
+</blockquote>
+<hr>
+<h2>第四部分｜海关审价挤压：第一大利润变量</h2>
+<p>规则口径：湛江霞山非标中矿报关时，海关若认定市场现货参考价高于合同申报成交价，可调增完税价格约一至两成（区间化表述，个案差异大）。</p>
+<h3>计算公式</h3>
+<p>$$单吨多缴增值税 = 申报价 \times 调增比例 \times 13%$$</p>
+<h3>方法演示（符号化）</h3>
+<p>设申报 CIF 为 $P$，调增比例为 $r$，则完税价为 $P \times (1+r)$。
+多缴增值税 = $P \times r \times 13%$。</p>
+<p>在选矿与贸易综合毛利仅个位数百分比的微利环境下，单吨新增税负可吃掉数成毛利，且多缴进项难向萧条的下游转嫁。</p>
+<blockquote>
+<p>[!NOTE]
+<strong>代理动作（方法版）</strong>：</p>
+<ol>
+<li>申报前备齐成交价证据链（合同、付款、第三方价、品位检测与扣罚计算），与同口岸同品位成交区间对齐；</li>
+<li>非标中矿单独准备品位与回收率说明，避免按精品参考价核定；</li>
+<li>代理协议写明审价调增的税负分担与追溯期限；</li>
+<li>保留价格磋商与复议路径的时间戳——审价争议不只算税额，还算滞港堆存与船期连锁成本。</li>
+</ol>
+</blockquote>
+<hr>
+<h2>第五部分｜预付款与资金占用：敞口公式</h2>
+<p><img src="./assets/image3.png" alt="图3｜资金占用周期：五段相加"></p>
+<p style="font-size:12px; color:#888; margin-top:-6px; margin-bottom:20px; text-align:left; line-height:1.6;">图3｜资金占用周期：五段相加</p><ul>
+<li><strong>结构</strong>：预付三至五成、锁定一至两月（区间化表述）；到港后另有审价滞留、选矿加工与下游账期。</li>
+<li><strong>公式</strong>：
+$$单吨资金占用 \approx CIF \times 预付比例 + 港杂垫付 + 加工费垫付$$
+$$占用周期 = 预付锁定天数 + 海运在途 + 报关/审价滞留 + 选矿周期 + 下游账期$$</li>
+<li><strong>下行期风险</strong>：锁定价高于到港时现货，库存重估与下游压价同时发生；长协季度议价时滞放大此效应。</li>
+<li><strong>缓释清单</strong>：分批预付与装船节点挂钩、锁汇覆盖预付至结汇段、量弹性与延期提货条款、审价税负分担条款、下游背靠背品位标的。</li>
+</ul>
+<hr>
+<h2>第六部分｜HS 口径陷阱（与第一篇共用）</h2>
+<ul>
+<li><strong>HS 26151000（锆）</strong>：陷阱在“毛重 vs 折纯”——海关统计为实物毛重，定价与消费须折 65% 标准品；西非、东南亚原砂/HMC 占比上升，折纯增幅显著低于毛重增幅。</li>
+<li><strong>HS 26140000（钛）</strong>：天然金红石（$\text{TiO}_2 \ge 95%$）与钛铁矿（$\text{TiO}_2\ 45%—50%$）同税号混装，只看税号均价严重失真，必须按申报品名与品位二次分拆。</li>
+<li><strong>分国别</strong>：澳洲精品（高端特瓷/精密铸造/氯化法）、莫桑比克华南核心（海运直达、低放射性）、西非/南非 HMC 与中矿（国内分选）。</li>
+</ul>
+<hr>
+<h2>第七部分｜对进口贸易的实操含义：中间人的四本账</h2>
+<ol>
+<li><strong>定价账</strong>：公式先行，品位、粒度、放射性写进标的；溢价部分单独列示，不与货值混谈。</li>
+<li><strong>税费账</strong>：审价是第一大利润变量，申报材料与协议条款提前准备，不做事后补救。</li>
+<li><strong>资金账</strong>：预付、滞留、加工、账期五段相加算总占用，下行周期先算资金成本再算货值。</li>
+<li><strong>库存账</strong>：长协时滞约一个季度，现货已跌、长协未调时，库存重估先行，备货节奏留出议价窗口。</li>
+</ol>
+<hr>
+<h2>第八部分｜反证：什么会推翻当前解读</h2>
+<p>按本系列的方法，每个判断都配推翻条件。反证只能逐条下调对应解释的权重，不能自动推出价格方向。</p>
+<div class="table-container"><table>
+<thead>
+<tr>
+<th align="center">#</th>
+<th align="left">当前判断</th>
+<th align="left">推翻条件</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><strong>1</strong></td>
+<td align="left">审价是第一大利润变量</td>
+<td align="left">口岸审价口径实质性放宽，或精品参考价体系覆盖中矿</td>
+</tr>
+<tr>
+<td align="center"><strong>2</strong></td>
+<td align="left">长协溢价本质是品位错配</td>
+<td align="left">现货市场出现同品位、同确定性的低价供给</td>
+</tr>
+<tr>
+<td align="center"><strong>3</strong></td>
+<td align="left">季度议价时滞约一个季度</td>
+<td align="left">矿山转向现货指数日更联动</td>
+</tr>
+<tr>
+<td align="center"><strong>4</strong></td>
+<td align="left">下行期预付即敞口</td>
+<td align="left">市场转入上行周期，锁定价低于到港现货</td>
+</tr>
+</tbody></table></div>
+<hr>
+<h2>下篇预告与数据口径</h2>
+<h3>下篇预告</h3>
+<p>第六篇《底部、中继，还是结构性重定价？》——判断清单、反证清单、2027 观察指标，为系列收官。</p>
+<blockquote>
+<p>[!NOTE]
+<strong>系列方法</strong></p>
+<p>每篇只解决一个问题：先给数据，再讲传导，最后列反证。行情会变，但框架要能留下来。</p>
+</blockquote>
+<h3>数据口径声明</h3>
+<p>A 级为公开规则（HS 税则、增值税率、海关审价法规口径）；B 级为一线台账区间（长协机制、到岸结构、审价区间、预付结构），仅作参考。公式中 P 为符号化申报价，不对应任何真实单票。</p>
+<h3>参考引用</h3>
+<ul>
+<li>《中华人民共和国海关进出口税则》：HS 26151000、HS 26140000 税率口径.</li>
+<li>USGS Mineral Commodity Summaries 2026（价格与产量口径）. <a href="https://pubs.usgs.gov/periodicals/mcs2026/mcs2026.pdf">USGS</a></li>
+<li>本系列第一篇《低迷不是一种跌法：锆钛的供需双杀与价格分化》（HS 口径与折纯陷阱）.</li>
+<li>本系列第二篇《大矿减产之后，谁来补上锆钛的缺口？》（三线到岸结构对比）.</li>
+</ul>
+
+              </div>
+            
