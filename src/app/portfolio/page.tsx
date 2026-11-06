@@ -15,20 +15,57 @@ export default function Portfolio() {
   const [searchQuery, setSearchQuery] = useState('');
   const itemsPerPage = 6;
 
-  // Smart Sorting: isPinned (boolean) first, then hasContent, then date descending
+  // Smart Sorting: isPinned (boolean) first, then hasContent, then date descending, then stable secondary key
   const sortedReports = useMemo(() => [...ALL_REPORTS].sort((a, b) => {
     if (a.isPinned !== b.isPinned) return a.isPinned ? -1 : 1;
     if (a.hasContent !== b.hasContent) return a.hasContent ? -1 : 1;
-    return new Date(b.date).getTime() - new Date(a.date).getTime();
+    const dateDiff = new Date(b.date).getTime() - new Date(a.date).getTime();
+    if (dateDiff !== 0) return dateDiff;
+    return a.id.localeCompare(b.id) || a.slug.localeCompare(b.slug);
   }), []);
 
-  const filteredReports = sortedReports.filter(r => {
-    const matchesTag = activeTag === '全部' || r.tag === activeTag;
-    const matchesSearch = !searchQuery ||
-      r.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      r.description.toLowerCase().includes(searchQuery.toLowerCase());
-    return matchesTag && matchesSearch;
-  });
+  const filteredReports = useMemo(() => {
+    const q = searchQuery.trim().toLowerCase();
+
+    return sortedReports
+      .filter(r => {
+        const matchesTag = activeTag === '全部' || r.tag === activeTag;
+        if (!matchesTag) return false;
+        if (!q) return true;
+
+        const titleMatch = r.title.toLowerCase().includes(q);
+        const tagMatch = r.tag.toLowerCase().includes(q);
+        const slugMatch = r.slug.toLowerCase().includes(q) || r.id.toLowerCase().includes(q);
+        const descMatch = r.description.toLowerCase().includes(q);
+
+        return titleMatch || tagMatch || slugMatch || descMatch;
+      })
+      .sort((a, b) => {
+        if (!q) return 0;
+
+        const getScore = (item: typeof a) => {
+          let score = 0;
+          const title = item.title.toLowerCase();
+          const tag = item.tag.toLowerCase();
+          const slug = item.slug.toLowerCase();
+          const desc = item.description.toLowerCase();
+
+          if (title.startsWith(q)) score += 100;
+          else if (title.includes(q)) score += 80;
+
+          if (tag.includes(q)) score += 40;
+          if (slug.includes(q)) score += 30;
+          if (desc.includes(q)) score += 10;
+
+          return score;
+        };
+
+        const scoreA = getScore(a);
+        const scoreB = getScore(b);
+        if (scoreB !== scoreA) return scoreB - scoreA;
+        return 0;
+      });
+  }, [sortedReports, activeTag, searchQuery]);
 
   const totalPages = Math.ceil(filteredReports.length / itemsPerPage);
   const currentReports = filteredReports.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);

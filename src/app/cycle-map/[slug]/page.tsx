@@ -138,10 +138,17 @@ export default function CycleMapDetail({ params }: { params: Promise<{ slug: str
             <div className="flex-1">
               <div className="flex items-center gap-4 mb-6">
                 <div className="relative">
-                   <div className="w-3 h-3 rounded-full bg-brand-blue animate-pulse"></div>
-                   <div className="absolute inset-0 rounded-full bg-brand-blue animate-ping opacity-20"></div>
+                   <div className="w-3 h-3 rounded-full bg-emerald-400 animate-pulse"></div>
+                   <div className="absolute inset-0 rounded-full bg-emerald-400 animate-ping opacity-20"></div>
                 </div>
-                <span className="text-xs font-black text-brand-blue uppercase tracking-[0.2em] italic">Industrial Data Node 0x7A // SILICON INSIGHT</span>
+                <span className="text-xs font-black text-emerald-400 uppercase tracking-[0.2em] italic">
+                  Industrial Data Node // REALTIME LINKED
+                </span>
+                {data.marketLinkage && (
+                  <span className="text-[11px] font-mono text-slate-400 bg-white/5 border border-white/10 px-2 py-0.5 rounded">
+                    高频锚点: {data.marketLinkage.tickerName} ({data.marketLinkage.ticker}) {data.marketLinkage.deltaFormatted}
+                  </span>
+                )}
               </div>
               <h1 className="text-5xl md:text-8xl font-black tracking-tighter italic uppercase text-white mb-8 leading-none drop-shadow-2xl">{data.name}</h1>
               <p className="max-w-2xl text-lg leading-relaxed text-white/70 italic font-medium border-l-2 border-brand-blue/30 pl-8">{data.context}</p>
@@ -151,7 +158,7 @@ export default function CycleMapDetail({ params }: { params: Promise<{ slug: str
               <div className="text-right">
                 <div className="text-xs uppercase font-black text-white/40 mb-4 tracking-widest">Market Quotation Index</div>
                 <div className="text-7xl font-black tracking-tighter text-white">
-                  {data.price} <span className="text-xl font-normal text-white/20 ml-3 italic">USD</span>
+                  {data.price} <span className="text-xl font-normal text-white/20 ml-3 italic">{data.unit}</span>
                 </div>
               </div>
               <div className={`px-6 py-4 text-2xl font-black italic rounded-3xl shadow-[0_0_30px_rgba(0,0,0,0.5)] transform hover:scale-105 transition-transform ${data.change.startsWith('+') ? 'bg-emerald-500 text-slate-900 border-b-4 border-emerald-700' : 'bg-rose-500 text-white border-b-4 border-rose-700'}`}>

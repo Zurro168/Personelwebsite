@@ -79,11 +79,52 @@ const SNAPSHOT_COMMODITIES = [
 ];
 
 export default function Home() {
+  const [commodities, setCommodities] = React.useState(
+    SNAPSHOT_COMMODITIES.map((item) => ({ ...item, isLive: false, scoreDelta: 0 }))
+  );
+
+  React.useEffect(() => {
+    async function syncCommodityLinkages() {
+      try {
+        const res = await fetch(`/api/commodities?_t=${Date.now()}`, { 
+          cache: 'no-store',
+          headers: {
+            'Pragma': 'no-cache',
+            'Cache-Control': 'no-cache'
+          }
+        });
+        if (res.ok) {
+          const liveData = await res.json();
+          if (Array.isArray(liveData)) {
+            setCommodities((prev) =>
+              prev.map((item) => {
+                const live = liveData.find((l: { slug: string }) => l.slug === item.slug);
+                if (!live) return item;
+                return {
+                  ...item,
+                  score: live.liveScore,
+                  status: live.liveStatus,
+                  trend: live.trend,
+                  changeText: `${live.deltaFormatted} 市场联动`,
+                  isLive: live.isLive,
+                  scoreDelta: live.scoreDelta,
+                };
+              })
+            );
+          }
+        }
+      } catch {
+        // 维持静默降级
+      }
+    }
+    syncCommodityLinkages();
+  }, []);
+
   // 精选前 4 篇最具代表性的智库研报（或带真实封面的优先排布）
   const featuredReports = React.useMemo(() => {
     // 优先选取代表作：AI Agent、美元周期、战略金属、交易能力
     const prioritySlugs = [
-      'AI_Agent_Procurement',
+      'ai-agent-procurement-2026',
       'dollar-cycle-and-commodity-gravity-2026',
       'strategic-metals-analysis-2026',
       'trader-core-competency-2026'
@@ -218,11 +259,14 @@ export default function Home() {
                 {/* 四大关键战略金属快照条 */}
                 <div className="space-y-3 pt-2">
                   <div className="text-[10px] font-mono text-slate-400 uppercase tracking-widest flex justify-between">
-                    <span>战略金属周期巡视</span>
+                    <span className="flex items-center gap-1.5">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                      战略金属高频联动
+                    </span>
                     <span>CONFIDENCE INDEX</span>
                   </div>
 
-                  {SNAPSHOT_COMMODITIES.map((c) => (
+                  {commodities.map((c) => (
                     <Link
                       key={c.slug}
                       href={`/cycle-map/${c.slug}`}
@@ -240,8 +284,13 @@ export default function Home() {
 
                       <div className="flex items-center gap-4">
                         <div className="text-right">
-                          <div className="text-sm font-black font-mono text-white">
+                          <div className="text-sm font-black font-mono text-white flex items-center justify-end gap-1">
                             {c.score}<span className="text-[10px] text-slate-500">/100</span>
+                            {c.scoreDelta !== 0 && (
+                              <span className={`text-[9px] font-bold ${c.scoreDelta > 0 ? 'text-emerald-400' : 'text-rose-400'}`}>
+                                ({c.scoreDelta > 0 ? `+${c.scoreDelta}` : c.scoreDelta})
+                              </span>
+                            )}
                           </div>
                           <div className="text-[10px] font-mono text-slate-400">{c.changeText}</div>
                         </div>
@@ -291,7 +340,7 @@ export default function Home() {
 
           {/* 4 大战略金属卡片网格 */}
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {SNAPSHOT_COMMODITIES.map((item) => (
+            {commodities.map((item) => (
               <Link
                 key={item.slug}
                 href={`/cycle-map/${item.slug}`}
@@ -304,9 +353,16 @@ export default function Home() {
                   {/* 头部：代码与评分 */}
                   <div className="flex justify-between items-start">
                     <div>
-                      <span className="text-[10px] font-mono tracking-widest text-slate-500 uppercase block mb-1">
-                        TICKER: {item.symbol}
-                      </span>
+                      <div className="flex items-center gap-1.5 mb-1">
+                        <span className="text-[10px] font-mono tracking-widest text-slate-500 uppercase">
+                          TICKER: {item.symbol}
+                        </span>
+                        {item.scoreDelta !== 0 && (
+                          <span className={`text-[9px] font-mono px-1 rounded ${item.scoreDelta > 0 ? 'bg-emerald-500/10 text-emerald-400' : 'bg-rose-500/10 text-rose-400'}`}>
+                            {item.scoreDelta > 0 ? `+${item.scoreDelta}` : item.scoreDelta}
+                          </span>
+                        )}
+                      </div>
                       <h3 className="text-xl font-black text-white group-hover:text-cyan-400 transition-colors">
                         {item.name}
                       </h3>

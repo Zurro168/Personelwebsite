@@ -273,7 +273,7 @@ export const ALL_REPORTS: Report[] = [
     "date": "2026-05-19",
     "readTime": "15 min",
     "image": "/covers/default-report.png",
-    "slug": "铝工业跨越绿色叙事的结构性摩擦与估值重构",
+    "slug": "aluminum-green-narrative-friction-2026",
     "hasContent": true,
     "isPinned": false,
     "layout": "paper"
@@ -286,7 +286,7 @@ export const ALL_REPORTS: Report[] = [
     "date": "2026-05-19",
     "readTime": "15 min",
     "image": "/covers/default-report.png",
-    "slug": "2026年全球铅锌市场的认知失调与定价扭曲",
+    "slug": "lead-zinc-cognitive-dissonance-2026",
     "hasContent": true,
     "isPinned": false,
     "layout": "paper"
@@ -325,7 +325,7 @@ export const ALL_REPORTS: Report[] = [
     "date": "2026-05-15",
     "readTime": "15 min",
     "image": "/covers/default-report.png",
-    "slug": "AI自动驾驶重塑矿山物流：铅锌矿供应链弹性与成本结构深度分析",
+    "slug": "ai-autonomous-mining-logistics-2026",
     "hasContent": true,
     "isPinned": false,
     "layout": "paper"
@@ -338,7 +338,7 @@ export const ALL_REPORTS: Report[] = [
     "date": "2026-05-14",
     "readTime": "15 min",
     "image": "/covers/default-report.png",
-    "slug": "西芒杜（simandou）西非铁矿石的最后堡垒",
+    "slug": "simandou-iron-ore-last-fortress-2026",
     "hasContent": true,
     "isPinned": false,
     "layout": "paper"
@@ -351,7 +351,7 @@ export const ALL_REPORTS: Report[] = [
     "date": "2026-05-13",
     "readTime": "15 min",
     "image": "/covers/default-report.png",
-    "slug": "大语言模型LLM驱动下的铅锌大宗商品价值链革新",
+    "slug": "llm-lead-zinc-value-chain-2026",
     "hasContent": true,
     "isPinned": false,
     "layout": "paper"
@@ -364,7 +364,7 @@ export const ALL_REPORTS: Report[] = [
     "date": "2026-05-12",
     "readTime": "15 min",
     "image": "/covers/default-report.png",
-    "slug": "黄金定价权-“去利率化”-转型与全球信用本位回归",
+    "slug": "gold-pricing-de-rate-shift-2026",
     "hasContent": true,
     "isPinned": false,
     "layout": "paper"
@@ -377,7 +377,7 @@ export const ALL_REPORTS: Report[] = [
     "date": "2026-05-12",
     "readTime": "15 min",
     "image": "/images/reports/2026-年全球铅锌产业-“颗粒度”-管理与价格背离研究_lead_zinc_granularity_2026.png",
-    "slug": "2026-年全球铅锌产业-“颗粒度”-管理与价格背离研究",
+    "slug": "lead-zinc-granularity-price-divergence-2026",
     "hasContent": true,
     "isPinned": false,
     "layout": "paper"
@@ -390,7 +390,7 @@ export const ALL_REPORTS: Report[] = [
     "date": "2026-05-11",
     "readTime": "15 min",
     "image": "/covers/default-report.png",
-    "slug": "利率潮汐下的资源重构：全球铅锌矿业-2025-2026-年深度战略研究报告-1",
+    "slug": "rate-tides-lead-zinc-mining-2026",
     "hasContent": true,
     "isPinned": false,
     "layout": "paper"
@@ -429,7 +429,7 @@ export const ALL_REPORTS: Report[] = [
     "date": "2026-05-10",
     "readTime": "15 min",
     "image": "/covers/default-report.png",
-    "slug": "2026年全球铜业战略报告：美元锚点失效下的“软脱钩”与战略性资产重估",
+    "slug": "global-copper-strategic-decoupling-2026",
     "hasContent": true,
     "isPinned": false,
     "layout": "paper"
@@ -442,7 +442,7 @@ export const ALL_REPORTS: Report[] = [
     "date": "2026-05-09",
     "readTime": "15 min",
     "image": "/covers/default-report.png",
-    "slug": "刚果民主共和国采矿业微观建模分析：地缘博弈、技术转型与财政主权演进",
+    "slug": "drc-mining-micro-modeling-2026",
     "hasContent": true,
     "isPinned": false,
     "layout": "paper"
@@ -468,7 +468,7 @@ export const ALL_REPORTS: Report[] = [
     "date": "2026-05-08",
     "readTime": "15 min",
     "image": "/covers/default-report.png",
-    "slug": "全球铜业物理成本陷阱与硅基对冲重构",
+    "slug": "copper-physical-cost-trap-2026",
     "hasContent": true,
     "isPinned": false,
     "layout": "paper"
@@ -494,7 +494,7 @@ export const ALL_REPORTS: Report[] = [
     "date": "2026-04-24",
     "readTime": "5 min",
     "image": "/covers/default-report.png",
-    "slug": "全球铜业巨擘财务稳健性与战略转型深度调研报告：智利国家铜业公司（codelco）与必和必拓（bhp）的对比研究",
+    "slug": "codelco-vs-bhp-financial-analysis-2026",
     "hasContent": true,
     "isPinned": false,
     "layout": "paper"
@@ -507,7 +507,7 @@ export const ALL_REPORTS: Report[] = [
     "date": "2026-04-22",
     "readTime": "8 min",
     "image": "/covers/default-report.png",
-    "slug": "AI_Agent_Procurement",
+    "slug": "ai-agent-procurement-2026",
     "hasContent": true,
     "isPinned": false,
     "layout": "paper"

@@ -1,8 +1,9 @@
+import type { CommodityMarketLinkage } from '@/lib/cycle-engine';
 
 /**
- * Silicon Commodity Unified Data Adapter v2.1 (Production Grade)
- * - Harmonizes FRED API with manual JSON packets.
- * - Supports dynamic cycle steps and narrative injection.
+ * Silicon Commodity Unified Data Adapter v3.0 (Production Grade with Real-time Linkage)
+ * - Harmonizes FRED API & high-frequency Yahoo market linkage with manual JSON packets.
+ * - Supports dynamic cycle steps, live score adjustment, and narrative injection.
  * - Handles dual-axis historical data (Price vs Inventory).
  */
 
@@ -34,6 +35,7 @@ export interface UnifiedCommodityData {
   inventoryValues: number[];
   status: string;
   trend: 'up' | 'down' | 'neutral';
+  marketLinkage?: CommodityMarketLinkage;
 }
 
 interface CommodityHistoryPoint {
@@ -63,6 +65,7 @@ interface CommodityPacket {
     outlook?: string;
   };
   narrative_layer?: Narrative[];
+  market_linkage?: CommodityMarketLinkage;
 }
 
 export async function resolveCommodity(slug: string): Promise<UnifiedCommodityData> {
@@ -71,7 +74,13 @@ export async function resolveCommodity(slug: string): Promise<UnifiedCommodityDa
   try {
     // Determine base URL for server-side or client-side fetch
     const baseUrl = typeof window !== 'undefined' ? window.location.origin : (process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000');
-    const response = await fetch(`${baseUrl}/api/commodities/${slug}`, { cache: 'no-store' });
+    const response = await fetch(`${baseUrl}/api/commodities/${slug}?_t=${Date.now()}`, { 
+      cache: 'no-store',
+      headers: {
+        'Pragma': 'no-cache',
+        'Cache-Control': 'no-cache'
+      }
+    });
     if (response.ok) {
         packet = await response.json() as CommodityPacket;
     }
@@ -122,7 +131,7 @@ export async function resolveCommodity(slug: string): Promise<UnifiedCommodityDa
     price: price,
     change: change,
     unit: packet.metadata?.unit || "N/A",
-    score: packet.score_engine?.total_score || 50,
+    score: packet.score_engine?.total_score ?? 50,
     dimensionScores: packet.score_engine?.dimensions || [50, 50, 50, 50],
     cyclePosition: packet.score_engine?.cycle_position || 0,
     cycleSteps: packet.score_engine?.cycle_steps || [],
@@ -132,6 +141,7 @@ export async function resolveCommodity(slug: string): Promise<UnifiedCommodityDa
     chartValues,
     inventoryValues,
     status: packet.metadata?.status || "未知周期阶段",
-    trend
+    trend,
+    marketLinkage: packet.market_linkage
   };
 }

@@ -4,6 +4,7 @@ This folder contains the shared maintenance documentation for the Silicon Commod
 
 ## Start Here
 
+- [Publishing Pipeline Handover (WeChat & Website)](./PUBLISHING_PIPELINE_HANDOVER.md): end-to-end publishing workflow, layout rules, archival state machine, and core scripts for multi-agent sync.
 - [Repository Git Maintenance](./GIT_MAINTENANCE.md): shared Git workflow, generated-file boundaries, verification rules.
 - [Architecture](./ARCHITECTURE.md): visual identity and high-level technical architecture.
 - [Content Workflow](./CONTENT_WORKFLOW.md): how reports move into the website.

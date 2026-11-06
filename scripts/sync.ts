@@ -35,6 +35,29 @@ const REPORTS_REGISTRY_FILE = path.join(process.cwd(), 'src/data/reports.ts');
 const PUBLIC_REPORTS_DIR = path.join(process.cwd(), 'public/content/reports');
 const PUBLIC_SYSTEM_DIR = path.join(process.cwd(), 'public/content/system');
 
+const LEGACY_SLUG_MAP: Record<string, string> = {
+    '铝工业跨越绿色叙事的结构性摩擦与估值重构': 'aluminum-green-narrative-friction-2026',
+    '2026年全球铅锌市场的认知失调与定价扭曲': 'lead-zinc-cognitive-dissonance-2026',
+    'AI自动驾驶重塑矿山物流：铅锌矿供应链弹性与成本结构深度分析': 'ai-autonomous-mining-logistics-2026',
+    '西芒杜（simandou）西非铁矿石的最后堡垒': 'simandou-iron-ore-last-fortress-2026',
+    '大语言模型LLM驱动下的铅锌大宗商品价值链革新': 'llm-lead-zinc-value-chain-2026',
+    '黄金定价权-“去利率化”-转型与全球信用本位回归': 'gold-pricing-de-rate-shift-2026',
+    '2026-年全球铅锌产业-“颗粒度”-管理与价格背离研究': 'lead-zinc-granularity-price-divergence-2026',
+    '利率潮汐下的资源重构：全球铅锌矿业-2025-2026-年深度战略研究报告-1': 'rate-tides-lead-zinc-mining-2026',
+    '2026年全球铜业战略报告：美元锚点失效下的“软脱钩”与战略性资产重估': 'global-copper-strategic-decoupling-2026',
+    '刚果民主共和国采矿业微观建模分析：地缘博弈、技术转型与财政主权演进': 'drc-mining-micro-modeling-2026',
+    '全球铜业物理成本陷阱与硅基对冲重构': 'copper-physical-cost-trap-2026',
+    '全球铜业巨擘财务稳健性与战略转型深度调研报告：智利国家铜业公司（codelco）与必和必拓（bhp）的对比研究': 'codelco-vs-bhp-financial-analysis-2026',
+    'AI_Agent_Procurement': 'ai-agent-procurement-2026',
+};
+
+function normalizeSlug(slug: string): string {
+    if (!slug) return '';
+    const trimmed = slug.trim();
+    if (LEGACY_SLUG_MAP[trimmed]) return LEGACY_SLUG_MAP[trimmed];
+    return trimmed;
+}
+
 interface ReportRegistryEntry {
     id: string;
     title: string;
@@ -240,7 +263,7 @@ async function sync() {
         }
 
         const isSystemFile = filePath.includes(SYSTEM_DIR);
-        const outSlug = data.slug || 'about';
+        const outSlug = normalizeSlug(data.slug) || 'about';
         const layout = data.layout || 'paper'; 
         
         if (processedSlugs.has(outSlug)) continue;
