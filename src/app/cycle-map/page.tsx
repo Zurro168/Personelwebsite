@@ -275,11 +275,11 @@ export default function CycleMapPortal() {
         })}
 
         {/* Coming Soon Card */}
-        <div className="bg-slate-900/10 border border-dashed border-white/10 rounded-3xl p-10 flex flex-center flex-col justify-center items-center gap-4 text-center group">
+        <div className="bg-slate-900/10 border border-dashed border-white/10 rounded-3xl p-10 flex flex-center flex-col justify-center items-center gap-4 text-center group hover:border-brand-gold/30 transition-all">
            <Zap size={32} className="text-white/10 group-hover:text-brand-gold transition-colors" />
            <div className="space-y-1">
-              <div className="text-white/30 font-black text-lg tracking-widest uppercase italic">Cobalt / Nickel / Rare Earth</div>
-              <p className="text-white/10 text-[10px] uppercase tracking-[0.3em]">Initial Intelligence under processing</p>
+              <div className="text-white/30 group-hover:text-white/60 transition-colors font-black text-lg tracking-widest uppercase italic">Tungsten / Tin (钨 / 锡)</div>
+              <p className="text-white/10 text-[10px] uppercase tracking-[0.3em]">Strategic Metals Intelligence under preparation</p>
            </div>
         </div>
       </main>
