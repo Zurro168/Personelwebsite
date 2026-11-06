@@ -65,6 +65,9 @@ export default function CycleMapDetail({ params }: { params: Promise<{ slug: str
       lithium: ['锂', 'lithium'],
       zirconium: ['锆', 'zirconium', '战略金属'],
       titanium: ['钛', 'titanium', '战略金属'],
+      cobalt: ['钴', 'cobalt', '刚果', '战略金属'],
+      nickel: ['镍', 'nickel', '印尼', '战略金属'],
+      'rare-earth': ['稀土', 'rare earth', '战略金属', '永磁'],
     };
     const keys = keywords[slug] || [slug];
     return ALL_REPORTS.filter(r =>

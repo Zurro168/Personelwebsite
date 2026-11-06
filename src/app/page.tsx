@@ -51,6 +51,32 @@ const SNAPSHOT_COMMODITIES = [
     focus: '澳洲精矿挺价 · 下游采购放缓 · 核电涂层'
   },
   {
+    name: '氧化镨钕/稀土 (Rare Earth)',
+    slug: 'rare-earth',
+    symbol: 'RE',
+    score: 62,
+    status: '配额指标收紧 / 政策筑底回升',
+    trend: 'up' as const,
+    changeText: '+2.4% 配额刚性管控',
+    cyclePhase: '配额硬约束 / 筑底复苏 (Stage 2)',
+    badgeColor: 'text-indigo-400 border-indigo-500/30 bg-indigo-500/10',
+    barColor: 'bg-indigo-400',
+    focus: '配额指标增速骤降 · 人形机器人永磁 · 战略溯源'
+  },
+  {
+    name: '精炼镍 (Nickel)',
+    slug: 'nickel',
+    symbol: 'NI',
+    score: 42,
+    status: '印尼重塑成本 / 低位拉锯整理',
+    trend: 'neutral' as const,
+    changeText: '+0.4% 成本线拉锯',
+    cyclePhase: '成本再锚定 / 宽幅筑底 (Stage 3)',
+    badgeColor: 'text-brand-gold border-amber-500/30 bg-amber-500/10',
+    barColor: 'bg-amber-400',
+    focus: '印尼红土镍矿放量 · 传统高成本矿出清 · 区间拉锯'
+  },
+  {
     name: '海绵钛 (Titanium)',
     slug: 'titanium',
     symbol: 'TI',
@@ -62,6 +88,19 @@ const SNAPSHOT_COMMODITIES = [
     badgeColor: 'text-rose-400 border-rose-500/30 bg-rose-500/10',
     barColor: 'bg-rose-400',
     focus: '钛白粉产能过剩 · 价格阴跌探底 · 成本线倒挂'
+  },
+  {
+    name: '电解钴 (Cobalt)',
+    slug: 'cobalt',
+    symbol: 'CO',
+    score: 32,
+    status: '伴生过剩压制 / 成本线筑底',
+    trend: 'down' as const,
+    changeText: '-1.8% 伴生矿放量',
+    cyclePhase: '深度磨底期 / 产能出清 (Stage 4)',
+    badgeColor: 'text-rose-400 border-rose-500/30 bg-rose-500/10',
+    barColor: 'bg-rose-400',
+    focus: '铜钴伴生被动放量 · 三元受LFP挤压 · 成本线磨底'
   },
   {
     name: '碳酸锂 (Lithium)',

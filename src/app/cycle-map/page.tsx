@@ -22,11 +22,32 @@ const COMMODITIES_META = [
     labels: ['相对高位', '近月偏弱', '精矿挺价']
   },
   {
+    name: '氧化镨钕/稀土 (Rare Earth)',
+    symbol: 'RE',
+    slug: 'rare-earth',
+    description: '核心观察点：国家稀土配额指标增速显著收敛，全产业链溯源管控落地，人形机器人微特电机与新能源车永磁刚需推动估值筑底回升。',
+    labels: ['配额收紧', '永磁刚需', '筑底回升']
+  },
+  {
+    name: '精炼镍 (Nickel)',
+    symbol: 'NI',
+    slug: 'nickel',
+    description: '核心观察点：印尼HPAL与高冰镍产能持续改写全球成本曲线，欧美澳传统矿山承压关停，印尼RKAB审批节奏与不锈钢弱需求形成低位拉锯。',
+    labels: ['印尼成本重塑', 'HPAL放量', '低位拉锯']
+  },
+  {
     name: '海绵钛 (Titanium)',
     symbol: 'TI',
     slug: 'titanium',
     description: '核心观察点：国内钛白粉与海绵钛产能过剩严重，价格持续走低，行业整体处于成本线以下探底出清阶段。',
     labels: ['持续下跌', '产能过剩', '探底出清']
+  },
+  {
+    name: '电解钴 (Cobalt)',
+    symbol: 'CO',
+    slug: 'cobalt',
+    description: '核心观察点：刚果(金)铜钴伴生矿与印尼MHP副产激增导致全球结构性过剩，三元电池份额受LFP挤压，现货在成本线边缘低位磨底。',
+    labels: ['伴生过剩', 'MHP放量', '低位磨底']
   },
   {
     name: '电池级碳酸锂 (Lithium)',
