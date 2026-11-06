@@ -11,29 +11,29 @@ const COMMODITIES_META = [
     name: '精炼铜 (Copper)',
     symbol: 'HG=F',
     slug: 'copper',
-    description: '核心观察点：LME/SHFE 库存历史低位与算力基建的结构性需求背离。',
-    labels: ['库存紧缺', '能源转型', '算力溢价']
+    description: '核心观察点：现货加工费 TC/RC 罕见跌为负值，矿端断供与冶炼厂倒贴抢矿，算力基建与电网升级需求刚性。',
+    labels: ['矿端短缺', 'TC/RC负值', '供不应求']
   },
   {
     name: '海绵锆 (Zirconium)',
     symbol: 'ZR',
     slug: 'zirconium',
-    description: '核心观察点：澳洲精矿供应动态与全球陶瓷、核电涂层的订单反馈。',
-    labels: ['精矿供应', '核电材料', '陶瓷基建']
+    description: '核心观察点：头部矿山挺价使行情处于相对高位，但近一个月下游陶瓷与核电订单采购略有放缓，高位盘整。',
+    labels: ['相对高位', '近月偏弱', '精矿挺价']
   },
   {
     name: '海绵钛 (Titanium)',
     symbol: 'TI',
     slug: 'titanium',
-    description: '核心观察点：民航大飞机复苏对高端钛合金零件的长期拉动效应。',
-    labels: ['航空工业', '海工装备', '结构强韧']
+    description: '核心观察点：国内钛白粉与海绵钛产能过剩严重，价格持续走低，行业整体处于成本线以下探底出清阶段。',
+    labels: ['持续下跌', '产能过剩', '探底出清']
   },
   {
     name: '电池级碳酸锂 (Lithium)',
     symbol: 'LI',
     slug: 'lithium',
-    description: '核心观察点：锂矿提锂成本线与下游电池厂商补库周期的拟合度。',
-    labels: ['电池金属', '库存周期', '减产预期']
+    description: '核心观察点：近几个月价格经历大幅深跌，边际高成本锂矿逐步关停，下游动力电池去库观望，筑底尚待时日。',
+    labels: ['近月大跌', '边际关停', '去库寻底']
   }
 ];
 
@@ -179,14 +179,14 @@ export default function CycleMapPortal() {
 
                   <div className="text-right">
                     <div className="flex items-baseline justify-end gap-1">
-                      <div className={`text-4xl font-black font-mono ${item.trend === 'up' ? 'text-emerald-400' : item.trend === 'down' ? 'text-rose-400' : 'text-brand-blue'}`}>
+                      <div className={`text-4xl font-black font-mono ${item.score >= 75 ? 'text-emerald-400' : item.score <= 45 ? 'text-rose-400' : 'text-brand-blue'}`}>
                         {item.score}
                       </div>
                       <span className="text-xs text-white/20">/100</span>
                     </div>
 
                     <div className="flex items-center justify-end gap-1.5 mt-1">
-                      <div className="text-[10px] text-white/40 uppercase tracking-widest">Confidence</div>
+                      <div className="text-[10px] text-white/40 uppercase tracking-widest">Cycle Score · 景气信心</div>
                       {scoreDelta !== 0 && (
                         <span className={`text-[10px] font-mono font-bold px-1.5 py-0.2 rounded ${
                           scoreDelta > 0 

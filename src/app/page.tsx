@@ -25,56 +25,56 @@ import PriceTicker from '@/components/layout/PriceTicker';
  */
 const SNAPSHOT_COMMODITIES = [
   {
-    name: '海绵钛 (Titanium)',
-    slug: 'titanium',
-    symbol: 'TI',
+    name: '精炼铜 (Copper)',
+    slug: 'copper',
+    symbol: 'HG=F',
     score: 88,
-    status: '防务扩张 / 航空级强劲',
+    status: '供不应求 / TC/RC 跌为负值',
     trend: 'up' as const,
-    changeText: '+18.4% 溢价走强',
-    cyclePhase: '上升扩张期 (Stage 1)',
+    changeText: '+3.8% 矿端极度紧缺',
+    cyclePhase: '矿端刚性短缺 / 极度紧平衡 (Stage 1)',
     badgeColor: 'text-emerald-400 border-emerald-500/30 bg-emerald-500/10',
     barColor: 'bg-emerald-400',
-    focus: '航空发动机 · 结构强韧 · 纯度壁垒'
+    focus: 'TC/RC 倒挂负值 · 算力电网刚需 · 全球缺矿'
   },
   {
     name: '海绵锆 (Zirconium)',
     slug: 'zirconium',
     symbol: 'ZR',
-    score: 72,
-    status: '供应受限 / 订单刚性',
-    trend: 'up' as const,
-    changeText: '+6.2% 刚性锁定',
-    cyclePhase: '紧平衡阶段 (Stage 2)',
+    score: 68,
+    status: '相对高位运行 / 近月动能偏弱',
+    trend: 'neutral' as const,
+    changeText: '-0.8% 高位承压盘整',
+    cyclePhase: '高位博弈期 / 承压盘整 (Stage 2)',
     badgeColor: 'text-cyan-400 border-cyan-500/30 bg-cyan-500/10',
     barColor: 'bg-cyan-400',
-    focus: '核电涂层 · 澳洲精矿 · 特种陶瓷'
+    focus: '澳洲精矿挺价 · 下游采购放缓 · 核电涂层'
   },
   {
-    name: '精炼铜 (Copper)',
-    slug: 'copper',
-    symbol: 'HG=F',
-    score: 58,
-    status: '高库存修正 / 算力分化',
-    trend: 'neutral' as const,
-    changeText: '-1.24% 高位整固',
-    cyclePhase: '库存再平衡 (Stage 3)',
-    badgeColor: 'text-brand-gold border-amber-500/30 bg-amber-500/10',
-    barColor: 'bg-amber-400',
-    focus: 'AI 算力电网 · 绿色转型 · 100万吨显性库存'
+    name: '海绵钛 (Titanium)',
+    slug: 'titanium',
+    symbol: 'TI',
+    score: 35,
+    status: '持续下跌 / 市场深度探底中',
+    trend: 'down' as const,
+    changeText: '-14.2% 产能出清探底',
+    cyclePhase: '下行探底期 / 产能出清 (Stage 4)',
+    badgeColor: 'text-rose-400 border-rose-500/30 bg-rose-500/10',
+    barColor: 'bg-rose-400',
+    focus: '钛白粉产能过剩 · 价格阴跌探底 · 成本线倒挂'
   },
   {
     name: '碳酸锂 (Lithium)',
     slug: 'lithium',
     symbol: 'LI',
-    score: 38,
-    status: '社会库存去化 / 探底出清',
+    score: 28,
+    status: '近月深跌 / 成本博弈寻底',
     trend: 'down' as const,
-    changeText: '-24.5% 成本博弈',
-    cyclePhase: '产能出清期 (Stage 4)',
-    badgeColor: 'text-rose-400 border-rose-500/30 bg-rose-500/10',
-    barColor: 'bg-rose-400',
-    focus: '电池级锂盐 · 边际成本关停 · 储能放量'
+    changeText: '-28.5% 成本博弈',
+    cyclePhase: '出清阵痛期 / 宽幅磨底 (Stage 4)',
+    badgeColor: 'text-rose-500 border-rose-500/30 bg-rose-500/10',
+    barColor: 'bg-rose-500',
+    focus: '电池级锂盐 · 边际高成本关停 · 供需宽幅磨底'
   }
 ];
 
