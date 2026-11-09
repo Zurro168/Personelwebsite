@@ -48,3 +48,7 @@ __pycache__/
 *.pyc
 .token_cache.json
 .wechat_sync_cache.json
+
+# Security and Environment Protections
+.venv/
+venv/
